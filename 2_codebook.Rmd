@@ -125,6 +125,22 @@ data = data %>% mutate(
 qplot(data$contraception_hormonal) + coord_flip()
 ```
 
+create variable to indicate whether people changed contraception since meeting their partner
+```{r}
+crosstabs(~contraception_hormonal + contraception_meeting_partner, data = data)
+data = data %>% mutate(
+  contraception_change_since_meeting_partner = ifelse(
+    contraception_hormonal == "yes" & contraception_meeting_partner == 1, "congruent_hormonal",
+    ifelse(
+      contraception_hormonal == "no" & contraception_meeting_partner == 0, "congruent_nonhormonal",
+      ifelse(
+        contraception_hormonal == "yes" & contraception_meeting_partner == 0, "switched_to_hormonal",
+        ifelse(
+          contraception_hormonal == "no" & contraception_meeting_partner == 1, "switched_to_nonhormonal",
+          NA)))))
+qplot(data$contraception_change_since_meeting_partner) + coord_flip()
+```
+
 ## Restricted codebook too 100 people
 ```{r}
 data = data %>% filter(row_number() < 101)
@@ -145,7 +161,7 @@ data = data %>% filter(row_number() < 101)
 ## Contraception Codebook
 ```{r}
 codebook_contraception_data = data %>%
-  select(contraception_hormonal, contraception_meeting_partner)
+  select(contraception_hormonal, contraception_meeting_partner, contraception_change_since_meeting_partner)
 
 codebook(codebook_contraception_data,  missingness_report = FALSE, indent = "##")
 ```
