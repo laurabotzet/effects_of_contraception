@@ -266,8 +266,21 @@ ggplot(data, aes(x = relationship_status, y = diary_sex_active_sex_mean)) + geom
 ```
 
 
-## Correlations
+## Correlations {.tabset}
+### Selection
 ```{r}
-# pairs.panels(stress_scale, cex.cor = 10)
+lapply(selection_variables,class)
+
+selection_variables = codebook_selection_data %>% select(
+  -starts_with("bfi_agree_"), -starts_with("bfi_consc_"), -starts_with("bfi_open_"),
+  -starts_with("bfi_extra_"), -starts_with("bfi_neuro_"), -relationship_status, -net_income)
+
+
+cor(selection_variables, use="complete.obs")
+```
+
+### Outcomes
+```{r}
+cor(codebook_outcome_data, use="complete.obs")
 ```
 
