@@ -5,10 +5,10 @@ nocite: |
     @R @packrat @rmarkdown @knitr @formr @pander @lubridate @stringr @broom @effects @ggplot2 @tidyr @svglite @dplyr @reshape2 @lmerTest @devtools @formatR @lazyeval @scales @car @xlsx @lme4
 ---
 
-# Routine and Sex {.tabset .tabset-sticky}
+# Effects of Contraception {.tabset .tabset-sticky}
 
 ```{r message=FALSE, warning=FALSE}
-bibliography: packrat_bibliography.bibtex
+# bibliography: packrat_bibliography.bibtex
 source("0_helpers.R")
 ```
 
