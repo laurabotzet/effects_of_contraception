@@ -46,7 +46,7 @@ data = all_surveys %>%
          duration_relationship_month,
          days_with_partner,
          nights_with_partner,
-         soi_r_attitude,
+         starts_with("soi_r"),
          soi_r_behavior,
          soi_r_desire,
          number_sexual_partner,
@@ -86,9 +86,42 @@ data = data %>% filter(reasons_for_exclusion == "")
 ```
 `r n_excluded` people were excluded.
 
+## Wrangle data
+created contraception_approach
+```{r}
+data = data %>% mutate(
+    contraception_method = if_else(is.na(contraception_method), "", as.character(contraception_method)),
+    com = contraception_method,
+    contraception_approach = if_else(
+        condition = com %contains% "hormonal_pill" | com %contains% "hormonal_other", # condition
+        # true
+        true = if_else(
+            condition = com == "hormonal_pill" | com == "hormonal_other" | com == "hormonal_morning_after_pill", # condition
+            true = if_else(com == "hormonal_pill", 
+                                            true = "hormonal_pill_only", 
+                                            false = "hormonal_other_only"
+            ),
+                                            false = "hormonal+barrier"
+            ),
+        if_else(
+            condition = ! com %contains% "awareness", 
+            true = if_else(condition = com != "",
+                true = if_else(condition = com %contains% "barrier_intrauterine_pessar", 
+                               true = "barrier_pessar",
+                                if_else(condition = com %contains% "barrier_condoms", true = "condoms", false = "other")),
+                false = "nothing"),
+                false = "awareness")
+        )
+          # false
+    )
+all_surveys$contraception_approach = factor( all_surveys$contraception_approach, levels = c("condoms", "barrier_pessar", "hormonal+barrier", "hormonal_pill_only", "hormonal_other_only", "awareness", "nothing", "other") )
+qplot(all_surveys$contraception_approach) + coord_flip()
+
+```
+
 ## Restricted codebook too 100 people
 ```{r}
-data = data[1:100,]
+x = data %>% filter(row_number() < 101)
 ```
 
 ## Selection Variables Codebook
@@ -96,7 +129,8 @@ data = data[1:100,]
 codebook_selection_data = data %>%
   select(-session, 
          -starts_with("contraception_"), 
-         -starts_with("partner_"), -starts_with("relationship_"), -satisfaction_sexual_intercourse,
+         -starts_with("partner_"), -starts_with("relationship_satisfaction"),
+         -relationship_problems_R, -relationship_conflict_R, -satisfaction_sexual_intercourse,
          -reasons_for_exclusion, -pregnant_trying)
 
 codebook(codebook_selection_data,  missingness_report = FALSE, indent = "##")
@@ -105,7 +139,7 @@ codebook(codebook_selection_data,  missingness_report = FALSE, indent = "##")
 ## Contraception Codebook
 ```{r}
 codebook_contraception_data = data %>%
-  select()
+  select(contraception_method, contraception_approach, contraception_meeting_partner)
 ```
 
 ## Outcomes Codebook 
