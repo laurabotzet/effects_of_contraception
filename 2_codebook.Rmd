@@ -76,3 +76,12 @@ data_diary = diary %>%
 ```
 
 
+## Exclusion
+For now based on old exclusion criteria --> update later
+```{r}
+n_excluded = data %>% filter(reasons_for_exclusion != "") %>% nrow()
+data = data %>% filter(reasons_for_exclusion == "")
+```
+`r n_excluded` people were excluded.
+
+
