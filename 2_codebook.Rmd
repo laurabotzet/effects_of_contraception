@@ -118,6 +118,13 @@ data$contraception_approach = factor( all_surveys$contraception_approach, levels
 qplot(data$contraception_approach) + coord_flip()
 ```
 
+create current contraceptive status (hormonal vs. non hormonal)
+```{r}
+data = data %>% mutate(
+  contraception_hormonal = factor(ifelse(contraception_approach %contains% "hormonal", "yes", "no")))
+qplot(data$contraception_hormonal) + coord_flip()
+```
+
 ## Restricted codebook too 100 people
 ```{r}
 data = data %>% filter(row_number() < 101)
@@ -138,7 +145,7 @@ data = data %>% filter(row_number() < 101)
 ## Contraception Codebook
 ```{r}
 codebook_contraception_data = data %>%
-  select(contraception_method, contraception_approach, contraception_meeting_partner)
+  select(contraception_hormonal, contraception_meeting_partner)
 
 codebook(codebook_contraception_data,  missingness_report = FALSE, indent = "##")
 ```
