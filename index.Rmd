@@ -1,0 +1,44 @@
+---
+pagetitle: "Effects of Contraception"
+csl: apa-custom-no-issue.csl
+nocite: |
+    @R @packrat @rmarkdown @knitr @formr @pander @lubridate @stringr @broom @effects @ggplot2 @tidyr @svglite @dplyr @reshape2 @lmerTest @devtools @formatR @lazyeval @scales @car @xlsx @lme4
+---
+
+# Routine and Sex {.tabset .tabset-sticky}
+
+```{r message=FALSE, warning=FALSE}
+bibliography: packrat_bibliography.bibtex
+source("0_helpers.R")
+```
+
+# To the [codebook](2_codebook.html)
+
+
+We used these [helper functions](0_helpers.html). These are the [.Rprofile settings](.Rprofile.html).
+
+1. First we [wrangled the data](0_import_data.html).
+2. Then we looked at some [descriptives](1_descriptives.html).
+3. Then we [analysed](2_analyses.html) it.
+3. And [tested robustness](3_robustness_analyses_new.html).
+
+## Authors & Acknowledgements {.tabset .tabset-sticky}
+
+### Authors
+Laura J. Botzet & Ruben Arslan
+
+### Acknowledgements {.active}
+
+
+#### Package bibliography {.tabset .tabset-sticky}
+
+##### Session info
+```{r}
+# Make packrat bibliography
+# packrat_bibliography(overwrite_bib = TRUE, silent = TRUE)
+# Turn the .R files into .Rmd files, turn those into .html, remove the .Rmd files
+# spin_R_files_to_site_html()
+sessionInfo()
+```
+
+##### References {.active}

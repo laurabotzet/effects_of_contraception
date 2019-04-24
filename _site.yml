@@ -1,0 +1,41 @@
+name: effects_of_contraception
+output_dir: docs
+navbar:
+  title: Effects of Contraception
+  left:
+  - text: Overview
+    href: index.html
+  - text: Data wrangling
+    href: 1_wrangle_data.html
+  - text: Descriptives & Exclusion
+    href: 2_descriptives.html
+  - text: Analyses
+    href: 3_analyses.html
+  - text: Robustness Analyses
+    href: 4_robustness_analyses.html
+  right:
+  - text: ''
+    icon: fa-github
+    href: https://github.com/laurabotzet/effects_of_contraception
+output:
+  html_document:
+    theme: paper
+    code_folding: hide
+    df_print: tibble
+    code_download: yes
+    highlight: zenburn
+    css: styles.css
+    lib_dir: site_libs
+    self_contained: no
+exclude:
+- packrat
+- '*.rda'
+- '*.pdf'
+- '*.dta'
+- '*.csv'
+- '*.csl'
+- '*.bibtex'
+- '*.xlsx'
+- data
+- who_fits
+
