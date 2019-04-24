@@ -67,7 +67,8 @@ data = all_surveys %>%
 
 # based on diary:
 data_diary = diary %>%
-  select(high_libido,
+  select(session,
+         high_libido,
          sex_active, sex_activity_anal_sex, sex_activity_bdsm_dom, sex_activity_bdsm_sub,
          sex_activity_cuddling, sex_activity_cunnilingus, sex_activity_cybersex, sex_activity_dirty_talk,
          sex_activity_fellatio, sex_activity_kissing,  sex_activity_masturbated_by_partner,
@@ -141,7 +142,25 @@ data = data %>% mutate(
 qplot(data$contraception_change_since_meeting_partner) + coord_flip()
 ```
 
-## Restricted codebook too 100 people
+calculate mean of libido, sex_active_frequency and actual sex frequency based on diary
+```{r}
+data_diary_means = data_diary %>%
+  mutate(days_done = as.numeric(days_done)) %>%
+  #restrict analyses to people who filled out more than 30 days
+  filter(days_done > 30) %>% 
+  group_by(session) %>%
+  summarise(diary_libido_mean = mean(high_libido, na.rm = T),
+            diary_sex_active_mean = mean(sex_active, na.rm = T),
+            diary_sex_active_sex_mean = mean(sex_activity_sex, na.rm = T))
+
+qplot(data_diary_means$diary_libido_mean)
+qplot(data_diary_means$diary_sex_active_mean)
+qplot(data_diary_means$diary_sex_active_sex_mean)
+
+data = left_join(data, data_diary_means, by = "session")
+```
+
+## Restricted codebook to 100 people
 ```{r}
 data = data %>% filter(row_number() < 101)
 ```
@@ -149,24 +168,39 @@ data = data %>% filter(row_number() < 101)
 ## Selection Variables Codebook
 ```{r}
 # codebook_selection_data = data %>%
-  select(-session, 
-         -starts_with("contraception_"), 
-         -starts_with("partner_"), -starts_with("relationship_satisfaction"),
-         -relationship_problems_R, -relationship_conflict_R, -satisfaction_sexual_intercourse,
-         -reasons_for_exclusion, -pregnant_trying)
+#   select(-session, 
+#          -starts_with("contraception_"), 
+#          -starts_with("partner_"), -starts_with("relationship_satisfaction"),
+#          -relationship_problems_R, -relationship_conflict_R, -satisfaction_sexual_intercourse,
+#          -reasons_for_exclusion, -pregnant_trying)
 
 # codebook(codebook_selection_data,  missingness_report = FALSE, indent = "##")
 ```
 
 ## Contraception Codebook
 ```{r}
-codebook_contraception_data = data %>%
-  select(contraception_hormonal, contraception_meeting_partner, contraception_change_since_meeting_partner)
-
-codebook(codebook_contraception_data,  missingness_report = FALSE, indent = "##")
+# codebook_contraception_data = data %>%
+#   select(contraception_hormonal, contraception_meeting_partner, contraception_change_since_meeting_partner)
+# 
+# codebook(codebook_contraception_data,  missingness_report = FALSE, indent = "##")
 ```
 
 ## Outcomes Codebook 
+```{r}
+codebook_outcome_data = data %>%
+  select(partner_attractiveness_face,
+         partner_attractiveness_body,
+         relationship_satisfaction_overall,
+         relationship_satisfaction_2,
+         relationship_satisfaction_3,
+         relationship_problems_R,
+         relationship_conflict_R,
+         satisfaction_sexual_intercourse,
+         diary_libido_mean,
+         diary_sex_active_mean,
+         diary_sex_active_sex_mean)
+codebook(codebook_outcome_data,  missingness_report = FALSE, indent = "##")
+```
 
 ## Correlations
 ```{r}
