@@ -26,56 +26,6 @@ theme_set(theme_bw())
 library(codebook)
 ```
 
-## Included variables for codebook
-```{r}
-data = all_surveys %>%
-  select(session,
-         age,
-         education_years,
-         net_income,
-         bfi_agree,
-         bfi_consc,
-         bfi_open,
-         bfi_extra,
-         bfi_neuro,
-         religiosity,
-         pregnant_stress,
-         duration_relationship_years,
-         duration_relationship_month,
-         days_with_partner,
-         nights_with_partner,
-         soi_r_attitude,
-         soi_r_behavior,
-         soi_r_desire,
-         number_sexual_partner,
-         contraception_method,
-         contraception_approach,
-         contraception_method_broad,
-         contraception_meeting_partner,
-         partner_attractiveness_face,
-         partner_attractiveness_body,
-         relationship_satisfaction_overall,
-         relationship_satisfaction_2,
-         relationship_satisfaction_3,
-         relationship_problems_R,
-         relationship_conflict_R,
-         satisfaction_sexual_intercourse,
-         reasons_for_exclusion,
-         pregnant_trying)
-
-# based on diary:
-data_diary = diary %>%
-  select(high_libido,
-         sex_active, sex_activity_anal_sex, sex_activity_bdsm_dom, sex_activity_bdsm_sub,
-         sex_activity_cuddling, sex_activity_cunnilingus, sex_activity_cybersex, sex_activity_dirty_talk,
-         sex_activity_fellatio, sex_activity_kissing,  sex_activity_masturbated_by_partner,
-         sex_activity_masturbated_partner, sex_activity_masturbation, sex_activity_other,
-         sex_activity_phone_skype_sex, sex_activity_pornography, sex_activity_sex, sex_activity_touch_other, 
-         sex_activity_toys, sex_activity_unclear,  sex_other, sex_solo, sex_unclear,
-         days_done)
-```
-
-
 ```{r}
 attributes(s3_daily$grooming_broad)$scale_item_names <- NULL
 s3_daily <- s3_daily %>% filter(!is.na(session), !is.na(created))
