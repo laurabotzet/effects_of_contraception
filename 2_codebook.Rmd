@@ -167,22 +167,22 @@ data = data %>% filter(row_number() < 101)
 
 ## Selection Variables Codebook
 ```{r}
-# codebook_selection_data = data %>%
-#   select(-session, 
-#          -starts_with("contraception_"), 
-#          -starts_with("partner_"), -starts_with("relationship_satisfaction"),
-#          -relationship_problems_R, -relationship_conflict_R, -satisfaction_sexual_intercourse,
-#          -reasons_for_exclusion, -pregnant_trying)
+codebook_selection_data = data %>%
+  select(-session,
+         -starts_with("contraception_"),
+         -starts_with("partner_"), -starts_with("relationship_satisfaction"),
+         -relationship_problems_R, -relationship_conflict_R, -satisfaction_sexual_intercourse,
+         -reasons_for_exclusion, -pregnant_trying)
 
-# codebook(codebook_selection_data,  missingness_report = FALSE, indent = "##")
+codebook(codebook_selection_data,  missingness_report = FALSE, indent = "##")
 ```
 
 ## Contraception Codebook
 ```{r}
-# codebook_contraception_data = data %>%
-#   select(contraception_hormonal, contraception_meeting_partner, contraception_change_since_meeting_partner)
-# 
-# codebook(codebook_contraception_data,  missingness_report = FALSE, indent = "##")
+codebook_contraception_data = data %>%
+  select(contraception_hormonal, contraception_meeting_partner, contraception_change_since_meeting_partner)
+
+codebook(codebook_contraception_data,  missingness_report = FALSE, indent = "##")
 ```
 
 ## Outcomes Codebook 
