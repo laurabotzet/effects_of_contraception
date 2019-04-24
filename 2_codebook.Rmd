@@ -41,7 +41,6 @@ data = all_surveys %>%
          starts_with("bfi_neuro"),
          religiosity,
          pregnant_stress,
-         relationship_status,
          duration_relationship_years,
          duration_relationship_month,
          days_with_partner,
@@ -160,6 +159,15 @@ qplot(data_diary_means$diary_sex_active_sex_mean)
 data = left_join(data, data_diary_means, by = "session")
 ```
 
+relationship status (single vs partnered)
+```{r}
+data = data %>% mutate(
+  relationship_status = ifelse(is.na(duration_relationship_month), "Single", "Partnered")
+)
+
+qplot(data$relationship_status)
+```
+
 ## Restricted codebook to 100 people
 ```{r}
 data = data %>% filter(row_number() < 101)
@@ -205,7 +213,7 @@ codebook(codebook_outcome_data,  missingness_report = FALSE, indent = "##")
 
 ## Differences in contraception status by relationship status
 ```{r}
-ggplot(data, aes(x = relationship_status, y = contraception_hormonal)) + 
+ggplot(data, aes(x = relationship_status, fill = contraception_hormonal)) + geom_bar(position = "dodge")
 ```
 
 ## Differences in Gaussian variables by HC and RS {.tabset}
@@ -234,11 +242,27 @@ ggplot(data, aes(x = contraception_hormonal, y = relationship_conflict_R)) + geo
 
 ggplot(data, aes(x = contraception_hormonal, y = satisfaction_sexual_intercourse)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
     stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+
+ggplot(data, aes(x = contraception_hormonal, y = diary_libido_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+
+ggplot(data, aes(x = contraception_hormonal, y = diary_sex_active_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+
+ggplot(data, aes(x = contraception_hormonal, y = diary_sex_active_sex_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
 ```
 
 ### Relationship status
 ```{r}
+ggplot(data, aes(x = relationship_status, y = diary_libido_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
 
+ggplot(data, aes(x = relationship_status, y = diary_sex_active_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+
+ggplot(data, aes(x = relationship_status, y = diary_sex_active_sex_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
 ```
 
 
