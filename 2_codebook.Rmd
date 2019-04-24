@@ -97,11 +97,15 @@ codebook_selection_data = data %>%
   select(-session, 
          -starts_with("contraception_"), 
          -starts_with("partner_"), -starts_with("relationship_"), -satisfaction_sexual_intercourse,
-         - reasons_for_exclusion, -pregnant_trying)
+         -reasons_for_exclusion, -pregnant_trying)
 
-codebook(data %>% codebook_selection_data,  missingness_report = FALSE, indent = "##")
+codebook(codebook_selection_data,  missingness_report = FALSE, indent = "##")
 ```
 
 ## Contraception Codebook
+```{r}
+codebook_contraception_data = data %>%
+  select()
+```
 
 ## Outcomes Codebook 
