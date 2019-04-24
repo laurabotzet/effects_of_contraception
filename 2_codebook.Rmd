@@ -26,6 +26,7 @@ theme_set(theme_bw())
 library(codebook)
 ```
 
+
 ## Included variables for codebook
 ```{r}
 data = all_surveys %>%
@@ -33,7 +34,7 @@ data = all_surveys %>%
          age,
          education_years,
          net_income,
-         bfi_agree,
+         starts_with("bfi_agree"),
          bfi_consc,
          bfi_open,
          bfi_extra,
@@ -84,4 +85,9 @@ data = data %>% filter(reasons_for_exclusion == "")
 ```
 `r n_excluded` people were excluded.
 
+
+## Codebook 
+```{r}
+codebook(data %>% select(starts_with("bfi_agree")),  missingness_report = FALSE, indent = "##")
+```
 

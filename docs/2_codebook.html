@@ -13,7 +13,7 @@
 
 <title>Codebook Effects of Contraception</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -25,6 +25,27 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.5/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="site_libs/jszip-1.10.16/jszip.min.js"></script>
+<script src="site_libs/pdfmake-1.10.16/pdfmake.min.js"></script>
+<script src="site_libs/pdfmake-1.10.16/vfs_fonts.js"></script>
+<link href="site_libs/dt-ext-buttons-1.10.16/css/buttons.dataTables.min.css" rel="stylesheet" />
+<script src="site_libs/dt-ext-buttons-1.10.16/js/dataTables.buttons.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.16/js/buttons.flash.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.16/js/buttons.html5.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.16/js/buttons.colVis.min.js"></script>
+<script src="site_libs/dt-ext-buttons-1.10.16/js/buttons.print.min.js"></script>
+<link href="site_libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet" />
+<script src="site_libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+<link href="site_libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -527,8 +548,526 @@ knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="k
 <p>For now based on old exclusion criteria –&gt; update later</p>
 <p>636 people were excluded.</p>
 </div>
+<div id="codebook" class="section level2">
+<h2>Codebook</h2>
+<div id="metadata" class="section level3">
+<h3>Metadata</h3>
+<div id="description" class="section level4">
+<h4>Description</h4>
+<p><strong>Dataset name</strong>: data %&gt;% select(starts_with(“bfi_agree”))</p>
+<p>The dataset has N=1024 rows and 10 columns. 1024 rows have no missing values on any column.</p>
+<p><details> <summary title="Expand this section to see some additional metadata in a structured format that is useful for search engines">Metadata for search engines</summary></p>
+<ul>
+<li><p><strong>Date published</strong>: 2019-04-24</p></li>
+<li><p><strong>keywords</strong>: <em>bfi_agree_2</em>, <em>bfi_agree_3r</em>, <em>bfi_agree_1r</em>, <em>bfi_agree_4</em>, <em>bfi_agree_5</em>, <em>bfi_agree_6r</em>, <em>bfi_agree_7</em>, <em>bfi_agree_8r</em>, <em>bfi_agree_9</em> and <em>bfi_agree</em></p></li>
+</ul>
+<!-- end of list -->
+<p></details></p>
+</div>
+</div>
+<div id="variables" class="section level3">
+<h3>Variables</h3>
+<div id="bfi_agree" class="section level4 tabset">
+<h4>Scale: bfi_agree</h4>
+<p><a name="bfi_agree_2"></a><a name="bfi_agree_3r"></a><a name="bfi_agree_1r"></a><a name="bfi_agree_4"></a><a name="bfi_agree_5"></a><a name="bfi_agree_6r"></a><a name="bfi_agree_7"></a><a name="bfi_agree_8r"></a><a name="bfi_agree_9"></a></p>
+<div id="bfi_agree_likert" class="section level5">
+<h5>Overview</h5>
+<p><strong>Reliability</strong>: ω<sub>ordinal</sub> [95% CI] = 0.78 [0.76;0.8].</p>
+<p><strong>Missing</strong>: 0.</p>
+<p><img src="2_codebook_files/figure-html/bfi_agree_likert-1.png" width="672" /></p>
+<p><img src="2_codebook_files/figure-html/bfi_agree_distribution-1.png" width="672" /></p>
+</div>
+<div id="bfi_agree_reliability" class="section level5">
+<h5>Reliability details</h5>
+<div id="reliability-indices" class="section level6">
+<h6>Reliability Indices</h6>
+<table style="width:46%;">
+<colgroup>
+<col width="31%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Index</th>
+<th align="center">Estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Omega</td>
+<td align="center">0.77</td>
+</tr>
+<tr class="even">
+<td align="center">Omega Psych Tot</td>
+<td align="center">0.81</td>
+</tr>
+<tr class="odd">
+<td align="center">Omega Psych H</td>
+<td align="center">0.54</td>
+</tr>
+<tr class="even">
+<td align="center">Omega Ordinal</td>
+<td align="center">0.78</td>
+</tr>
+<tr class="odd">
+<td align="center">Cronbach Alpha</td>
+<td align="center">0.76</td>
+</tr>
+<tr class="even">
+<td align="center">Greatest Lower Bound</td>
+<td align="center">0.83</td>
+</tr>
+<tr class="odd">
+<td align="center">Alpha Ordinal</td>
+<td align="center">0.79</td>
+</tr>
+</tbody>
+</table>
+<p>Positive correlations: 36 out of 36 (100%)</p>
+</div>
+<div id="scatter-matrix" class="section level6">
+<h6>Scatter matrix</h6>
+<p><img src="2_codebook_files/figure-html/bfi_agree_unnamed-chunk-4-5-1.png" width="672" /></p>
+<p><details><summary>Detailed output</summary></p>
+<pre><code>## 
+## Information about this analysis:
+## 
+##                  Dataframe: res$dat
+##                      Items: bfi_agree_2, bfi_agree_3r, bfi_agree_1r, bfi_agree_4, bfi_agree_5, bfi_agree_6r, bfi_agree_7, bfi_agree_8r, bfi_agree_9
+##               Observations: 1024
+##      Positive correlations: 36 out of 36 (100%)
+## 
+## Estimates assuming interval level:
+## 
+##              Omega (total): 0.77
+##       Omega (hierarchical): 0.54
+##    Revelle&#39;s omega (total): 0.81
+## Greatest Lower Bound (GLB): 0.83
+##              Coefficient H: 0.81
+##           Cronbach&#39;s alpha: 0.76
+## Confidence intervals:
+##              Omega (total): [0.75, 0.79]
+##           Cronbach&#39;s alpha: [0.73, 0.78]
+## 
+## Estimates assuming ordinal level:
+## 
+##      Ordinal Omega (total): 0.78
+##  Ordinal Omega (hierarch.): 0.75
+##   Ordinal Cronbach&#39;s alpha: 0.79
+## Confidence intervals:
+##      Ordinal Omega (total): [0.76, 0.8]
+##   Ordinal Cronbach&#39;s alpha: [0.77, 0.81]
+## 
+## Note: the normal point estimate and confidence interval for omega are based on the procedure suggested by Dunn, Baguley &amp; Brunsden (2013) using the MBESS function ci.reliability, whereas the psych package point estimate was suggested in Revelle &amp; Zinbarg (2008). See the help (&#39;?scaleStructure&#39;) for more information.
+## 
+## Eigen values: 3.082, 1.248, 0.982, 0.911, 0.744, 0.611, 0.59, 0.511, 0.321
+## Loadings:
+##              TC1    TC2   
+## bfi_agree_2          0.819
+## bfi_agree_3r  0.737 -0.207
+## bfi_agree_1r  0.738       
+## bfi_agree_4   0.526  0.126
+## bfi_agree_5   0.184  0.506
+## bfi_agree_6r  0.599  0.203
+## bfi_agree_7          0.753
+## bfi_agree_8r  0.730  0.151
+## bfi_agree_9   0.175  0.476
+## 
+##                  TC1   TC2
+## SS loadings    2.329 1.845
+## Proportion Var 0.259 0.205
+## Cumulative Var 0.259 0.464
+## 
+##              vars    n mean   sd median trimmed  mad min max range  skew
+## bfi_agree_2     1 1024 3.91 0.82      4    3.96 0.00   1   5     4 -0.65
+## bfi_agree_3r    2 1024 4.31 0.88      5    4.46 0.00   1   5     4 -1.30
+## bfi_agree_1r    3 1024 3.10 1.08      3    3.09 1.48   1   5     4 -0.06
+## bfi_agree_4     4 1024 3.33 1.17      3    3.39 1.48   1   5     4 -0.33
+## bfi_agree_5     5 1024 3.89 0.97      4    4.00 1.48   1   5     4 -0.82
+## bfi_agree_6r    6 1024 2.99 1.29      3    2.99 1.48   1   5     4  0.01
+## bfi_agree_7     7 1024 4.26 0.77      4    4.36 1.48   1   5     4 -0.88
+## bfi_agree_8r    8 1024 3.28 1.28      3    3.35 1.48   1   5     4 -0.24
+## bfi_agree_9     9 1024 4.12 0.95      4    4.26 1.48   1   5     4 -1.04
+##              kurtosis   se
+## bfi_agree_2      0.65 0.03
+## bfi_agree_3r     1.28 0.03
+## bfi_agree_1r    -0.75 0.03
+## bfi_agree_4     -0.77 0.04
+## bfi_agree_5      0.23 0.03
+## bfi_agree_6r    -1.11 0.04
+## bfi_agree_7      0.50 0.02
+## bfi_agree_8r    -1.05 0.04
+## bfi_agree_9      0.65 0.03</code></pre>
+<p></details></p>
+</div>
+</div>
+<div id="bfi_agree_summary" class="section level5">
+<h5>Summary statistics</h5>
+<table>
+<thead>
+<tr class="header">
+<th align="left">name</th>
+<th align="left">label</th>
+<th align="left">data_type</th>
+<th align="left">value_labels</th>
+<th align="left">missing</th>
+<th align="left">complete</th>
+<th align="left">n</th>
+<th align="left">mean</th>
+<th align="left">sd</th>
+<th align="left">p0</th>
+<th align="left">p25</th>
+<th align="left">p50</th>
+<th align="left">p75</th>
+<th align="left">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">bfi_agree_2</td>
+<td align="left">Ich sehe mich selbst als jemanden, der hilfsbereit und selbstlos gegenüber anderen ist.</td>
+<td align="left">numeric</td>
+<td align="left">1. 1: trifft gar nicht zu,<br>2. 2,<br>3. 3,<br>4. 4,<br>5. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.</td>
+<td align="left">0</td>
+<td align="left">1024</td>
+<td align="left">1024</td>
+<td align="left">3.91</td>
+<td align="left">0.82</td>
+<td align="left">1</td>
+<td align="left">3</td>
+<td align="left">4</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">▁▁▁▃▁▇▁▃</td>
+</tr>
+<tr class="even">
+<td align="left">bfi_agree_3r</td>
+<td align="left">Ich sehe mich selbst als jemanden, der häufig in Streitereien verwickelt ist.</td>
+<td align="left">numeric</td>
+<td align="left">5. 1: trifft gar nicht zu,<br>4. 2,<br>3. 3,<br>2. 4,<br>1. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.</td>
+<td align="left">0</td>
+<td align="left">1024</td>
+<td align="left">1024</td>
+<td align="left">4.31</td>
+<td align="left">0.88</td>
+<td align="left">1</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">▁▁▁▂▁▅▁▇</td>
+</tr>
+<tr class="odd">
+<td align="left">bfi_agree_1r</td>
+<td align="left">Ich sehe mich selbst als jemanden, der dazu neigt, andere zu kritisieren.</td>
+<td align="left">numeric</td>
+<td align="left">5. 1: trifft gar nicht zu,<br>4. 2,<br>3. 3,<br>2. 4,<br>1. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.</td>
+<td align="left">0</td>
+<td align="left">1024</td>
+<td align="left">1024</td>
+<td align="left">3.1</td>
+<td align="left">1.08</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">▂▆▁▇▁▇▁▂</td>
+</tr>
+<tr class="even">
+<td align="left">bfi_agree_4</td>
+<td align="left">Ich sehe mich selbst als jemanden, der <strong>nicht</strong> nachtragend ist, anderen leicht vergibt.</td>
+<td align="left">numeric</td>
+<td align="left">1. 1: trifft gar nicht zu,<br>2. 2,<br>3. 3,<br>4. 4,<br>5. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.</td>
+<td align="left">0</td>
+<td align="left">1024</td>
+<td align="left">1024</td>
+<td align="left">3.33</td>
+<td align="left">1.17</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">▂▅▁▆▁▇▁▅</td>
+</tr>
+<tr class="odd">
+<td align="left">bfi_agree_5</td>
+<td align="left">Ich sehe mich selbst als jemanden, der anderen Vertrauen schenkt.</td>
+<td align="left">numeric</td>
+<td align="left">1. 1: trifft gar nicht zu,<br>2. 2,<br>3. 3,<br>4. 4,<br>5. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.</td>
+<td align="left">0</td>
+<td align="left">1024</td>
+<td align="left">1024</td>
+<td align="left">3.89</td>
+<td align="left">0.97</td>
+<td align="left">1</td>
+<td align="left">3</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">▁▂▁▃▁▇▁▅</td>
+</tr>
+<tr class="even">
+<td align="left">bfi_agree_6r</td>
+<td align="left">Ich sehe mich selbst als jemanden, der sich kalt und distanziert verhalten kann.</td>
+<td align="left">numeric</td>
+<td align="left">5. 1: trifft gar nicht zu,<br>4. 2,<br>3. 3,<br>2. 4,<br>1. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.</td>
+<td align="left">0</td>
+<td align="left">1024</td>
+<td align="left">1024</td>
+<td align="left">2.99</td>
+<td align="left">1.29</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">▅▇▁▇▁▇▁▅</td>
+</tr>
+<tr class="odd">
+<td align="left">bfi_agree_7</td>
+<td align="left">Ich sehe mich selbst als jemanden, der rücksichtsvoll und einfühlsam zu anderen ist.</td>
+<td align="left">numeric</td>
+<td align="left">1. 1: trifft gar nicht zu,<br>2. 2,<br>3. 3,<br>4. 4,<br>5. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.</td>
+<td align="left">0</td>
+<td align="left">1024</td>
+<td align="left">1024</td>
+<td align="left">4.26</td>
+<td align="left">0.77</td>
+<td align="left">1</td>
+<td align="left">4</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">▁▁▁▂▁▇▁▇</td>
+</tr>
+<tr class="even">
+<td align="left">bfi_agree_8r</td>
+<td align="left">Ich sehe mich selbst als jemanden, der schroff und abweisend zu anderen sein kann.</td>
+<td align="left">numeric</td>
+<td align="left">5. 1: trifft gar nicht zu,<br>4. 2,<br>3. 3,<br>2. 4,<br>1. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.</td>
+<td align="left">0</td>
+<td align="left">1024</td>
+<td align="left">1024</td>
+<td align="left">3.28</td>
+<td align="left">1.28</td>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">▃▆▁▆▁▇▁▆</td>
+</tr>
+<tr class="odd">
+<td align="left">bfi_agree_9</td>
+<td align="left">Ich sehe mich selbst als jemanden, der sich kooperativ verhält, Zusammenarbeit dem Wettbewerb vorzieht.</td>
+<td align="left">numeric</td>
+<td align="left">1. 1: trifft gar nicht zu,<br>2. 2,<br>3. 3,<br>4. 4,<br>5. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.</td>
+<td align="left">0</td>
+<td align="left">1024</td>
+<td align="left">1024</td>
+<td align="left">4.12</td>
+<td align="left">0.95</td>
+<td align="left">1</td>
+<td align="left">4</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">5</td>
+<td align="left">▁▁▁▃▁▇▁▇</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="codebook-table" class="section level3">
+<h3>Codebook table</h3>
+<div id="htmlwidget-be7096d2916e954e736b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-be7096d2916e954e736b">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"disabled\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","extensions":["Buttons"],"data":[["<a href=\"#bfi_agree_2\">bfi_agree_2<\/a>","<a href=\"#bfi_agree_3r\">bfi_agree_3r<\/a>","<a href=\"#bfi_agree_1r\">bfi_agree_1r<\/a>","<a href=\"#bfi_agree_4\">bfi_agree_4<\/a>","<a href=\"#bfi_agree_5\">bfi_agree_5<\/a>","<a href=\"#bfi_agree_6r\">bfi_agree_6r<\/a>","<a href=\"#bfi_agree_7\">bfi_agree_7<\/a>","<a href=\"#bfi_agree_8r\">bfi_agree_8r<\/a>","<a href=\"#bfi_agree_9\">bfi_agree_9<\/a>","<a href=\"#bfi_agree\">bfi_agree<\/a>"],["Ich sehe mich selbst als jemanden, der hilfsbereit und selbstlos gegenüber anderen ist.","Ich sehe mich selbst als jemanden, der häufig in Streitereien verwickelt ist.","Ich sehe mich selbst als jemanden, der dazu neigt, andere zu kritisieren.","Ich sehe mich selbst als jemanden, der __nicht__ nachtragend ist, anderen leicht vergibt.","Ich sehe mich selbst als jemanden, der anderen Vertrauen schenkt.","Ich sehe mich selbst als jemanden, der sich kalt und distanziert verhalten kann.","Ich sehe mich selbst als jemanden, der rücksichtsvoll und einfühlsam zu anderen ist.","Ich sehe mich selbst als jemanden, der schroff und abweisend zu anderen sein kann.","Ich sehe mich selbst als jemanden, der sich kooperativ verhält, Zusammenarbeit dem Wettbewerb vorzieht.","9 bfi_agree items averaged with aggregation_function"],["numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric","numeric"],["1. 1: trifft gar nicht zu,<br>2. 2,<br>3. 3,<br>4. 4,<br>5. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.","5. 1: trifft gar nicht zu,<br>4. 2,<br>3. 3,<br>2. 4,<br>1. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.","5. 1: trifft gar nicht zu,<br>4. 2,<br>3. 3,<br>2. 4,<br>1. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.","1. 1: trifft gar nicht zu,<br>2. 2,<br>3. 3,<br>4. 4,<br>5. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.","1. 1: trifft gar nicht zu,<br>2. 2,<br>3. 3,<br>4. 4,<br>5. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.","5. 1: trifft gar nicht zu,<br>4. 2,<br>3. 3,<br>2. 4,<br>1. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.","1. 1: trifft gar nicht zu,<br>2. 2,<br>3. 3,<br>4. 4,<br>5. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.","5. 1: trifft gar nicht zu,<br>4. 2,<br>3. 3,<br>2. 4,<br>1. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.","1. 1: trifft gar nicht zu,<br>2. 2,<br>3. 3,<br>4. 4,<br>5. 5: trifft völlig zu,<br>NA. Item was never rendered for this user.",null],[null,null,null,null,null,null,null,null,null,"bfi_agree_2, bfi_agree_3r, bfi_agree_1r, bfi_agree_4, bfi_agree_5, bfi_agree_6r, bfi_agree_7, bfi_agree_8r, bfi_agree_9"],["0","0","0","0","0","0","0","0","0","0"],["1024","1024","1024","1024","1024","1024","1024","1024","1024","1024"],["1024","1024","1024","1024","1024","1024","1024","1024","1024","1024"],["3.91","4.31","3.1 ","3.33","3.89","2.99","4.26","3.28","4.12","3.69"],["0.82","0.88","1.08","1.17","0.97","1.29","0.77","1.28","0.95","0.61"],["1   ","1   ","1   ","1   ","1   ","1   ","1   ","1   ","1   ","1.44"],["3   ","4   ","2   ","2   ","3   ","2   ","4   ","2   ","4   ","3.33"],["4   ","5   ","3   ","3   ","4   ","3   ","4   ","3   ","4   ","3.78"],["4   ","5   ","4   ","4   ","5   ","4   ","5   ","4   ","5   ","4.11"],["5","5","5","5","5","5","5","5","5","5"],["▁▁▁▃▁▇▁▃","▁▁▁▂▁▅▁▇","▂▆▁▇▁▇▁▂","▂▅▁▆▁▇▁▅","▁▂▁▃▁▇▁▅","▅▇▁▇▁▇▁▅","▁▁▁▂▁▇▁▇","▃▆▁▆▁▇▁▆","▁▁▁▃▁▇▁▇","▁▁▂▅▇▇▆▂"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>name<\/th>\n      <th>label<\/th>\n      <th>data_type<\/th>\n      <th>value_labels<\/th>\n      <th>scale_item_names<\/th>\n      <th>missing<\/th>\n      <th>complete<\/th>\n      <th>n<\/th>\n      <th>mean<\/th>\n      <th>sd<\/th>\n      <th>p0<\/th>\n      <th>p25<\/th>\n      <th>p50<\/th>\n      <th>p75<\/th>\n      <th>p100<\/th>\n      <th>hist<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"Bfrtip","buttons":["copy","csv","excel","pdf","print"],"pageLength":200,"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[10,25,50,100,200]}},"evals":[],"jsHooks":[]}</script>
+<script type="application/ld+json">
+{
+  "name": "data %>% select(starts_with(\"bfi_agree\"))",
+  "datePublished": "2019-04-24",
+  "description": "The dataset has N=1024 rows and 10 columns.\n1024 rows have no missing values on any column.\n\n\n## Table of variables\nThis table contains variable names, labels, their central tendencies and other attributes.\n\n|name         |label                                                                                                   |data_type |value_labels                                                                                                    |scale_item_names                                                                                                        |missing |complete |n    |mean |sd   |p0   |p25  |p50  |p75  |p100 |hist     |\n|:------------|:-------------------------------------------------------------------------------------------------------|:---------|:---------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------|:-------|:--------|:----|:----|:----|:----|:----|:----|:----|:----|:--------|\n|bfi_agree_2  |Ich sehe mich selbst als jemanden, der hilfsbereit und selbstlos gegenüber anderen ist.                 |numeric   |1. 1: trifft gar nicht zu, - 2. 2, - 3. 3, - 4. 4, - 5. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |3.91 |0.82 |1    |3    |4    |4    |5    |▁▁▁▃▁▇▁▃ |\n|bfi_agree_3r |Ich sehe mich selbst als jemanden, der häufig in Streitereien verwickelt ist.                           |numeric   |5. 1: trifft gar nicht zu, - 4. 2, - 3. 3, - 2. 4, - 1. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |4.31 |0.88 |1    |4    |5    |5    |5    |▁▁▁▂▁▅▁▇ |\n|bfi_agree_1r |Ich sehe mich selbst als jemanden, der dazu neigt, andere zu kritisieren.                               |numeric   |5. 1: trifft gar nicht zu, - 4. 2, - 3. 3, - 2. 4, - 1. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |3.1  |1.08 |1    |2    |3    |4    |5    |▂▆▁▇▁▇▁▂ |\n|bfi_agree_4  |Ich sehe mich selbst als jemanden, der __nicht__ nachtragend ist, anderen leicht vergibt.               |numeric   |1. 1: trifft gar nicht zu, - 2. 2, - 3. 3, - 4. 4, - 5. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |3.33 |1.17 |1    |2    |3    |4    |5    |▂▅▁▆▁▇▁▅ |\n|bfi_agree_5  |Ich sehe mich selbst als jemanden, der anderen Vertrauen schenkt.                                       |numeric   |1. 1: trifft gar nicht zu, - 2. 2, - 3. 3, - 4. 4, - 5. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |3.89 |0.97 |1    |3    |4    |5    |5    |▁▂▁▃▁▇▁▅ |\n|bfi_agree_6r |Ich sehe mich selbst als jemanden, der sich kalt und distanziert verhalten kann.                        |numeric   |5. 1: trifft gar nicht zu, - 4. 2, - 3. 3, - 2. 4, - 1. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |2.99 |1.29 |1    |2    |3    |4    |5    |▅▇▁▇▁▇▁▅ |\n|bfi_agree_7  |Ich sehe mich selbst als jemanden, der rücksichtsvoll und einfühlsam zu anderen ist.                    |numeric   |1. 1: trifft gar nicht zu, - 2. 2, - 3. 3, - 4. 4, - 5. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |4.26 |0.77 |1    |4    |4    |5    |5    |▁▁▁▂▁▇▁▇ |\n|bfi_agree_8r |Ich sehe mich selbst als jemanden, der schroff und abweisend zu anderen sein kann.                      |numeric   |5. 1: trifft gar nicht zu, - 4. 2, - 3. 3, - 2. 4, - 1. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |3.28 |1.28 |1    |2    |3    |4    |5    |▃▆▁▆▁▇▁▆ |\n|bfi_agree_9  |Ich sehe mich selbst als jemanden, der sich kooperativ verhält, Zusammenarbeit dem Wettbewerb vorzieht. |numeric   |1. 1: trifft gar nicht zu, - 2. 2, - 3. 3, - 4. 4, - 5. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |4.12 |0.95 |1    |4    |4    |5    |5    |▁▁▁▃▁▇▁▇ |\n|bfi_agree    |9 bfi_agree items averaged with aggregation_function                                                    |numeric   |NA                                                                                                              |bfi_agree_2, bfi_agree_3r, bfi_agree_1r, bfi_agree_4, bfi_agree_5, bfi_agree_6r, bfi_agree_7, bfi_agree_8r, bfi_agree_9 |0       |1024     |1024 |3.69 |0.61 |1.44 |3.33 |3.78 |4.11 |5    |▁▁▂▅▇▇▆▂ |\n\n### Note\nThis dataset was automatically described using the [codebook R package](https://rubenarslan.github.io/codebook/) (version 0.8.0).",
+  "keywords": ["bfi_agree_2", "bfi_agree_3r", "bfi_agree_1r", "bfi_agree_4", "bfi_agree_5", "bfi_agree_6r", "bfi_agree_7", "bfi_agree_8r", "bfi_agree_9", "bfi_agree"],
+  "@context": "http://schema.org/",
+  "@type": "Dataset",
+  "variableMeasured": [
+    {
+      "name": "bfi_agree_2",
+      "description": "Ich sehe mich selbst als jemanden, der hilfsbereit und selbstlos gegenüber anderen ist.",
+      "value": "1. 1: trifft gar nicht zu,\n2. 2,\n3. 3,\n4. 4,\n5. 5: trifft völlig zu,\nNA. Item was never rendered for this user.",
+      "maxValue": 5,
+      "minValue": 1,
+      "@type": "propertyValue"
+    },
+    {
+      "name": "bfi_agree_3r",
+      "description": "Ich sehe mich selbst als jemanden, der häufig in Streitereien verwickelt ist.",
+      "value": "5. 1: trifft gar nicht zu,\n4. 2,\n3. 3,\n2. 4,\n1. 5: trifft völlig zu,\nNA. Item was never rendered for this user.",
+      "maxValue": 5,
+      "minValue": 1,
+      "@type": "propertyValue"
+    },
+    {
+      "name": "bfi_agree_1r",
+      "description": "Ich sehe mich selbst als jemanden, der dazu neigt, andere zu kritisieren.",
+      "value": "5. 1: trifft gar nicht zu,\n4. 2,\n3. 3,\n2. 4,\n1. 5: trifft völlig zu,\nNA. Item was never rendered for this user.",
+      "maxValue": 5,
+      "minValue": 1,
+      "@type": "propertyValue"
+    },
+    {
+      "name": "bfi_agree_4",
+      "description": "Ich sehe mich selbst als jemanden, der __nicht__ nachtragend ist, anderen leicht vergibt.",
+      "value": "1. 1: trifft gar nicht zu,\n2. 2,\n3. 3,\n4. 4,\n5. 5: trifft völlig zu,\nNA. Item was never rendered for this user.",
+      "maxValue": 5,
+      "minValue": 1,
+      "@type": "propertyValue"
+    },
+    {
+      "name": "bfi_agree_5",
+      "description": "Ich sehe mich selbst als jemanden, der anderen Vertrauen schenkt.",
+      "value": "1. 1: trifft gar nicht zu,\n2. 2,\n3. 3,\n4. 4,\n5. 5: trifft völlig zu,\nNA. Item was never rendered for this user.",
+      "maxValue": 5,
+      "minValue": 1,
+      "@type": "propertyValue"
+    },
+    {
+      "name": "bfi_agree_6r",
+      "description": "Ich sehe mich selbst als jemanden, der sich kalt und distanziert verhalten kann.",
+      "value": "5. 1: trifft gar nicht zu,\n4. 2,\n3. 3,\n2. 4,\n1. 5: trifft völlig zu,\nNA. Item was never rendered for this user.",
+      "maxValue": 5,
+      "minValue": 1,
+      "@type": "propertyValue"
+    },
+    {
+      "name": "bfi_agree_7",
+      "description": "Ich sehe mich selbst als jemanden, der rücksichtsvoll und einfühlsam zu anderen ist.",
+      "value": "1. 1: trifft gar nicht zu,\n2. 2,\n3. 3,\n4. 4,\n5. 5: trifft völlig zu,\nNA. Item was never rendered for this user.",
+      "maxValue": 5,
+      "minValue": 1,
+      "@type": "propertyValue"
+    },
+    {
+      "name": "bfi_agree_8r",
+      "description": "Ich sehe mich selbst als jemanden, der schroff und abweisend zu anderen sein kann.",
+      "value": "5. 1: trifft gar nicht zu,\n4. 2,\n3. 3,\n2. 4,\n1. 5: trifft völlig zu,\nNA. Item was never rendered for this user.",
+      "maxValue": 5,
+      "minValue": 1,
+      "@type": "propertyValue"
+    },
+    {
+      "name": "bfi_agree_9",
+      "description": "Ich sehe mich selbst als jemanden, der sich kooperativ verhält, Zusammenarbeit dem Wettbewerb vorzieht.",
+      "value": "1. 1: trifft gar nicht zu,\n2. 2,\n3. 3,\n4. 4,\n5. 5: trifft völlig zu,\nNA. Item was never rendered for this user.",
+      "maxValue": 5,
+      "minValue": 1,
+      "@type": "propertyValue"
+    },
+    {
+      "name": "bfi_agree",
+      "description": "9 bfi_agree items averaged with aggregation_function",
+      "@type": "propertyValue"
+    }
+  ]
+}
+</script>
+<p><details><summary>JSON-LD metadata</summary> The following JSON-LD can be found by search engines, if you share this codebook publicly on the web.</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;data %&gt;% select(starts_with(</span><span class="ch">\&quot;</span><span class="st">bfi_agree</span><span class="ch">\&quot;</span><span class="st">))&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;datePublished&quot;</span><span class="fu">:</span> <span class="st">&quot;2019-04-24&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;The dataset has N=1024 rows and 10 columns.</span><span class="ch">\n</span><span class="st">1024 rows have no missing values on any column.</span><span class="ch">\n\n\n</span><span class="st">## Table of variables</span><span class="ch">\n</span><span class="st">This table contains variable names, labels, their central tendencies and other attributes.</span><span class="ch">\n\n</span><span class="st">|name         |label                                                                                                   |data_type |value_labels                                                                                                    |scale_item_names                                                                                                        |missing |complete |n    |mean |sd   |p0   |p25  |p50  |p75  |p100 |hist     |</span><span class="ch">\n</span><span class="st">|:------------|:-------------------------------------------------------------------------------------------------------|:---------|:---------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------|:-------|:--------|:----|:----|:----|:----|:----|:----|:----|:----|:--------|</span><span class="ch">\n</span><span class="st">|bfi_agree_2  |Ich sehe mich selbst als jemanden, der hilfsbereit und selbstlos gegenüber anderen ist.                 |numeric   |1. 1: trifft gar nicht zu, - 2. 2, - 3. 3, - 4. 4, - 5. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |3.91 |0.82 |1    |3    |4    |4    |5    |▁▁▁▃▁▇▁▃ |</span><span class="ch">\n</span><span class="st">|bfi_agree_3r |Ich sehe mich selbst als jemanden, der häufig in Streitereien verwickelt ist.                           |numeric   |5. 1: trifft gar nicht zu, - 4. 2, - 3. 3, - 2. 4, - 1. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |4.31 |0.88 |1    |4    |5    |5    |5    |▁▁▁▂▁▅▁▇ |</span><span class="ch">\n</span><span class="st">|bfi_agree_1r |Ich sehe mich selbst als jemanden, der dazu neigt, andere zu kritisieren.                               |numeric   |5. 1: trifft gar nicht zu, - 4. 2, - 3. 3, - 2. 4, - 1. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |3.1  |1.08 |1    |2    |3    |4    |5    |▂▆▁▇▁▇▁▂ |</span><span class="ch">\n</span><span class="st">|bfi_agree_4  |Ich sehe mich selbst als jemanden, der __nicht__ nachtragend ist, anderen leicht vergibt.               |numeric   |1. 1: trifft gar nicht zu, - 2. 2, - 3. 3, - 4. 4, - 5. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |3.33 |1.17 |1    |2    |3    |4    |5    |▂▅▁▆▁▇▁▅ |</span><span class="ch">\n</span><span class="st">|bfi_agree_5  |Ich sehe mich selbst als jemanden, der anderen Vertrauen schenkt.                                       |numeric   |1. 1: trifft gar nicht zu, - 2. 2, - 3. 3, - 4. 4, - 5. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |3.89 |0.97 |1    |3    |4    |5    |5    |▁▂▁▃▁▇▁▅ |</span><span class="ch">\n</span><span class="st">|bfi_agree_6r |Ich sehe mich selbst als jemanden, der sich kalt und distanziert verhalten kann.                        |numeric   |5. 1: trifft gar nicht zu, - 4. 2, - 3. 3, - 2. 4, - 1. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |2.99 |1.29 |1    |2    |3    |4    |5    |▅▇▁▇▁▇▁▅ |</span><span class="ch">\n</span><span class="st">|bfi_agree_7  |Ich sehe mich selbst als jemanden, der rücksichtsvoll und einfühlsam zu anderen ist.                    |numeric   |1. 1: trifft gar nicht zu, - 2. 2, - 3. 3, - 4. 4, - 5. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |4.26 |0.77 |1    |4    |4    |5    |5    |▁▁▁▂▁▇▁▇ |</span><span class="ch">\n</span><span class="st">|bfi_agree_8r |Ich sehe mich selbst als jemanden, der schroff und abweisend zu anderen sein kann.                      |numeric   |5. 1: trifft gar nicht zu, - 4. 2, - 3. 3, - 2. 4, - 1. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |3.28 |1.28 |1    |2    |3    |4    |5    |▃▆▁▆▁▇▁▆ |</span><span class="ch">\n</span><span class="st">|bfi_agree_9  |Ich sehe mich selbst als jemanden, der sich kooperativ verhält, Zusammenarbeit dem Wettbewerb vorzieht. |numeric   |1. 1: trifft gar nicht zu, - 2. 2, - 3. 3, - 4. 4, - 5. 5: trifft völlig zu, - NA. Item was never rendered for this user. |NA                                                                                                                      |0       |1024     |1024 |4.12 |0.95 |1    |4    |4    |5    |5    |▁▁▁▃▁▇▁▇ |</span><span class="ch">\n</span><span class="st">|bfi_agree    |9 bfi_agree items averaged with aggregation_function                                                    |numeric   |NA                                                                                                              |bfi_agree_2, bfi_agree_3r, bfi_agree_1r, bfi_agree_4, bfi_agree_5, bfi_agree_6r, bfi_agree_7, bfi_agree_8r, bfi_agree_9 |0       |1024     |1024 |3.69 |0.61 |1.44 |3.33 |3.78 |4.11 |5    |▁▁▂▅▇▇▆▂ |</span><span class="ch">\n\n</span><span class="st">### Note</span><span class="ch">\n</span><span class="st">This dataset was automatically described using the [codebook R package](https://rubenarslan.github.io/codebook/) (version 0.8.0).&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;keywords&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;bfi_agree_2&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_3r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_1r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_4&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_5&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_6r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_7&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_8r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_9&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree&quot;</span><span class="ot">]</span><span class="fu">,</span>
+  <span class="dt">&quot;@context&quot;</span><span class="fu">:</span> <span class="st">&quot;http://schema.org/&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;Dataset&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;variableMeasured&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;bfi_agree_2&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Ich sehe mich selbst als jemanden, der hilfsbereit und selbstlos gegenüber anderen ist.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;1. 1: trifft gar nicht zu,</span><span class="ch">\n</span><span class="st">2. 2,</span><span class="ch">\n</span><span class="st">3. 3,</span><span class="ch">\n</span><span class="st">4. 4,</span><span class="ch">\n</span><span class="st">5. 5: trifft völlig zu,</span><span class="ch">\n</span><span class="st">NA. Item was never rendered for this user.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;maxValue&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span>
+      <span class="dt">&quot;minValue&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;propertyValue&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;bfi_agree_3r&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Ich sehe mich selbst als jemanden, der häufig in Streitereien verwickelt ist.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;5. 1: trifft gar nicht zu,</span><span class="ch">\n</span><span class="st">4. 2,</span><span class="ch">\n</span><span class="st">3. 3,</span><span class="ch">\n</span><span class="st">2. 4,</span><span class="ch">\n</span><span class="st">1. 5: trifft völlig zu,</span><span class="ch">\n</span><span class="st">NA. Item was never rendered for this user.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;maxValue&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span>
+      <span class="dt">&quot;minValue&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;propertyValue&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;bfi_agree_1r&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Ich sehe mich selbst als jemanden, der dazu neigt, andere zu kritisieren.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;5. 1: trifft gar nicht zu,</span><span class="ch">\n</span><span class="st">4. 2,</span><span class="ch">\n</span><span class="st">3. 3,</span><span class="ch">\n</span><span class="st">2. 4,</span><span class="ch">\n</span><span class="st">1. 5: trifft völlig zu,</span><span class="ch">\n</span><span class="st">NA. Item was never rendered for this user.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;maxValue&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span>
+      <span class="dt">&quot;minValue&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;propertyValue&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;bfi_agree_4&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Ich sehe mich selbst als jemanden, der __nicht__ nachtragend ist, anderen leicht vergibt.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;1. 1: trifft gar nicht zu,</span><span class="ch">\n</span><span class="st">2. 2,</span><span class="ch">\n</span><span class="st">3. 3,</span><span class="ch">\n</span><span class="st">4. 4,</span><span class="ch">\n</span><span class="st">5. 5: trifft völlig zu,</span><span class="ch">\n</span><span class="st">NA. Item was never rendered for this user.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;maxValue&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span>
+      <span class="dt">&quot;minValue&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;propertyValue&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;bfi_agree_5&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Ich sehe mich selbst als jemanden, der anderen Vertrauen schenkt.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;1. 1: trifft gar nicht zu,</span><span class="ch">\n</span><span class="st">2. 2,</span><span class="ch">\n</span><span class="st">3. 3,</span><span class="ch">\n</span><span class="st">4. 4,</span><span class="ch">\n</span><span class="st">5. 5: trifft völlig zu,</span><span class="ch">\n</span><span class="st">NA. Item was never rendered for this user.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;maxValue&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span>
+      <span class="dt">&quot;minValue&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;propertyValue&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;bfi_agree_6r&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Ich sehe mich selbst als jemanden, der sich kalt und distanziert verhalten kann.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;5. 1: trifft gar nicht zu,</span><span class="ch">\n</span><span class="st">4. 2,</span><span class="ch">\n</span><span class="st">3. 3,</span><span class="ch">\n</span><span class="st">2. 4,</span><span class="ch">\n</span><span class="st">1. 5: trifft völlig zu,</span><span class="ch">\n</span><span class="st">NA. Item was never rendered for this user.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;maxValue&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span>
+      <span class="dt">&quot;minValue&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;propertyValue&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;bfi_agree_7&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Ich sehe mich selbst als jemanden, der rücksichtsvoll und einfühlsam zu anderen ist.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;1. 1: trifft gar nicht zu,</span><span class="ch">\n</span><span class="st">2. 2,</span><span class="ch">\n</span><span class="st">3. 3,</span><span class="ch">\n</span><span class="st">4. 4,</span><span class="ch">\n</span><span class="st">5. 5: trifft völlig zu,</span><span class="ch">\n</span><span class="st">NA. Item was never rendered for this user.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;maxValue&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span>
+      <span class="dt">&quot;minValue&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;propertyValue&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;bfi_agree_8r&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Ich sehe mich selbst als jemanden, der schroff und abweisend zu anderen sein kann.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;5. 1: trifft gar nicht zu,</span><span class="ch">\n</span><span class="st">4. 2,</span><span class="ch">\n</span><span class="st">3. 3,</span><span class="ch">\n</span><span class="st">2. 4,</span><span class="ch">\n</span><span class="st">1. 5: trifft völlig zu,</span><span class="ch">\n</span><span class="st">NA. Item was never rendered for this user.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;maxValue&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span>
+      <span class="dt">&quot;minValue&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;propertyValue&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;bfi_agree_9&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Ich sehe mich selbst als jemanden, der sich kooperativ verhält, Zusammenarbeit dem Wettbewerb vorzieht.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;1. 1: trifft gar nicht zu,</span><span class="ch">\n</span><span class="st">2. 2,</span><span class="ch">\n</span><span class="st">3. 3,</span><span class="ch">\n</span><span class="st">4. 4,</span><span class="ch">\n</span><span class="st">5. 5: trifft völlig zu,</span><span class="ch">\n</span><span class="st">NA. Item was never rendered for this user.&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;maxValue&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span>
+      <span class="dt">&quot;minValue&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;propertyValue&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="fu">{</span>
+      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;bfi_agree&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;9 bfi_agree items averaged with aggregation_function&quot;</span><span class="fu">,</span>
+      <span class="dt">&quot;@type&quot;</span><span class="fu">:</span> <span class="st">&quot;propertyValue&quot;</span>
+    <span class="fu">}</span>
+  <span class="ot">]</span>
+<span class="fu">}</span><span class="er">`</span></code></pre></div>
+<p></details></p>
+</div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ29kZWJvb2sgRWZmZWN0cyBvZiBDb250cmFjZXB0aW9uIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgdG9jX2RlcHRoOiA0CiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIGNvZGVfZm9sZGluZzogJ2hpZGUnCiAgICBzZWxmX2NvbnRhaW5lZDogZmFsc2UKLS0tCiAgCmBgYHtyIHJlc3VsdHM9J2hpZGUnLG1lc3NhZ2U9Rix3YXJuaW5nPUZ9CnNvdXJjZSgiMF9oZWxwZXJzLlIiKQprbml0cjo6b3B0c19jaHVuayRzZXQod2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0UpCnBhbmRlcjo6cGFuZGVyT3B0aW9ucygidGFibGUuc3BsaXQudGFibGUiLCBJbmYpCnBhbmRlcjo6cGFuZGVyT3B0aW9ucygncm91bmQnLDIpCnBhbmRlcjo6cGFuZGVyT3B0aW9ucygnZGlnaXRzJywyKQpwYW5kZXI6OnBhbmRlck9wdGlvbnMoJ2tlZXAudHJhaWxpbmcuemVyb3MnLFRSVUUpCgpsb2FkKCJkYXRhL2NsZWFuZWRfc2VsZWN0ZWQucmRhdGEiKQoKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBGQUxTRSwgZXJyb3IgPSBUUlVFLCBkZXYgPSAiQ2Fpcm9QTkciKQpsaWJyYXJ5KGdncGxvdDIpCnRoZW1lX3NldCh0aGVtZV9idygpKQoKbGlicmFyeShjb2RlYm9vaykKYGBgCgojIyBJbmNsdWRlZCB2YXJpYWJsZXMgZm9yIGNvZGVib29rCmBgYHtyfQpkYXRhID0gYWxsX3N1cnZleXMgJT4lCiAgc2VsZWN0KHNlc3Npb24sCiAgICAgICAgIGFnZSwKICAgICAgICAgZWR1Y2F0aW9uX3llYXJzLAogICAgICAgICBuZXRfaW5jb21lLAogICAgICAgICBiZmlfYWdyZWUsCiAgICAgICAgIGJmaV9jb25zYywKICAgICAgICAgYmZpX29wZW4sCiAgICAgICAgIGJmaV9leHRyYSwKICAgICAgICAgYmZpX25ldXJvLAogICAgICAgICByZWxpZ2lvc2l0eSwKICAgICAgICAgcHJlZ25hbnRfc3RyZXNzLAogICAgICAgICBkdXJhdGlvbl9yZWxhdGlvbnNoaXBfeWVhcnMsCiAgICAgICAgIGR1cmF0aW9uX3JlbGF0aW9uc2hpcF9tb250aCwKICAgICAgICAgZGF5c193aXRoX3BhcnRuZXIsCiAgICAgICAgIG5pZ2h0c193aXRoX3BhcnRuZXIsCiAgICAgICAgIHNvaV9yX2F0dGl0dWRlLAogICAgICAgICBzb2lfcl9iZWhhdmlvciwKICAgICAgICAgc29pX3JfZGVzaXJlLAogICAgICAgICBudW1iZXJfc2V4dWFsX3BhcnRuZXIsCiAgICAgICAgIGNvbnRyYWNlcHRpb25fbWV0aG9kLAogICAgICAgICBjb250cmFjZXB0aW9uX2FwcHJvYWNoLAogICAgICAgICBjb250cmFjZXB0aW9uX21ldGhvZF9icm9hZCwKICAgICAgICAgY29udHJhY2VwdGlvbl9tZWV0aW5nX3BhcnRuZXIsCiAgICAgICAgIHBhcnRuZXJfYXR0cmFjdGl2ZW5lc3NfZmFjZSwKICAgICAgICAgcGFydG5lcl9hdHRyYWN0aXZlbmVzc19ib2R5LAogICAgICAgICByZWxhdGlvbnNoaXBfc2F0aXNmYWN0aW9uX292ZXJhbGwsCiAgICAgICAgIHJlbGF0aW9uc2hpcF9zYXRpc2ZhY3Rpb25fMiwKICAgICAgICAgcmVsYXRpb25zaGlwX3NhdGlzZmFjdGlvbl8zLAogICAgICAgICByZWxhdGlvbnNoaXBfcHJvYmxlbXNfUiwKICAgICAgICAgcmVsYXRpb25zaGlwX2NvbmZsaWN0X1IsCiAgICAgICAgIHNhdGlzZmFjdGlvbl9zZXh1YWxfaW50ZXJjb3Vyc2UsCiAgICAgICAgIHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiwKICAgICAgICAgcHJlZ25hbnRfdHJ5aW5nKQoKIyBiYXNlZCBvbiBkaWFyeToKZGF0YV9kaWFyeSA9IGRpYXJ5ICU+JQogIHNlbGVjdChoaWdoX2xpYmlkbywKICAgICAgICAgc2V4X2FjdGl2ZSwgc2V4X2FjdGl2aXR5X2FuYWxfc2V4LCBzZXhfYWN0aXZpdHlfYmRzbV9kb20sIHNleF9hY3Rpdml0eV9iZHNtX3N1YiwKICAgICAgICAgc2V4X2FjdGl2aXR5X2N1ZGRsaW5nLCBzZXhfYWN0aXZpdHlfY3VubmlsaW5ndXMsIHNleF9hY3Rpdml0eV9jeWJlcnNleCwgc2V4X2FjdGl2aXR5X2RpcnR5X3RhbGssCiAgICAgICAgIHNleF9hY3Rpdml0eV9mZWxsYXRpbywgc2V4X2FjdGl2aXR5X2tpc3NpbmcsICBzZXhfYWN0aXZpdHlfbWFzdHVyYmF0ZWRfYnlfcGFydG5lciwKICAgICAgICAgc2V4X2FjdGl2aXR5X21hc3R1cmJhdGVkX3BhcnRuZXIsIHNleF9hY3Rpdml0eV9tYXN0dXJiYXRpb24sIHNleF9hY3Rpdml0eV9vdGhlciwKICAgICAgICAgc2V4X2FjdGl2aXR5X3Bob25lX3NreXBlX3NleCwgc2V4X2FjdGl2aXR5X3Bvcm5vZ3JhcGh5LCBzZXhfYWN0aXZpdHlfc2V4LCBzZXhfYWN0aXZpdHlfdG91Y2hfb3RoZXIsIAogICAgICAgICBzZXhfYWN0aXZpdHlfdG95cywgc2V4X2FjdGl2aXR5X3VuY2xlYXIsICBzZXhfb3RoZXIsIHNleF9zb2xvLCBzZXhfdW5jbGVhciwKICAgICAgICAgZGF5c19kb25lKQpgYGAKCgojIyBFeGNsdXNpb24KRm9yIG5vdyBiYXNlZCBvbiBvbGQgZXhjbHVzaW9uIGNyaXRlcmlhIC0tPiB1cGRhdGUgbGF0ZXIKYGBge3J9Cm5fZXhjbHVkZWQgPSBkYXRhICU+JSBmaWx0ZXIocmVhc29uc19mb3JfZXhjbHVzaW9uICE9ICIiKSAlPiUgbnJvdygpCmRhdGEgPSBkYXRhICU+JSBmaWx0ZXIocmVhc29uc19mb3JfZXhjbHVzaW9uID09ICIiKQpgYGAKYHIgbl9leGNsdWRlZGAgcGVvcGxlIHdlcmUgZXhjbHVkZWQuCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQ29kZWJvb2sgRWZmZWN0cyBvZiBDb250cmFjZXB0aW9uIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgdG9jX2RlcHRoOiA0CiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIGNvZGVfZm9sZGluZzogJ2hpZGUnCiAgICBzZWxmX2NvbnRhaW5lZDogZmFsc2UKLS0tCiAgCmBgYHtyIHJlc3VsdHM9J2hpZGUnLG1lc3NhZ2U9Rix3YXJuaW5nPUZ9CnNvdXJjZSgiMF9oZWxwZXJzLlIiKQprbml0cjo6b3B0c19jaHVuayRzZXQod2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0UpCnBhbmRlcjo6cGFuZGVyT3B0aW9ucygidGFibGUuc3BsaXQudGFibGUiLCBJbmYpCnBhbmRlcjo6cGFuZGVyT3B0aW9ucygncm91bmQnLDIpCnBhbmRlcjo6cGFuZGVyT3B0aW9ucygnZGlnaXRzJywyKQpwYW5kZXI6OnBhbmRlck9wdGlvbnMoJ2tlZXAudHJhaWxpbmcuemVyb3MnLFRSVUUpCgpsb2FkKCJkYXRhL2NsZWFuZWRfc2VsZWN0ZWQucmRhdGEiKQoKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBGQUxTRSwgZXJyb3IgPSBUUlVFLCBkZXYgPSAiQ2Fpcm9QTkciKQpsaWJyYXJ5KGdncGxvdDIpCnRoZW1lX3NldCh0aGVtZV9idygpKQoKbGlicmFyeShjb2RlYm9vaykKYGBgCgoKIyMgSW5jbHVkZWQgdmFyaWFibGVzIGZvciBjb2RlYm9vawpgYGB7cn0KZGF0YSA9IGFsbF9zdXJ2ZXlzICU+JQogIHNlbGVjdChzZXNzaW9uLAogICAgICAgICBhZ2UsCiAgICAgICAgIGVkdWNhdGlvbl95ZWFycywKICAgICAgICAgbmV0X2luY29tZSwKICAgICAgICAgc3RhcnRzX3dpdGgoImJmaV9hZ3JlZSIpLAogICAgICAgICBiZmlfY29uc2MsCiAgICAgICAgIGJmaV9vcGVuLAogICAgICAgICBiZmlfZXh0cmEsCiAgICAgICAgIGJmaV9uZXVybywKICAgICAgICAgcmVsaWdpb3NpdHksCiAgICAgICAgIHByZWduYW50X3N0cmVzcywKICAgICAgICAgZHVyYXRpb25fcmVsYXRpb25zaGlwX3llYXJzLAogICAgICAgICBkdXJhdGlvbl9yZWxhdGlvbnNoaXBfbW9udGgsCiAgICAgICAgIGRheXNfd2l0aF9wYXJ0bmVyLAogICAgICAgICBuaWdodHNfd2l0aF9wYXJ0bmVyLAogICAgICAgICBzb2lfcl9hdHRpdHVkZSwKICAgICAgICAgc29pX3JfYmVoYXZpb3IsCiAgICAgICAgIHNvaV9yX2Rlc2lyZSwKICAgICAgICAgbnVtYmVyX3NleHVhbF9wYXJ0bmVyLAogICAgICAgICBjb250cmFjZXB0aW9uX21ldGhvZCwKICAgICAgICAgY29udHJhY2VwdGlvbl9hcHByb2FjaCwKICAgICAgICAgY29udHJhY2VwdGlvbl9tZXRob2RfYnJvYWQsCiAgICAgICAgIGNvbnRyYWNlcHRpb25fbWVldGluZ19wYXJ0bmVyLAogICAgICAgICBwYXJ0bmVyX2F0dHJhY3RpdmVuZXNzX2ZhY2UsCiAgICAgICAgIHBhcnRuZXJfYXR0cmFjdGl2ZW5lc3NfYm9keSwKICAgICAgICAgcmVsYXRpb25zaGlwX3NhdGlzZmFjdGlvbl9vdmVyYWxsLAogICAgICAgICByZWxhdGlvbnNoaXBfc2F0aXNmYWN0aW9uXzIsCiAgICAgICAgIHJlbGF0aW9uc2hpcF9zYXRpc2ZhY3Rpb25fMywKICAgICAgICAgcmVsYXRpb25zaGlwX3Byb2JsZW1zX1IsCiAgICAgICAgIHJlbGF0aW9uc2hpcF9jb25mbGljdF9SLAogICAgICAgICBzYXRpc2ZhY3Rpb25fc2V4dWFsX2ludGVyY291cnNlLAogICAgICAgICByZWFzb25zX2Zvcl9leGNsdXNpb24sCiAgICAgICAgIHByZWduYW50X3RyeWluZykKCiMgYmFzZWQgb24gZGlhcnk6CmRhdGFfZGlhcnkgPSBkaWFyeSAlPiUKICBzZWxlY3QoaGlnaF9saWJpZG8sCiAgICAgICAgIHNleF9hY3RpdmUsIHNleF9hY3Rpdml0eV9hbmFsX3NleCwgc2V4X2FjdGl2aXR5X2Jkc21fZG9tLCBzZXhfYWN0aXZpdHlfYmRzbV9zdWIsCiAgICAgICAgIHNleF9hY3Rpdml0eV9jdWRkbGluZywgc2V4X2FjdGl2aXR5X2N1bm5pbGluZ3VzLCBzZXhfYWN0aXZpdHlfY3liZXJzZXgsIHNleF9hY3Rpdml0eV9kaXJ0eV90YWxrLAogICAgICAgICBzZXhfYWN0aXZpdHlfZmVsbGF0aW8sIHNleF9hY3Rpdml0eV9raXNzaW5nLCAgc2V4X2FjdGl2aXR5X21hc3R1cmJhdGVkX2J5X3BhcnRuZXIsCiAgICAgICAgIHNleF9hY3Rpdml0eV9tYXN0dXJiYXRlZF9wYXJ0bmVyLCBzZXhfYWN0aXZpdHlfbWFzdHVyYmF0aW9uLCBzZXhfYWN0aXZpdHlfb3RoZXIsCiAgICAgICAgIHNleF9hY3Rpdml0eV9waG9uZV9za3lwZV9zZXgsIHNleF9hY3Rpdml0eV9wb3Jub2dyYXBoeSwgc2V4X2FjdGl2aXR5X3NleCwgc2V4X2FjdGl2aXR5X3RvdWNoX290aGVyLCAKICAgICAgICAgc2V4X2FjdGl2aXR5X3RveXMsIHNleF9hY3Rpdml0eV91bmNsZWFyLCAgc2V4X290aGVyLCBzZXhfc29sbywgc2V4X3VuY2xlYXIsCiAgICAgICAgIGRheXNfZG9uZSkKYGBgCgoKIyMgRXhjbHVzaW9uCkZvciBub3cgYmFzZWQgb24gb2xkIGV4Y2x1c2lvbiBjcml0ZXJpYSAtLT4gdXBkYXRlIGxhdGVyCmBgYHtyfQpuX2V4Y2x1ZGVkID0gZGF0YSAlPiUgZmlsdGVyKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiAhPSAiIikgJT4lIG5yb3coKQpkYXRhID0gZGF0YSAlPiUgZmlsdGVyKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiA9PSAiIikKYGBgCmByIG5fZXhjbHVkZWRgIHBlb3BsZSB3ZXJlIGV4Y2x1ZGVkLgoKCiMjIENvZGVib29rIApgYGB7cn0KY29kZWJvb2soZGF0YSAlPiUgc2VsZWN0KHN0YXJ0c193aXRoKCJiZmlfYWdyZWUiKSksICBtaXNzaW5nbmVzc19yZXBvcnQgPSBGQUxTRSwgaW5kZW50ID0gIiMjIikKYGBgCgo=</div>
 
 
 </div>
