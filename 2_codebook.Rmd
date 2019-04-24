@@ -202,6 +202,46 @@ codebook_outcome_data = data %>%
 codebook(codebook_outcome_data,  missingness_report = FALSE, indent = "##")
 ```
 
+
+## Differences in contraception status by relationship status
+```{r}
+ggplot(data, aes(x = relationship_status, y = contraception_hormonal)) + 
+```
+
+## Differences in Gaussian variables by HC and RS {.tabset}
+### Hormonal contraception
+```{r}
+ggplot(data, aes(x = contraception_hormonal, y = partner_attractiveness_face)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+
+ggplot(data, aes(x = contraception_hormonal, y = partner_attractiveness_body)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+
+ggplot(data, aes(x = contraception_hormonal, y = relationship_satisfaction_overall)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+
+ggplot(data, aes(x = contraception_hormonal, y = relationship_satisfaction_2)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+
+ggplot(data, aes(x = contraception_hormonal, y = relationship_satisfaction_3)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+
+ggplot(data, aes(x = contraception_hormonal, y = relationship_problems_R)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+
+ggplot(data, aes(x = contraception_hormonal, y = relationship_conflict_R)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+
+ggplot(data, aes(x = contraception_hormonal, y = satisfaction_sexual_intercourse)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
+    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
+```
+
+### Relationship status
+```{r}
+
+```
+
+
 ## Correlations
 ```{r}
 # pairs.panels(stress_scale, cex.cor = 10)
