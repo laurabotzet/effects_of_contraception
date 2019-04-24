@@ -41,6 +41,7 @@ data = all_surveys %>%
          starts_with("bfi_neuro"),
          religiosity,
          pregnant_stress,
+         relationship_status,
          duration_relationship_years,
          duration_relationship_month,
          days_with_partner,
@@ -88,7 +89,13 @@ data = data %>% filter(reasons_for_exclusion == "")
 
 ## Selection Variables Codebook
 ```{r}
-codebook(data %>% select(starts_with("bfi_agree")),  missingness_report = FALSE, indent = "##")
+codebook_selection_data = data %>%
+  select(-session, 
+         -starts_with("contraception_"), 
+         -starts_with("partner_"), -starts_with("relationship_"), -satisfaction_sexual_intercourse,
+         - reasons_for_exclusion, -pregnant_trying)
+
+codebook(data %>% codebook_selection_data,  missingness_report = FALSE, indent = "##")
 ```
 
 ## Contraception Codebook
