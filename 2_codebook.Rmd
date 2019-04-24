@@ -35,10 +35,10 @@ data = all_surveys %>%
          education_years,
          net_income,
          starts_with("bfi_agree"),
-         bfi_consc,
-         bfi_open,
-         bfi_extra,
-         bfi_neuro,
+         starts_with("bfi_consc"),
+         starts_with("bfi_open"),
+         starts_with("bfi_extra"),
+         starts_with("bfi_neuro"),
          religiosity,
          pregnant_stress,
          duration_relationship_years,
@@ -86,8 +86,11 @@ data = data %>% filter(reasons_for_exclusion == "")
 `r n_excluded` people were excluded.
 
 
-## Codebook 
+## Selection Variables Codebook
 ```{r}
 codebook(data %>% select(starts_with("bfi_agree")),  missingness_report = FALSE, indent = "##")
 ```
 
+## Contraception Codebook
+
+## Outcomes Codebook 
