@@ -267,7 +267,12 @@ ggplot(data, aes(x = relationship_status, y = diary_sex_active_sex_mean)) + geom
 ```{r}
 selection_variables = codebook_selection_data %>% select(
   -starts_with("bfi_agree_"), -starts_with("bfi_consc_"), -starts_with("bfi_open_"),
-  -starts_with("bfi_extra_"), -starts_with("bfi_neuro_"), -relationship_status, -net_income, -com)
+  -starts_with("bfi_extra_"), -starts_with("bfi_neuro_"),
+  -starts_with("soi_r_attitude_"), -starts_with("soi_r_desire_"), -starts_with("soi_r_behavior_"), 
+  -relationship_status, -net_income, -com, -duration_relationship_month)
+
+colnames(selection_variables)
+pairs.panels(selection_variables, cex.cor = 10)
 
 
 cor_pred = cor(selection_variables, use="complete.obs")
@@ -276,6 +281,7 @@ print(cor_pred)
 
 ### Outcomes
 ```{r}
+pairs.panels(codebook_outcome_data, cex.cor = 10)
 cor_out = cor(codebook_outcome_data, use="complete.obs")
 print(cor_out)
 ```
