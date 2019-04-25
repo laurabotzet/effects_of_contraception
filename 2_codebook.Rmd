@@ -272,6 +272,7 @@ selection_variables = codebook_selection_data %>% select(
   -relationship_status, -net_income, -com, -duration_relationship_month)
 
 colnames(selection_variables)
+library(psych)
 pairs.panels(selection_variables, cex.cor = 10)
 
 
