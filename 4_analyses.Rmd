@@ -10,6 +10,8 @@ output:
 ---
   
 ```{r results='hide',message=F,warning=F}
+source("0_helpers.R")
+
 load("data/cleaned_selected.rdata")
 
 knitr::opts_chunk$set(echo = FALSE, error = TRUE, dev = "CairoPNG")
@@ -159,9 +161,18 @@ data = data %>% mutate(
 qplot(data$relationship_status)
 ```
 
-## First Model
+
+## standardize
 ```{r}
-m1 = brm(relationship_satisfaction_overall ~ contraception_hormonal + contraception_meeting_partner +
+data = data %>%
+  mutate(relationship_satisfaction_overall_z = scale(relationship_satisfaction_overall,
+                                                     center = TRUE, scale = TRUE))
+```
+
+## First Models relationship satisfaction overall
+
+```{r}
+m1 = brm(relationship_satisfaction_overall_z ~ contraception_hormonal + contraception_meeting_partner +
     contraception_hormonal : contraception_meeting_partner +
     age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
     bfi_agree + bfi_neuro + religiosity + pregnant_stress +
@@ -170,10 +181,43 @@ m1 = brm(relationship_satisfaction_overall ~ contraception_hormonal + contracept
     soi_r_desire + number_sexual_partner,
     data = data, family = gaussian())
 
-m2 = brm(relationship_satisfaction_overall ~ contraception_hormonal + contraception_meeting_partner +
-           contraception_hormonal : contraception_meeting_partner,
-         data = data, family = gaussian(), cores = 4)
+summary(m1)
 
+m1_unadj = brm(file = "models/m1_relsat_unadj", # cache model. have to manually delete when data/model changes
+  relationship_satisfaction_overall_z ~ contraception_hormonal + contraception_meeting_partner +
+           contraception_hormonal : contraception_meeting_partner,
+         data = data, family = gaussian(), cores = 4) %>% 
+  add_criterion("loo") %>% 
+  add_criterion("R2")
+summary(m1_unadj)
+# plot(m1_unadj)
+
+library(loo)
+compare_models <- loo(m1, m1_unadj) # Fehlermeldung wegen haven_labelled
+loo(m1)
+print(loo_compare(m1_unadj, m1), simplify = F)
+
+library(sjPl)
+sjPlot::tab_model(m1_unadj, show.hdi50 = FALSE, bpe = "mean",ci.hyphen = ";", prefix.labels = "label")
+
+library(bayestestR)
+equiv_test <- equivalence_test(m1_unadj, range = c(-0.1, 0.1))
+equiv_test
+
+sjstats::equi_test(m1, out = "plot")
+
+equiv_test <- equivalence_test(m1, range = c(-0.1, 0.1))
+equiv_test
+
+library(margins)
+marginal_effects(m1_unadj) # no valid term
+
+library(brms)
+marginal_smooths(m1_unadj) # no valid term
+```
+
+
+```{r}
 m3 = brm(diary_libido_mean ~ contraception_hormonal + contraception_meeting_partner +
            contraception_hormonal : contraception_meeting_partner,
     data = data, family = gaussian(), cores = 4)
@@ -187,5 +231,19 @@ m4 = brm(diary_libido_mean ~ contraception_hormonal + contraception_meeting_part
     soi_r_desire + number_sexual_partner,
     data = data, family = gaussian(), cores = 4)
 
+```
+
+
+```{r}
+qplot(log(15/30/12 + all_surveys$duration_relationship_month / 12 + all_surveys$duration_relationship_years))
+qplot(all_surveys$number_sexual_partner, bins = 50) + scale_x_continuous(trans = "log1p", breaks = c(0,1,2,5,10,50,100))
+qplot(residuals(lm(all_surveys$number_sexual_partner ~ all_surveys$age)), bins = 50) +xlim(-20,20)
++ scale_x_continuous(trans = "log1p", breaks = c(0,1,2,5,10,50,100))
+
+qplot(all_surveys$number_sexual_partner / (all_surveys$age - mean(all_surveys$first_time, na.rm = T)), bins = 50)
++xlim(-20,20)
+
+library(tidyverse)
+all_surveys %>% filter(number_sexual_partner > 50) %>% select(number_sexual_partner, age, first_time, number_sexual_partner_certainty, reasons_for_exclusion, free_not_covered_demo) %>% arrange(number_sexual_partner)
 ```
 
