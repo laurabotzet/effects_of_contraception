@@ -2,7 +2,7 @@
 
 ```{r}
 source("0_helpers.R")
-load("cleaned.rdata")
+load("data/cleaned.rdata")
 opts_chunk$set(warning = F, message = F, error = T)
 
 library(knitr)

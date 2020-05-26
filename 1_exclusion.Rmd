@@ -2,8 +2,8 @@
 
 ```{r}
 source("0_helpers.R")
-load("cleaned.rdata")
-opts_chunk$set(warning = F, message = F, error = T)
+load("data/cleaned.rdata")
+# opts_chunk$set(warning = F, message = F, error = T)
 
 library(knitr)
 opts_chunk$set(fig.width = 9, fig.height = 7, cache = T, warning = F, message = F, cache = F, error = T)
