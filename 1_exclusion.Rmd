@@ -1,6 +1,19 @@
-# Reasons for Exclusion 
+# Reasons for Exclusion {.tabset}
 
-```{r}
+The following reasons for exclusion apply:
+* missing data (not finishing the initial survey)
+* menopausal
+* older than 50
+* pregnant
+* breastfeeding
+* use of one of the following contraceptive methods: abandonment of penetrative sexual intercourse, morning-after pill, breastfeeding, I am infertile, my partner is infertile, I am sterilized, my partner is sterilized, other
+* homosexuality
+* participants, who do not want to avoid pregnancy
+* incongruent information about current contraceptive method and method used in the last three months
+* use of medication including sex hormones in the last three months.
+
+## Data and Functions
+```{r data and functions}
 source("0_helpers.R")
 load("data/cleaned.rdata")
 # opts_chunk$set(warning = F, message = F, error = T)
@@ -8,9 +21,10 @@ load("data/cleaned.rdata")
 library(knitr)
 opts_chunk$set(fig.width = 9, fig.height = 7, cache = T, warning = F, message = F, cache = F, error = T)
 
-comma_separated_to_columns <- function(df, col) {
-  colname <- deparse(substitute(col))
-  df$splitcol <- df %>% pull(colname)
+# function to seperate the reasons for exclusion variable for upsetr
+comma_separated_to_columns = function(df, col) {
+  colname = deparse(substitute(col))
+  df$splitcol = df %>% pull(colname)
   separate_rows(df, splitcol, convert = TRUE, sep = ", ") %>% 
     mutate(splitcol = if_else(is.na(splitcol), "no", 
                         if_else(splitcol == "" | 
@@ -21,146 +35,231 @@ comma_separated_to_columns <- function(df, col) {
     select(-colname)
 }
 
-all_survey_length <- nrow(all_surveys)
-diary_length <- nrow(diary)
-diary_social_length <- nrow(diary_social)
+all_survey_length = nrow(all_surveys)
+diary_length = nrow(diary)
+diary_social_length = nrow(diary_social)
 ```
 
-## Who completed what?
-
-We create a character variable `reasons_for_exclusion`. We will concatenate (abbreviated)
-reasons for exclusion in this variable.
-
-```{r}
-all_surveys$reasons_for_exclusion <- ""
+## Exclusion Steps
+```{r reasons_for_exclusion}
+all_surveys$reasons_for_exclusion = "" #insert new variable reasons_for_exclusion to list all exclusion criteria
+all_surveys$reasons_for_exclusion_contraception = "" #insert new variable reasons_for_exclusion to list all exclusion criteria
 ```
 
-Did not finish demographics survey
-```{r}
-all_surveys <- all_surveys %>% 
+### Missing data (not finishing the initial survey)
+```{r didnt_finish_initial}
+all_surveys = all_surveys %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(is.na(ended_demo), "didnt_finish_demographics, ", "")
-                                       )
-  )
+                                       if_else(is.na(ended_initial), "didnt_finish_initial, ", "")))
+
+table(all_surveys$reasons_for_exclusion %contains% "didnt_finish_initial")
 ```
 
-
-Reported no regular menstruation
-```{r}
-all_surveys <- all_surveys %>% 
+### Menopausal
+```{r menopausal}
+all_surveys = all_surveys %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(menstruation_regular == 0, "no_regular_menstruation, ", "", "")
-                                       )
-  )
+                                       if_else(menopause_yes == 1 | menopause_yes == 2,
+                                               "menopausal, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion %contains% "menopausal")
 ```
 
-
-Menopausal or in climacteric period
-```{r}
-all_surveys <- all_surveys %>% 
+### Older than 50
+```{r older_than_50}
+all_surveys = all_surveys %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(menopause_yes == 1 | menopause_yes == 2, "menopausal, ", "", "")
-                                       )
-  )
+                                            if_else(age >= 50, "older_than_50, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion %contains% "older_than_50")
 ```
 
-Older than 50
-```{r}
-all_surveys <- all_surveys %>% 
+### Pregnant
+```{r pregnant}
+all_surveys = all_surveys %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(age >= 50, "older_than_50, ", "", "")
-                                       )
-  )
+                                       if_else(pregnant == 1, "pregnant, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion %contains% "pregnant")
 ```
 
-Pregnant
-```{r}
-all_surveys <- all_surveys %>% 
+
+### Breastfeeding
+```{r breastfeeding}
+all_surveys = all_surveys %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(pregnant == 1, "pregnant, ", "", "")
-                                       )
-  )
+                                            if_else(breast_feeding == 1, "breast_feeding, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion %contains% "breast_feeding")
 ```
 
-Breast-feeding
+
+### Conraceptive Method {.tabset}
+Use of one of the following contraceptive methods
+#### Abandonment of penetrative sexual intercourse
+```{r contraception_barrier_no_penetrative_sex}
+all_surveys = all_surveys %>% 
+  mutate(reasons_for_exclusion_contraception = str_c(
+    reasons_for_exclusion_contraception,
+    if_else(contraception_method %contains% "barrier_no_penetrative_sex",
+            "contraception_barrier_no_penetrative_sex, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_barrier_no_penetrative_sex")
+```
+
+#### Morning-after pill
+```{r contraception_hormonal_morning_after_pill}
+all_surveys = all_surveys %>% 
+  mutate(reasons_for_exclusion_contraception = str_c(
+    reasons_for_exclusion_contraception,
+    if_else(contraception_method %contains% "hormonal_morning_after_pill",
+            "contraception_hormonal_morning_after_pill, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_hormonal_morning_after_pill")
+```
+
+#### Breastfeeding
+```{r contraception_breast_feeding}
+all_surveys = all_surveys %>% 
+  mutate(reasons_for_exclusion_contraception = str_c(
+    reasons_for_exclusion_contraception,
+    if_else(contraception_method %contains% "breast_feeding",
+            "contraception_breast_feeding, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_breast_feeding")
+```
+
+#### I am infertile
+```{r contraception_infertile}
+all_surveys = all_surveys %>% 
+  mutate(reasons_for_exclusion_contraception = str_c(
+    reasons_for_exclusion_contraception,
+    if_else(contraception_method %contains% "infertile" &
+              !(contraception_method %contains% "partner_infertile"),
+            "contraception_infertile, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_infertile")
+```
+
+#### My partner is infertile
+```{r contraception_partner_infertile}
+all_surveys = all_surveys %>% 
+  mutate(reasons_for_exclusion_contraception = str_c(
+    reasons_for_exclusion_contraception,
+    if_else(contraception_method %contains% "partner_infertile",
+            "contraception_partner_infertile, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_partner_infertile")
+```
+
+#### I am sterilized
+```{r contraception_sterilised}
+all_surveys = all_surveys %>% 
+  mutate(reasons_for_exclusion_contraception = str_c(
+    reasons_for_exclusion_contraception,
+    if_else(contraception_method %contains% "sterilised" &
+              !(contraception_method %contains% "partner_sterilised"),
+            "contraception_sterilised, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_sterilised")
+```
+
+
+#### My partner is sterilized
+```{r contraception_partner_sterilised}
+all_surveys = all_surveys %>% 
+  mutate(reasons_for_exclusion_contraception = str_c(
+    reasons_for_exclusion_contraception,
+    if_else(contraception_method %contains% "partner_sterilised",
+            "contraception_partner_sterilised, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_partner_sterilised")
+```
+
+#### Other
+```{r contraception_not_listed}
+all_surveys = all_surveys %>% 
+  mutate(reasons_for_exclusion_contraception = str_c(
+    reasons_for_exclusion_contraception,
+    if_else(contraception_method %contains% "not_listed",
+            "contraception_not_listed, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_not_listed")
+```
+
+#### Summary
+All participants that will be excluded based on their choice of contraception
 ```{r}
-all_surveys <- all_surveys %>% 
+all_surveys = all_surveys %>%
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(breast_feeding == 1, "breast_feeding, ", "", "")
-                                       )
-  )
+                                       if_else(reasons_for_exclusion_contraception != "",
+                                       "contraceptive_method, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion %contains% "contraceptive_method")
 ```
 
-
+### Homosexuality
 Not primarily heterosexual. This excludes women who reported being equally interested in men and women, women who reported being asexual or aromantic, and participants who did not identify as female gender.
-```{r}
-all_surveys <- all_surveys %>% 
+```{r not_heterosexual_female}
+all_surveys = all_surveys %>%
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(sex_orientation >= 4 | gender != 1, "not_heterosexual_female, ", "", "")
-                                       )
-  )
+                                       if_else(sex_orientation >= 4 | gender != 1,
+                                               "not_heterosexual_female, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion %contains% "not_heterosexual_female")
 ```
 
-Did not finish personality survey
-```{r}
-all_surveys <- all_surveys %>% 
+### Participants, who do not want to avoid pregnancy
+```{r pregnant_trying}
+all_surveys = all_surveys %>%
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(!is.na(ended_demo) & is.na(ended_initial), "didnt_finish_personality, ", "")
-                                       )
-  )
-```
+                                       if_else(pregnant_trying >= 4,
+                                               "pregnant_trying, ", "", "")))
 
-Changed contraception
-```{r}
-all_surveys <- all_surveys %>% 
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(change_to_nonhormonal != 0 | change_to_hormonal_contraception != 0, "switched_contraception, ", "", "")
-                                       )
-  )
-
+table(all_surveys$reasons_for_exclusion %contains% "pregnant_trying")
 ```
 
 
+### Incongruent information about current contraceptive method and method used in the last three months
+```{r incongruent_information_about_hormonal_contraception}
+all_surveys = all_surveys %>%
+  mutate(incongruent_information_about_hormonal_contraception =
+           ifelse((hormonal_contraception_last3m == 0 & hormonal_contraception == T), 1, 0),
+         reasons_for_exclusion = str_c(reasons_for_exclusion,
+                                       if_else(incongruent_information_about_hormonal_contraception == 1,
+                                               "incongruent_information_about_hormonal_contraception, ",
+                                               "", "")))
+
+
+table(all_surveys$reasons_for_exclusion %contains% "incongruent_information_about_hormonal_contraception")
+```
+
+
+### Use of medication including sex hormones in the last three months.
 Taking sex hormones (other than the pill)
 ```{r}
-all_surveys <- all_surveys %>% 
+all_surveys = all_surveys %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(medication_name %contains% "Cycloprognova" |
-                                                      medication_name %contains% "Cyproderm" |
-                                                       medication_name %contains% "DHEA" |
-                                                       medication_name %contains% "Hormone" |
-                                                       medication_name %contains% "Cyclo-Progynova" |
-                                                       medication_name %contains% "Femoston" |
-                                                       medication_name %contains% "Gynokadin", "sex_hormones, ", "", "")
-                                       )
-  )
+                                       if_else(medication_name %contains% "Cycloprognova" |
+                                                 medication_name %contains% "Cyproderm" |
+                                                 medication_name %contains% "DHEA" |
+                                                 medication_name %contains% "Hormone" |
+                                                 medication_name %contains% "Cyclo-Progynova" |
+                                                 medication_name %contains% "Femoston" |
+                                                 medication_name %contains% "Gynokadin",
+                                               "sex_hormones, ", "", "")))
 
+table(all_surveys$reasons_for_exclusion %contains% "sex_hormones")
 ```
 
-No diary days
+## Total number of excluded participants
 ```{r}
-all_surveys <- all_surveys %>% 
-  left_join(diary %>% group_by(session) %>% summarise(diary_days = n_nonmissing(ended_diary)), by = 'session') %>% 
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(!is.na(ended_initial) & diary_days == 0, "didnt_do_diary, ", "", "didnt_do_diary, ")
-                                       )
-  )
+table(all_surveys$reasons_for_exclusion == "")
 ```
-
-Fertility never estimable
-```{r}
-all_surveys <- all_surveys %>% 
-  left_join(diary %>% group_by(session) %>% summarise(fertility_days = n_nonmissing(fertile_fab)), by = 'session') %>% 
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(menstruation_regular != 0  & diary_days > 0 & fertility_days == 0, 
-                                                    "fertility_not_estimable, ", "", "")
-                                       )
-  )
-```
+In total 469 participants were excluded, leaving 1191 subjects which were included in the analysis.
 
 
 ## Reasons for exclusion
-
 How to read this plot: The horizontal green bars show for how many women this reason for
 exclusion applies. The blue bars show how many women are excluded for multiple reasons (e.g.,
 they're menopausal _and_ not heterosexual). If reasons for exclusion necessarily depend on
@@ -172,7 +271,7 @@ other only stochastically (e.g., age and menopause), we did not do this.
 table(all_surveys$reasons_for_exclusion == "", exclude = NULL)
 
 library(UpSetR)
-exclusion_reasons <- all_surveys %>% 
+exclusion_reasons = all_surveys %>% 
   mutate(reasons_for_exclusion = str_sub(reasons_for_exclusion, 1, -3)) %>% 
   select(session, reasons_for_exclusion) %>% 
   comma_separated_to_columns(reasons_for_exclusion) %>% 
@@ -199,7 +298,7 @@ exclusion_reasons %>%
 ### By contraception
 ```{r}
 library(UpSetR)
-exclusion_reasons_hc <- all_surveys %>% 
+exclusion_reasons_hc = all_surveys %>% 
   mutate(reasons_for_exclusion = str_sub(reasons_for_exclusion, 1, -3)) %>% 
   select(session, hormonal_contraception, reasons_for_exclusion) %>% 
   mutate(hormonal_contraception = if_else(hormonal_contraception, 1, 0)) %>% 
@@ -223,7 +322,7 @@ exclusion_reasons_hc %>%
 
 ### In the diary
 ```{r}
-diary <- diary %>% left_join(all_surveys %>% select(session, reasons_for_exclusion), by = 'session')
+diary = diary %>% left_join(all_surveys %>% select(session, reasons_for_exclusion), by = 'session')
 ```
 
 
@@ -231,7 +330,7 @@ diary <- diary %>% left_join(all_surveys %>% select(session, reasons_for_exclusi
 Lab participants that did not do the online diary
 
 ```{r}
-diary <- diary %>% 
+diary = diary %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
                                             if_else(is.na(session), "lab_only, ", "", "")
                                        )
@@ -241,7 +340,7 @@ diary <- diary %>%
 Disclosed that they responded dishonestly on that day.
 
 ```{r}
-diary <- diary %>% 
+diary = diary %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
                                             if_else(dishonest_discard == 1, "dishonest_answer, ", "", "")
                                        )
@@ -250,7 +349,7 @@ diary <- diary %>%
 
 Cycle shorter than 20 days.
 ```{r}
-diary <- diary %>% 
+diary = diary %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
                                             if_else(coalesce(minimum_cycle_length_diary, as.numeric(menstruation_length)) < 20, "cycle_shorter_than_20, ", "", "")
                                        )
@@ -259,7 +358,7 @@ diary <- diary %>%
 
 Cycle longer than 50 days.
 ```{r}
-diary <- diary %>% 
+diary = diary %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
                                             if_else(coalesce(minimum_cycle_length_diary, as.numeric(menstruation_length)) > 50, "cycle_longer_than_50, ", "", "")
                                        )
@@ -268,7 +367,7 @@ diary <- diary %>%
 
 
 ```{r}
-diary <- diary %>% 
+diary = diary %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
                                             if_else(is.na(fertile_fab), "fertility_unknown, ", "")
                                        )
@@ -278,7 +377,7 @@ diary <- diary %>%
 
 Skipped this diary day (days after dropping out not included)
 ```{r}
-diary <- diary %>% 
+diary = diary %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
                                             if_else(is.na(ended_diary) & is.na(modified_diary), "skipped_diary_entry, ", "")
                                        )
@@ -287,7 +386,7 @@ diary <- diary %>%
 
 ```{r}
 library(UpSetR)
-exclusion_reasons_diary <- diary %>% 
+exclusion_reasons_diary = diary %>% 
   mutate(reasons_for_exclusion = str_sub(reasons_for_exclusion, 1, -3)) %>% 
   select(session, created_date, reasons_for_exclusion) %>% 
   drop_na(session, created_date) %>% 
@@ -320,7 +419,7 @@ exclusion_reasons_diary %>%
       sets.bar.color = "#53AC9B")
   }
 
-included <- diary %>% filter(reasons_for_exclusion == "") %>% distinct(session)
+included = diary %>% filter(reasons_for_exclusion == "") %>% distinct(session)
 ```
 
 ### Response rates and dropout
@@ -328,7 +427,7 @@ included <- diary %>% filter(reasons_for_exclusion == "") %>% distinct(session)
 ```{r}
 began_s1_demo = sum(!is.na(s1_demo$created))
 ended_s1_demo = sum(!is.na(s1_demo$ended))
-diary <- s1_filter %>% full_join(diary, by = c('session', 'short'), suffix = c("_filter", ""))
+diary = s1_filter %>% full_join(diary, by = c('session', 'short'), suffix = c("_filter", ""))
 ended_pre = diary %>% filter(!is.na(ended_initial)) %>% ungroup() %>% summarise(n = n_distinct(session)) %>% pull(n)
 diary %>% group_by(gets_paid) %>% summarise(n = sum(!is.na(ended_initial[!duplicated(session)]), n = n_distinct(session)))
 at_least_one_diary_entry = diary %>% group_by(session) %>% summarise(n = n_nonmissing(ended_diary)) %>% filter(n >= 1) %>% nrow()
@@ -342,9 +441,9 @@ at_least_one_diary_entry = s3_daily %>% group_by(session) %>% summarise(n = n_no
 at_least_20_diary_entries = s3_daily %>% group_by(session) %>% summarise(n = n_nonmissing(ended)) %>% filter(n >= 20) %>% nrow()
 at_least_50_diary_entries = s3_daily %>% group_by(session) %>% summarise(n = n_nonmissing(ended)) %>% filter(n >= 50) %>% nrow()
 
-mean_diary_entries <- s3_daily %>% group_by(session) %>% summarise(n = n_nonmissing(ended)) %>% summarise(mean(n))
+mean_diary_entries = s3_daily %>% group_by(session) %>% summarise(n = n_nonmissing(ended)) %>% summarise(mean(n))
 
-mean_diary_entries_by_payment <- s1_filter %>% 
+mean_diary_entries_by_payment = s1_filter %>% 
   select(-ended) %>% left_join(s3_daily, by = 'session') %>% 
   group_by(gets_paid, session) %>%
   summarise(n = n_nonmissing(ended)) %>% 
@@ -352,7 +451,7 @@ mean_diary_entries_by_payment <- s1_filter %>%
   group_by(gets_paid) %>% 
   summarise(responses = mean(n), n = n_distinct(session))
 
-response_rate_over_time <- diary %>% filter(day_number > 0, day_number < 70) %>% 
+response_rate_over_time = diary %>% filter(day_number > 0, day_number < 70) %>% 
     left_join(s1_filter, by = 'session', suffix = c("", "_filter")) %>% 
   left_join(mean_diary_entries_by_payment) %>% 
   group_by(gets_paid, day_number) %>% 
@@ -363,7 +462,7 @@ ggplot(response_rate_over_time, aes(day_number, rr, colour = gets_paid)) + geom_
 
 
 
-response_rate_over_time <- diary %>% filter(day_number > 0, day_number < 70) %>% 
+response_rate_over_time = diary %>% filter(day_number > 0, day_number < 70) %>% 
   filter(reasons_for_exclusion == "") %>% 
     left_join(s1_filter, by = 'session', suffix = c("", "_filter")) %>% 
   left_join(mean_diary_entries_by_payment) %>% 
@@ -373,9 +472,9 @@ response_rate_over_time <- diary %>% filter(day_number > 0, day_number < 70) %>%
 ggplot(response_rate_over_time, aes(day_number, rr, colour = gets_paid)) + geom_point() +
     ggtitle("Response rate over time", "for included subsample")
 
-mean_diary_entries_finishers <- s4_followup %>% select(-ended) %>% left_join(s3_daily, by = 'session') %>% group_by(session) %>% summarise(n = n_nonmissing(ended)) %>% summarise(mean(n))
+mean_diary_entries_finishers = s4_followup %>% select(-ended) %>% left_join(s3_daily, by = 'session') %>% group_by(session) %>% summarise(n = n_nonmissing(ended)) %>% summarise(mean(n))
 
-response_rate_over_time <- s4_followup %>% select(-ended) %>% 
+response_rate_over_time = s4_followup %>% select(-ended) %>% 
   left_join(diary %>% select(session, day_number, created_diary, ended_diary)) %>% filter(day_number > 0, day_number < 70) %>% 
   left_join(s1_filter, by = 'session', suffix = c("", "_filter")) %>% 
   left_join(mean_diary_entries_by_payment) %>% 
@@ -386,7 +485,7 @@ ggplot(response_rate_over_time, aes(day_number, rr, colour = gets_paid)) +
   geom_point() +
     ggtitle("Response rate over time", "for people who finished the diary")
 
-nsmt2d_over_time <- s4_followup %>% select(-ended) %>% 
+nsmt2d_over_time = s4_followup %>% select(-ended) %>% 
   left_join(diary %>% select(session, day_number, never_skipped_more_than_2, created_diary, ended_diary)) %>% filter(day_number > 0, day_number < 70) %>% 
   left_join(s1_filter, by = 'session', suffix = c("", "_filter")) %>% 
   left_join(mean_diary_entries_by_payment) %>% 
@@ -399,7 +498,7 @@ ggplot(nsmt2d_over_time, aes(day_number, rr, colour = gets_paid)) +
     ggtitle("Percentage who never skipped more than two days over time", "for people who finished the diary")
 
 
-mean_finishing_personality_by_payment <- s1_demo %>% 
+mean_finishing_personality_by_payment = s1_demo %>% 
   left_join(s1_filter, by = 'session', suffix = c("_demo", "")) %>% 
   left_join(s2_initial,by ='session', suffix = c("", "_initial")) %>% 
   group_by(gets_paid) %>% 
@@ -409,7 +508,7 @@ mean_finishing_personality_by_payment <- s1_demo %>%
             consc = mean(bfi_consc,na.rm=T))
 kable(mean_finishing_personality_by_payment)
 
-mean_finishing_follow_up_by_payment <- s1_filter %>% select(-ended) %>% right_join(s2_initial,by ='session') %>% left_join(s4_followup, by = 'session', suffix = c("_initial", "_followup")) %>% group_by(gets_paid) %>% summarise(followup = n_nonmissing(ended_followup), initial = n_nonmissing(ended_initial), n(), prc_fu_over_initial = round(100*followup/initial))
+mean_finishing_follow_up_by_payment = s1_filter %>% select(-ended) %>% right_join(s2_initial,by ='session') %>% left_join(s4_followup, by = 'session', suffix = c("_initial", "_followup")) %>% group_by(gets_paid) %>% summarise(followup = n_nonmissing(ended_followup), initial = n_nonmissing(ended_initial), n(), prc_fu_over_initial = round(100*followup/initial))
 kable(mean_finishing_follow_up_by_payment)
 
 fertile_known_man_known = diary_social %>% group_by(session, created) %>% 
@@ -451,7 +550,7 @@ all_surveys %>% mutate(should_be_done = created_demo + days(70) < today()) %>%
 ## Exclusion {.tabset .tabset-sticky}
 
 ```{r}
-all_surveys$included <- TRUE
+all_surveys$included = TRUE
 diary$included_d = TRUE
 
 pipeline = list()
@@ -460,12 +559,12 @@ all_surveys = all_surveys %>% mutate(included = if_else(included,
                     !is.na(ended_demo) , F))
 newly_excluded = sum( !all_surveys$included)
 
-diary$included_d <- TRUE
+diary$included_d = TRUE
 
 pipeline_days = list()
 excluded_old_days = NULL
 
-diary_social$included_s <- TRUE
+diary_social$included_s = TRUE
 
 pipeline_social= list()
 excluded_old_social = NULL
@@ -569,7 +668,7 @@ sum(all_surveys$included)
 #### exlcuded days 
 
 ```{r}
-diary <- diary %>% ungroup()
+diary = diary %>% ungroup()
 d_irregular = count(diary %>% filter(menstruation_regular == 0 & !is.na(ended_initial) ))
 
 
@@ -1254,9 +1353,9 @@ nrow(diary_social %>% filter(included_s == T & !is.na(fertile_fab)))
 # Contraception
 ```{r}
 library(UpSetR)
-comma_separated_to_columns <- function(df, col) {
-  colname <- deparse(substitute(col))
-  df$splitcol <- df %>% pull(colname)
+comma_separated_to_columns = function(df, col) {
+  colname = deparse(substitute(col))
+  df$splitcol = df %>% pull(colname)
   separate_rows(df, splitcol, convert = TRUE, sep = ", ") %>% 
     mutate(splitcol = if_else(is.na(splitcol), "no", 
                         if_else(splitcol == "" | 
@@ -1301,7 +1400,7 @@ __`r persons`__ number of nicknames/names women remembered.
 
 ```{r}
 source("0_helpers.R") 
-network$included <- TRUE
+network$included = TRUE
 excluded_old_network = 0
 
 
@@ -1340,7 +1439,7 @@ unique(network$person_sex_other)
 ```{r}
 
 
-network$included_strict <- TRUE
+network$included_strict = TRUE
 
 pipeline_network_strict = list()
 excluded_old_network_strict = NULL
