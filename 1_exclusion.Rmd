@@ -1,6 +1,7 @@
 # Reasons for Exclusion {.tabset}
 
 The following reasons for exclusion apply:
+* not female
 * missing data (not finishing the initial survey)
 * menopausal
 * older than 50
@@ -9,6 +10,7 @@ The following reasons for exclusion apply:
 * use of one of the following contraceptive methods: abandonment of penetrative sexual intercourse, morning-after pill, breastfeeding, I am infertile, my partner is infertile, I am sterilized, my partner is sterilized, other
 * homosexuality
 * participants, who do not want to avoid pregnancy
+* participants, who either ‘took a chance’ on getting pregnant or used no contraception for ‘other reasons’
 * incongruent information about current contraceptive method and method used in the last three months
 * use of medication including sex hormones in the last three months.
 
@@ -43,7 +45,16 @@ diary_social_length = nrow(diary_social)
 ## Exclusion Steps
 ```{r reasons_for_exclusion}
 all_surveys$reasons_for_exclusion = "" #insert new variable reasons_for_exclusion to list all exclusion criteria
-all_surveys$reasons_for_exclusion_contraception = "" #insert new variable reasons_for_exclusion to list all exclusion criteria
+all_surveys$reasons_for_exclusion_contraception = "" #insert new variable reasons_for_exclusion_contraception to list different contraceptions that lead to exclusion
+```
+
+### Not female
+```{r not_female}
+all_surveys = all_surveys %>% 
+  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
+                                       if_else(gender != 1 |, "not_female, ", "")))
+
+table(all_surveys$reasons_for_exclusion %contains% "not_female")
 ```
 
 ### Missing data (not finishing the initial survey)
@@ -219,6 +230,25 @@ all_surveys = all_surveys %>%
 table(all_surveys$reasons_for_exclusion %contains% "pregnant_trying")
 ```
 
+### Participants, who ‘took a chance’ on getting pregnant
+```{r}
+all_surveys = all_surveys %>%
+  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
+                                       if_else(contraception_at_all == 4,
+                                               "pregnant_chance, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion %contains% "pregnant_chance")
+```
+
+###  Particiapnts who used no contraception for ‘other reasons’
+```{r}
+all_surveys = all_surveys %>%
+  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
+                                       if_else(contraception_at_all == 6,
+                                               "no_contraception, ", "", "")))
+
+table(all_surveys$reasons_for_exclusion %contains% "no_contraception")
+```
 
 ### Incongruent information about current contraceptive method and method used in the last three months
 ```{r incongruent_information_about_hormonal_contraception}
@@ -256,7 +286,7 @@ table(all_surveys$reasons_for_exclusion %contains% "sex_hormones")
 ```{r}
 table(all_surveys$reasons_for_exclusion == "")
 ```
-In total 469 participants were excluded, leaving 1191 subjects which were included in the analysis.
+In total 497 participants were excluded, leaving 1163 subjects which were included in the analysis.
 
 
 ## Reasons for exclusion
