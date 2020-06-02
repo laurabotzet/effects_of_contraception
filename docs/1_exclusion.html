@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Effects of Contraception</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li>
+  <a href="1_wrangle_data.html">Data wrangling</a>
+</li>
+<li>
+  <a href="2_descriptives.html">Descriptives &amp; Exclusion</a>
+</li>
+<li>
+  <a href="3_analyses.html">Analyses</a>
+</li>
+<li>
+  <a href="4_robustness_analyses.html">Robustness Analyses</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/laurabotzet/effects_of_contraception">
+    <span class="fa fa-github"></span>
+     
+    
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div id="reasons-for-exclusion" class="section level1 tabset">
+<h1>Reasons for Exclusion</h1>
+<p>The following reasons for exclusion apply: * missing data (not finishing the initial survey) * not female * homosexuality * older than 50 * menopausal * pregnant * breastfeeding * participants, who do not want to avoid pregnancy * participants, who ‘took a chance’ on getting pregnant * particiapnts, who used no contraception for ‘other reasons’ * use of one of the following contraceptive methods: abandonment of penetrative sexual intercourse, morning-after pill, breastfeeding, I am infertile, my partner is infertile, I am sterilized, my partner is sterilized, other * incongruent information about current contraceptive method and method used in the last three months * use of medication including sex hormones in the last three months.</p>
+<div id="data-and-functions" class="section level2">
+<h2>Data and Functions</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">&quot;0_helpers.R&quot;</span>)</code></pre></div>
+<pre><code>## Warning: package &#39;pander&#39; was built under R version 3.6.3</code></pre>
+<pre><code>## Warning: package &#39;broom&#39; was built under R version 3.6.3</code></pre>
+<pre><code>## Warning: package &#39;ggthemes&#39; was built under R version 3.6.3</code></pre>
+<pre><code>## Warning: package &#39;codebook&#39; was built under R version 3.6.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;data/cleaned.rdata&quot;</span>)
+<span class="co"># opts_chunk$set(warning = F, message = F, error = T)</span>
+
+<span class="kw">library</span>(knitr)
+opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">fig.width =</span> <span class="dv">9</span>, <span class="dt">fig.height =</span> <span class="dv">7</span>, <span class="dt">cache =</span> T, <span class="dt">warning =</span> F, <span class="dt">message =</span> F, <span class="dt">cache =</span> F, <span class="dt">error =</span> T)
+
+<span class="co"># function to seperate the reasons for exclusion variable for upsetr</span>
+comma_separated_to_columns =<span class="st"> </span><span class="cf">function</span>(df, col) {
+  colname =<span class="st"> </span><span class="kw">deparse</span>(<span class="kw">substitute</span>(col))
+  df<span class="op">$</span>splitcol =<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(colname)
+  <span class="kw">separate_rows</span>(df, splitcol, <span class="dt">convert =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;, &quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">splitcol =</span> <span class="kw">if_else</span>(<span class="kw">is.na</span>(splitcol), <span class="st">&quot;no&quot;</span>, 
+                        <span class="kw">if_else</span>(splitcol <span class="op">==</span><span class="st"> &quot;&quot;</span> <span class="op">|</span><span class="st"> </span>
+<span class="st">                                  </span>splitcol <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(), <span class="st">&quot;included&quot;</span>, <span class="kw">as.character</span>(splitcol)))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="co">#splitcol = stringr::str_c(colname, &quot;_&quot;, splitcol), </span>
+           <span class="dt">value =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">spread</span>(splitcol, value, <span class="dt">fill =</span> <span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>colname)
+}
+
+all_survey_length =<span class="st"> </span><span class="kw">nrow</span>(all_surveys)
+diary_length =<span class="st"> </span><span class="kw">nrow</span>(diary)
+diary_social_length =<span class="st"> </span><span class="kw">nrow</span>(diary_social)</code></pre></div>
+</div>
+<div id="exclusion-steps" class="section level2">
+<h2>Exclusion Steps</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys<span class="op">$</span>reasons_for_exclusion =<span class="st"> &quot;&quot;</span> <span class="co">#insert new variable reasons_for_exclusion to list all exclusion criteria</span>
+all_surveys<span class="op">$</span>reasons_for_exclusion_contraception =<span class="st"> &quot;&quot;</span> <span class="co">#insert new variable reasons_for_exclusion_contraception to list different contraceptions that lead to exclusion</span></code></pre></div>
+<div id="missing-data-not-finishing-the-initial-survey" class="section level3">
+<h3>Missing data (not finishing the initial survey)</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                       <span class="kw">if_else</span>(<span class="kw">is.na</span>(ended_initial), <span class="st">&quot;didnt_finish_initial, &quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;didnt_finish_initial&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1411</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">249</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="not-female" class="section level3">
+<h3>Not female</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                       <span class="kw">if_else</span>(gender <span class="op">!=</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(gender), <span class="st">&quot;not_female, &quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;not_female&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1657</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">3</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="homosexuality" class="section level3">
+<h3>Homosexuality</h3>
+<p>Not primarily heterosexual. This excludes women who reported being equally interested in men and women, women who reported being asexual or aromantic, and participants who did not identify as female gender.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                       <span class="kw">if_else</span>(sex_orientation <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4</span> <span class="op">|</span><span class="st"> </span>gender <span class="op">!=</span><span class="st"> </span><span class="dv">1</span>,
+                                               <span class="st">&quot;not_heterosexual_female, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;not_heterosexual_female&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1634</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">26</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="older-than-50" class="section level3">
+<h3>Older than 50</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                            <span class="kw">if_else</span>(age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">50</span>, <span class="st">&quot;older_than_50, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;older_than_50&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1625</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">35</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="menopausal" class="section level3">
+<h3>Menopausal</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                       <span class="kw">if_else</span>(menopause_yes <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>menopause_yes <span class="op">==</span><span class="st"> </span><span class="dv">2</span>,
+                                               <span class="st">&quot;menopausal, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;menopausal&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1619</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">41</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="pregnant" class="section level3">
+<h3>Pregnant</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                       <span class="kw">if_else</span>(pregnant <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;pregnant, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;pregnant&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1637</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">23</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="breastfeeding" class="section level3">
+<h3>Breastfeeding</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                            <span class="kw">if_else</span>(breast_feeding <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;breast_feeding, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;breast_feeding&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1632</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">28</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="participants-who-do-not-want-to-avoid-pregnancy" class="section level3">
+<h3>Participants, who do not want to avoid pregnancy</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                       <span class="kw">if_else</span>(pregnant_trying <span class="op">&gt;=</span><span class="st"> </span><span class="dv">4</span>,
+                                               <span class="st">&quot;pregnant_trying, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;pregnant_trying&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1599</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">61</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="participants-who-took-a-chance-on-getting-pregnant" class="section level3">
+<h3>Participants, who ‘took a chance’ on getting pregnant</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                       <span class="kw">if_else</span>(contraception_at_all <span class="op">==</span><span class="st"> </span><span class="dv">4</span>,
+                                               <span class="st">&quot;pregnant_chance, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;pregnant_chance&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1619</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">41</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="participants-who-used-no-contraception-for-other-reasons" class="section level3">
+<h3>Participants, who used no contraception for ‘other reasons’</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                       <span class="kw">if_else</span>(contraception_at_all <span class="op">==</span><span class="st"> </span><span class="dv">6</span>,
+                                               <span class="st">&quot;no_contraception, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;no_contraception&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1605</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">55</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="conraceptive-method" class="section level3 tabset">
+<h3>Conraceptive Method</h3>
+<p>Use of one of the following contraceptive methods</p>
+<div id="abandonment-of-penetrative-sexual-intercourse" class="section level4">
+<h4>Abandonment of penetrative sexual intercourse</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion_contraception =</span> <span class="kw">str_c</span>(
+    reasons_for_exclusion_contraception,
+    <span class="kw">if_else</span>(contraception_method <span class="op">%contains%</span><span class="st"> &quot;barrier_no_penetrative_sex&quot;</span> <span class="op">|</span>
+<span class="st">              </span>contraception_at_all <span class="op">==</span><span class="st"> </span><span class="dv">5</span>,
+            <span class="st">&quot;contraception_barrier_no_penetrative_sex, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion_contraception <span class="op">%contains%</span><span class="st"> &quot;contraception_barrier_no_penetrative_sex&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1515</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">145</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="morning-after-pill" class="section level4">
+<h4>Morning-after pill</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion_contraception =</span> <span class="kw">str_c</span>(
+    reasons_for_exclusion_contraception,
+    <span class="kw">if_else</span>(contraception_method <span class="op">%contains%</span><span class="st"> &quot;hormonal_morning_after_pill&quot;</span>,
+            <span class="st">&quot;contraception_hormonal_morning_after_pill, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion_contraception <span class="op">%contains%</span><span class="st"> &quot;contraception_hormonal_morning_after_pill&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1648</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">12</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="breastfeeding-1" class="section level4">
+<h4>Breastfeeding</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion_contraception =</span> <span class="kw">str_c</span>(
+    reasons_for_exclusion_contraception,
+    <span class="kw">if_else</span>(contraception_method <span class="op">%contains%</span><span class="st"> &quot;breast_feeding&quot;</span>,
+            <span class="st">&quot;contraception_breast_feeding, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion_contraception <span class="op">%contains%</span><span class="st"> &quot;contraception_breast_feeding&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1659</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="i-am-infertile" class="section level4">
+<h4>I am infertile</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion_contraception =</span> <span class="kw">str_c</span>(
+    reasons_for_exclusion_contraception,
+    <span class="kw">if_else</span>(contraception_method <span class="op">%contains%</span><span class="st"> &quot;infertile&quot;</span> <span class="op">&amp;</span>
+<span class="st">              </span><span class="op">!</span>(contraception_method <span class="op">%contains%</span><span class="st"> &quot;partner_infertile&quot;</span>),
+            <span class="st">&quot;contraception_infertile, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion_contraception <span class="op">%contains%</span><span class="st"> &quot;contraception_infertile&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1658</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="my-partner-is-infertile" class="section level4">
+<h4>My partner is infertile</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion_contraception =</span> <span class="kw">str_c</span>(
+    reasons_for_exclusion_contraception,
+    <span class="kw">if_else</span>(contraception_method <span class="op">%contains%</span><span class="st"> &quot;partner_infertile&quot;</span>,
+            <span class="st">&quot;contraception_partner_infertile, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion_contraception <span class="op">%contains%</span><span class="st"> &quot;contraception_partner_infertile&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1658</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="i-am-sterilized" class="section level4">
+<h4>I am sterilized</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion_contraception =</span> <span class="kw">str_c</span>(
+    reasons_for_exclusion_contraception,
+    <span class="kw">if_else</span>(contraception_method <span class="op">%contains%</span><span class="st"> &quot;sterilised&quot;</span> <span class="op">&amp;</span>
+<span class="st">              </span><span class="op">!</span>(contraception_method <span class="op">%contains%</span><span class="st"> &quot;partner_sterilised&quot;</span>),
+            <span class="st">&quot;contraception_sterilised, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion_contraception <span class="op">%contains%</span><span class="st"> &quot;contraception_sterilised&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1658</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="my-partner-is-sterilized" class="section level4">
+<h4>My partner is sterilized</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion_contraception =</span> <span class="kw">str_c</span>(
+    reasons_for_exclusion_contraception,
+    <span class="kw">if_else</span>(contraception_method <span class="op">%contains%</span><span class="st"> &quot;partner_sterilised&quot;</span>,
+            <span class="st">&quot;contraception_partner_sterilised, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion_contraception <span class="op">%contains%</span><span class="st"> &quot;contraception_partner_sterilised&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1653</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="other" class="section level4">
+<h4>Other</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion_contraception =</span> <span class="kw">str_c</span>(
+    reasons_for_exclusion_contraception,
+    <span class="kw">if_else</span>(contraception_method <span class="op">%contains%</span><span class="st"> &quot;not_listed&quot;</span>,
+            <span class="st">&quot;contraception_not_listed, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion_contraception <span class="op">%contains%</span><span class="st"> &quot;contraception_not_listed&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1651</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="summary" class="section level4">
+<h4>Summary</h4>
+<p>All participants that will be excluded based on their choice of contraception</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                       <span class="kw">if_else</span>(reasons_for_exclusion_contraception <span class="op">!=</span><span class="st"> &quot;&quot;</span>,
+                                       <span class="st">&quot;contraceptive_method, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;contraceptive_method&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1484</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">176</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="incongruent-information-about-current-contraceptive-method-and-method-used-in-the-last-three-months" class="section level3">
+<h3>Incongruent information about current contraceptive method and method used in the last three months</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">incongruent_information_about_hormonal_contraception =</span>
+           <span class="kw">ifelse</span>((hormonal_contraception_last3m <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>hormonal_contraception <span class="op">==</span><span class="st"> </span>T), <span class="dv">1</span>, <span class="dv">0</span>),
+         <span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                       <span class="kw">if_else</span>(incongruent_information_about_hormonal_contraception <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,
+                                               <span class="st">&quot;incongruent_information_about_hormonal_contraception, &quot;</span>,
+                                               <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;incongruent_information_about_hormonal_contraception&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1621</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">39</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="use-of-medication-including-sex-hormones-in-the-last-three-months." class="section level3">
+<h3>Use of medication including sex hormones in the last three months.</h3>
+<p>Taking sex hormones (other than the pill)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_surveys =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">reasons_for_exclusion =</span> <span class="kw">str_c</span>(reasons_for_exclusion,
+                                       <span class="kw">if_else</span>(medication_name <span class="op">%contains%</span><span class="st"> &quot;Cycloprognova&quot;</span> <span class="op">|</span>
+<span class="st">                                                 </span>medication_name <span class="op">%contains%</span><span class="st"> &quot;Cyproderm&quot;</span> <span class="op">|</span>
+<span class="st">                                                 </span>medication_name <span class="op">%contains%</span><span class="st"> &quot;DHEA&quot;</span> <span class="op">|</span>
+<span class="st">                                                 </span>medication_name <span class="op">%contains%</span><span class="st"> &quot;Hormone&quot;</span> <span class="op">|</span>
+<span class="st">                                                 </span>medication_name <span class="op">%contains%</span><span class="st"> &quot;Cyclo-Progynova&quot;</span> <span class="op">|</span>
+<span class="st">                                                 </span>medication_name <span class="op">%contains%</span><span class="st"> &quot;Femoston&quot;</span> <span class="op">|</span>
+<span class="st">                                                 </span>medication_name <span class="op">%contains%</span><span class="st"> &quot;Gynokadin&quot;</span>,
+                                               <span class="st">&quot;sex_hormones, &quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;&quot;</span>)))
+
+<span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;sex_hormones&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">1653</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">7</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="total-number-of-excluded-participants" class="section level2">
+<h2>Total number of excluded participants</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">table</span>(all_surveys<span class="op">$</span>reasons_for_exclusion <span class="op">==</span><span class="st"> &quot;&quot;</span>))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Var1</th>
+<th align="right">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FALSE</td>
+<td align="right">585</td>
+</tr>
+<tr class="even">
+<td align="left">TRUE</td>
+<td align="right">1075</td>
+</tr>
+<tr class="odd">
+<td align="left">In total</td>
+<td align="right">497 participants were excluded, leaving 1163 subjects which were included in the analysis.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="rmd-source-code">IyBSZWFzb25zIGZvciBFeGNsdXNpb24gey50YWJzZXR9CgpUaGUgZm9sbG93aW5nIHJlYXNvbnMgZm9yIGV4Y2x1c2lvbiBhcHBseToKKiBtaXNzaW5nIGRhdGEgKG5vdCBmaW5pc2hpbmcgdGhlIGluaXRpYWwgc3VydmV5KQoqIG5vdCBmZW1hbGUKKiBob21vc2V4dWFsaXR5Ciogb2xkZXIgdGhhbiA1MAoqIG1lbm9wYXVzYWwKKiBwcmVnbmFudAoqIGJyZWFzdGZlZWRpbmcKKiBwYXJ0aWNpcGFudHMsIHdobyBkbyBub3Qgd2FudCB0byBhdm9pZCBwcmVnbmFuY3kKKiBwYXJ0aWNpcGFudHMsIHdobyDigJh0b29rIGEgY2hhbmNl4oCZIG9uIGdldHRpbmcgcHJlZ25hbnQKKiBwYXJ0aWNpYXBudHMsIHdobyB1c2VkIG5vIGNvbnRyYWNlcHRpb24gZm9yIOKAmG90aGVyIHJlYXNvbnPigJkKKiB1c2Ugb2Ygb25lIG9mIHRoZSBmb2xsb3dpbmcgY29udHJhY2VwdGl2ZSBtZXRob2RzOiBhYmFuZG9ubWVudCBvZiBwZW5ldHJhdGl2ZSBzZXh1YWwgaW50ZXJjb3Vyc2UsIG1vcm5pbmctYWZ0ZXIgcGlsbCwgYnJlYXN0ZmVlZGluZywgSSBhbSBpbmZlcnRpbGUsIG15IHBhcnRuZXIgaXMgaW5mZXJ0aWxlLCBJIGFtIHN0ZXJpbGl6ZWQsIG15IHBhcnRuZXIgaXMgc3RlcmlsaXplZCwgb3RoZXIKKiBpbmNvbmdydWVudCBpbmZvcm1hdGlvbiBhYm91dCBjdXJyZW50IGNvbnRyYWNlcHRpdmUgbWV0aG9kIGFuZCBtZXRob2QgdXNlZCBpbiB0aGUgbGFzdCB0aHJlZSBtb250aHMKKiB1c2Ugb2YgbWVkaWNhdGlvbiBpbmNsdWRpbmcgc2V4IGhvcm1vbmVzIGluIHRoZSBsYXN0IHRocmVlIG1vbnRocy4KCiMjIERhdGEgYW5kIEZ1bmN0aW9ucwpgYGB7ciBkYXRhIGFuZCBmdW5jdGlvbnN9CnNvdXJjZSgiMF9oZWxwZXJzLlIiKQpsb2FkKCJkYXRhL2NsZWFuZWQucmRhdGEiKQojIG9wdHNfY2h1bmskc2V0KHdhcm5pbmcgPSBGLCBtZXNzYWdlID0gRiwgZXJyb3IgPSBUKQoKbGlicmFyeShrbml0cikKb3B0c19jaHVuayRzZXQoZmlnLndpZHRoID0gOSwgZmlnLmhlaWdodCA9IDcsIGNhY2hlID0gVCwgd2FybmluZyA9IEYsIG1lc3NhZ2UgPSBGLCBjYWNoZSA9IEYsIGVycm9yID0gVCkKCiMgZnVuY3Rpb24gdG8gc2VwZXJhdGUgdGhlIHJlYXNvbnMgZm9yIGV4Y2x1c2lvbiB2YXJpYWJsZSBmb3IgdXBzZXRyCmNvbW1hX3NlcGFyYXRlZF90b19jb2x1bW5zID0gZnVuY3Rpb24oZGYsIGNvbCkgewogIGNvbG5hbWUgPSBkZXBhcnNlKHN1YnN0aXR1dGUoY29sKSkKICBkZiRzcGxpdGNvbCA9IGRmICU+JSBwdWxsKGNvbG5hbWUpCiAgc2VwYXJhdGVfcm93cyhkZiwgc3BsaXRjb2wsIGNvbnZlcnQgPSBUUlVFLCBzZXAgPSAiLCAiKSAlPiUgCiAgICBtdXRhdGUoc3BsaXRjb2wgPSBpZl9lbHNlKGlzLm5hKHNwbGl0Y29sKSwgIm5vIiwgCiAgICAgICAgICAgICAgICAgICAgICAgIGlmX2Vsc2Uoc3BsaXRjb2wgPT0gIiIgfCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNwbGl0Y29sICVpbiUgYygpLCAiaW5jbHVkZWQiLCBhcy5jaGFyYWN0ZXIoc3BsaXRjb2wpKSkpICU+JSAKICAgIG11dGF0ZSgjc3BsaXRjb2wgPSBzdHJpbmdyOjpzdHJfYyhjb2xuYW1lLCAiXyIsIHNwbGl0Y29sKSwgCiAgICAgICAgICAgdmFsdWUgPSAxKSAlPiUgCiAgICBzcHJlYWQoc3BsaXRjb2wsIHZhbHVlLCBmaWxsID0gMCkgJT4lIAogICAgc2VsZWN0KC1jb2xuYW1lKQp9CgphbGxfc3VydmV5X2xlbmd0aCA9IG5yb3coYWxsX3N1cnZleXMpCmRpYXJ5X2xlbmd0aCA9IG5yb3coZGlhcnkpCmRpYXJ5X3NvY2lhbF9sZW5ndGggPSBucm93KGRpYXJ5X3NvY2lhbCkKYGBgCgojIyBFeGNsdXNpb24gU3RlcHMKYGBge3IgcmVhc29uc19mb3JfZXhjbHVzaW9ufQphbGxfc3VydmV5cyRyZWFzb25zX2Zvcl9leGNsdXNpb24gPSAiIiAjaW5zZXJ0IG5ldyB2YXJpYWJsZSByZWFzb25zX2Zvcl9leGNsdXNpb24gdG8gbGlzdCBhbGwgZXhjbHVzaW9uIGNyaXRlcmlhCmFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uID0gIiIgI2luc2VydCBuZXcgdmFyaWFibGUgcmVhc29uc19mb3JfZXhjbHVzaW9uX2NvbnRyYWNlcHRpb24gdG8gbGlzdCBkaWZmZXJlbnQgY29udHJhY2VwdGlvbnMgdGhhdCBsZWFkIHRvIGV4Y2x1c2lvbgpgYGAKCiMjIyBNaXNzaW5nIGRhdGEgKG5vdCBmaW5pc2hpbmcgdGhlIGluaXRpYWwgc3VydmV5KQpgYGB7ciBkaWRudF9maW5pc2hfaW5pdGlhbH0KYWxsX3N1cnZleXMgPSBhbGxfc3VydmV5cyAlPiUgCiAgbXV0YXRlKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiA9IHN0cl9jKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWZfZWxzZShpcy5uYShlbmRlZF9pbml0aWFsKSwgImRpZG50X2ZpbmlzaF9pbml0aWFsLCAiLCAiIikpKQoKa2FibGUodGFibGUoYWxsX3N1cnZleXMkcmVhc29uc19mb3JfZXhjbHVzaW9uICVjb250YWlucyUgImRpZG50X2ZpbmlzaF9pbml0aWFsIikpCmBgYAoKIyMjIE5vdCBmZW1hbGUKYGBge3Igbm90X2ZlbWFsZX0KYWxsX3N1cnZleXMgPSBhbGxfc3VydmV5cyAlPiUgCiAgbXV0YXRlKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiA9IHN0cl9jKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWZfZWxzZShnZW5kZXIgIT0gMSAmICFpcy5uYShnZW5kZXIpLCAibm90X2ZlbWFsZSwgIiwgIiIpKSkKCmthYmxlKHRhYmxlKGFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiAlY29udGFpbnMlICJub3RfZmVtYWxlIikpCmBgYAoKIyMjIEhvbW9zZXh1YWxpdHkKTm90IHByaW1hcmlseSBoZXRlcm9zZXh1YWwuIFRoaXMgZXhjbHVkZXMgd29tZW4gd2hvIHJlcG9ydGVkIGJlaW5nIGVxdWFsbHkgaW50ZXJlc3RlZCBpbiBtZW4gYW5kIHdvbWVuLCB3b21lbiB3aG8gcmVwb3J0ZWQgYmVpbmcgYXNleHVhbCBvciBhcm9tYW50aWMsIGFuZCBwYXJ0aWNpcGFudHMgd2hvIGRpZCBub3QgaWRlbnRpZnkgYXMgZmVtYWxlIGdlbmRlci4KYGBge3Igbm90X2hldGVyb3NleHVhbF9mZW1hbGV9CmFsbF9zdXJ2ZXlzID0gYWxsX3N1cnZleXMgJT4lCiAgbXV0YXRlKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiA9IHN0cl9jKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWZfZWxzZShzZXhfb3JpZW50YXRpb24gPj0gNCB8IGdlbmRlciAhPSAxLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJub3RfaGV0ZXJvc2V4dWFsX2ZlbWFsZSwgIiwgIiIsICIiKSkpCgprYWJsZSh0YWJsZShhbGxfc3VydmV5cyRyZWFzb25zX2Zvcl9leGNsdXNpb24gJWNvbnRhaW5zJSAibm90X2hldGVyb3NleHVhbF9mZW1hbGUiKSkKYGBgCgojIyMgT2xkZXIgdGhhbiA1MApgYGB7ciBvbGRlcl90aGFuXzUwfQphbGxfc3VydmV5cyA9IGFsbF9zdXJ2ZXlzICU+JSAKICBtdXRhdGUocmVhc29uc19mb3JfZXhjbHVzaW9uID0gc3RyX2MocmVhc29uc19mb3JfZXhjbHVzaW9uLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmX2Vsc2UoYWdlID49IDUwLCAib2xkZXJfdGhhbl81MCwgIiwgIiIsICIiKSkpCgprYWJsZSh0YWJsZShhbGxfc3VydmV5cyRyZWFzb25zX2Zvcl9leGNsdXNpb24gJWNvbnRhaW5zJSAib2xkZXJfdGhhbl81MCIpKQpgYGAKCiMjIyBNZW5vcGF1c2FsCmBgYHtyIG1lbm9wYXVzYWx9CmFsbF9zdXJ2ZXlzID0gYWxsX3N1cnZleXMgJT4lIAogIG11dGF0ZShyZWFzb25zX2Zvcl9leGNsdXNpb24gPSBzdHJfYyhyZWFzb25zX2Zvcl9leGNsdXNpb24sCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmX2Vsc2UobWVub3BhdXNlX3llcyA9PSAxIHwgbWVub3BhdXNlX3llcyA9PSAyLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJtZW5vcGF1c2FsLCAiLCAiIiwgIiIpKSkKCmthYmxlKHRhYmxlKGFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiAlY29udGFpbnMlICJtZW5vcGF1c2FsIikpCmBgYAoKIyMjIFByZWduYW50CmBgYHtyIHByZWduYW50fQphbGxfc3VydmV5cyA9IGFsbF9zdXJ2ZXlzICU+JSAKICBtdXRhdGUocmVhc29uc19mb3JfZXhjbHVzaW9uID0gc3RyX2MocmVhc29uc19mb3JfZXhjbHVzaW9uLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZl9lbHNlKHByZWduYW50ID09IDEsICJwcmVnbmFudCwgIiwgIiIsICIiKSkpCgprYWJsZSh0YWJsZShhbGxfc3VydmV5cyRyZWFzb25zX2Zvcl9leGNsdXNpb24gJWNvbnRhaW5zJSAicHJlZ25hbnQiKSkKYGBgCgoKIyMjIEJyZWFzdGZlZWRpbmcKYGBge3IgYnJlYXN0ZmVlZGluZ30KYWxsX3N1cnZleXMgPSBhbGxfc3VydmV5cyAlPiUgCiAgbXV0YXRlKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiA9IHN0cl9jKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZl9lbHNlKGJyZWFzdF9mZWVkaW5nID09IDEsICJicmVhc3RfZmVlZGluZywgIiwgIiIsICIiKSkpCgprYWJsZSh0YWJsZShhbGxfc3VydmV5cyRyZWFzb25zX2Zvcl9leGNsdXNpb24gJWNvbnRhaW5zJSAiYnJlYXN0X2ZlZWRpbmciKSkKYGBgCgojIyMgUGFydGljaXBhbnRzLCB3aG8gZG8gbm90IHdhbnQgdG8gYXZvaWQgcHJlZ25hbmN5CmBgYHtyIHByZWduYW50X3RyeWluZ30KYWxsX3N1cnZleXMgPSBhbGxfc3VydmV5cyAlPiUKICBtdXRhdGUocmVhc29uc19mb3JfZXhjbHVzaW9uID0gc3RyX2MocmVhc29uc19mb3JfZXhjbHVzaW9uLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZl9lbHNlKHByZWduYW50X3RyeWluZyA+PSA0LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJwcmVnbmFudF90cnlpbmcsICIsICIiLCAiIikpKQoKa2FibGUodGFibGUoYWxsX3N1cnZleXMkcmVhc29uc19mb3JfZXhjbHVzaW9uICVjb250YWlucyUgInByZWduYW50X3RyeWluZyIpKQpgYGAKCiMjIyBQYXJ0aWNpcGFudHMsIHdobyDigJh0b29rIGEgY2hhbmNl4oCZIG9uIGdldHRpbmcgcHJlZ25hbnQKYGBge3J9CmFsbF9zdXJ2ZXlzID0gYWxsX3N1cnZleXMgJT4lCiAgbXV0YXRlKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiA9IHN0cl9jKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWZfZWxzZShjb250cmFjZXB0aW9uX2F0X2FsbCA9PSA0LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJwcmVnbmFudF9jaGFuY2UsICIsICIiLCAiIikpKQoKa2FibGUodGFibGUoYWxsX3N1cnZleXMkcmVhc29uc19mb3JfZXhjbHVzaW9uICVjb250YWlucyUgInByZWduYW50X2NoYW5jZSIpKQpgYGAKCiMjIyAgUGFydGljaXBhbnRzLCB3aG8gdXNlZCBubyBjb250cmFjZXB0aW9uIGZvciDigJhvdGhlciByZWFzb25z4oCZCmBgYHtyfQphbGxfc3VydmV5cyA9IGFsbF9zdXJ2ZXlzICU+JQogIG11dGF0ZShyZWFzb25zX2Zvcl9leGNsdXNpb24gPSBzdHJfYyhyZWFzb25zX2Zvcl9leGNsdXNpb24sCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmX2Vsc2UoY29udHJhY2VwdGlvbl9hdF9hbGwgPT0gNiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAibm9fY29udHJhY2VwdGlvbiwgIiwgIiIsICIiKSkpCgprYWJsZSh0YWJsZShhbGxfc3VydmV5cyRyZWFzb25zX2Zvcl9leGNsdXNpb24gJWNvbnRhaW5zJSAibm9fY29udHJhY2VwdGlvbiIpKQpgYGAKCiMjIyBDb25yYWNlcHRpdmUgTWV0aG9kIHsudGFic2V0fQpVc2Ugb2Ygb25lIG9mIHRoZSBmb2xsb3dpbmcgY29udHJhY2VwdGl2ZSBtZXRob2RzCgojIyMjIEFiYW5kb25tZW50IG9mIHBlbmV0cmF0aXZlIHNleHVhbCBpbnRlcmNvdXJzZQpgYGB7ciBjb250cmFjZXB0aW9uX2JhcnJpZXJfbm9fcGVuZXRyYXRpdmVfc2V4fQphbGxfc3VydmV5cyA9IGFsbF9zdXJ2ZXlzICU+JSAKICBtdXRhdGUocmVhc29uc19mb3JfZXhjbHVzaW9uX2NvbnRyYWNlcHRpb24gPSBzdHJfYygKICAgIHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uLAogICAgaWZfZWxzZShjb250cmFjZXB0aW9uX21ldGhvZCAlY29udGFpbnMlICJiYXJyaWVyX25vX3BlbmV0cmF0aXZlX3NleCIgfAogICAgICAgICAgICAgIGNvbnRyYWNlcHRpb25fYXRfYWxsID09IDUsCiAgICAgICAgICAgICJjb250cmFjZXB0aW9uX2JhcnJpZXJfbm9fcGVuZXRyYXRpdmVfc2V4LCAiLCAiIiwgIiIpKSkKCmthYmxlKHRhYmxlKGFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uICVjb250YWlucyUgImNvbnRyYWNlcHRpb25fYmFycmllcl9ub19wZW5ldHJhdGl2ZV9zZXgiKSkKYGBgCgojIyMjIE1vcm5pbmctYWZ0ZXIgcGlsbApgYGB7ciBjb250cmFjZXB0aW9uX2hvcm1vbmFsX21vcm5pbmdfYWZ0ZXJfcGlsbH0KYWxsX3N1cnZleXMgPSBhbGxfc3VydmV5cyAlPiUgCiAgbXV0YXRlKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uID0gc3RyX2MoCiAgICByZWFzb25zX2Zvcl9leGNsdXNpb25fY29udHJhY2VwdGlvbiwKICAgIGlmX2Vsc2UoY29udHJhY2VwdGlvbl9tZXRob2QgJWNvbnRhaW5zJSAiaG9ybW9uYWxfbW9ybmluZ19hZnRlcl9waWxsIiwKICAgICAgICAgICAgImNvbnRyYWNlcHRpb25faG9ybW9uYWxfbW9ybmluZ19hZnRlcl9waWxsLCAiLCAiIiwgIiIpKSkKCmthYmxlKHRhYmxlKGFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uICVjb250YWlucyUgImNvbnRyYWNlcHRpb25faG9ybW9uYWxfbW9ybmluZ19hZnRlcl9waWxsIikpCmBgYAoKIyMjIyBCcmVhc3RmZWVkaW5nCmBgYHtyIGNvbnRyYWNlcHRpb25fYnJlYXN0X2ZlZWRpbmd9CmFsbF9zdXJ2ZXlzID0gYWxsX3N1cnZleXMgJT4lIAogIG11dGF0ZShyZWFzb25zX2Zvcl9leGNsdXNpb25fY29udHJhY2VwdGlvbiA9IHN0cl9jKAogICAgcmVhc29uc19mb3JfZXhjbHVzaW9uX2NvbnRyYWNlcHRpb24sCiAgICBpZl9lbHNlKGNvbnRyYWNlcHRpb25fbWV0aG9kICVjb250YWlucyUgImJyZWFzdF9mZWVkaW5nIiwKICAgICAgICAgICAgImNvbnRyYWNlcHRpb25fYnJlYXN0X2ZlZWRpbmcsICIsICIiLCAiIikpKQoKa2FibGUodGFibGUoYWxsX3N1cnZleXMkcmVhc29uc19mb3JfZXhjbHVzaW9uX2NvbnRyYWNlcHRpb24gJWNvbnRhaW5zJSAiY29udHJhY2VwdGlvbl9icmVhc3RfZmVlZGluZyIpKQpgYGAKCiMjIyMgSSBhbSBpbmZlcnRpbGUKYGBge3IgY29udHJhY2VwdGlvbl9pbmZlcnRpbGV9CmFsbF9zdXJ2ZXlzID0gYWxsX3N1cnZleXMgJT4lIAogIG11dGF0ZShyZWFzb25zX2Zvcl9leGNsdXNpb25fY29udHJhY2VwdGlvbiA9IHN0cl9jKAogICAgcmVhc29uc19mb3JfZXhjbHVzaW9uX2NvbnRyYWNlcHRpb24sCiAgICBpZl9lbHNlKGNvbnRyYWNlcHRpb25fbWV0aG9kICVjb250YWlucyUgImluZmVydGlsZSIgJgogICAgICAgICAgICAgICEoY29udHJhY2VwdGlvbl9tZXRob2QgJWNvbnRhaW5zJSAicGFydG5lcl9pbmZlcnRpbGUiKSwKICAgICAgICAgICAgImNvbnRyYWNlcHRpb25faW5mZXJ0aWxlLCAiLCAiIiwgIiIpKSkKCmthYmxlKHRhYmxlKGFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uICVjb250YWlucyUgImNvbnRyYWNlcHRpb25faW5mZXJ0aWxlIikpCmBgYAoKIyMjIyBNeSBwYXJ0bmVyIGlzIGluZmVydGlsZQpgYGB7ciBjb250cmFjZXB0aW9uX3BhcnRuZXJfaW5mZXJ0aWxlfQphbGxfc3VydmV5cyA9IGFsbF9zdXJ2ZXlzICU+JSAKICBtdXRhdGUocmVhc29uc19mb3JfZXhjbHVzaW9uX2NvbnRyYWNlcHRpb24gPSBzdHJfYygKICAgIHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uLAogICAgaWZfZWxzZShjb250cmFjZXB0aW9uX21ldGhvZCAlY29udGFpbnMlICJwYXJ0bmVyX2luZmVydGlsZSIsCiAgICAgICAgICAgICJjb250cmFjZXB0aW9uX3BhcnRuZXJfaW5mZXJ0aWxlLCAiLCAiIiwgIiIpKSkKCmthYmxlKHRhYmxlKGFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uICVjb250YWlucyUgImNvbnRyYWNlcHRpb25fcGFydG5lcl9pbmZlcnRpbGUiKSkKYGBgCgojIyMjIEkgYW0gc3RlcmlsaXplZApgYGB7ciBjb250cmFjZXB0aW9uX3N0ZXJpbGlzZWR9CmFsbF9zdXJ2ZXlzID0gYWxsX3N1cnZleXMgJT4lIAogIG11dGF0ZShyZWFzb25zX2Zvcl9leGNsdXNpb25fY29udHJhY2VwdGlvbiA9IHN0cl9jKAogICAgcmVhc29uc19mb3JfZXhjbHVzaW9uX2NvbnRyYWNlcHRpb24sCiAgICBpZl9lbHNlKGNvbnRyYWNlcHRpb25fbWV0aG9kICVjb250YWlucyUgInN0ZXJpbGlzZWQiICYKICAgICAgICAgICAgICAhKGNvbnRyYWNlcHRpb25fbWV0aG9kICVjb250YWlucyUgInBhcnRuZXJfc3RlcmlsaXNlZCIpLAogICAgICAgICAgICAiY29udHJhY2VwdGlvbl9zdGVyaWxpc2VkLCAiLCAiIiwgIiIpKSkKCmthYmxlKHRhYmxlKGFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uICVjb250YWlucyUgImNvbnRyYWNlcHRpb25fc3RlcmlsaXNlZCIpKQpgYGAKCgojIyMjIE15IHBhcnRuZXIgaXMgc3RlcmlsaXplZApgYGB7ciBjb250cmFjZXB0aW9uX3BhcnRuZXJfc3RlcmlsaXNlZH0KYWxsX3N1cnZleXMgPSBhbGxfc3VydmV5cyAlPiUgCiAgbXV0YXRlKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uID0gc3RyX2MoCiAgICByZWFzb25zX2Zvcl9leGNsdXNpb25fY29udHJhY2VwdGlvbiwKICAgIGlmX2Vsc2UoY29udHJhY2VwdGlvbl9tZXRob2QgJWNvbnRhaW5zJSAicGFydG5lcl9zdGVyaWxpc2VkIiwKICAgICAgICAgICAgImNvbnRyYWNlcHRpb25fcGFydG5lcl9zdGVyaWxpc2VkLCAiLCAiIiwgIiIpKSkKCmthYmxlKHRhYmxlKGFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uICVjb250YWlucyUgImNvbnRyYWNlcHRpb25fcGFydG5lcl9zdGVyaWxpc2VkIikpCmBgYAoKIyMjIyBPdGhlcgpgYGB7ciBjb250cmFjZXB0aW9uX25vdF9saXN0ZWR9CmFsbF9zdXJ2ZXlzID0gYWxsX3N1cnZleXMgJT4lIAogIG11dGF0ZShyZWFzb25zX2Zvcl9leGNsdXNpb25fY29udHJhY2VwdGlvbiA9IHN0cl9jKAogICAgcmVhc29uc19mb3JfZXhjbHVzaW9uX2NvbnRyYWNlcHRpb24sCiAgICBpZl9lbHNlKGNvbnRyYWNlcHRpb25fbWV0aG9kICVjb250YWlucyUgIm5vdF9saXN0ZWQiLAogICAgICAgICAgICAiY29udHJhY2VwdGlvbl9ub3RfbGlzdGVkLCAiLCAiIiwgIiIpKSkKCmthYmxlKHRhYmxlKGFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uICVjb250YWlucyUgImNvbnRyYWNlcHRpb25fbm90X2xpc3RlZCIpKQpgYGAKCiMjIyMgU3VtbWFyeQpBbGwgcGFydGljaXBhbnRzIHRoYXQgd2lsbCBiZSBleGNsdWRlZCBiYXNlZCBvbiB0aGVpciBjaG9pY2Ugb2YgY29udHJhY2VwdGlvbgpgYGB7cn0KYWxsX3N1cnZleXMgPSBhbGxfc3VydmV5cyAlPiUKICBtdXRhdGUocmVhc29uc19mb3JfZXhjbHVzaW9uID0gc3RyX2MocmVhc29uc19mb3JfZXhjbHVzaW9uLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZl9lbHNlKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbl9jb250cmFjZXB0aW9uICE9ICIiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiY29udHJhY2VwdGl2ZV9tZXRob2QsICIsICIiLCAiIikpKQoKa2FibGUodGFibGUoYWxsX3N1cnZleXMkcmVhc29uc19mb3JfZXhjbHVzaW9uICVjb250YWlucyUgImNvbnRyYWNlcHRpdmVfbWV0aG9kIikpCmBgYAoKCgojIyMgSW5jb25ncnVlbnQgaW5mb3JtYXRpb24gYWJvdXQgY3VycmVudCBjb250cmFjZXB0aXZlIG1ldGhvZCBhbmQgbWV0aG9kIHVzZWQgaW4gdGhlIGxhc3QgdGhyZWUgbW9udGhzCmBgYHtyIGluY29uZ3J1ZW50X2luZm9ybWF0aW9uX2Fib3V0X2hvcm1vbmFsX2NvbnRyYWNlcHRpb259CmFsbF9zdXJ2ZXlzID0gYWxsX3N1cnZleXMgJT4lCiAgbXV0YXRlKGluY29uZ3J1ZW50X2luZm9ybWF0aW9uX2Fib3V0X2hvcm1vbmFsX2NvbnRyYWNlcHRpb24gPQogICAgICAgICAgIGlmZWxzZSgoaG9ybW9uYWxfY29udHJhY2VwdGlvbl9sYXN0M20gPT0gMCAmIGhvcm1vbmFsX2NvbnRyYWNlcHRpb24gPT0gVCksIDEsIDApLAogICAgICAgICByZWFzb25zX2Zvcl9leGNsdXNpb24gPSBzdHJfYyhyZWFzb25zX2Zvcl9leGNsdXNpb24sCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmX2Vsc2UoaW5jb25ncnVlbnRfaW5mb3JtYXRpb25fYWJvdXRfaG9ybW9uYWxfY29udHJhY2VwdGlvbiA9PSAxLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJpbmNvbmdydWVudF9pbmZvcm1hdGlvbl9hYm91dF9ob3Jtb25hbF9jb250cmFjZXB0aW9uLCAiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICIiLCAiIikpKQoKCmthYmxlKHRhYmxlKGFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiAlY29udGFpbnMlICJpbmNvbmdydWVudF9pbmZvcm1hdGlvbl9hYm91dF9ob3Jtb25hbF9jb250cmFjZXB0aW9uIikpCmBgYAoKCiMjIyBVc2Ugb2YgbWVkaWNhdGlvbiBpbmNsdWRpbmcgc2V4IGhvcm1vbmVzIGluIHRoZSBsYXN0IHRocmVlIG1vbnRocy4KVGFraW5nIHNleCBob3Jtb25lcyAob3RoZXIgdGhhbiB0aGUgcGlsbCkKYGBge3J9CmFsbF9zdXJ2ZXlzID0gYWxsX3N1cnZleXMgJT4lIAogIG11dGF0ZShyZWFzb25zX2Zvcl9leGNsdXNpb24gPSBzdHJfYyhyZWFzb25zX2Zvcl9leGNsdXNpb24sCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmX2Vsc2UobWVkaWNhdGlvbl9uYW1lICVjb250YWlucyUgIkN5Y2xvcHJvZ25vdmEiIHwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lZGljYXRpb25fbmFtZSAlY29udGFpbnMlICJDeXByb2Rlcm0iIHwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lZGljYXRpb25fbmFtZSAlY29udGFpbnMlICJESEVBIiB8CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBtZWRpY2F0aW9uX25hbWUgJWNvbnRhaW5zJSAiSG9ybW9uZSIgfAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbWVkaWNhdGlvbl9uYW1lICVjb250YWlucyUgIkN5Y2xvLVByb2d5bm92YSIgfAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbWVkaWNhdGlvbl9uYW1lICVjb250YWlucyUgIkZlbW9zdG9uIiB8CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBtZWRpY2F0aW9uX25hbWUgJWNvbnRhaW5zJSAiR3lub2thZGluIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAic2V4X2hvcm1vbmVzLCAiLCAiIiwgIiIpKSkKCmthYmxlKHRhYmxlKGFsbF9zdXJ2ZXlzJHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiAlY29udGFpbnMlICJzZXhfaG9ybW9uZXMiKSkKYGBgCgojIyBUb3RhbCBudW1iZXIgb2YgZXhjbHVkZWQgcGFydGljaXBhbnRzCmBgYHtyfQprYWJsZSh0YWJsZShhbGxfc3VydmV5cyRyZWFzb25zX2Zvcl9leGNsdXNpb24gPT0gIiIpKQpgYGAKSW4gdG90YWwgNDk3IHBhcnRpY2lwYW50cyB3ZXJlIGV4Y2x1ZGVkLCBsZWF2aW5nIDExNjMgc3ViamVjdHMgd2hpY2ggd2VyZSBpbmNsdWRlZCBpbiB0aGUgYW5hbHlzaXMuCgoK</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("1_exclusion.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

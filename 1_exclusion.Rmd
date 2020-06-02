@@ -1,16 +1,17 @@
 # Reasons for Exclusion {.tabset}
 
 The following reasons for exclusion apply:
-* not female
 * missing data (not finishing the initial survey)
-* menopausal
+* not female
+* homosexuality
 * older than 50
+* menopausal
 * pregnant
 * breastfeeding
-* use of one of the following contraceptive methods: abandonment of penetrative sexual intercourse, morning-after pill, breastfeeding, I am infertile, my partner is infertile, I am sterilized, my partner is sterilized, other
-* homosexuality
 * participants, who do not want to avoid pregnancy
-* participants, who either ‘took a chance’ on getting pregnant or used no contraception for ‘other reasons’
+* participants, who ‘took a chance’ on getting pregnant
+* particiapnts, who used no contraception for ‘other reasons’
+* use of one of the following contraceptive methods: abandonment of penetrative sexual intercourse, morning-after pill, breastfeeding, I am infertile, my partner is infertile, I am sterilized, my partner is sterilized, other
 * incongruent information about current contraceptive method and method used in the last three months
 * use of medication including sex hormones in the last three months.
 
@@ -42,19 +43,10 @@ diary_length = nrow(diary)
 diary_social_length = nrow(diary_social)
 ```
 
-## Exclusion Steps
+## Exclusion Steps {.tabset}
 ```{r reasons_for_exclusion}
 all_surveys$reasons_for_exclusion = "" #insert new variable reasons_for_exclusion to list all exclusion criteria
 all_surveys$reasons_for_exclusion_contraception = "" #insert new variable reasons_for_exclusion_contraception to list different contraceptions that lead to exclusion
-```
-
-### Not female
-```{r not_female}
-all_surveys = all_surveys %>% 
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                       if_else(gender != 1 |, "not_female, ", "")))
-
-table(all_surveys$reasons_for_exclusion %contains% "not_female")
 ```
 
 ### Missing data (not finishing the initial survey)
@@ -63,7 +55,36 @@ all_surveys = all_surveys %>%
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
                                        if_else(is.na(ended_initial), "didnt_finish_initial, ", "")))
 
-table(all_surveys$reasons_for_exclusion %contains% "didnt_finish_initial")
+kable(table(all_surveys$reasons_for_exclusion %contains% "didnt_finish_initial"))
+```
+
+### Not female
+```{r not_female}
+all_surveys = all_surveys %>% 
+  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
+                                       if_else(gender != 1 & !is.na(gender), "not_female, ", "")))
+
+kable(table(all_surveys$reasons_for_exclusion %contains% "not_female"))
+```
+
+### Homosexuality
+Not primarily heterosexual. This excludes women who reported being equally interested in men and women, women who reported being asexual or aromantic, and participants who did not identify as female gender.
+```{r not_heterosexual_female}
+all_surveys = all_surveys %>%
+  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
+                                       if_else(sex_orientation >= 4 | gender != 1,
+                                               "not_heterosexual_female, ", "", "")))
+
+kable(table(all_surveys$reasons_for_exclusion %contains% "not_heterosexual_female"))
+```
+
+### Older than 50
+```{r older_than_50}
+all_surveys = all_surveys %>% 
+  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
+                                            if_else(age >= 50, "older_than_50, ", "", "")))
+
+kable(table(all_surveys$reasons_for_exclusion %contains% "older_than_50"))
 ```
 
 ### Menopausal
@@ -73,16 +94,7 @@ all_surveys = all_surveys %>%
                                        if_else(menopause_yes == 1 | menopause_yes == 2,
                                                "menopausal, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion %contains% "menopausal")
-```
-
-### Older than 50
-```{r older_than_50}
-all_surveys = all_surveys %>% 
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(age >= 50, "older_than_50, ", "", "")))
-
-table(all_surveys$reasons_for_exclusion %contains% "older_than_50")
+kable(table(all_surveys$reasons_for_exclusion %contains% "menopausal"))
 ```
 
 ### Pregnant
@@ -91,7 +103,7 @@ all_surveys = all_surveys %>%
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
                                        if_else(pregnant == 1, "pregnant, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion %contains% "pregnant")
+kable(table(all_surveys$reasons_for_exclusion %contains% "pregnant"))
 ```
 
 
@@ -101,21 +113,52 @@ all_surveys = all_surveys %>%
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
                                             if_else(breast_feeding == 1, "breast_feeding, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion %contains% "breast_feeding")
+kable(table(all_surveys$reasons_for_exclusion %contains% "breast_feeding"))
 ```
 
+### Participants, who do not want to avoid pregnancy
+```{r pregnant_trying}
+all_surveys = all_surveys %>%
+  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
+                                       if_else(pregnant_trying >= 4,
+                                               "pregnant_trying, ", "", "")))
+
+kable(table(all_surveys$reasons_for_exclusion %contains% "pregnant_trying"))
+```
+
+### Participants, who ‘took a chance’ on getting pregnant
+```{r}
+all_surveys = all_surveys %>%
+  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
+                                       if_else(contraception_at_all == 4,
+                                               "pregnant_chance, ", "", "")))
+
+kable(table(all_surveys$reasons_for_exclusion %contains% "pregnant_chance"))
+```
+
+###  Participants, who used no contraception for ‘other reasons’
+```{r}
+all_surveys = all_surveys %>%
+  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
+                                       if_else(contraception_at_all == 6,
+                                               "no_contraception, ", "", "")))
+
+kable(table(all_surveys$reasons_for_exclusion %contains% "no_contraception"))
+```
 
 ### Conraceptive Method {.tabset}
 Use of one of the following contraceptive methods
+
 #### Abandonment of penetrative sexual intercourse
 ```{r contraception_barrier_no_penetrative_sex}
 all_surveys = all_surveys %>% 
   mutate(reasons_for_exclusion_contraception = str_c(
     reasons_for_exclusion_contraception,
-    if_else(contraception_method %contains% "barrier_no_penetrative_sex",
+    if_else(contraception_method %contains% "barrier_no_penetrative_sex" |
+              contraception_at_all == 5,
             "contraception_barrier_no_penetrative_sex, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_barrier_no_penetrative_sex")
+kable(table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_barrier_no_penetrative_sex"))
 ```
 
 #### Morning-after pill
@@ -126,7 +169,7 @@ all_surveys = all_surveys %>%
     if_else(contraception_method %contains% "hormonal_morning_after_pill",
             "contraception_hormonal_morning_after_pill, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_hormonal_morning_after_pill")
+kable(table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_hormonal_morning_after_pill"))
 ```
 
 #### Breastfeeding
@@ -137,7 +180,7 @@ all_surveys = all_surveys %>%
     if_else(contraception_method %contains% "breast_feeding",
             "contraception_breast_feeding, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_breast_feeding")
+kable(table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_breast_feeding"))
 ```
 
 #### I am infertile
@@ -149,7 +192,7 @@ all_surveys = all_surveys %>%
               !(contraception_method %contains% "partner_infertile"),
             "contraception_infertile, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_infertile")
+kable(table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_infertile"))
 ```
 
 #### My partner is infertile
@@ -160,7 +203,7 @@ all_surveys = all_surveys %>%
     if_else(contraception_method %contains% "partner_infertile",
             "contraception_partner_infertile, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_partner_infertile")
+kable(table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_partner_infertile"))
 ```
 
 #### I am sterilized
@@ -172,7 +215,7 @@ all_surveys = all_surveys %>%
               !(contraception_method %contains% "partner_sterilised"),
             "contraception_sterilised, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_sterilised")
+kable(table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_sterilised"))
 ```
 
 
@@ -184,7 +227,7 @@ all_surveys = all_surveys %>%
     if_else(contraception_method %contains% "partner_sterilised",
             "contraception_partner_sterilised, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_partner_sterilised")
+kable(table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_partner_sterilised"))
 ```
 
 #### Other
@@ -195,7 +238,7 @@ all_surveys = all_surveys %>%
     if_else(contraception_method %contains% "not_listed",
             "contraception_not_listed, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_not_listed")
+kable(table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_not_listed"))
 ```
 
 #### Summary
@@ -206,49 +249,10 @@ all_surveys = all_surveys %>%
                                        if_else(reasons_for_exclusion_contraception != "",
                                        "contraceptive_method, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion %contains% "contraceptive_method")
+kable(table(all_surveys$reasons_for_exclusion %contains% "contraceptive_method"))
 ```
 
-### Homosexuality
-Not primarily heterosexual. This excludes women who reported being equally interested in men and women, women who reported being asexual or aromantic, and participants who did not identify as female gender.
-```{r not_heterosexual_female}
-all_surveys = all_surveys %>%
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                       if_else(sex_orientation >= 4 | gender != 1,
-                                               "not_heterosexual_female, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion %contains% "not_heterosexual_female")
-```
-
-### Participants, who do not want to avoid pregnancy
-```{r pregnant_trying}
-all_surveys = all_surveys %>%
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                       if_else(pregnant_trying >= 4,
-                                               "pregnant_trying, ", "", "")))
-
-table(all_surveys$reasons_for_exclusion %contains% "pregnant_trying")
-```
-
-### Participants, who ‘took a chance’ on getting pregnant
-```{r}
-all_surveys = all_surveys %>%
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                       if_else(contraception_at_all == 4,
-                                               "pregnant_chance, ", "", "")))
-
-table(all_surveys$reasons_for_exclusion %contains% "pregnant_chance")
-```
-
-###  Particiapnts who used no contraception for ‘other reasons’
-```{r}
-all_surveys = all_surveys %>%
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                       if_else(contraception_at_all == 6,
-                                               "no_contraception, ", "", "")))
-
-table(all_surveys$reasons_for_exclusion %contains% "no_contraception")
-```
 
 ### Incongruent information about current contraceptive method and method used in the last three months
 ```{r incongruent_information_about_hormonal_contraception}
@@ -261,7 +265,7 @@ all_surveys = all_surveys %>%
                                                "", "")))
 
 
-table(all_surveys$reasons_for_exclusion %contains% "incongruent_information_about_hormonal_contraception")
+kable(table(all_surveys$reasons_for_exclusion %contains% "incongruent_information_about_hormonal_contraception"))
 ```
 
 
@@ -279,14 +283,15 @@ all_surveys = all_surveys %>%
                                                  medication_name %contains% "Gynokadin",
                                                "sex_hormones, ", "", "")))
 
-table(all_surveys$reasons_for_exclusion %contains% "sex_hormones")
+kable(table(all_surveys$reasons_for_exclusion %contains% "sex_hormones"))
 ```
 
 ## Total number of excluded participants
 ```{r}
-table(all_surveys$reasons_for_exclusion == "")
+kable(table(all_surveys$reasons_for_exclusion == ""))
 ```
 In total 497 participants were excluded, leaving 1163 subjects which were included in the analysis.
+
 
 
 ## Reasons for exclusion
@@ -1771,6 +1776,5 @@ crosstabs(~ included_d + (reasons_for_exclusion == ""), diary)
 crosstabs(~ diary_social$included_s)
 crosstabs(~ network$included)
 ```
-
 
 
