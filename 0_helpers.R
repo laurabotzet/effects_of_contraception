@@ -34,9 +34,12 @@ library(broom)
 #' grammar of graphics plots
 library(ggplot2)
 #' svg graphs
-# library(svglite);
+#' library(svglite);
 library(ggthemes)
 library(codebook)
+
+#'UpSetR is used to generate exlusion plots
+library(UpSetR)
 
 #' tidyverse: has a lot of naming conflicts, so always load last
 library(tidyverse)
@@ -105,7 +108,7 @@ pander_handler = function(x, ...) {
     any(sapply(classes, FUN = function(classes) { !is.null(getS3method('pander',classes,TRUE)) } ))
   }
   if ("knit_asis" %in% class(x)) {
-    x # obj is knit_asis already, don't touch it 
+    x # obj is knit_asis already, don't touch it
     # (useful if e.g. pander is called with options in the doc)
   } else if (anyS3method(x)) {
     pander(x, row.names = F, ...) # if method available, pander
@@ -181,7 +184,7 @@ n_excluded = function(x) {
   excluded
 }
 
-### counting excluded days 
+### counting excluded days
 
 n_excluded_days = function(x) {
   excluded_new_days = sum(is.na(x) | x == FALSE,na.rm = T)
@@ -236,7 +239,7 @@ n_excluded_network_strict = function(x) {
   excluded
 }
 
-###### bar plot 
+###### bar plot
 
 bar_count = function(data, variable, na.rm = FALSE) {
   varname = deparse(substitute(variable))
@@ -246,7 +249,7 @@ bar_count = function(data, variable, na.rm = FALSE) {
   }
   var = factor(var, exclude = NULL)
   data$var = var
-  
+
   ggplot(data, aes(x = var)) +
     geom_bar() +
     stat_count(aes(label = paste(..count.., "\n", scales::percent(round(..count../sum(count),2)))), hjust = -0.1, geom = "text", position = "identity", na.rm = T) +
@@ -264,15 +267,15 @@ plot_interaction = function(model, nr = 3) {
   int_ef = data.frame(ef[[int]])
   int_parts = stringr::str_split(int, ":")[[1]]
   int_ef[, int_parts[2]] = factor(int_ef[, int_parts[2]])
-  ggplot(int_ef, 
-         aes_string(x = int_parts[1], y = "fit", ymin = "lower", ymax = "upper")) + 
+  ggplot(int_ef,
+         aes_string(x = int_parts[1], y = "fit", ymin = "lower", ymax = "upper")) +
     geom_smooth(aes_string(colour = int_parts[2],
                            fill = int_parts[2]),
-                stat = 'identity') + 
-    facet_wrap(as.formula(paste0("~ ", int_parts[3])), labeller = labeller(hormonal_contraception = c(`FALSE` = 'cycling', `TRUE` = 'hormonal contraception'))) + 
+                stat = 'identity') +
+    facet_wrap(as.formula(paste0("~ ", int_parts[3])), labeller = labeller(hormonal_contraception = c(`FALSE` = 'cycling', `TRUE` = 'hormonal contraception'))) +
     ggtitle(paste0("Moderation by ", str_replace_all(int_parts[2], "_", " "))) +
     scale_color_solarized(guide = F) +
-    scale_fill_solarized(guide = F) + 
+    scale_fill_solarized(guide = F) +
     scale_x_continuous("Conception risk estimate", breaks = c(0, 0.3, 0.5))
 
 }
@@ -283,22 +286,22 @@ plot_2way_interaction = function(model, nr = 3) {
   int_ef = data.frame(ef[[int]])
   int_parts = stringr::str_split(int, ":")[[1]]
   int_ef[, int_parts[2]] = factor(int_ef[, int_parts[2]])
-  ggplot(int_ef, 
-         aes_string(x = int_parts[1], y = "fit", ymin = "lower", ymax = "upper")) + 
+  ggplot(int_ef,
+         aes_string(x = int_parts[1], y = "fit", ymin = "lower", ymax = "upper")) +
     geom_smooth(aes_string(colour = int_parts[2],
                            fill = int_parts[2]),
-                stat = 'identity') + 
+                stat = 'identity') +
     ggtitle(paste0("Moderation by ", str_replace_all(int_parts[2], "_", " "))) +
     scale_color_solarized(guide = F) +
-    scale_fill_solarized(guide = F) + 
+    scale_fill_solarized(guide = F) +
     scale_x_continuous("Conception risk estimate", breaks = c(0, 0.3, 0.5))
-  
+
 }
 
-multi_rel = function(diary, lme = T, lmer = T) { 
+multi_rel = function(diary, lme = T, lmer = T) {
   mrel = diary %>%
-    group_by(short) %>% 
-    filter(!is.na(risk_taking)) %>% 
+    group_by(short) %>%
+    filter(!is.na(risk_taking)) %>%
     filter(day_number <= 70) %>%
     gather(variable, value, -short, -day_number) %>%
     psych::multilevel.reliability(., "short", "day_number", lme = lme, lmer = lmer, items = "variable", values = "value", long = T, aov = F)
@@ -306,7 +309,7 @@ multi_rel = function(diary, lme = T, lmer = T) {
 }
 
 
-robust_rowmeans <- function(x) { 
+robust_rowmeans <- function(x) {
   y <- rowMeans(x, na.rm = TRUE)
   y[is.nan(y)] <- NA_real_
   y
@@ -315,10 +318,10 @@ robust_rowmeans <- function(x) {
 
 cortest_stretch <- function(d) {
   var_pairs <- t(combn(names(d), 2)) %>%
-    as_data_frame() %>% 
+    as_data_frame() %>%
     setNames(c("x", "y"))
-  
-  p_values <- var_pairs %>% 
+
+  p_values <- var_pairs %>%
     dplyr::mutate(r.test = purrr::map2(x, y, ~ stats::cor.test(d[[.x]], d[[.y]])),
                   r.test = purrr::map(r.test, broom::tidy)) %>%
     tidyr::unnest(r.test)
@@ -367,7 +370,7 @@ send_job_to_cluster <- function(expr,
       mod
     }
   } else {
-    if (file.exists(template)) { 
+    if (file.exists(template)) {
       qsub <- tweak(batchtools_torque, template = template,
                     # workers = "export LSF_ENVDIR=/opt/lsf/conf",
                     resources = list(job.name = job_name,
