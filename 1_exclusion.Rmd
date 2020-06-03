@@ -377,136 +377,40 @@ exclusion_reasons %>%
 
 
 
+## Exlusion Steps Diary {.tabset}
+To calculate Libido and Sexual Frequency we need Information from the diary. Therefore, two additional exlusion reasons for the diary apply:
 
+* Skipping a diary day
+* Dishonest answers on that day
 
-
-
-### By contraception
-```{r}
-library(UpSetR)
-exclusion_reasons_hc = all_surveys %>% 
-  mutate(reasons_for_exclusion = str_sub(reasons_for_exclusion, 1, -3)) %>% 
-  select(session, hormonal_contraception, reasons_for_exclusion) %>% 
-  mutate(hormonal_contraception = if_else(hormonal_contraception, 1, 0)) %>% 
-  comma_separated_to_columns(reasons_for_exclusion) %>% 
-  # filter(included == 0) %>%
-  select(-session)
-
-exclusion_reasons_hc %>% group_by(hormonal_contraception) %>% 
-  summarise_all(sum) %>% gather(reason, n, -hormonal_contraception) %>% 
-  spread(hormonal_contraception, n) %>% 
-  arrange(`0`) %>% knitr::kable()
-
-exclusion_reasons_hc %>% 
-  {
-  upset(., ncol(.), 20, show.numbers = TRUE, order.by = "freq",
-      main.bar.color = "#6E8691",
-      matrix.color = "#6E8691",
-      sets.bar.color = "#53AC9B")
-  }
-```
-
-### In the diary
 ```{r}
 diary = diary %>% left_join(all_surveys %>% select(session, reasons_for_exclusion), by = 'session')
 ```
 
 
-
-Lab participants that did not do the online diary
-
+### Skipped this diary day (days after dropping out not included)
 ```{r}
 diary = diary %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(is.na(session), "lab_only, ", "", "")
-                                       )
-  )
+                                            if_else(is.na(ended_diary) & is.na(modified_diary),
+                                                    "skipped_diary_entry, ", "")))
+
+table(diary$reasons_for_exclusion %contains% "skipped_diary_entry")
 ```
 
-Disclosed that they responded dishonestly on that day.
 
+### Disclosed that they responded dishonestly on that day.
 ```{r}
 diary = diary %>% 
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(dishonest_discard == 1, "dishonest_answer, ", "", "")
-                                       )
-  )
-```
+                                            if_else(dishonest_discard == 1,
+                                                    "dishonest_answer, ", "", "")))
 
-Cycle shorter than 20 days.
-```{r}
-diary = diary %>% 
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(coalesce(minimum_cycle_length_diary, as.numeric(menstruation_length)) < 20, "cycle_shorter_than_20, ", "", "")
-                                       )
-  )
-```
-
-Cycle longer than 50 days.
-```{r}
-diary = diary %>% 
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(coalesce(minimum_cycle_length_diary, as.numeric(menstruation_length)) > 50, "cycle_longer_than_50, ", "", "")
-                                       )
-  )
+table(diary$reasons_for_exclusion %contains% "dishonest_answer")
 ```
 
 
-```{r}
-diary = diary %>% 
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(is.na(fertile_fab), "fertility_unknown, ", "")
-                                       )
-  )
-```
 
-
-Skipped this diary day (days after dropping out not included)
-```{r}
-diary = diary %>% 
-  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
-                                            if_else(is.na(ended_diary) & is.na(modified_diary), "skipped_diary_entry, ", "")
-                                       )
-  )
-```
-
-```{r}
-library(UpSetR)
-exclusion_reasons_diary = diary %>% 
-  mutate(reasons_for_exclusion = str_sub(reasons_for_exclusion, 1, -3)) %>% 
-  select(session, created_date, reasons_for_exclusion) %>% 
-  drop_na(session, created_date) %>% 
-  comma_separated_to_columns(reasons_for_exclusion) %>% 
-  select( -created_date)
-
-exclusion_reasons_diary %>% 
-  select(-session) %>% 
-  summarise_all(sum) %>% 
-  sort() %>% 
-  gather(reason, n) %>% 
-  left_join(diary %>% mutate(reason = str_sub(reasons_for_exclusion, 1, -3)) %>% group_by(reason) %>% summarise(unique = n())) %>% 
-  mutate(unique = if_else(is.na(unique), 0L, unique)) %>% 
-  left_join(exclusion_reasons_diary %>% 
-  gather(reason, n, -session) %>% 
-  filter(n > 0) %>% 
-  distinct(session, reason, n) %>% 
-  group_by(reason) %>%
-  summarise(n_women = sum(n)))
-  knitr::kable()
-
-
-exclusion_reasons_diary %>% 
-  filter(included == 0) %>%
-  select(-session, -included, -didnt_do_diary) %>% 
-  {
-  upset(., ncol(.), 20, show.numbers = TRUE, order.by = "freq",
-      main.bar.color = "#6E8691",
-      matrix.color = "#6E8691",
-      sets.bar.color = "#53AC9B")
-  }
-
-included = diary %>% filter(reasons_for_exclusion == "") %>% distinct(session)
-```
 
 ### Response rates and dropout
 
