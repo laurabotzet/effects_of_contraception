@@ -409,13 +409,21 @@ diary = diary %>%
 table(diary$reasons_for_exclusion %contains% "dishonest_answer")
 ```
 
+## Create included variable
+```{r}
+all_surveys = all_surveys %>%
+  mutate(included = if_else(reasons_for_exclusion == "", TRUE, FALSE))
+
+diary = diary %>%
+  mutate(included = if_else(reasons_for_exclusion == "", TRUE, FALSE))
+```
+
 
 ## Save
 ```{r}
 library(testthat)
 expect_equal(nrow(diary), diary_length)
 expect_equal(nrow(all_surveys), all_survey_length)
-expect_equal(nrow(diary_social), diary_social_length)
 
-save(diary_social, diary, sex_long, network_nominations, network, s1_demo, s1_filter, s2_initial, s3_daily, s4_followup, s4_timespent, withfollowup, all_surveys, file = "data/cleaned_selected.rdata")
+save(diary, all_surveys, file = "data/cleaned_selected.rdata")
 ``` 
