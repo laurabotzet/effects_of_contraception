@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Effects of Contraception</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li>
+  <a href="1_wrangle_data.html">Data wrangling</a>
+</li>
+<li>
+  <a href="2_descriptives.html">Descriptives &amp; Exclusion</a>
+</li>
+<li>
+  <a href="3_analyses.html">Analyses</a>
+</li>
+<li>
+  <a href="4_robustness_analyses.html">Robustness Analyses</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/laurabotzet/effects_of_contraception">
+    <span class="fa fa-github"></span>
+     
+    
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div id="datawrangling" class="section level1 tabset">
+<h1>Datawrangling</h1>
+<div id="data-and-functions" class="section level2">
+<h2>Data and Functions</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">&quot;0_helpers.R&quot;</span>)
+knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">warning =</span> <span class="ot">FALSE</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>)
+pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&quot;table.split.table&quot;</span>, <span class="ot">Inf</span>)
+pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;round&#39;</span>,<span class="dv">2</span>)
+pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;digits&#39;</span>,<span class="dv">2</span>)
+pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;keep.trailing.zeros&#39;</span>,<span class="ot">TRUE</span>)
+
+<span class="kw">load</span>(<span class="st">&quot;data/cleaned_selected.rdata&quot;</span>)</code></pre></div>
+</div>
+<div id="select-variables" class="section level2 tabset">
+<h2>Select Variables</h2>
+<div id="initial-survey" class="section level3">
+<h3>Initial Survey</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(session,
+         age,
+         education_years,
+         net_income,
+         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_agree&quot;</span>),
+         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_consc&quot;</span>),
+         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_open&quot;</span>),
+         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_extra&quot;</span>),
+         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_neuro&quot;</span>),
+         religiosity,
+         pregnant_stress,
+         duration_relationship_years,
+         duration_relationship_month,
+         days_with_partner,
+         nights_with_partner,
+         <span class="kw">starts_with</span>(<span class="st">&quot;soi_r&quot;</span>),
+         soi_r_behavior,
+         soi_r_desire,
+         number_sexual_partner,
+         contraception_method,
+         contraception_approach,
+         contraception_method_broad,
+         contraception_meeting_partner,
+         partner_attractiveness_face,
+         partner_attractiveness_body,
+         relationship_satisfaction_overall,
+         relationship_satisfaction_<span class="dv">2</span>,
+         relationship_satisfaction_<span class="dv">3</span>,
+         relationship_problems_R,
+         relationship_conflict_R,
+         satisfaction_sexual_intercourse,
+         reasons_for_exclusion,
+         pregnant_trying)</code></pre></div>
+</div>
+<div id="diary" class="section level3">
+<h3>Diary</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_diary =<span class="st"> </span>diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(session,
+         reasons_for_exclusion,
+         high_libido,
+         sex_active, sex_activity_anal_sex, sex_activity_bdsm_dom, sex_activity_bdsm_sub,
+         sex_activity_cuddling, sex_activity_cunnilingus, sex_activity_cybersex,
+         sex_activity_dirty_talk,
+         sex_activity_fellatio, sex_activity_kissing,  sex_activity_masturbated_by_partner,
+         sex_activity_masturbated_partner, sex_activity_masturbation, sex_activity_other,
+         sex_activity_phone_skype_sex, sex_activity_pornography, sex_activity_sex, 
+         sex_activity_touch_other, 
+         sex_activity_toys, sex_activity_unclear,  sex_other, sex_solo, sex_unclear,
+         days_done)</code></pre></div>
+</div>
+</div>
+<div id="exclusion" class="section level2 tabset">
+<h2>Exclusion</h2>
+<div id="initial-survey-1" class="section level3">
+<h3>Initial Survey</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_excluded =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">!=</span><span class="st"> &quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nrow</span>()
+data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">==</span><span class="st"> &quot;&quot;</span>)</code></pre></div>
+<p>585 people were excluded.</p>
+</div>
+<div id="diary-1" class="section level3 tabset">
+<h3>Diary</h3>
+<div id="exclusion-criteria-based-on-initial" class="section level4">
+<h4>Exclusion criteria based on initial</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">session_codes =<span class="st"> </span>data<span class="op">$</span>session
+
+data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(session <span class="op">%in%</span><span class="st"> </span>session_codes)
+
+<span class="kw">length</span>(data_diary<span class="op">$</span>session)</code></pre></div>
+<pre><code>## [1] 48067</code></pre>
+<p>The 1075 participants filled out 48067.</p>
+</div>
+<div id="skipped-diary-entry" class="section level4">
+<h4>Skipped diary entry</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_skipped_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;skipped_diary_entry&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>()
+
+data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;skipped_diary_entry&quot;</span>))</code></pre></div>
+<p>676 days were skipped.</p>
+</div>
+<div id="dishonest-answers" class="section level4">
+<h4>Dishonest answers</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_dishonest =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;dishonest&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>()
+
+data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;dishonest&quot;</span>))</code></pre></div>
+<p>126 days contained dishonest answers.</p>
+</div>
+<div id="filled-out-less-than-30-days" class="section level4">
+<h4>Filled out less than 30 days</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number_of_days =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(session) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">number_of_days =</span> n)
+  
+data_diary =<span class="st"> </span><span class="kw">left_join</span>(data_diary, number_of_days, <span class="dt">by =</span> <span class="st">&quot;session&quot;</span>)
+
+data_diary_include =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">as.numeric</span>(number_of_days) <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>)
+
+data_diary_exclude =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">as.numeric</span>(number_of_days) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>)
+
+data_diary =<span class="st"> </span>data_diary_include</code></pre></div>
+<p>300 participants were excluded because they filled out less than 30 days - resulting in 4149 excluded days.</p>
+</div>
+<div id="summary" class="section level4 active">
+<h4>Summary</h4>
+<p>In total 740 participants with 43116 diary days were included for the analyses in which outcomes were based on diary information.</p>
+</div>
+</div>
+</div>
+<div id="wrangle-data" class="section level2 tabset">
+<h2>Wrangle data</h2>
+<div id="contraception-approach" class="section level3">
+<h3>Contraception approach</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(
+    <span class="dt">contraception_method =</span> <span class="kw">if_else</span>(<span class="kw">is.na</span>(contraception_method), <span class="st">&quot;&quot;</span>,
+                                   <span class="kw">as.character</span>(contraception_method)),
+    <span class="dt">com =</span> contraception_method,
+    <span class="dt">contraception_approach =</span> <span class="kw">if_else</span>(
+        <span class="dt">condition =</span> com <span class="op">%contains%</span><span class="st"> &quot;hormonal_pill&quot;</span> <span class="op">|</span><span class="st"> </span>com <span class="op">%contains%</span><span class="st"> &quot;hormonal_other&quot;</span>,
+        <span class="dt">true =</span> <span class="kw">if_else</span>(
+            <span class="dt">condition =</span> com <span class="op">==</span><span class="st"> &quot;hormonal_pill&quot;</span> <span class="op">|</span><span class="st"> </span>com <span class="op">==</span><span class="st"> &quot;hormonal_other&quot;</span> <span class="op">|</span>
+<span class="st">              </span>com <span class="op">==</span><span class="st"> &quot;hormonal_morning_after_pill&quot;</span>,
+            <span class="dt">true =</span> <span class="kw">if_else</span>(com <span class="op">==</span><span class="st"> &quot;hormonal_pill&quot;</span>, 
+                           <span class="dt">true =</span> <span class="st">&quot;hormonal_pill_only&quot;</span>,
+                           <span class="dt">false =</span> <span class="st">&quot;hormonal_other_only&quot;</span>),
+            <span class="dt">false =</span> <span class="st">&quot;hormonal+barrier&quot;</span>),
+        <span class="kw">if_else</span>(
+            <span class="dt">condition =</span> <span class="op">!</span><span class="st"> </span>com <span class="op">%contains%</span><span class="st"> &quot;awareness&quot;</span>, 
+            <span class="dt">true =</span> <span class="kw">if_else</span>(<span class="dt">condition =</span> com <span class="op">!=</span><span class="st"> &quot;&quot;</span>,
+                           <span class="dt">true =</span> <span class="kw">if_else</span>(<span class="dt">condition =</span> com <span class="op">%contains%</span><span class="st"> &quot;barrier_intrauterine_pessar&quot;</span>,
+                                          <span class="dt">true =</span> <span class="st">&quot;barrier_pessar&quot;</span>,
+                                          <span class="kw">if_else</span>(<span class="dt">condition =</span> com <span class="op">%contains%</span><span class="st"> &quot;barrier_condoms&quot;</span>,
+                                                  <span class="dt">true =</span> <span class="st">&quot;condoms&quot;</span>,
+                                                  <span class="dt">false =</span> <span class="st">&quot;other&quot;</span>)),
+                           <span class="dt">false =</span> <span class="st">&quot;nothing&quot;</span>),
+            <span class="dt">false =</span> <span class="st">&quot;awareness&quot;</span>)))
+
+
+
+data<span class="op">$</span>contraception_approach =<span class="st"> </span><span class="kw">factor</span>(data<span class="op">$</span>contraception_approach,
+                                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;condoms&quot;</span>, <span class="st">&quot;barrier_pessar&quot;</span>,
+                                                       <span class="st">&quot;hormonal+barrier&quot;</span>,
+                                                       <span class="st">&quot;hormonal_pill_only&quot;</span>, <span class="st">&quot;hormonal_other_only&quot;</span>,
+                                                       <span class="st">&quot;awareness&quot;</span>, <span class="st">&quot;nothing&quot;</span>, <span class="st">&quot;other&quot;</span>))
+
+<span class="kw">qplot</span>(data<span class="op">$</span>contraception_approach) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/contraception%20approach-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(data<span class="op">$</span>contraception_approach)</code></pre></div>
+<pre><code>## 
+##             condoms      barrier_pessar    hormonal+barrier  hormonal_pill_only hormonal_other_only 
+##                 371                  86                 178                 254                  61 
+##           awareness             nothing               other 
+##                 111                   0                  14</code></pre>
+</div>
+<div id="current-contraceptive-status-hormonal-vs.non-hormonal" class="section level3">
+<h3>Current contraceptive status (hormonal vs. non hormonal)</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(
+  <span class="dt">contraception_hormonal =</span> <span class="kw">factor</span>(<span class="kw">ifelse</span>(contraception_approach <span class="op">%contains%</span><span class="st"> &quot;hormonal&quot;</span>,
+                                         <span class="st">&quot;yes&quot;</span>,
+                                         <span class="st">&quot;no&quot;</span>)))
+<span class="kw">qplot</span>(data<span class="op">$</span>contraception_hormonal) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="changed-contraception-since-meeting-their-partner" class="section level3">
+<h3>Changed contraception since meeting their partner</h3>
+<p>There will be NAs because we asked about contracetion when meeting partner only if participants were currently in a relationship</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">crosstabs</span>(<span class="op">~</span>contraception_hormonal <span class="op">+</span><span class="st"> </span>contraception_meeting_partner, <span class="dt">data =</span> data)</code></pre></div>
+<pre><code>##                       contraception_meeting_partner
+## contraception_hormonal   0   1 &lt;NA&gt;
+##                    no  229 144  209
+##                    yes 134 241  118</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(
+  <span class="dt">contraception_change_since_meeting_partner =</span>
+    <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,
+           <span class="st">&quot;congruent_hormonal&quot;</span>,
+           <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;no&quot;</span> <span class="op">&amp;</span><span class="st"> </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,
+                  <span class="st">&quot;congruent_nonhormonal&quot;</span>,
+                  <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,
+                         <span class="st">&quot;switched_to_hormonal&quot;</span>,
+                         <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;no&quot;</span> <span class="op">&amp;</span>
+<span class="st">                                  </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;switched_to_nonhormonal&quot;</span>,
+                                <span class="ot">NA</span>)))))
+
+<span class="kw">qplot</span>(data<span class="op">$</span>contraception_change_since_meeting_partner) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="relationship-status-single-vs-partnered" class="section level3">
+<h3>Relationship status (single vs partnered)</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(
+  <span class="dt">relationship_status =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(duration_relationship_month), <span class="st">&quot;Single&quot;</span>, <span class="st">&quot;Partnered&quot;</span>))
+
+<span class="kw">qplot</span>(data<span class="op">$</span>relationship_status) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="diary-information" class="section level3">
+<h3>Diary information</h3>
+<p>calculate mean of libido, sex_active_frequency and actual sex frequency based on diary</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_diary_means =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(session) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">diary_libido_mean =</span> <span class="kw">mean</span>(high_libido, <span class="dt">na.rm =</span> T),
+            <span class="dt">diary_sex_active_mean =</span> <span class="kw">mean</span>(sex_active, <span class="dt">na.rm =</span> T),
+            <span class="dt">diary_sex_active_sex_mean =</span> <span class="kw">mean</span>(sex_activity_sex, <span class="dt">na.rm =</span> T))
+
+<span class="kw">qplot</span>(data_diary_means<span class="op">$</span>diary_libido_mean)</code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(data_diary_means<span class="op">$</span>diary_sex_active_mean)</code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(data_diary_means<span class="op">$</span>diary_sex_active_sex_mean)</code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-8-3.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span><span class="kw">left_join</span>(data, data_diary_means, <span class="dt">by =</span> <span class="st">&quot;session&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div id="save-data" class="section level2">
+<h2>Save Data</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">save</span>(data, data, <span class="dt">file =</span> <span class="st">&quot;data/cleaned_selected_wrangled.rdata&quot;</span>)</code></pre></div>
+</div>
+</div>
+
+<div id="rmd-source-code">CiMgRGF0YXdyYW5nbGluZyB7LnRhYnNldH0KCiMjIERhdGEgYW5kIEZ1bmN0aW9ucwpgYGB7ciBkYXRhIGFuZCBmdW5jdGlvbiwgcmVzdWx0cz0naGlkZScsbWVzc2FnZT1GLHdhcm5pbmc9Rn0Kc291cmNlKCIwX2hlbHBlcnMuUiIpCmtuaXRyOjpvcHRzX2NodW5rJHNldCh3YXJuaW5nID0gRkFMU0UsIG1lc3NhZ2UgPSBGQUxTRSkKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCJ0YWJsZS5zcGxpdC50YWJsZSIsIEluZikKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCdyb3VuZCcsMikKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCdkaWdpdHMnLDIpCnBhbmRlcjo6cGFuZGVyT3B0aW9ucygna2VlcC50cmFpbGluZy56ZXJvcycsVFJVRSkKCmxvYWQoImRhdGEvY2xlYW5lZF9zZWxlY3RlZC5yZGF0YSIpCmBgYAoKCiMjIFNlbGVjdCBWYXJpYWJsZXMgey50YWJzZXR9CiMjIyBJbml0aWFsIFN1cnZleQpgYGB7ciBzZWxlY3QgdmFyaWFibGVzfQpkYXRhID0gYWxsX3N1cnZleXMgJT4lCiAgc2VsZWN0KHNlc3Npb24sCiAgICAgICAgIGFnZSwKICAgICAgICAgZWR1Y2F0aW9uX3llYXJzLAogICAgICAgICBuZXRfaW5jb21lLAogICAgICAgICBzdGFydHNfd2l0aCgiYmZpX2FncmVlIiksCiAgICAgICAgIHN0YXJ0c193aXRoKCJiZmlfY29uc2MiKSwKICAgICAgICAgc3RhcnRzX3dpdGgoImJmaV9vcGVuIiksCiAgICAgICAgIHN0YXJ0c193aXRoKCJiZmlfZXh0cmEiKSwKICAgICAgICAgc3RhcnRzX3dpdGgoImJmaV9uZXVybyIpLAogICAgICAgICByZWxpZ2lvc2l0eSwKICAgICAgICAgcHJlZ25hbnRfc3RyZXNzLAogICAgICAgICBkdXJhdGlvbl9yZWxhdGlvbnNoaXBfeWVhcnMsCiAgICAgICAgIGR1cmF0aW9uX3JlbGF0aW9uc2hpcF9tb250aCwKICAgICAgICAgZGF5c193aXRoX3BhcnRuZXIsCiAgICAgICAgIG5pZ2h0c193aXRoX3BhcnRuZXIsCiAgICAgICAgIHN0YXJ0c193aXRoKCJzb2lfciIpLAogICAgICAgICBzb2lfcl9iZWhhdmlvciwKICAgICAgICAgc29pX3JfZGVzaXJlLAogICAgICAgICBudW1iZXJfc2V4dWFsX3BhcnRuZXIsCiAgICAgICAgIGNvbnRyYWNlcHRpb25fbWV0aG9kLAogICAgICAgICBjb250cmFjZXB0aW9uX2FwcHJvYWNoLAogICAgICAgICBjb250cmFjZXB0aW9uX21ldGhvZF9icm9hZCwKICAgICAgICAgY29udHJhY2VwdGlvbl9tZWV0aW5nX3BhcnRuZXIsCiAgICAgICAgIHBhcnRuZXJfYXR0cmFjdGl2ZW5lc3NfZmFjZSwKICAgICAgICAgcGFydG5lcl9hdHRyYWN0aXZlbmVzc19ib2R5LAogICAgICAgICByZWxhdGlvbnNoaXBfc2F0aXNmYWN0aW9uX292ZXJhbGwsCiAgICAgICAgIHJlbGF0aW9uc2hpcF9zYXRpc2ZhY3Rpb25fMiwKICAgICAgICAgcmVsYXRpb25zaGlwX3NhdGlzZmFjdGlvbl8zLAogICAgICAgICByZWxhdGlvbnNoaXBfcHJvYmxlbXNfUiwKICAgICAgICAgcmVsYXRpb25zaGlwX2NvbmZsaWN0X1IsCiAgICAgICAgIHNhdGlzZmFjdGlvbl9zZXh1YWxfaW50ZXJjb3Vyc2UsCiAgICAgICAgIHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiwKICAgICAgICAgcHJlZ25hbnRfdHJ5aW5nKQpgYGAKCiMjIyBEaWFyeQpgYGB7ciBzZWxlY3QgdmFyaWFibGVzIGRpYXJ5fQpkYXRhX2RpYXJ5ID0gZGlhcnkgJT4lCiAgc2VsZWN0KHNlc3Npb24sCiAgICAgICAgIHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiwKICAgICAgICAgaGlnaF9saWJpZG8sCiAgICAgICAgIHNleF9hY3RpdmUsIHNleF9hY3Rpdml0eV9hbmFsX3NleCwgc2V4X2FjdGl2aXR5X2Jkc21fZG9tLCBzZXhfYWN0aXZpdHlfYmRzbV9zdWIsCiAgICAgICAgIHNleF9hY3Rpdml0eV9jdWRkbGluZywgc2V4X2FjdGl2aXR5X2N1bm5pbGluZ3VzLCBzZXhfYWN0aXZpdHlfY3liZXJzZXgsCiAgICAgICAgIHNleF9hY3Rpdml0eV9kaXJ0eV90YWxrLAogICAgICAgICBzZXhfYWN0aXZpdHlfZmVsbGF0aW8sIHNleF9hY3Rpdml0eV9raXNzaW5nLCAgc2V4X2FjdGl2aXR5X21hc3R1cmJhdGVkX2J5X3BhcnRuZXIsCiAgICAgICAgIHNleF9hY3Rpdml0eV9tYXN0dXJiYXRlZF9wYXJ0bmVyLCBzZXhfYWN0aXZpdHlfbWFzdHVyYmF0aW9uLCBzZXhfYWN0aXZpdHlfb3RoZXIsCiAgICAgICAgIHNleF9hY3Rpdml0eV9waG9uZV9za3lwZV9zZXgsIHNleF9hY3Rpdml0eV9wb3Jub2dyYXBoeSwgc2V4X2FjdGl2aXR5X3NleCwgCiAgICAgICAgIHNleF9hY3Rpdml0eV90b3VjaF9vdGhlciwgCiAgICAgICAgIHNleF9hY3Rpdml0eV90b3lzLCBzZXhfYWN0aXZpdHlfdW5jbGVhciwgIHNleF9vdGhlciwgc2V4X3NvbG8sIHNleF91bmNsZWFyLAogICAgICAgICBkYXlzX2RvbmUpCmBgYAoKCiMjIEV4Y2x1c2lvbiB7LnRhYnNldH0KIyMjIEluaXRpYWwgU3VydmV5CmBgYHtyIGV4Y2x1c2lvbiBpbml0aWFsIHN1cnZleX0Kbl9leGNsdWRlZCA9IGRhdGEgJT4lIGZpbHRlcihyZWFzb25zX2Zvcl9leGNsdXNpb24gIT0gIiIpICU+JSBucm93KCkKZGF0YSA9IGRhdGEgJT4lIGZpbHRlcihyZWFzb25zX2Zvcl9leGNsdXNpb24gPT0gIiIpCmBgYApgciBuX2V4Y2x1ZGVkYCBwZW9wbGUgd2VyZSBleGNsdWRlZC4KCiMjIyBEaWFyeSAgey50YWJzZXR9CiMjIyMgRXhjbHVzaW9uIGNyaXRlcmlhIGJhc2VkIG9uIGluaXRpYWwKYGBge3J9CnNlc3Npb25fY29kZXMgPSBkYXRhJHNlc3Npb24KCmRhdGFfZGlhcnkgPSBkYXRhX2RpYXJ5ICU+JQogIGZpbHRlcihzZXNzaW9uICVpbiUgc2Vzc2lvbl9jb2RlcykKCmxlbmd0aChkYXRhX2RpYXJ5JHNlc3Npb24pCmBgYApUaGUgYHIgbGVuZ3RoKHVuaXF1ZShkYXRhX2RpYXJ5JHNlc3Npb24pKWAgcGFydGljaXBhbnRzIGZpbGxlZCBvdXQgYHIgbGVuZ3RoKGRhdGFfZGlhcnkkc2Vzc2lvbilgLgoKIyMjIyBTa2lwcGVkIGRpYXJ5IGVudHJ5CmBgYHtyfQpuX3NraXBwZWRfZGlhcnkgPSBkYXRhX2RpYXJ5ICU+JQogIGZpbHRlcihyZWFzb25zX2Zvcl9leGNsdXNpb24gJWNvbnRhaW5zJSAic2tpcHBlZF9kaWFyeV9lbnRyeSIpICU+JQogIGNvdW50KCkKCmRhdGFfZGlhcnkgPSBkYXRhX2RpYXJ5ICU+JQogIGZpbHRlcighKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiAlY29udGFpbnMlICJza2lwcGVkX2RpYXJ5X2VudHJ5IikpCmBgYApgciBuX3NraXBwZWRfZGlhcnlgIGRheXMgd2VyZSBza2lwcGVkLgoKIyMjIyBEaXNob25lc3QgYW5zd2VycwpgYGB7cn0Kbl9kaXNob25lc3QgPSBkYXRhX2RpYXJ5ICU+JQogIGZpbHRlcihyZWFzb25zX2Zvcl9leGNsdXNpb24gJWNvbnRhaW5zJSAiZGlzaG9uZXN0IikgJT4lCiAgY291bnQoKQoKZGF0YV9kaWFyeSA9IGRhdGFfZGlhcnkgJT4lCiAgZmlsdGVyKCEocmVhc29uc19mb3JfZXhjbHVzaW9uICVjb250YWlucyUgImRpc2hvbmVzdCIpKQpgYGAKYHIgbl9kaXNob25lc3RgIGRheXMgY29udGFpbmVkIGRpc2hvbmVzdCBhbnN3ZXJzLgoKIyMjIyBGaWxsZWQgb3V0IGxlc3MgdGhhbiAzMCBkYXlzCmBgYHtyfQpudW1iZXJfb2ZfZGF5cyA9IGRhdGFfZGlhcnkgJT4lCiAgZ3JvdXBfYnkoc2Vzc2lvbikgJT4lCiAgc3VtbWFyaXNlKG4gPSBuKCkpICU+JQogIHJlbmFtZShudW1iZXJfb2ZfZGF5cyA9IG4pCiAgCmRhdGFfZGlhcnkgPSBsZWZ0X2pvaW4oZGF0YV9kaWFyeSwgbnVtYmVyX29mX2RheXMsIGJ5ID0gInNlc3Npb24iKQoKZGF0YV9kaWFyeV9pbmNsdWRlID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIoYXMubnVtZXJpYyhudW1iZXJfb2ZfZGF5cykgPiAzMCkKCmRhdGFfZGlhcnlfZXhjbHVkZSA9IGRhdGFfZGlhcnkgJT4lCiAgZmlsdGVyKGFzLm51bWVyaWMobnVtYmVyX29mX2RheXMpIDw9IDMwKQoKZGF0YV9kaWFyeSA9IGRhdGFfZGlhcnlfaW5jbHVkZQpgYGAKYHIgbGVuZ3RoKHVuaXF1ZShkYXRhX2RpYXJ5X2V4Y2x1ZGUkc2Vzc2lvbikpYCBwYXJ0aWNpcGFudHMgd2VyZSBleGNsdWRlZCBiZWNhdXNlIHRoZXkgZmlsbGVkIG91dCBsZXNzIHRoYW4gMzAgZGF5cyAtIHJlc3VsdGluZyBpbiBgciBsZW5ndGgoZGF0YV9kaWFyeV9leGNsdWRlJHNlc3Npb24pYCBleGNsdWRlZCBkYXlzLgoKIyMjIyBTdW1tYXJ5IHsuYWN0aXZlfQpJbiB0b3RhbCBgciBsZW5ndGgodW5pcXVlKGRhdGFfZGlhcnkkc2Vzc2lvbikpYCBwYXJ0aWNpcGFudHMgd2l0aCBgciBsZW5ndGgoZGF0YV9kaWFyeSRzZXNzaW9uKWAgZGlhcnkgZGF5cyB3ZXJlIGluY2x1ZGVkIGZvciB0aGUgYW5hbHlzZXMgaW4gd2hpY2ggb3V0Y29tZXMgd2VyZSBiYXNlZCBvbiBkaWFyeSBpbmZvcm1hdGlvbi4gCgojIyBXcmFuZ2xlIGRhdGEgey50YWJzZXR9CiMjIyBDb250cmFjZXB0aW9uIGFwcHJvYWNoCmBgYHtyIGNvbnRyYWNlcHRpb24gYXBwcm9hY2h9CmRhdGEgPSBkYXRhICU+JSBtdXRhdGUoCiAgICBjb250cmFjZXB0aW9uX21ldGhvZCA9IGlmX2Vsc2UoaXMubmEoY29udHJhY2VwdGlvbl9tZXRob2QpLCAiIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcy5jaGFyYWN0ZXIoY29udHJhY2VwdGlvbl9tZXRob2QpKSwKICAgIGNvbSA9IGNvbnRyYWNlcHRpb25fbWV0aG9kLAogICAgY29udHJhY2VwdGlvbl9hcHByb2FjaCA9IGlmX2Vsc2UoCiAgICAgICAgY29uZGl0aW9uID0gY29tICVjb250YWlucyUgImhvcm1vbmFsX3BpbGwiIHwgY29tICVjb250YWlucyUgImhvcm1vbmFsX290aGVyIiwKICAgICAgICB0cnVlID0gaWZfZWxzZSgKICAgICAgICAgICAgY29uZGl0aW9uID0gY29tID09ICJob3Jtb25hbF9waWxsIiB8IGNvbSA9PSAiaG9ybW9uYWxfb3RoZXIiIHwKICAgICAgICAgICAgICBjb20gPT0gImhvcm1vbmFsX21vcm5pbmdfYWZ0ZXJfcGlsbCIsCiAgICAgICAgICAgIHRydWUgPSBpZl9lbHNlKGNvbSA9PSAiaG9ybW9uYWxfcGlsbCIsIAogICAgICAgICAgICAgICAgICAgICAgICAgICB0cnVlID0gImhvcm1vbmFsX3BpbGxfb25seSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhbHNlID0gImhvcm1vbmFsX290aGVyX29ubHkiKSwKICAgICAgICAgICAgZmFsc2UgPSAiaG9ybW9uYWwrYmFycmllciIpLAogICAgICAgIGlmX2Vsc2UoCiAgICAgICAgICAgIGNvbmRpdGlvbiA9ICEgY29tICVjb250YWlucyUgImF3YXJlbmVzcyIsIAogICAgICAgICAgICB0cnVlID0gaWZfZWxzZShjb25kaXRpb24gPSBjb20gIT0gIiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgIHRydWUgPSBpZl9lbHNlKGNvbmRpdGlvbiA9IGNvbSAlY29udGFpbnMlICJiYXJyaWVyX2ludHJhdXRlcmluZV9wZXNzYXIiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0cnVlID0gImJhcnJpZXJfcGVzc2FyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWZfZWxzZShjb25kaXRpb24gPSBjb20gJWNvbnRhaW5zJSAiYmFycmllcl9jb25kb21zIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0cnVlID0gImNvbmRvbXMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhbHNlID0gIm90aGVyIikpLAogICAgICAgICAgICAgICAgICAgICAgICAgICBmYWxzZSA9ICJub3RoaW5nIiksCiAgICAgICAgICAgIGZhbHNlID0gImF3YXJlbmVzcyIpKSkKCgoKZGF0YSRjb250cmFjZXB0aW9uX2FwcHJvYWNoID0gZmFjdG9yKGRhdGEkY29udHJhY2VwdGlvbl9hcHByb2FjaCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsZXZlbHMgPSBjKCJjb25kb21zIiwgImJhcnJpZXJfcGVzc2FyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJob3Jtb25hbCtiYXJyaWVyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJob3Jtb25hbF9waWxsX29ubHkiLCAiaG9ybW9uYWxfb3RoZXJfb25seSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiYXdhcmVuZXNzIiwgIm5vdGhpbmciLCAib3RoZXIiKSkKCnFwbG90KGRhdGEkY29udHJhY2VwdGlvbl9hcHByb2FjaCkgKyBjb29yZF9mbGlwKCkKdGFibGUoZGF0YSRjb250cmFjZXB0aW9uX2FwcHJvYWNoKQpgYGAKCiMjIyBDdXJyZW50IGNvbnRyYWNlcHRpdmUgc3RhdHVzIChob3Jtb25hbCB2cy4gbm9uIGhvcm1vbmFsKQpgYGB7cn0KZGF0YSA9IGRhdGEgJT4lIG11dGF0ZSgKICBjb250cmFjZXB0aW9uX2hvcm1vbmFsID0gZmFjdG9yKGlmZWxzZShjb250cmFjZXB0aW9uX2FwcHJvYWNoICVjb250YWlucyUgImhvcm1vbmFsIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAieWVzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAibm8iKSkpCnFwbG90KGRhdGEkY29udHJhY2VwdGlvbl9ob3Jtb25hbCkgKyBjb29yZF9mbGlwKCkKYGBgCgojIyMgQ2hhbmdlZCBjb250cmFjZXB0aW9uIHNpbmNlIG1lZXRpbmcgdGhlaXIgcGFydG5lcgpUaGVyZSB3aWxsIGJlIE5BcyBiZWNhdXNlIHdlIGFza2VkIGFib3V0IGNvbnRyYWNldGlvbiB3aGVuIG1lZXRpbmcgcGFydG5lciBvbmx5IGlmIHBhcnRpY2lwYW50cyB3ZXJlIGN1cnJlbnRseSBpbiBhIHJlbGF0aW9uc2hpcApgYGB7cn0KY3Jvc3N0YWJzKH5jb250cmFjZXB0aW9uX2hvcm1vbmFsICsgY29udHJhY2VwdGlvbl9tZWV0aW5nX3BhcnRuZXIsIGRhdGEgPSBkYXRhKQpkYXRhID0gZGF0YSAlPiUgbXV0YXRlKAogIGNvbnRyYWNlcHRpb25fY2hhbmdlX3NpbmNlX21lZXRpbmdfcGFydG5lciA9CiAgICBpZmVsc2UoY29udHJhY2VwdGlvbl9ob3Jtb25hbCA9PSAieWVzIiAmIGNvbnRyYWNlcHRpb25fbWVldGluZ19wYXJ0bmVyID09IDEsCiAgICAgICAgICAgImNvbmdydWVudF9ob3Jtb25hbCIsCiAgICAgICAgICAgaWZlbHNlKGNvbnRyYWNlcHRpb25faG9ybW9uYWwgPT0gIm5vIiAmIGNvbnRyYWNlcHRpb25fbWVldGluZ19wYXJ0bmVyID09IDAsCiAgICAgICAgICAgICAgICAgICJjb25ncnVlbnRfbm9uaG9ybW9uYWwiLAogICAgICAgICAgICAgICAgICBpZmVsc2UoY29udHJhY2VwdGlvbl9ob3Jtb25hbCA9PSAieWVzIiAmIGNvbnRyYWNlcHRpb25fbWVldGluZ19wYXJ0bmVyID09IDAsCiAgICAgICAgICAgICAgICAgICAgICAgICAic3dpdGNoZWRfdG9faG9ybW9uYWwiLAogICAgICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKGNvbnRyYWNlcHRpb25faG9ybW9uYWwgPT0gIm5vIiAmCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb250cmFjZXB0aW9uX21lZXRpbmdfcGFydG5lciA9PSAxLCAic3dpdGNoZWRfdG9fbm9uaG9ybW9uYWwiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE5BKSkpKSkKCnFwbG90KGRhdGEkY29udHJhY2VwdGlvbl9jaGFuZ2Vfc2luY2VfbWVldGluZ19wYXJ0bmVyKSArIGNvb3JkX2ZsaXAoKQpgYGAKCiMjIyBSZWxhdGlvbnNoaXAgc3RhdHVzIChzaW5nbGUgdnMgcGFydG5lcmVkKQpgYGB7cn0KZGF0YSA9IGRhdGEgJT4lIG11dGF0ZSgKICByZWxhdGlvbnNoaXBfc3RhdHVzID0gaWZlbHNlKGlzLm5hKGR1cmF0aW9uX3JlbGF0aW9uc2hpcF9tb250aCksICJTaW5nbGUiLCAiUGFydG5lcmVkIikpCgpxcGxvdChkYXRhJHJlbGF0aW9uc2hpcF9zdGF0dXMpICsgY29vcmRfZmxpcCgpCmBgYAoKIyMjIERpYXJ5IGluZm9ybWF0aW9uCmNhbGN1bGF0ZSBtZWFuIG9mIGxpYmlkbywgc2V4X2FjdGl2ZV9mcmVxdWVuY3kgYW5kIGFjdHVhbCBzZXggZnJlcXVlbmN5IGJhc2VkIG9uIGRpYXJ5CmBgYHtyfQpkYXRhX2RpYXJ5X21lYW5zID0gZGF0YV9kaWFyeSAlPiUKICBncm91cF9ieShzZXNzaW9uKSAlPiUKICBzdW1tYXJpc2UoZGlhcnlfbGliaWRvX21lYW4gPSBtZWFuKGhpZ2hfbGliaWRvLCBuYS5ybSA9IFQpLAogICAgICAgICAgICBkaWFyeV9zZXhfYWN0aXZlX21lYW4gPSBtZWFuKHNleF9hY3RpdmUsIG5hLnJtID0gVCksCiAgICAgICAgICAgIGRpYXJ5X3NleF9hY3RpdmVfc2V4X21lYW4gPSBtZWFuKHNleF9hY3Rpdml0eV9zZXgsIG5hLnJtID0gVCkpCgpxcGxvdChkYXRhX2RpYXJ5X21lYW5zJGRpYXJ5X2xpYmlkb19tZWFuKQpxcGxvdChkYXRhX2RpYXJ5X21lYW5zJGRpYXJ5X3NleF9hY3RpdmVfbWVhbikKcXBsb3QoZGF0YV9kaWFyeV9tZWFucyRkaWFyeV9zZXhfYWN0aXZlX3NleF9tZWFuKQoKZGF0YSA9IGxlZnRfam9pbihkYXRhLCBkYXRhX2RpYXJ5X21lYW5zLCBieSA9ICJzZXNzaW9uIikKYGBgCgoKIyMgU2F2ZSBEYXRhCmBgYHtyfQpzYXZlKGRhdGEsIGRhdGEsIGZpbGUgPSAiZGF0YS9jbGVhbmVkX3NlbGVjdGVkX3dyYW5nbGVkLnJkYXRhIikKYGBgCgo=</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("2_datawrangling.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,15 +1,8 @@
----
-title: "Codebook Effects of Contraception"
-output:
-  html_document:
-    toc: true
-    toc_depth: 4
-    toc_float: true
-    code_folding: 'hide'
-    self_contained: false
----
-  
-```{r results='hide',message=F,warning=F}
+
+# Datawrangling {.tabset}
+
+## Data and Functions
+```{r data and function, results='hide',message=F,warning=F}
 source("0_helpers.R")
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 pander::panderOptions("table.split.table", Inf)
@@ -18,17 +11,12 @@ pander::panderOptions('digits',2)
 pander::panderOptions('keep.trailing.zeros',TRUE)
 
 load("data/cleaned_selected.rdata")
-
-knitr::opts_chunk$set(echo = FALSE, error = TRUE, dev = "CairoPNG")
-library(ggplot2)
-theme_set(theme_bw())
-
-library(codebook)
 ```
 
 
-## Included variables for codebook
-```{r}
+## Select Variables {.tabset}
+### Initial Survey
+```{r select variables}
 data = all_surveys %>%
   select(session,
          age,
@@ -63,90 +51,169 @@ data = all_surveys %>%
          satisfaction_sexual_intercourse,
          reasons_for_exclusion,
          pregnant_trying)
+```
 
-# based on diary:
+### Diary
+```{r select variables diary}
 data_diary = diary %>%
   select(session,
+         reasons_for_exclusion,
          high_libido,
          sex_active, sex_activity_anal_sex, sex_activity_bdsm_dom, sex_activity_bdsm_sub,
-         sex_activity_cuddling, sex_activity_cunnilingus, sex_activity_cybersex, sex_activity_dirty_talk,
+         sex_activity_cuddling, sex_activity_cunnilingus, sex_activity_cybersex,
+         sex_activity_dirty_talk,
          sex_activity_fellatio, sex_activity_kissing,  sex_activity_masturbated_by_partner,
          sex_activity_masturbated_partner, sex_activity_masturbation, sex_activity_other,
-         sex_activity_phone_skype_sex, sex_activity_pornography, sex_activity_sex, sex_activity_touch_other, 
+         sex_activity_phone_skype_sex, sex_activity_pornography, sex_activity_sex, 
+         sex_activity_touch_other, 
          sex_activity_toys, sex_activity_unclear,  sex_other, sex_solo, sex_unclear,
          days_done)
 ```
 
 
-## Exclusion
-For now based on old exclusion criteria --> update later
-```{r}
+## Exclusion {.tabset}
+### Initial Survey
+```{r exclusion initial survey}
 n_excluded = data %>% filter(reasons_for_exclusion != "") %>% nrow()
 data = data %>% filter(reasons_for_exclusion == "")
 ```
 `r n_excluded` people were excluded.
 
-## Wrangle data
-created contraception_approach
+### Diary  {.tabset}
+#### Exclusion criteria based on initial
 ```{r}
+session_codes = data$session
+
+data_diary = data_diary %>%
+  filter(session %in% session_codes)
+
+length(data_diary$session)
+```
+The `r length(unique(data_diary$session))` participants filled out `r length(data_diary$session)`.
+
+#### Skipped diary entry
+```{r}
+n_skipped_diary = data_diary %>%
+  filter(reasons_for_exclusion %contains% "skipped_diary_entry") %>%
+  count()
+
+data_diary = data_diary %>%
+  filter(!(reasons_for_exclusion %contains% "skipped_diary_entry"))
+```
+`r n_skipped_diary` days were skipped.
+
+#### Dishonest answers
+```{r}
+n_dishonest = data_diary %>%
+  filter(reasons_for_exclusion %contains% "dishonest") %>%
+  count()
+
+data_diary = data_diary %>%
+  filter(!(reasons_for_exclusion %contains% "dishonest"))
+```
+`r n_dishonest` days contained dishonest answers.
+
+#### Filled out less than 30 days
+```{r}
+number_of_days = data_diary %>%
+  group_by(session) %>%
+  summarise(n = n()) %>%
+  rename(number_of_days = n)
+  
+data_diary = left_join(data_diary, number_of_days, by = "session")
+
+data_diary_include = data_diary %>%
+  filter(as.numeric(number_of_days) > 30)
+
+data_diary_exclude = data_diary %>%
+  filter(as.numeric(number_of_days) <= 30)
+
+data_diary = data_diary_include
+```
+`r length(unique(data_diary_exclude$session))` participants were excluded because they filled out less than 30 days - resulting in `r length(data_diary_exclude$session)` excluded days.
+
+#### Summary {.active}
+In total `r length(unique(data_diary$session))` participants with `r length(data_diary$session)` diary days were included for the analyses in which outcomes were based on diary information. 
+
+## Wrangle data {.tabset}
+### Contraception approach
+```{r contraception approach}
 data = data %>% mutate(
-    contraception_method = if_else(is.na(contraception_method), "", as.character(contraception_method)),
+    contraception_method = if_else(is.na(contraception_method), "",
+                                   as.character(contraception_method)),
     com = contraception_method,
     contraception_approach = if_else(
-        condition = com %contains% "hormonal_pill" | com %contains% "hormonal_other", # condition
-        # true
+        condition = com %contains% "hormonal_pill" | com %contains% "hormonal_other",
         true = if_else(
-            condition = com == "hormonal_pill" | com == "hormonal_other" | com == "hormonal_morning_after_pill", # condition
+            condition = com == "hormonal_pill" | com == "hormonal_other" |
+              com == "hormonal_morning_after_pill",
             true = if_else(com == "hormonal_pill", 
-                                            true = "hormonal_pill_only", 
-                                            false = "hormonal_other_only"
-            ),
-                                            false = "hormonal+barrier"
-            ),
+                           true = "hormonal_pill_only",
+                           false = "hormonal_other_only"),
+            false = "hormonal+barrier"),
         if_else(
             condition = ! com %contains% "awareness", 
             true = if_else(condition = com != "",
-                true = if_else(condition = com %contains% "barrier_intrauterine_pessar", 
-                               true = "barrier_pessar",
-                                if_else(condition = com %contains% "barrier_condoms", true = "condoms", false = "other")),
-                false = "nothing"),
-                false = "awareness")
-        )
-          # false
-    )
-data$contraception_approach = factor( all_surveys$contraception_approach, levels = c("condoms", "barrier_pessar", "hormonal+barrier", "hormonal_pill_only", "hormonal_other_only", "awareness", "nothing", "other") )
+                           true = if_else(condition = com %contains% "barrier_intrauterine_pessar",
+                                          true = "barrier_pessar",
+                                          if_else(condition = com %contains% "barrier_condoms",
+                                                  true = "condoms",
+                                                  false = "other")),
+                           false = "nothing"),
+            false = "awareness")))
+
+
+
+data$contraception_approach = factor(data$contraception_approach,
+                                            levels = c("condoms", "barrier_pessar",
+                                                       "hormonal+barrier",
+                                                       "hormonal_pill_only", "hormonal_other_only",
+                                                       "awareness", "nothing", "other"))
+
 qplot(data$contraception_approach) + coord_flip()
+table(data$contraception_approach)
 ```
 
-create current contraceptive status (hormonal vs. non hormonal)
+### Current contraceptive status (hormonal vs. non hormonal)
 ```{r}
 data = data %>% mutate(
-  contraception_hormonal = factor(ifelse(contraception_approach %contains% "hormonal", "yes", "no")))
+  contraception_hormonal = factor(ifelse(contraception_approach %contains% "hormonal",
+                                         "yes",
+                                         "no")))
 qplot(data$contraception_hormonal) + coord_flip()
 ```
 
-create variable to indicate whether people changed contraception since meeting their partner
+### Changed contraception since meeting their partner
+There will be NAs because we asked about contracetion when meeting partner only if participants were currently in a relationship
 ```{r}
 crosstabs(~contraception_hormonal + contraception_meeting_partner, data = data)
 data = data %>% mutate(
-  contraception_change_since_meeting_partner = ifelse(
-    contraception_hormonal == "yes" & contraception_meeting_partner == 1, "congruent_hormonal",
-    ifelse(
-      contraception_hormonal == "no" & contraception_meeting_partner == 0, "congruent_nonhormonal",
-      ifelse(
-        contraception_hormonal == "yes" & contraception_meeting_partner == 0, "switched_to_hormonal",
-        ifelse(
-          contraception_hormonal == "no" & contraception_meeting_partner == 1, "switched_to_nonhormonal",
-          NA)))))
+  contraception_change_since_meeting_partner =
+    ifelse(contraception_hormonal == "yes" & contraception_meeting_partner == 1,
+           "congruent_hormonal",
+           ifelse(contraception_hormonal == "no" & contraception_meeting_partner == 0,
+                  "congruent_nonhormonal",
+                  ifelse(contraception_hormonal == "yes" & contraception_meeting_partner == 0,
+                         "switched_to_hormonal",
+                         ifelse(contraception_hormonal == "no" &
+                                  contraception_meeting_partner == 1, "switched_to_nonhormonal",
+                                NA)))))
+
 qplot(data$contraception_change_since_meeting_partner) + coord_flip()
 ```
 
+### Relationship status (single vs partnered)
+```{r}
+data = data %>% mutate(
+  relationship_status = ifelse(is.na(duration_relationship_month), "Single", "Partnered"))
+
+qplot(data$relationship_status) + coord_flip()
+```
+
+### Diary information
 calculate mean of libido, sex_active_frequency and actual sex frequency based on diary
 ```{r}
 data_diary_means = data_diary %>%
-  mutate(days_done = as.numeric(days_done)) %>%
-  #restrict analyses to people who filled out more than 30 days
-  filter(days_done > 30) %>% 
   group_by(session) %>%
   summarise(diary_libido_mean = mean(high_libido, na.rm = T),
             diary_sex_active_mean = mean(sex_active, na.rm = T),
@@ -159,131 +226,9 @@ qplot(data_diary_means$diary_sex_active_sex_mean)
 data = left_join(data, data_diary_means, by = "session")
 ```
 
-relationship status (single vs partnered)
+
+## Save Data
 ```{r}
-data = data %>% mutate(
-  relationship_status = ifelse(is.na(duration_relationship_month), "Single", "Partnered")
-)
-
-qplot(data$relationship_status)
-```
-
-
-## Selection Variables Codebook
-```{r}
-codebook_selection_data = data %>%
-  select(-session,
-         -starts_with("contraception_"),
-         -starts_with("partner_"), -starts_with("relationship_satisfaction"),
-         -relationship_problems_R, -relationship_conflict_R, -satisfaction_sexual_intercourse,
-         -reasons_for_exclusion, -pregnant_trying)
-
-codebook(codebook_selection_data,  missingness_report = FALSE, indent = "##")
-```
-
-## Contraception Codebook
-```{r}
-codebook_contraception_data = data %>%
-  select(contraception_hormonal, contraception_meeting_partner, contraception_change_since_meeting_partner)
-
-codebook(codebook_contraception_data,  missingness_report = FALSE, indent = "##")
-```
-
-## Outcomes Codebook 
-```{r}
-codebook_outcome_data = data %>%
-  select(partner_attractiveness_face,
-         partner_attractiveness_body,
-         relationship_satisfaction_overall,
-         relationship_satisfaction_2,
-         relationship_satisfaction_3,
-         relationship_problems_R,
-         relationship_conflict_R,
-         satisfaction_sexual_intercourse,
-         diary_libido_mean,
-         diary_sex_active_mean,
-         diary_sex_active_sex_mean)
-codebook(codebook_outcome_data,  missingness_report = FALSE, indent = "##")
-```
-
-
-## Differences in contraception status by relationship status
-```{r}
-ggplot(data, aes(x = relationship_status, fill = contraception_hormonal)) + geom_bar(position = "dodge")
-```
-
-## Differences in Gaussian variables by HC and RS {.tabset}
-### Hormonal contraception
-```{r}
-ggplot(data, aes(x = contraception_hormonal, y = partner_attractiveness_face)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = contraception_hormonal, y = partner_attractiveness_body)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = contraception_hormonal, y = relationship_satisfaction_overall)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = contraception_hormonal, y = relationship_satisfaction_2)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = contraception_hormonal, y = relationship_satisfaction_3)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = contraception_hormonal, y = relationship_problems_R)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = contraception_hormonal, y = relationship_conflict_R)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = contraception_hormonal, y = satisfaction_sexual_intercourse)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = contraception_hormonal, y = diary_libido_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = contraception_hormonal, y = diary_sex_active_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = contraception_hormonal, y = diary_sex_active_sex_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-```
-
-### Relationship status
-```{r}
-ggplot(data, aes(x = relationship_status, y = diary_libido_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = relationship_status, y = diary_sex_active_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-
-ggplot(data, aes(x = relationship_status, y = diary_sex_active_sex_mean)) + geom_jitter() + stat_summary(fun.y = mean, geom = "point", color = "red") + 
-    stat_summary(fun.data = mean_cl_normal, geom = "errorbar", color = "red")
-```
-
-
-## Correlations {.tabset}
-### Selection
-```{r}
-selection_variables = codebook_selection_data %>% select(
-  -starts_with("bfi_agree_"), -starts_with("bfi_consc_"), -starts_with("bfi_open_"),
-  -starts_with("bfi_extra_"), -starts_with("bfi_neuro_"),
-  -starts_with("soi_r_attitude_"), -starts_with("soi_r_desire_"), -starts_with("soi_r_behavior_"), 
-  -relationship_status, -net_income, -com, -duration_relationship_month)
-
-colnames(selection_variables)
-library(psych)
-pairs.panels(selection_variables, cex.cor = 10)
-
-
-cor_pred = cor(selection_variables, use="complete.obs")
-print(cor_pred)
-```
-
-### Outcomes
-```{r}
-pairs.panels(codebook_outcome_data, cex.cor = 10)
-cor_out = cor(codebook_outcome_data, use="complete.obs")
-print(cor_out)
+save(data, data, file = "data/cleaned_selected_wrangled.rdata")
 ```
 
