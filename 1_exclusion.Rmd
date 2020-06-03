@@ -290,27 +290,22 @@ kable(table(all_surveys$reasons_for_exclusion %contains% "sex_hormones"))
 ```{r}
 kable(table(all_surveys$reasons_for_exclusion == ""))
 ```
-In total 497 participants were excluded, leaving 1163 subjects which were included in the analysis.
+In total `r table(all_surveys$reasons_for_exclusion == "")["FALSE"]` participants were excluded, leaving `r table(all_surveys$reasons_for_exclusion == "")["TRUE"]` subjects which were included in the analysis.
 
 
-
-## Reasons for exclusion
+## Reasons for exclusion {.tabset}
 How to read this plot: The horizontal green bars show for how many women this reason for
 exclusion applies. The blue bars show how many women are excluded for multiple reasons (e.g.,
-they're menopausal _and_ not heterosexual). If reasons for exclusion necessarily depend on
-another (i.e. participants had to finish the first survey to get to the second), we counted
-only those who had not yet been excluded earlier. If reasons for exclusion depended on each
-other only stochastically (e.g., age and menopause), we did not do this.
+they're menopausal _and_ not heterosexual).
 
+### Table
 ```{r}
-table(all_surveys$reasons_for_exclusion == "", exclude = NULL)
-
 library(UpSetR)
 exclusion_reasons = all_surveys %>% 
   mutate(reasons_for_exclusion = str_sub(reasons_for_exclusion, 1, -3)) %>% 
   select(session, reasons_for_exclusion) %>% 
   comma_separated_to_columns(reasons_for_exclusion) %>% 
-  select(-session)
+  select(-session) 
 
 exclusion_reasons %>% 
   summarise_all(sum) %>% sort() %>% 
@@ -319,16 +314,72 @@ exclusion_reasons %>%
   mutate(unique = if_else(is.na(unique), 0L, unique)) %>% 
   knitr::kable()
 
+```
+
+### Figure 3: Exclusion criteria and most common combinations of exclusion criteria. {.active}
+The horizontal green bars show for how many women this exclusion criteria applies. The blue bars show how many women are excluded for multiple reasons (e.g., not finishing the initial survey and being pregnant). Only the 20 most common overlaps are displayed. See Figure S1 in the supplementary materials for all combinations.
+
+```{r}
 exclusion_reasons %>% 
+  rename(`Breastfeeding` = breast_feeding, 
+         `Choice of Contraceptive Methode` = contraceptive_method,
+         `Missing Data` = didnt_finish_initial,
+         `Incongruent Information about Contraceptive Method` =
+           incongruent_information_about_hormonal_contraception,
+         `(Post-)Menopausal` = menopausal,
+         `Using no Contraceptive Methods for Other Reasons` = no_contraception,
+         `Not Female` = not_female,
+         `Not Predominantly Heterosexual` = not_heterosexual_female,
+         `Older than 50` = older_than_50,
+         `Pregnant` = pregnant,
+         `“Taking a Chance” of Becoming Pregnant` = pregnant_chance,
+         `Trying to Become Pregnant` = pregnant_trying,
+         `Medication Including Sex Hormones` = sex_hormones) %>%
   filter(included == 0) %>% 
   select(-included) %>% 
   {
-  upset(., ncol(.), 20, show.numbers = TRUE, order.by = "freq",
+  upset(., ncol(.), 20, order.by = "freq",
       main.bar.color = "#6E8691",
       matrix.color = "#6E8691",
       sets.bar.color = "#53AC9B")
   }
 ```
+
+### Figure S1: Exclusion criteria and all combinations of exclusion criteria. 
+The horizontal green bars show for how many women this exclusion criteria applies. The blue bars show how many women are excluded for multiple reasons (e.g., not finishing the initial survey and being pregnant). All 58 combinations of exclusion criteria are displayed. 
+
+```{r}
+exclusion_reasons %>% 
+  rename(`Breastfeeding` = breast_feeding, 
+         `Choice of Contraceptive Methode` = contraceptive_method,
+         `Missing Data` = didnt_finish_initial,
+         `Incongruent Information about Contraceptive Method` =
+           incongruent_information_about_hormonal_contraception,
+         `(Post-)Menopausal` = menopausal,
+         `Using no Contraceptive Methods for Other Reasons` = no_contraception,
+         `Not Female` = not_female,
+         `Not Predominantly Heterosexual` = not_heterosexual_female,
+         `Older than 50` = older_than_50,
+         `Pregnant` = pregnant,
+         `“Taking a Chance” of Becoming Pregnant` = pregnant_chance,
+         `Trying to Become Pregnant` = pregnant_trying,
+         `Medication Including Sex Hormones` = sex_hormones) %>%
+  filter(included == 0) %>% 
+  select(-included) %>% 
+  {
+  upset(., ncol(.), 80, order.by = "freq",
+      main.bar.color = "#6E8691",
+      matrix.color = "#6E8691",
+      sets.bar.color = "#53AC9B")
+  }
+```
+
+
+
+
+
+
+
 
 ### By contraception
 ```{r}
