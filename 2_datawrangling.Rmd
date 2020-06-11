@@ -183,6 +183,7 @@ data = data %>% mutate(
 qplot(data$contraception_hormonal) + coord_flip()
 ```
 
+
 ### Changed contraception since meeting their partner
 There will be NAs because we asked about contracetion when meeting partner only if participants were currently in a relationship
 ```{r}
@@ -200,6 +201,14 @@ data = data %>% mutate(
                                 NA)))))
 
 qplot(data$contraception_change_since_meeting_partner) + coord_flip()
+```
+
+### Contraception meeting partner
+```{r}
+data = data %>%
+  mutate(contraception_meeting_partnerx = factor(if_else(
+    contraception_meeting_partner == 1,
+    "yes", "no")))
 ```
 
 ### Relationship status (single vs partnered)
