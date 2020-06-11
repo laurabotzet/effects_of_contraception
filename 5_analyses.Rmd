@@ -21,12 +21,18 @@ theme_set(theme_bw())
 ```
 
 
-
-
 ## First Selection Model
 ```{r}
 library(brms)
-m1 = brm(contraception_hormonal ~ age + net_income + duration_relationship_years,
+m1_simple = brm(contraception_hormonal ~ age + net_income + duration_relationship_years,
+    data = data, family = bernoulli("probit"))
+
+m1_complex = brm(contraception_hormonal ~ age + net_income + duration_relationship_years +
+                   education_years + bfi_open + bfi_consc + bfi_extra +
+    bfi_agree + bfi_neuro + religiosity + pregnant_stress +
+    duration_relationship_years + days_with_partner + 
+    nights_with_partner + soi_r_behavior + soi_r_attitude +
+    soi_r_desire + number_sexual_partner,
     data = data, family = bernoulli("probit"))
 
 ```
@@ -41,6 +47,7 @@ data = data %>%
 ```
 
 ```{r}
+library(brms)
 m1 = brm(relationship_satisfaction_overall_z ~ contraception_hormonal + contraception_meeting_partner +
     contraception_hormonal : contraception_meeting_partner +
     age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
@@ -52,7 +59,7 @@ m1 = brm(relationship_satisfaction_overall_z ~ contraception_hormonal + contrace
 
 summary(m1)
 
-m1_unadj = brm(file = "models/m1_relsat_unadj", # cache model. have to manually delete when data/model changes
+m1_unadj = brm(
   relationship_satisfaction_overall_z ~ contraception_hormonal + contraception_meeting_partner +
            contraception_hormonal : contraception_meeting_partner,
          data = data, family = gaussian(), cores = 4) %>% 
@@ -63,6 +70,8 @@ summary(m1_unadj)
 
 library(loo)
 compare_models <- loo(m1, m1_unadj) # Fehlermeldung wegen haven_labelled
+compare_models
+
 loo(m1)
 print(loo_compare(m1_unadj, m1), simplify = F)
 
@@ -73,7 +82,6 @@ library(bayestestR)
 equiv_test <- equivalence_test(m1_unadj, range = c(-0.1, 0.1))
 equiv_test
 
-sjstats::equi_test(m1, out = "plot")
 
 equiv_test <- equivalence_test(m1, range = c(-0.1, 0.1))
 equiv_test
