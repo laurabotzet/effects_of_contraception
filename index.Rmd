@@ -4,7 +4,7 @@ csl: apa-custom-no-issue.csl
 nocite: |
     @R @packrat @rmarkdown @knitr @formr @pander @lubridate @stringr @broom @effects @ggplot2 @tidyr @svglite @dplyr @reshape2 @lmerTest @devtools @formatR @lazyeval @scales @car @xlsx @lme4
 ---
-
+ 
 # Effects of Contraception {.tabset .tabset-sticky}
 
 ```{r message=FALSE, warning=FALSE}
