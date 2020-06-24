@@ -37,6 +37,7 @@ data = all_surveys %>%
          soi_r_behavior,
          soi_r_desire,
          number_sexual_partner,
+         contraception_at_all,
          contraception_method,
          contraception_approach,
          contraception_method_broad,
@@ -113,7 +114,7 @@ data_diary = data_diary %>%
 ```
 `r n_dishonest` days contained dishonest answers.
 
-#### Filled out less than 30 days
+#### Filled out less than 14 days
 ```{r}
 number_of_days = data_diary %>%
   group_by(session) %>%
@@ -123,14 +124,14 @@ number_of_days = data_diary %>%
 data_diary = left_join(data_diary, number_of_days, by = "session")
 
 data_diary_include = data_diary %>%
-  filter(as.numeric(number_of_days) > 30)
+  filter(as.numeric(number_of_days) >= 14)
 
 data_diary_exclude = data_diary %>%
-  filter(as.numeric(number_of_days) <= 30)
+  filter(as.numeric(number_of_days) < 14)
 
 data_diary = data_diary_include
 ```
-`r length(unique(data_diary_exclude$session))` participants were excluded because they filled out less than 30 days - resulting in `r length(data_diary_exclude$session)` excluded days.
+`r length(unique(data_diary_exclude$session))` participants were excluded because they filled out less than 14 days - resulting in `r length(data_diary_exclude$session)` excluded days.
 
 #### Summary {.active}
 In total `r length(unique(data_diary$session))` participants with `r length(data_diary$session)` diary days were included for the analyses in which outcomes were based on diary information. 
@@ -138,29 +139,34 @@ In total `r length(unique(data_diary$session))` participants with `r length(data
 ## Wrangle data {.tabset}
 ### Contraception approach
 ```{r contraception approach}
-data = data %>% mutate(
-    contraception_method = if_else(is.na(contraception_method), "",
-                                   as.character(contraception_method)),
+datax = data %>% mutate(
+    contraception_method = if_else(contraception_at_all == 5,
+                                   "barrier_no_penetrative_sex",
+                                   contraception_method),
     com = contraception_method,
     contraception_approach = if_else(
         condition = com %contains% "hormonal_pill" | com %contains% "hormonal_other",
         true = if_else(
-            condition = com == "hormonal_pill" | com == "hormonal_other" |
-              com == "hormonal_morning_after_pill",
-            true = if_else(com == "hormonal_pill", 
-                           true = "hormonal_pill_only",
-                           false = "hormonal_other_only"),
-            false = "hormonal+barrier"),
+          condition =
+            com == "hormonal_pill" | com == "hormonal_other" |
+            com == "hormonal_morning_after_pill",
+          true = if_else(com == "hormonal_pill", 
+                         true = "hormonal_pill_only",
+                         false = "hormonal_other_only"),
+          false = "hormonal+barrier"),
         if_else(
-            condition = ! com %contains% "awareness", 
-            true = if_else(condition = com != "",
-                           true = if_else(condition = com %contains% "barrier_intrauterine_pessar",
-                                          true = "barrier_pessar",
-                                          if_else(condition = com %contains% "barrier_condoms",
-                                                  true = "condoms",
-                                                  false = "other")),
-                           false = "nothing"),
-            false = "awareness")))
+          condition = !(com %contains% "awareness"),
+          true = if_else(condition =
+                           com != "",
+                         true = if_else(condition =
+                                          com %contains% "barrier_intrauterine_pessar",
+                                        true = "barrier_pessar",
+                                        if_else(condition =
+                                                  com %contains% "barrier_condoms",
+                                                true = "condoms",
+                                                false = "other")),
+                         false = "nothing"),
+          false = "awareness")))
 
 
 

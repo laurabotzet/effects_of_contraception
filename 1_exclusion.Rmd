@@ -11,8 +11,8 @@ The following reasons for exclusion apply:
 * breastfeeding
 * participants, who do not want to avoid pregnancy
 * participants, who ‘took a chance’ on getting pregnant
-* particiapnts, who used no contraception for ‘other reasons’
-* use of one of the following contraceptive methods: abandonment of penetrative sexual intercourse, morning-after pill, breastfeeding, I am infertile, my partner is infertile, I am sterilized, my partner is sterilized, other
+* participants, who used no contraception for ‘other reasons’
+* use of one of the following contraceptive methods: morning-after pill, breastfeeding, I am infertile, my partner is infertile, I am sterilized, my partner is sterilized, other
 * incongruent information about current contraceptive method and method used in the last three months
 * use of medication including sex hormones in the last three months.
 
@@ -137,7 +137,7 @@ all_surveys = all_surveys %>%
 kable(table(all_surveys$reasons_for_exclusion %contains% "pregnant_chance"))
 ```
 
-###  Participants, who used no contraception for ‘other reasons’
+### Participants, who used no contraception for ‘other reasons’
 ```{r}
 all_surveys = all_surveys %>%
   mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
@@ -150,17 +150,6 @@ kable(table(all_surveys$reasons_for_exclusion %contains% "no_contraception"))
 ### Conraceptive Method {.tabset}
 Use of one of the following contraceptive methods
 
-#### Abandonment of penetrative sexual intercourse
-```{r contraception_barrier_no_penetrative_sex}
-all_surveys = all_surveys %>% 
-  mutate(reasons_for_exclusion_contraception = str_c(
-    reasons_for_exclusion_contraception,
-    if_else(contraception_method %contains% "barrier_no_penetrative_sex" |
-              contraception_at_all == 5,
-            "contraception_barrier_no_penetrative_sex, ", "", "")))
-
-kable(table(all_surveys$reasons_for_exclusion_contraception %contains% "contraception_barrier_no_penetrative_sex"))
-```
 
 #### Morning-after pill
 ```{r contraception_hormonal_morning_after_pill}
@@ -346,7 +335,7 @@ exclusion_reasons %>%
 ```
 
 ### Figure S1: Exclusion criteria and all combinations of exclusion criteria. 
-The horizontal green bars show for how many women this exclusion criteria applies. The blue bars show how many women are excluded for multiple reasons (e.g., not finishing the initial survey and being pregnant). All 58 combinations of exclusion criteria are displayed. 
+The horizontal green bars show for how many women this exclusion criteria applies. The blue bars show how many women are excluded for multiple reasons (e.g., not finishing the initial survey and being pregnant). All 52 combinations of exclusion criteria are displayed. 
 
 ```{r}
 exclusion_reasons %>% 
