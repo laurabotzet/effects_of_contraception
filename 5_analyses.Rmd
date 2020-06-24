@@ -27,14 +27,15 @@ library(brms)
 m1_simple = brm(contraception_hormonal ~ age + net_income + duration_relationship_years,
     data = data, family = bernoulli("probit"))
 
-m1_complex = brm(contraception_hormonal ~ age + net_income + duration_relationship_years +
+m1_complex = brm(contraception_hormonal ~ age + net_income + 
                    education_years + bfi_open + bfi_consc + bfi_extra +
-    bfi_agree + bfi_neuro + religiosity + pregnant_stress +
-    duration_relationship_years + days_with_partner + 
-    nights_with_partner + soi_r_behavior + soi_r_attitude +
-    soi_r_desire + number_sexual_partner,
-    data = data, family = bernoulli("probit"))
+    bfi_agree + bfi_neuro + religiosity +
+    duration_relationship_years,
+    data = data, family = bernoulli())
 
+summary(m1_complex)
+
+m1_complex
 ```
 
 
@@ -59,6 +60,15 @@ m1 = brm(relationship_satisfaction_overall_z ~ contraception_hormonal + contrace
 
 summary(m1)
 
+m1_1 = brm(relationship_satisfaction_overall_z ~ contraception_hormonal + contraception_meeting_partner +
+    contraception_hormonal : contraception_meeting_partner +
+    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
+    bfi_agree + bfi_neuro + religiosity +
+    duration_relationship_years,
+    data = data, family = gaussian())
+
+summary(m1_1)
+
 m1_unadj = brm(
   relationship_satisfaction_overall_z ~ contraception_hormonal + contraception_meeting_partner +
            contraception_hormonal : contraception_meeting_partner,
@@ -69,8 +79,11 @@ summary(m1_unadj)
 # plot(m1_unadj)
 
 library(loo)
-compare_models <- loo(m1, m1_unadj) # Fehlermeldung wegen haven_labelled
+compare_models <- loo(m1, m1_unadj)
 compare_models
+
+loo_R2(m1)
+loo_R2(m1_unadj)
 
 loo(m1)
 print(loo_compare(m1_unadj, m1), simplify = F)
@@ -86,7 +99,11 @@ equiv_test
 equiv_test <- equivalence_test(m1, range = c(-0.1, 0.1))
 equiv_test
 
-marginal_effects(m1_unadj) # no valid term
+marginal_effects(m1_unadj)
+marginal_effects(m1, effects = c("bfi_open", "bfi_consc"))
+
+broom::tidy()
+
 
 library(brms)
 marginal_smooths(m1_unadj) # no valid term
