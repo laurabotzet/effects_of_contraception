@@ -137,6 +137,95 @@ data_diary = data_diary_include
 In total `r length(unique(data_diary$session))` participants with `r length(data_diary$session)` diary days were included for the analyses in which outcomes were based on diary information. 
 
 ## Wrangle data {.tabset}
+### Relationship status (single vs partnered)
+```{r}
+data = data %>% mutate(
+  relationship_status = ifelse(is.na(duration_relationship_month), "Single", "Partnered"))
+
+qplot(data$relationship_status) + coord_flip()
+```
+
+### Relationship duration
+```{r}
+data = data %>%
+  mutate(relationship_duration = duration_relationship_years * 12 +
+           duration_relationship_month)
+
+qplot(data$relationship_duration)
+
+
+data = data %>%
+   mutate(relationship_duration_factor = 
+            factor(ifelse(relationship_status == "Single",
+                   "Single",
+                   ifelse(relationship_duration <= 12,
+                          "Partnered_upto12months",
+                          ifelse(relationship_duration <= 28, 
+                                 "Partnered_upto28months",
+                                 ifelse(relationship_duration <= 52,
+                                        "Partnered_upto52months",
+                                        ifelse(relationship_duration > 52,
+                                        "Partnered_morethan52months",
+                                        NA))))),
+                   levels = c("Single", "Partnered_upto12months",
+                              "Partnered_upto28months", "Partnered_upto52months",
+                              "Partnered_morethan52months")))
+
+qplot(data$relationship_duration_factor)
+
+ggplot(data, aes(relationship_duration)) +
+  geom_histogram(aes(fill = relationship_duration_factor), bins = 100)
+
+quantiles = quantile(as.numeric(data$relationship_duration),
+                     na.rm = T,
+                     probs = c(0, 0.125, 0.25, 0.375, 0.5,0.625, 0.75, 0.875, 1))
+
+data = data %>%
+  mutate(relationship_duration_factor2 = 
+           factor(ifelse(relationship_status == "Single",
+                  "Single",
+                  ifelse(relationship_duration <= quantiles[2],
+                         "Partnered_upto6months",
+                         ifelse(relationship_duration <= quantiles[3],
+                                "Partnered_upto12months",
+                                ifelse(relationship_duration <= quantiles[4],
+                                       "Partnered_upto20months",
+                                       ifelse(relationship_duration <= quantiles[5],
+                                              "Partnered_upto28months",
+           ifelse(relationship_duration <= quantiles[6],
+                  "Partnered_upto38months",
+                  ifelse(relationship_duration <= quantiles[7],
+                         "Partnered_upto52months",
+                         ifelse(relationship_duration <= quantiles[8],
+                                "Partnered_upto85months",
+                                ifelse(relationship_duration > quantiles[8],
+                                       "Partnered_morethan85months",
+                                       NA))))))))),
+           levels = c("Single", "Partnered_upto6months", "Partnered_upto12months",
+                      "Partnered_upto20months", "Partnered_upto28months",
+                      "Partnered_upto38months", "Partnered_upto52months",
+                      "Partnered_upto85months", "Partnered_morethan85months")))
+
+qplot(data$relationship_duration_factor2)
+
+ggplot(data, aes(relationship_duration)) +
+  geom_histogram(aes(fill = relationship_duration_factor2), bins = 100)
+
+m1 = lm(bfi_extra ~ relationship_duration, data = data)
+m2 = lm(bfi_extra ~ relationship_duration_factor, data = data)
+m3 = lm(bfi_extra ~ relationship_duration_factor2, data = data)
+
+anova(m1, m2)
+
+anova(m1, m3)
+
+library(effects)
+plot(allEffects(m2))
+plot(allEffects(m3))
+
+```
+
+
 ### Contraception approach
 ```{r contraception approach}
 datax = data %>% mutate(
@@ -173,8 +262,10 @@ datax = data %>% mutate(
 data$contraception_approach = factor(data$contraception_approach,
                                             levels = c("condoms", "barrier_pessar",
                                                        "hormonal+barrier",
-                                                       "hormonal_pill_only", "hormonal_other_only",
-                                                       "awareness", "nothing", "other"))
+                                                       "hormonal_pill_only",
+                                                       "hormonal_other_only",
+                                                       "awareness", "nothing",
+                                                       "other"))
 
 qplot(data$contraception_approach) + coord_flip()
 table(data$contraception_approach)
@@ -217,13 +308,7 @@ data = data %>%
     "yes", "no")))
 ```
 
-### Relationship status (single vs partnered)
-```{r}
-data = data %>% mutate(
-  relationship_status = ifelse(is.na(duration_relationship_month), "Single", "Partnered"))
 
-qplot(data$relationship_status) + coord_flip()
-```
 
 ### Diary information
 calculate mean of libido, sex_active_frequency and actual sex frequency based on diary
