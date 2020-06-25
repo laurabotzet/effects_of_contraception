@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
+td.sourceCode { padding-left: 5px; }
+pre, code { color: #cccccc; background-color: #303030; }
+code > span.kw { color: #f0dfaf; } /* Keyword */
+code > span.dt { color: #dfdfbf; } /* DataType */
+code > span.dv { color: #dcdccc; } /* DecVal */
+code > span.bn { color: #dca3a3; } /* BaseN */
+code > span.fl { color: #c0bed1; } /* Float */
+code > span.ch { color: #dca3a3; } /* Char */
+code > span.st { color: #cc9393; } /* String */
+code > span.co { color: #7f9f7f; } /* Comment */
+code > span.ot { color: #efef8f; } /* Other */
+code > span.al { color: #ffcfaf; } /* Alert */
+code > span.fu { color: #efef8f; } /* Function */
+code > span.er { color: #c3bf9f; } /* Error */
+code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code > span.sc { color: #dca3a3; } /* SpecialChar */
+code > span.vs { color: #cc9393; } /* VerbatimString */
+code > span.ss { color: #cc9393; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #f0dfaf; } /* ControlFlow */
+code > span.op { color: #f0efd0; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code > span.at { } /* Attribute */
+code > span.do { color: #7f9f7f; } /* Documentation */
+code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Effects of Contraception</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li>
+  <a href="1_wrangle_data.html">Data wrangling</a>
+</li>
+<li>
+  <a href="2_descriptives.html">Descriptives &amp; Exclusion</a>
+</li>
+<li>
+  <a href="3_analyses.html">Analyses</a>
+</li>
+<li>
+  <a href="4_robustness_analyses.html">Robustness Analyses</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/laurabotzet/effects_of_contraception">
+    <span class="fa fa-github"></span>
+     
+    
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+
+<div id="datawrangling" class="section level1 tabset">
+<h1>Datawrangling</h1>
+<div id="data-and-functions" class="section level2">
+<h2>Data and Functions</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">&quot;0_helpers.R&quot;</span>)
+knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>, <span class="dt">warning=</span><span class="ot">FALSE</span>)
+pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&quot;table.split.table&quot;</span>, <span class="ot">Inf</span>)
+pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;round&#39;</span>,<span class="dv">2</span>)
+pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;digits&#39;</span>,<span class="dv">2</span>)
+pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;keep.trailing.zeros&#39;</span>,<span class="ot">TRUE</span>)
+
+<span class="kw">load</span>(<span class="st">&quot;data/cleaned_selected.rdata&quot;</span>)</code></pre></div>
+</div>
+<div id="select-variables" class="section level2 tabset">
+<h2>Select Variables</h2>
+<div id="initial-survey" class="section level3">
+<h3>Initial Survey</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(session,
+         age,
+         education_years,
+         net_income,
+         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_agree&quot;</span>),
+         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_consc&quot;</span>),
+         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_open&quot;</span>),
+         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_extra&quot;</span>),
+         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_neuro&quot;</span>),
+         religiosity,
+         pregnant_stress,
+         duration_relationship_years,
+         duration_relationship_month,
+         days_with_partner,
+         nights_with_partner,
+         <span class="kw">starts_with</span>(<span class="st">&quot;soi_r&quot;</span>),
+         soi_r_behavior,
+         soi_r_desire,
+         number_sexual_partner,
+         contraception_at_all,
+         contraception_method,
+         contraception_approach,
+         contraception_method_broad,
+         contraception_meeting_partner,
+         partner_attractiveness_face,
+         partner_attractiveness_body,
+         relationship_satisfaction_overall,
+         relationship_satisfaction_<span class="dv">2</span>,
+         relationship_satisfaction_<span class="dv">3</span>,
+         relationship_problems_R,
+         relationship_conflict_R,
+         satisfaction_sexual_intercourse,
+         reasons_for_exclusion,
+         pregnant_trying)</code></pre></div>
+</div>
+<div id="diary" class="section level3">
+<h3>Diary</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_diary =<span class="st"> </span>diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(session,
+         reasons_for_exclusion,
+         high_libido,
+         sex_active, sex_activity_anal_sex, sex_activity_bdsm_dom, sex_activity_bdsm_sub,
+         sex_activity_cuddling, sex_activity_cunnilingus, sex_activity_cybersex,
+         sex_activity_dirty_talk,
+         sex_activity_fellatio, sex_activity_kissing,  sex_activity_masturbated_by_partner,
+         sex_activity_masturbated_partner, sex_activity_masturbation, sex_activity_other,
+         sex_activity_phone_skype_sex, sex_activity_pornography, sex_activity_sex, 
+         sex_activity_touch_other, 
+         sex_activity_toys, sex_activity_unclear,  sex_other, sex_solo, sex_unclear,
+         days_done)</code></pre></div>
+</div>
+</div>
+<div id="exclusion" class="section level2 tabset">
+<h2>Exclusion</h2>
+<div id="initial-survey-1" class="section level3">
+<h3>Initial Survey</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_excluded =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">!=</span><span class="st"> &quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nrow</span>()
+data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">==</span><span class="st"> &quot;&quot;</span>)</code></pre></div>
+<p>475 people were excluded.</p>
+</div>
+<div id="diary-1" class="section level3 tabset">
+<h3>Diary</h3>
+<div id="exclusion-criteria-based-on-initial" class="section level4">
+<h4>Exclusion criteria based on initial</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">session_codes =<span class="st"> </span>data<span class="op">$</span>session
+
+data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(session <span class="op">%in%</span><span class="st"> </span>session_codes)
+
+<span class="kw">length</span>(data_diary<span class="op">$</span>session)</code></pre></div>
+<pre><code>## [1] 53483</code></pre>
+<p>The 1185 participants filled out 53483.</p>
+</div>
+<div id="skipped-diary-entry" class="section level4">
+<h4>Skipped diary entry</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_skipped_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;skipped_diary_entry&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>()
+
+data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;skipped_diary_entry&quot;</span>))</code></pre></div>
+<p>748 days were skipped.</p>
+</div>
+<div id="dishonest-answers" class="section level4">
+<h4>Dishonest answers</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_dishonest =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;dishonest&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>()
+
+data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;dishonest&quot;</span>))</code></pre></div>
+<p>142 days contained dishonest answers.</p>
+</div>
+<div id="filled-out-less-than-14-days" class="section level4">
+<h4>Filled out less than 14 days</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number_of_days =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(session) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">number_of_days =</span> n)
+  
+data_diary =<span class="st"> </span><span class="kw">left_join</span>(data_diary, number_of_days, <span class="dt">by =</span> <span class="st">&quot;session&quot;</span>)
+
+data_diary_include =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">as.numeric</span>(number_of_days) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>)
+
+data_diary_exclude =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">as.numeric</span>(number_of_days) <span class="op">&lt;</span><span class="st"> </span><span class="dv">14</span>)
+
+data_diary =<span class="st"> </span>data_diary_include</code></pre></div>
+<p>173 participants were excluded because they filled out less than 14 days - resulting in 1027 excluded days.</p>
+</div>
+<div id="summary" class="section level4 active">
+<h4>Summary</h4>
+<p>In total 971 participants with 51566 diary days were included for the analyses in which outcomes were based on diary information.</p>
+</div>
+</div>
+</div>
+<div id="wrangle-data" class="section level2 tabset active">
+<h2>Wrangle data</h2>
+<div id="relationship-status-single-vs-partnered" class="section level3">
+<h3>Relationship status (single vs partnered)</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(
+  <span class="dt">relationship_status =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(duration_relationship_month), <span class="st">&quot;Single&quot;</span>, <span class="st">&quot;Partnered&quot;</span>))
+
+<span class="kw">qplot</span>(data<span class="op">$</span>relationship_status) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
+<p><img src="99_relationship_duration_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="relationship-duration" class="section level3 active tabset">
+<h3>Relationship duration</h3>
+<div id="linear-relationship-duration" class="section level4">
+<h4>Linear relationship duration</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relationship_duration =</span> duration_relationship_years <span class="op">*</span><span class="st"> </span><span class="dv">12</span> <span class="op">+</span>
+<span class="st">           </span>duration_relationship_month)
+
+<span class="kw">qplot</span>(data<span class="op">$</span>relationship_duration)</code></pre></div>
+<pre><code>## Don&#39;t know how to automatically pick scale for object of type haven_labelled. Defaulting to continuous.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="99_relationship_duration_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="factor1-relationship-duration" class="section level4">
+<h4>Factor1 relationship duration</h4>
+<p>Divide relationship duration into quartiles</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">mutate</span>(<span class="dt">relationship_duration_factor =</span> 
+            <span class="kw">factor</span>(<span class="kw">ifelse</span>(relationship_status <span class="op">==</span><span class="st"> &quot;Single&quot;</span>,
+                   <span class="st">&quot;Single&quot;</span>,
+                   <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">12</span>,
+                          <span class="st">&quot;upto12months&quot;</span>,
+                          <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">28</span>, 
+                                 <span class="st">&quot;upto28months&quot;</span>,
+                                 <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">52</span>,
+                                        <span class="st">&quot;upto52months&quot;</span>,
+                                        <span class="kw">ifelse</span>(relationship_duration <span class="op">&gt;</span><span class="st"> </span><span class="dv">52</span>,
+                                        <span class="st">&quot;morethan52months&quot;</span>,
+                                        <span class="ot">NA</span>))))),
+                   <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Single&quot;</span>, <span class="st">&quot;upto12months&quot;</span>,
+                              <span class="st">&quot;upto28months&quot;</span>, <span class="st">&quot;upto52months&quot;</span>,
+                              <span class="st">&quot;morethan52months&quot;</span>)))
+
+
+data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(relationship_duration_factor) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_column</span>(<span class="dt">duration_in_years =</span> <span class="kw">c</span>(<span class="st">&quot;Single&quot;</span>,
+                                   <span class="st">&quot;upto1year&quot;</span>,
+                                   <span class="st">&quot;upto2.3years&quot;</span>,
+                                   <span class="st">&quot;upto4.3years&quot;</span>,
+                                   <span class="st">&quot;morethan4.3years&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(relationship_duration_factor, duration_in_years, count) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">relationship_duration_factor</th>
+<th align="left">duration_in_years</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Single</td>
+<td align="left">Single</td>
+<td align="right">405</td>
+</tr>
+<tr class="even">
+<td align="left">upto12months</td>
+<td align="left">upto1year</td>
+<td align="right">198</td>
+</tr>
+<tr class="odd">
+<td align="left">upto28months</td>
+<td align="left">upto2.3years</td>
+<td align="right">200</td>
+</tr>
+<tr class="even">
+<td align="left">upto52months</td>
+<td align="left">upto4.3years</td>
+<td align="right">190</td>
+</tr>
+<tr class="odd">
+<td align="left">morethan52months</td>
+<td align="left">morethan4.3years</td>
+<td align="right">192</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(data<span class="op">$</span>relationship_duration_factor)</code></pre></div>
+<p><img src="99_relationship_duration_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(relationship_duration)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> relationship_duration_factor), <span class="dt">bins =</span> <span class="dv">200</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre></div>
+<pre><code>## Don&#39;t know how to automatically pick scale for object of type haven_labelled. Defaulting to continuous.</code></pre>
+<p><img src="99_relationship_duration_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+</div>
+<div id="factor2-relationship-duration" class="section level4">
+<h4>Factor2 relationship duration</h4>
+<p>Divide relationship duration into 8 quantiles</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quantiles =<span class="st"> </span><span class="kw">quantile</span>(<span class="kw">as.numeric</span>(data<span class="op">$</span>relationship_duration),
+                     <span class="dt">na.rm =</span> T,
+                     <span class="dt">probs =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.375</span>, <span class="fl">0.5</span>,<span class="fl">0.625</span>, <span class="fl">0.75</span>, <span class="fl">0.875</span>, <span class="dv">1</span>))
+
+data =<span class="st"> </span>data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relationship_duration_factor2 =</span> 
+           <span class="kw">factor</span>(<span class="kw">ifelse</span>(relationship_status <span class="op">==</span><span class="st"> &quot;Single&quot;</span>,
+                  <span class="st">&quot;Single&quot;</span>,
+                  <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">2</span>],
+                         <span class="st">&quot;upto6months&quot;</span>,
+                         <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">3</span>],
+                                <span class="st">&quot;upto12months&quot;</span>,
+                                <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">4</span>],
+                                       <span class="st">&quot;upto20months&quot;</span>,
+                                       <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">5</span>],
+                                              <span class="st">&quot;upto28months&quot;</span>,
+           <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">6</span>],
+                  <span class="st">&quot;upto38months&quot;</span>,
+                  <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">7</span>],
+                         <span class="st">&quot;upto52months&quot;</span>,
+                         <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">8</span>],
+                                <span class="st">&quot;upto85months&quot;</span>,
+                                <span class="kw">ifelse</span>(relationship_duration <span class="op">&gt;</span><span class="st"> </span>quantiles[<span class="dv">8</span>],
+                                       <span class="st">&quot;morethan85months&quot;</span>,
+                                       <span class="ot">NA</span>))))))))),
+           <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Single&quot;</span>, <span class="st">&quot;upto6months&quot;</span>, <span class="st">&quot;upto12months&quot;</span>,
+                      <span class="st">&quot;upto20months&quot;</span>, <span class="st">&quot;upto28months&quot;</span>,
+                      <span class="st">&quot;upto38months&quot;</span>, <span class="st">&quot;upto52months&quot;</span>,
+                      <span class="st">&quot;upto85months&quot;</span>, <span class="st">&quot;morethan85months&quot;</span>)))
+
+data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(relationship_duration_factor2) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">add_column</span>(<span class="dt">duration_in_years =</span> <span class="kw">c</span>(<span class="st">&quot;Single&quot;</span>,
+                                   <span class="st">&quot;upto0.5years&quot;</span>,
+                                   <span class="st">&quot;upto1year&quot;</span>,
+                                   <span class="st">&quot;upto1.7year&quot;</span>,
+                                   <span class="st">&quot;upto2.3years&quot;</span>,
+                                   <span class="st">&quot;upto3.2years&quot;</span>,
+                                   <span class="st">&quot;upto4.3years&quot;</span>,
+                                   <span class="st">&quot;upto7.1years&quot;</span>,
+                                   <span class="st">&quot;morethan7.1years&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(relationship_duration_factor2, duration_in_years, count)  <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">relationship_duration_factor2</th>
+<th align="left">duration_in_years</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Single</td>
+<td align="left">Single</td>
+<td align="right">405</td>
+</tr>
+<tr class="even">
+<td align="left">upto6months</td>
+<td align="left">upto0.5years</td>
+<td align="right">120</td>
+</tr>
+<tr class="odd">
+<td align="left">upto12months</td>
+<td align="left">upto1year</td>
+<td align="right">78</td>
+</tr>
+<tr class="even">
+<td align="left">upto20months</td>
+<td align="left">upto1.7year</td>
+<td align="right">99</td>
+</tr>
+<tr class="odd">
+<td align="left">upto28months</td>
+<td align="left">upto2.3years</td>
+<td align="right">101</td>
+</tr>
+<tr class="even">
+<td align="left">upto38months</td>
+<td align="left">upto3.2years</td>
+<td align="right">96</td>
+</tr>
+<tr class="odd">
+<td align="left">upto52months</td>
+<td align="left">upto4.3years</td>
+<td align="right">94</td>
+</tr>
+<tr class="even">
+<td align="left">upto85months</td>
+<td align="left">upto7.1years</td>
+<td align="right">94</td>
+</tr>
+<tr class="odd">
+<td align="left">morethan85months</td>
+<td align="left">morethan7.1years</td>
+<td align="right">98</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(data<span class="op">$</span>relationship_duration_factor2) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>, <span class="dt">hjust=</span><span class="dv">1</span>))</code></pre></div>
+<p><img src="99_relationship_duration_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(relationship_duration)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> relationship_duration_factor2), <span class="dt">bins =</span> <span class="dv">200</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre></div>
+<pre><code>## Don&#39;t know how to automatically pick scale for object of type haven_labelled. Defaulting to continuous.</code></pre>
+<p><img src="99_relationship_duration_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+</div>
+<div id="factor3-relationship-duration" class="section level4">
+<h4>Factor3 relationship duration</h4>
+<p><a href="https://sci-hub.st/10.1016/j.ssresearch.2015.01.009" class="uri">https://sci-hub.st/10.1016/j.ssresearch.2015.01.009</a> Effects of relationship duration, cohabitation, and marriage on the frequency of intercourse in couples: Findings from German panel data</p>
+<p>Relationship Duration * 0-5 months * 6-11 months * 1-2 years * 2-3 years * 3-4 years * 4-5 years * 5-6 years * 6-8 years * 8-10 years * 10-12 years * 12-14 years * 14-16 years * &gt; 16 years</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relationship_duration_factor3 =</span> 
+           <span class="kw">factor</span>(<span class="kw">ifelse</span>(relationship_status <span class="op">==</span><span class="st"> &quot;Single&quot;</span>,
+                  <span class="st">&quot;Single&quot;</span>,
+                  <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;</span><span class="st"> </span><span class="dv">6</span>,
+                         <span class="st">&quot;0to5months&quot;</span>,
+                         <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;</span><span class="st"> </span><span class="dv">12</span>,
+                                <span class="st">&quot;6to11months&quot;</span>,
+                                <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">24</span>,
+                                       <span class="st">&quot;1to2years&quot;</span>,
+                                       <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">36</span>,
+                                              <span class="st">&quot;2to3years&quot;</span>,
+           <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">48</span>,
+                  <span class="st">&quot;3to4years&quot;</span>,
+                  <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">60</span>,
+                         <span class="st">&quot;4to5years&quot;</span>,
+                         <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">72</span>,
+                                <span class="st">&quot;5to6years&quot;</span>,
+                                <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">96</span>,
+                                       <span class="st">&quot;6to8years&quot;</span>,
+                                       <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">120</span>,
+                                              <span class="st">&quot;8to10years&quot;</span>,
+           <span class="kw">ifelse</span>(relationship_duration <span class="op">&gt;</span><span class="st"> </span><span class="dv">120</span>, <span class="st">&quot;morethan10years&quot;</span>,
+                  <span class="ot">NA</span>))))))))))),
+           <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Single&quot;</span>, <span class="st">&quot;0to5months&quot;</span>, <span class="st">&quot;6to11months&quot;</span>,
+                      <span class="st">&quot;1to2years&quot;</span>, <span class="st">&quot;2to3years&quot;</span>,
+                      <span class="st">&quot;3to4years&quot;</span>, <span class="st">&quot;4to5years&quot;</span>,
+                      <span class="st">&quot;5to6years&quot;</span>, <span class="st">&quot;6to8years&quot;</span>,
+                      <span class="st">&quot;8to10years&quot;</span>, <span class="st">&quot;morethan10years&quot;</span>)))
+
+data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(relationship_duration_factor3) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">count =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable</span>()</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">relationship_duration_factor3</th>
+<th align="right">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Single</td>
+<td align="right">405</td>
+</tr>
+<tr class="even">
+<td align="left">0to5months</td>
+<td align="right">92</td>
+</tr>
+<tr class="odd">
+<td align="left">6to11months</td>
+<td align="right">88</td>
+</tr>
+<tr class="even">
+<td align="left">1to2years</td>
+<td align="right">162</td>
+</tr>
+<tr class="odd">
+<td align="left">2to3years</td>
+<td align="right">125</td>
+</tr>
+<tr class="even">
+<td align="left">3to4years</td>
+<td align="right">94</td>
+</tr>
+<tr class="odd">
+<td align="left">4to5years</td>
+<td align="right">53</td>
+</tr>
+<tr class="even">
+<td align="left">5to6years</td>
+<td align="right">45</td>
+</tr>
+<tr class="odd">
+<td align="left">6to8years</td>
+<td align="right">47</td>
+</tr>
+<tr class="even">
+<td align="left">8to10years</td>
+<td align="right">26</td>
+</tr>
+<tr class="odd">
+<td align="left">morethan10years</td>
+<td align="right">48</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(data<span class="op">$</span>relationship_duration_factor3) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>, <span class="dt">hjust=</span><span class="dv">1</span>))</code></pre></div>
+<p><img src="99_relationship_duration_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(relationship_duration)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> relationship_duration_factor3), <span class="dt">bins =</span> <span class="dv">200</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</code></pre></div>
+<pre><code>## Don&#39;t know how to automatically pick scale for object of type haven_labelled. Defaulting to continuous.</code></pre>
+<p><img src="99_relationship_duration_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">CiMgRGF0YXdyYW5nbGluZyB7LnRhYnNldH0KCiMjIERhdGEgYW5kIEZ1bmN0aW9ucwpgYGB7ciBkYXRhIGFuZCBmdW5jdGlvbiwgcmVzdWx0cz0naGlkZScsbWVzc2FnZT1GLHdhcm5pbmc9Rn0Kc291cmNlKCIwX2hlbHBlcnMuUiIpCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSwgd2FybmluZz1GQUxTRSkKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCJ0YWJsZS5zcGxpdC50YWJsZSIsIEluZikKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCdyb3VuZCcsMikKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCdkaWdpdHMnLDIpCnBhbmRlcjo6cGFuZGVyT3B0aW9ucygna2VlcC50cmFpbGluZy56ZXJvcycsVFJVRSkKCmxvYWQoImRhdGEvY2xlYW5lZF9zZWxlY3RlZC5yZGF0YSIpCmBgYAoKCiMjIFNlbGVjdCBWYXJpYWJsZXMgey50YWJzZXR9CiMjIyBJbml0aWFsIFN1cnZleQpgYGB7ciBzZWxlY3QgdmFyaWFibGVzfQpkYXRhID0gYWxsX3N1cnZleXMgJT4lCiAgc2VsZWN0KHNlc3Npb24sCiAgICAgICAgIGFnZSwKICAgICAgICAgZWR1Y2F0aW9uX3llYXJzLAogICAgICAgICBuZXRfaW5jb21lLAogICAgICAgICBzdGFydHNfd2l0aCgiYmZpX2FncmVlIiksCiAgICAgICAgIHN0YXJ0c193aXRoKCJiZmlfY29uc2MiKSwKICAgICAgICAgc3RhcnRzX3dpdGgoImJmaV9vcGVuIiksCiAgICAgICAgIHN0YXJ0c193aXRoKCJiZmlfZXh0cmEiKSwKICAgICAgICAgc3RhcnRzX3dpdGgoImJmaV9uZXVybyIpLAogICAgICAgICByZWxpZ2lvc2l0eSwKICAgICAgICAgcHJlZ25hbnRfc3RyZXNzLAogICAgICAgICBkdXJhdGlvbl9yZWxhdGlvbnNoaXBfeWVhcnMsCiAgICAgICAgIGR1cmF0aW9uX3JlbGF0aW9uc2hpcF9tb250aCwKICAgICAgICAgZGF5c193aXRoX3BhcnRuZXIsCiAgICAgICAgIG5pZ2h0c193aXRoX3BhcnRuZXIsCiAgICAgICAgIHN0YXJ0c193aXRoKCJzb2lfciIpLAogICAgICAgICBzb2lfcl9iZWhhdmlvciwKICAgICAgICAgc29pX3JfZGVzaXJlLAogICAgICAgICBudW1iZXJfc2V4dWFsX3BhcnRuZXIsCiAgICAgICAgIGNvbnRyYWNlcHRpb25fYXRfYWxsLAogICAgICAgICBjb250cmFjZXB0aW9uX21ldGhvZCwKICAgICAgICAgY29udHJhY2VwdGlvbl9hcHByb2FjaCwKICAgICAgICAgY29udHJhY2VwdGlvbl9tZXRob2RfYnJvYWQsCiAgICAgICAgIGNvbnRyYWNlcHRpb25fbWVldGluZ19wYXJ0bmVyLAogICAgICAgICBwYXJ0bmVyX2F0dHJhY3RpdmVuZXNzX2ZhY2UsCiAgICAgICAgIHBhcnRuZXJfYXR0cmFjdGl2ZW5lc3NfYm9keSwKICAgICAgICAgcmVsYXRpb25zaGlwX3NhdGlzZmFjdGlvbl9vdmVyYWxsLAogICAgICAgICByZWxhdGlvbnNoaXBfc2F0aXNmYWN0aW9uXzIsCiAgICAgICAgIHJlbGF0aW9uc2hpcF9zYXRpc2ZhY3Rpb25fMywKICAgICAgICAgcmVsYXRpb25zaGlwX3Byb2JsZW1zX1IsCiAgICAgICAgIHJlbGF0aW9uc2hpcF9jb25mbGljdF9SLAogICAgICAgICBzYXRpc2ZhY3Rpb25fc2V4dWFsX2ludGVyY291cnNlLAogICAgICAgICByZWFzb25zX2Zvcl9leGNsdXNpb24sCiAgICAgICAgIHByZWduYW50X3RyeWluZykKYGBgCgojIyMgRGlhcnkKYGBge3Igc2VsZWN0IHZhcmlhYmxlcyBkaWFyeX0KZGF0YV9kaWFyeSA9IGRpYXJ5ICU+JQogIHNlbGVjdChzZXNzaW9uLAogICAgICAgICByZWFzb25zX2Zvcl9leGNsdXNpb24sCiAgICAgICAgIGhpZ2hfbGliaWRvLAogICAgICAgICBzZXhfYWN0aXZlLCBzZXhfYWN0aXZpdHlfYW5hbF9zZXgsIHNleF9hY3Rpdml0eV9iZHNtX2RvbSwgc2V4X2FjdGl2aXR5X2Jkc21fc3ViLAogICAgICAgICBzZXhfYWN0aXZpdHlfY3VkZGxpbmcsIHNleF9hY3Rpdml0eV9jdW5uaWxpbmd1cywgc2V4X2FjdGl2aXR5X2N5YmVyc2V4LAogICAgICAgICBzZXhfYWN0aXZpdHlfZGlydHlfdGFsaywKICAgICAgICAgc2V4X2FjdGl2aXR5X2ZlbGxhdGlvLCBzZXhfYWN0aXZpdHlfa2lzc2luZywgIHNleF9hY3Rpdml0eV9tYXN0dXJiYXRlZF9ieV9wYXJ0bmVyLAogICAgICAgICBzZXhfYWN0aXZpdHlfbWFzdHVyYmF0ZWRfcGFydG5lciwgc2V4X2FjdGl2aXR5X21hc3R1cmJhdGlvbiwgc2V4X2FjdGl2aXR5X290aGVyLAogICAgICAgICBzZXhfYWN0aXZpdHlfcGhvbmVfc2t5cGVfc2V4LCBzZXhfYWN0aXZpdHlfcG9ybm9ncmFwaHksIHNleF9hY3Rpdml0eV9zZXgsIAogICAgICAgICBzZXhfYWN0aXZpdHlfdG91Y2hfb3RoZXIsIAogICAgICAgICBzZXhfYWN0aXZpdHlfdG95cywgc2V4X2FjdGl2aXR5X3VuY2xlYXIsICBzZXhfb3RoZXIsIHNleF9zb2xvLCBzZXhfdW5jbGVhciwKICAgICAgICAgZGF5c19kb25lKQpgYGAKCgojIyBFeGNsdXNpb24gey50YWJzZXR9CiMjIyBJbml0aWFsIFN1cnZleQpgYGB7ciBleGNsdXNpb24gaW5pdGlhbCBzdXJ2ZXl9Cm5fZXhjbHVkZWQgPSBkYXRhICU+JSBmaWx0ZXIocmVhc29uc19mb3JfZXhjbHVzaW9uICE9ICIiKSAlPiUgbnJvdygpCmRhdGEgPSBkYXRhICU+JSBmaWx0ZXIocmVhc29uc19mb3JfZXhjbHVzaW9uID09ICIiKQpgYGAKYHIgbl9leGNsdWRlZGAgcGVvcGxlIHdlcmUgZXhjbHVkZWQuCgojIyMgRGlhcnkgIHsudGFic2V0fQojIyMjIEV4Y2x1c2lvbiBjcml0ZXJpYSBiYXNlZCBvbiBpbml0aWFsCmBgYHtyfQpzZXNzaW9uX2NvZGVzID0gZGF0YSRzZXNzaW9uCgpkYXRhX2RpYXJ5ID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIoc2Vzc2lvbiAlaW4lIHNlc3Npb25fY29kZXMpCgpsZW5ndGgoZGF0YV9kaWFyeSRzZXNzaW9uKQpgYGAKVGhlIGByIGxlbmd0aCh1bmlxdWUoZGF0YV9kaWFyeSRzZXNzaW9uKSlgIHBhcnRpY2lwYW50cyBmaWxsZWQgb3V0IGByIGxlbmd0aChkYXRhX2RpYXJ5JHNlc3Npb24pYC4KCiMjIyMgU2tpcHBlZCBkaWFyeSBlbnRyeQpgYGB7cn0Kbl9za2lwcGVkX2RpYXJ5ID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIocmVhc29uc19mb3JfZXhjbHVzaW9uICVjb250YWlucyUgInNraXBwZWRfZGlhcnlfZW50cnkiKSAlPiUKICBjb3VudCgpCgpkYXRhX2RpYXJ5ID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIoIShyZWFzb25zX2Zvcl9leGNsdXNpb24gJWNvbnRhaW5zJSAic2tpcHBlZF9kaWFyeV9lbnRyeSIpKQpgYGAKYHIgbl9za2lwcGVkX2RpYXJ5YCBkYXlzIHdlcmUgc2tpcHBlZC4KCiMjIyMgRGlzaG9uZXN0IGFuc3dlcnMKYGBge3J9Cm5fZGlzaG9uZXN0ID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIocmVhc29uc19mb3JfZXhjbHVzaW9uICVjb250YWlucyUgImRpc2hvbmVzdCIpICU+JQogIGNvdW50KCkKCmRhdGFfZGlhcnkgPSBkYXRhX2RpYXJ5ICU+JQogIGZpbHRlcighKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiAlY29udGFpbnMlICJkaXNob25lc3QiKSkKYGBgCmByIG5fZGlzaG9uZXN0YCBkYXlzIGNvbnRhaW5lZCBkaXNob25lc3QgYW5zd2Vycy4KCiMjIyMgRmlsbGVkIG91dCBsZXNzIHRoYW4gMTQgZGF5cwpgYGB7cn0KbnVtYmVyX29mX2RheXMgPSBkYXRhX2RpYXJ5ICU+JQogIGdyb3VwX2J5KHNlc3Npb24pICU+JQogIHN1bW1hcmlzZShuID0gbigpKSAlPiUKICByZW5hbWUobnVtYmVyX29mX2RheXMgPSBuKQogIApkYXRhX2RpYXJ5ID0gbGVmdF9qb2luKGRhdGFfZGlhcnksIG51bWJlcl9vZl9kYXlzLCBieSA9ICJzZXNzaW9uIikKCmRhdGFfZGlhcnlfaW5jbHVkZSA9IGRhdGFfZGlhcnkgJT4lCiAgZmlsdGVyKGFzLm51bWVyaWMobnVtYmVyX29mX2RheXMpID49IDE0KQoKZGF0YV9kaWFyeV9leGNsdWRlID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIoYXMubnVtZXJpYyhudW1iZXJfb2ZfZGF5cykgPCAxNCkKCmRhdGFfZGlhcnkgPSBkYXRhX2RpYXJ5X2luY2x1ZGUKYGBgCmByIGxlbmd0aCh1bmlxdWUoZGF0YV9kaWFyeV9leGNsdWRlJHNlc3Npb24pKWAgcGFydGljaXBhbnRzIHdlcmUgZXhjbHVkZWQgYmVjYXVzZSB0aGV5IGZpbGxlZCBvdXQgbGVzcyB0aGFuIDE0IGRheXMgLSByZXN1bHRpbmcgaW4gYHIgbGVuZ3RoKGRhdGFfZGlhcnlfZXhjbHVkZSRzZXNzaW9uKWAgZXhjbHVkZWQgZGF5cy4KCiMjIyMgU3VtbWFyeSB7LmFjdGl2ZX0KSW4gdG90YWwgYHIgbGVuZ3RoKHVuaXF1ZShkYXRhX2RpYXJ5JHNlc3Npb24pKWAgcGFydGljaXBhbnRzIHdpdGggYHIgbGVuZ3RoKGRhdGFfZGlhcnkkc2Vzc2lvbilgIGRpYXJ5IGRheXMgd2VyZSBpbmNsdWRlZCBmb3IgdGhlIGFuYWx5c2VzIGluIHdoaWNoIG91dGNvbWVzIHdlcmUgYmFzZWQgb24gZGlhcnkgaW5mb3JtYXRpb24uIAoKIyMgV3JhbmdsZSBkYXRhIHsudGFic2V0IC5hY3RpdmV9CiMjIyBSZWxhdGlvbnNoaXAgc3RhdHVzIChzaW5nbGUgdnMgcGFydG5lcmVkKQpgYGB7cn0KZGF0YSA9IGRhdGEgJT4lIG11dGF0ZSgKICByZWxhdGlvbnNoaXBfc3RhdHVzID0gaWZlbHNlKGlzLm5hKGR1cmF0aW9uX3JlbGF0aW9uc2hpcF9tb250aCksICJTaW5nbGUiLCAiUGFydG5lcmVkIikpCgpxcGxvdChkYXRhJHJlbGF0aW9uc2hpcF9zdGF0dXMpICsgY29vcmRfZmxpcCgpCmBgYAoKIyMjIFJlbGF0aW9uc2hpcCBkdXJhdGlvbiB7LmFjdGl2ZSAudGFic2V0fQojIyMjIExpbmVhciByZWxhdGlvbnNoaXAgZHVyYXRpb24KYGBge3J9CmRhdGEgPSBkYXRhICU+JQogIG11dGF0ZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPSBkdXJhdGlvbl9yZWxhdGlvbnNoaXBfeWVhcnMgKiAxMiArCiAgICAgICAgICAgZHVyYXRpb25fcmVsYXRpb25zaGlwX21vbnRoKQoKcXBsb3QoZGF0YSRyZWxhdGlvbnNoaXBfZHVyYXRpb24pCmBgYAoKIyMjIyBGYWN0b3IxIHJlbGF0aW9uc2hpcCBkdXJhdGlvbgpEaXZpZGUgcmVsYXRpb25zaGlwIGR1cmF0aW9uIGludG8gcXVhcnRpbGVzCmBgYHtyfQpkYXRhID0gZGF0YSAlPiUKICAgbXV0YXRlKHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IgPSAKICAgICAgICAgICAgZmFjdG9yKGlmZWxzZShyZWxhdGlvbnNoaXBfc3RhdHVzID09ICJTaW5nbGUiLAogICAgICAgICAgICAgICAgICAgIlNpbmdsZSIsCiAgICAgICAgICAgICAgICAgICBpZmVsc2UocmVsYXRpb25zaGlwX2R1cmF0aW9uIDw9IDEyLAogICAgICAgICAgICAgICAgICAgICAgICAgICJ1cHRvMTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPD0gMjgsIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAidXB0bzI4bW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKHJlbGF0aW9uc2hpcF9kdXJhdGlvbiA8PSA1MiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJ1cHRvNTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKHJlbGF0aW9uc2hpcF9kdXJhdGlvbiA+IDUyLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIm1vcmV0aGFuNTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTkEpKSkpKSwKICAgICAgICAgICAgICAgICAgIGxldmVscyA9IGMoIlNpbmdsZSIsICJ1cHRvMTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAidXB0bzI4bW9udGhzIiwgInVwdG81Mm1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJtb3JldGhhbjUybW9udGhzIikpKQoKCmRhdGEgJT4lIAogIGdyb3VwX2J5KHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IpICU+JQogIHN1bW1hcmlzZShjb3VudCA9IG4oKSkgJT4lCiAgYWRkX2NvbHVtbihkdXJhdGlvbl9pbl95ZWFycyA9IGMoIlNpbmdsZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgInVwdG8xeWVhciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgInVwdG8yLjN5ZWFycyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgInVwdG80LjN5ZWFycyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIm1vcmV0aGFuNC4zeWVhcnMiKSkgJT4lCiAgc2VsZWN0KHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IsIGR1cmF0aW9uX2luX3llYXJzLCBjb3VudCkgJT4lCiAga2FibGUoKQogCgpxcGxvdChkYXRhJHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IpCgoKZ2dwbG90KGRhdGEsIGFlcyhyZWxhdGlvbnNoaXBfZHVyYXRpb24pKSArCiAgZ2VvbV9oaXN0b2dyYW0oYWVzKGZpbGwgPSByZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yKSwgYmlucyA9IDIwMCkgKwogIHRoZW1lKGxlZ2VuZC50aXRsZSA9IGVsZW1lbnRfYmxhbmsoKSwgbGVnZW5kLnBvc2l0aW9uID0gImJvdHRvbSIpCgpgYGAKCiMjIyMgRmFjdG9yMiByZWxhdGlvbnNoaXAgZHVyYXRpb24KRGl2aWRlIHJlbGF0aW9uc2hpcCBkdXJhdGlvbiBpbnRvIDggcXVhbnRpbGVzCmBgYHtyfQpxdWFudGlsZXMgPSBxdWFudGlsZShhcy5udW1lcmljKGRhdGEkcmVsYXRpb25zaGlwX2R1cmF0aW9uKSwKICAgICAgICAgICAgICAgICAgICAgbmEucm0gPSBULAogICAgICAgICAgICAgICAgICAgICBwcm9icyA9IGMoMCwgMC4xMjUsIDAuMjUsIDAuMzc1LCAwLjUsMC42MjUsIDAuNzUsIDAuODc1LCAxKSkKCmRhdGEgPSBkYXRhICU+JQogIG11dGF0ZShyZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yMiA9IAogICAgICAgICAgIGZhY3RvcihpZmVsc2UocmVsYXRpb25zaGlwX3N0YXR1cyA9PSAiU2luZ2xlIiwKICAgICAgICAgICAgICAgICAgIlNpbmdsZSIsCiAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPD0gcXVhbnRpbGVzWzJdLAogICAgICAgICAgICAgICAgICAgICAgICAgInVwdG82bW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPD0gcXVhbnRpbGVzWzNdLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJ1cHRvMTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPD0gcXVhbnRpbGVzWzRdLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAidXB0bzIwbW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKHJlbGF0aW9uc2hpcF9kdXJhdGlvbiA8PSBxdWFudGlsZXNbNV0sCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAidXB0bzI4bW9udGhzIiwKICAgICAgICAgICBpZmVsc2UocmVsYXRpb25zaGlwX2R1cmF0aW9uIDw9IHF1YW50aWxlc1s2XSwKICAgICAgICAgICAgICAgICAgInVwdG8zOG1vbnRocyIsCiAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPD0gcXVhbnRpbGVzWzddLAogICAgICAgICAgICAgICAgICAgICAgICAgInVwdG81Mm1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UocmVsYXRpb25zaGlwX2R1cmF0aW9uIDw9IHF1YW50aWxlc1s4XSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAidXB0bzg1bW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UocmVsYXRpb25zaGlwX2R1cmF0aW9uID4gcXVhbnRpbGVzWzhdLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAibW9yZXRoYW44NW1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE5BKSkpKSkpKSkpLAogICAgICAgICAgIGxldmVscyA9IGMoIlNpbmdsZSIsICJ1cHRvNm1vbnRocyIsICJ1cHRvMTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgInVwdG8yMG1vbnRocyIsICJ1cHRvMjhtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgInVwdG8zOG1vbnRocyIsICJ1cHRvNTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgInVwdG84NW1vbnRocyIsICJtb3JldGhhbjg1bW9udGhzIikpKQoKZGF0YSAlPiUgCiAgZ3JvdXBfYnkocmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvcjIpICU+JQogIHN1bW1hcmlzZShjb3VudCA9IG4oKSkgJT4lCiAgYWRkX2NvbHVtbihkdXJhdGlvbl9pbl95ZWFycyA9IGMoIlNpbmdsZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgInVwdG8wLjV5ZWFycyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgInVwdG8xeWVhciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgInVwdG8xLjd5ZWFyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAidXB0bzIuM3llYXJzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAidXB0bzMuMnllYXJzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAidXB0bzQuM3llYXJzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAidXB0bzcuMXllYXJzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAibW9yZXRoYW43LjF5ZWFycyIpKSAlPiUKICBzZWxlY3QocmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvcjIsIGR1cmF0aW9uX2luX3llYXJzLCBjb3VudCkgICU+JQogIGthYmxlKCkKCnFwbG90KGRhdGEkcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvcjIpICsKICB0aGVtZShheGlzLnRleHQueCA9IGVsZW1lbnRfdGV4dChhbmdsZSA9IDkwLCB2anVzdCA9IDAuNSwgaGp1c3Q9MSkpCgpnZ3Bsb3QoZGF0YSwgYWVzKHJlbGF0aW9uc2hpcF9kdXJhdGlvbikpICsKICBnZW9tX2hpc3RvZ3JhbShhZXMoZmlsbCA9IHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IyKSwgYmlucyA9IDIwMCkgKwogIHRoZW1lKGxlZ2VuZC50aXRsZSA9IGVsZW1lbnRfYmxhbmsoKSwgbGVnZW5kLnBvc2l0aW9uID0gImJvdHRvbSIpCgpgYGAKCgojIyMjIEZhY3RvcjMgcmVsYXRpb25zaGlwIGR1cmF0aW9uCmh0dHBzOi8vc2NpLWh1Yi5zdC8xMC4xMDE2L2ouc3NyZXNlYXJjaC4yMDE1LjAxLjAwOQpFZmZlY3RzIG9mIHJlbGF0aW9uc2hpcCBkdXJhdGlvbiwgY29oYWJpdGF0aW9uLCBhbmQgbWFycmlhZ2Ugb24gdGhlIGZyZXF1ZW5jeSBvZiBpbnRlcmNvdXJzZSBpbiBjb3VwbGVzOiBGaW5kaW5ncyBmcm9tIEdlcm1hbiBwYW5lbCBkYXRhCgpSZWxhdGlvbnNoaXAgRHVyYXRpb24KKiAwLTUgbW9udGhzCiogNi0xMSBtb250aHMKKiAxLTIgeWVhcnMKKiAyLTMgeWVhcnMKKiAzLTQgeWVhcnMKKiA0LTUgeWVhcnMKKiA1LTYgeWVhcnMKKiA2LTggeWVhcnMKKiA4LTEwIHllYXJzCiogMTAtMTIgeWVhcnMKKiAxMi0xNCB5ZWFycwoqIDE0LTE2IHllYXJzCiogPiAxNiB5ZWFycwoKCmBgYHtyfQpkYXRhID0gZGF0YSAlPiUKICBtdXRhdGUocmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvcjMgPSAKICAgICAgICAgICBmYWN0b3IoaWZlbHNlKHJlbGF0aW9uc2hpcF9zdGF0dXMgPT0gIlNpbmdsZSIsCiAgICAgICAgICAgICAgICAgICJTaW5nbGUiLAogICAgICAgICAgICAgICAgICBpZmVsc2UocmVsYXRpb25zaGlwX2R1cmF0aW9uIDwgNiwKICAgICAgICAgICAgICAgICAgICAgICAgICIwdG81bW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPCAxMiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiNnRvMTFtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPD0gMjQsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICIxdG8yeWVhcnMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UocmVsYXRpb25zaGlwX2R1cmF0aW9uIDw9IDM2LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIjJ0bzN5ZWFycyIsCiAgICAgICAgICAgaWZlbHNlKHJlbGF0aW9uc2hpcF9kdXJhdGlvbiA8PSA0OCwKICAgICAgICAgICAgICAgICAgIjN0bzR5ZWFycyIsCiAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPD0gNjAsCiAgICAgICAgICAgICAgICAgICAgICAgICAiNHRvNXllYXJzIiwKICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPD0gNzIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIjV0bzZ5ZWFycyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKHJlbGF0aW9uc2hpcF9kdXJhdGlvbiA8PSA5NiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIjZ0bzh5ZWFycyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPD0gMTIwLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIjh0bzEweWVhcnMiLAogICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPiAxMjAsICJtb3JldGhhbjEweWVhcnMiLAogICAgICAgICAgICAgICAgICBOQSkpKSkpKSkpKSkpLAogICAgICAgICAgIGxldmVscyA9IGMoIlNpbmdsZSIsICIwdG81bW9udGhzIiwgIjZ0bzExbW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICIxdG8yeWVhcnMiLCAiMnRvM3llYXJzIiwKICAgICAgICAgICAgICAgICAgICAgICIzdG80eWVhcnMiLCAiNHRvNXllYXJzIiwKICAgICAgICAgICAgICAgICAgICAgICI1dG82eWVhcnMiLCAiNnRvOHllYXJzIiwKICAgICAgICAgICAgICAgICAgICAgICI4dG8xMHllYXJzIiwgIm1vcmV0aGFuMTB5ZWFycyIpKSkKCmRhdGEgJT4lIAogIGdyb3VwX2J5KHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IzKSAlPiUKICBzdW1tYXJpc2UoY291bnQgPSBuKCkpICU+JQogIGthYmxlKCkKICAKICAKcXBsb3QoZGF0YSRyZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yMykgKwogIHRoZW1lKGF4aXMudGV4dC54ID0gZWxlbWVudF90ZXh0KGFuZ2xlID0gOTAsIHZqdXN0ID0gMC41LCBoanVzdD0xKSkKCgpnZ3Bsb3QoZGF0YSwgYWVzKHJlbGF0aW9uc2hpcF9kdXJhdGlvbikpICsKICBnZW9tX2hpc3RvZ3JhbShhZXMoZmlsbCA9IHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IzKSwgYmlucyA9IDIwMCkgKwogIHRoZW1lKGxlZ2VuZC50aXRsZSA9IGVsZW1lbnRfYmxhbmsoKSwgbGVnZW5kLnBvc2l0aW9uID0gImJvdHRvbSIpCgpgYGAKCgo=</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("99_relationship_duration.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

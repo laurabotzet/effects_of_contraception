@@ -258,7 +258,7 @@ bar_count = function(data, variable, na.rm = FALSE) {
     coord_flip()
 }
 
-theme_set(theme_tufte(base_size = 20, base_family='Helvetica Neue'))
+#theme_set(theme_tufte(base_size = 20, base_family='Helvetica Neue'))
 
 plot_interaction = function(model, nr = 3) {
   ef = allEffects(model, xlevels = 2)
