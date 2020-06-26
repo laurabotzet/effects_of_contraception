@@ -4,7 +4,6 @@
 ## Data and Functions
 ```{r data and function, results='hide',message=F,warning=F}
 source("0_helpers.R")
-knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
 pander::panderOptions("table.split.table", Inf)
 pander::panderOptions('round',2)
 pander::panderOptions('digits',2)
