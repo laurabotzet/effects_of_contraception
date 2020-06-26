@@ -137,6 +137,17 @@ data_diary = data_diary_include
 In total `r length(unique(data_diary$session))` participants with `r length(data_diary$session)` diary days were included for the analyses in which outcomes were based on diary information. 
 
 ## Wrangle data {.tabset}
+
+### Income
+Set factor level correctly
+```{r}
+data = data %>%
+  mutate(net_income = factor(net_income,
+                             levels = c("euro_lt_500", "euro_500_1000",
+                                        "euro_1000_2000", "euro_2000_3000",
+                                        "euro_gt_3000", "dont_tell")))
+```
+
 ### Relationship status (single vs partnered)
 ```{r}
 data = data %>% mutate(
@@ -205,24 +216,6 @@ data = data %>%
                       "Partnered_upto20months", "Partnered_upto28months",
                       "Partnered_upto38months", "Partnered_upto52months",
                       "Partnered_upto85months", "Partnered_morethan85months")))
-
-qplot(data$relationship_duration_factor2)
-
-ggplot(data, aes(relationship_duration)) +
-  geom_histogram(aes(fill = relationship_duration_factor2), bins = 100)
-
-m1 = lm(bfi_extra ~ relationship_duration, data = data)
-m2 = lm(bfi_extra ~ relationship_duration_factor, data = data)
-m3 = lm(bfi_extra ~ relationship_duration_factor2, data = data)
-
-anova(m1, m2)
-
-anova(m1, m3)
-
-library(effects)
-plot(allEffects(m2))
-plot(allEffects(m3))
-
 ```
 
 

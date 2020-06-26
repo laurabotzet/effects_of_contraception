@@ -11,7 +11,7 @@
 
 
 
-<title></title>
+<title>2_datawrangling.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,48 +22,75 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #303030; color: #cccccc; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; }
-td.sourceCode { padding-left: 5px; }
-pre, code { color: #cccccc; background-color: #303030; }
-code > span.kw { color: #f0dfaf; } /* Keyword */
-code > span.dt { color: #dfdfbf; } /* DataType */
-code > span.dv { color: #dcdccc; } /* DecVal */
-code > span.bn { color: #dca3a3; } /* BaseN */
-code > span.fl { color: #c0bed1; } /* Float */
-code > span.ch { color: #dca3a3; } /* Char */
-code > span.st { color: #cc9393; } /* String */
-code > span.co { color: #7f9f7f; } /* Comment */
-code > span.ot { color: #efef8f; } /* Other */
-code > span.al { color: #ffcfaf; } /* Alert */
-code > span.fu { color: #efef8f; } /* Function */
-code > span.er { color: #c3bf9f; } /* Error */
-code > span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-code > span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
-code > span.sc { color: #dca3a3; } /* SpecialChar */
-code > span.vs { color: #cc9393; } /* VerbatimString */
-code > span.ss { color: #cc9393; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { color: #f0dfaf; } /* ControlFlow */
-code > span.op { color: #f0efd0; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
-code > span.at { } /* Attribute */
-code > span.do { color: #7f9f7f; } /* Documentation */
-code > span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
-code > span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
-code > span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
 
 .sourceCode .row {
   width: 100%;
@@ -391,253 +418,330 @@ $(document).ready(function () {
 <h1>Datawrangling</h1>
 <div id="data-and-functions" class="section level2">
 <h2>Data and Functions</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">source</span>(<span class="st">&quot;0_helpers.R&quot;</span>)
-knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">warning =</span> <span class="ot">FALSE</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>)
-pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&quot;table.split.table&quot;</span>, <span class="ot">Inf</span>)
-pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;round&#39;</span>,<span class="dv">2</span>)
-pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;digits&#39;</span>,<span class="dv">2</span>)
-pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;keep.trailing.zeros&#39;</span>,<span class="ot">TRUE</span>)
-
-<span class="kw">load</span>(<span class="st">&quot;data/cleaned_selected.rdata&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">source</span>(<span class="st">&quot;0_helpers.R&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">warning =</span> <span class="ot">FALSE</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a>pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&quot;table.split.table&quot;</span>, <span class="ot">Inf</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;round&#39;</span>,<span class="dv">2</span>)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;digits&#39;</span>,<span class="dv">2</span>)</span>
+<span id="cb1-6"><a href="#cb1-6"></a>pander<span class="op">::</span><span class="kw">panderOptions</span>(<span class="st">&#39;keep.trailing.zeros&#39;</span>,<span class="ot">TRUE</span>)</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="kw">load</span>(<span class="st">&quot;data/cleaned_selected.rdata&quot;</span>)</span></code></pre></div>
 </div>
 <div id="select-variables" class="section level2 tabset">
 <h2>Select Variables</h2>
 <div id="initial-survey" class="section level3">
 <h3>Initial Survey</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(session,
-         age,
-         education_years,
-         net_income,
-         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_agree&quot;</span>),
-         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_consc&quot;</span>),
-         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_open&quot;</span>),
-         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_extra&quot;</span>),
-         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_neuro&quot;</span>),
-         religiosity,
-         pregnant_stress,
-         duration_relationship_years,
-         duration_relationship_month,
-         days_with_partner,
-         nights_with_partner,
-         <span class="kw">starts_with</span>(<span class="st">&quot;soi_r&quot;</span>),
-         soi_r_behavior,
-         soi_r_desire,
-         number_sexual_partner,
-         contraception_method,
-         contraception_approach,
-         contraception_method_broad,
-         contraception_meeting_partner,
-         partner_attractiveness_face,
-         partner_attractiveness_body,
-         relationship_satisfaction_overall,
-         relationship_satisfaction_<span class="dv">2</span>,
-         relationship_satisfaction_<span class="dv">3</span>,
-         relationship_problems_R,
-         relationship_conflict_R,
-         satisfaction_sexual_intercourse,
-         reasons_for_exclusion,
-         pregnant_trying)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>data =<span class="st"> </span>all_surveys <span class="op">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">  </span><span class="kw">select</span>(session,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>         age,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>         education_years,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>         net_income,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_agree&quot;</span>),</span>
+<span id="cb2-7"><a href="#cb2-7"></a>         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_consc&quot;</span>),</span>
+<span id="cb2-8"><a href="#cb2-8"></a>         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_open&quot;</span>),</span>
+<span id="cb2-9"><a href="#cb2-9"></a>         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_extra&quot;</span>),</span>
+<span id="cb2-10"><a href="#cb2-10"></a>         <span class="kw">starts_with</span>(<span class="st">&quot;bfi_neuro&quot;</span>),</span>
+<span id="cb2-11"><a href="#cb2-11"></a>         religiosity,</span>
+<span id="cb2-12"><a href="#cb2-12"></a>         pregnant_stress,</span>
+<span id="cb2-13"><a href="#cb2-13"></a>         duration_relationship_years,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>         duration_relationship_month,</span>
+<span id="cb2-15"><a href="#cb2-15"></a>         days_with_partner,</span>
+<span id="cb2-16"><a href="#cb2-16"></a>         nights_with_partner,</span>
+<span id="cb2-17"><a href="#cb2-17"></a>         <span class="kw">starts_with</span>(<span class="st">&quot;soi_r&quot;</span>),</span>
+<span id="cb2-18"><a href="#cb2-18"></a>         soi_r_behavior,</span>
+<span id="cb2-19"><a href="#cb2-19"></a>         soi_r_desire,</span>
+<span id="cb2-20"><a href="#cb2-20"></a>         number_sexual_partner,</span>
+<span id="cb2-21"><a href="#cb2-21"></a>         contraception_at_all,</span>
+<span id="cb2-22"><a href="#cb2-22"></a>         contraception_method,</span>
+<span id="cb2-23"><a href="#cb2-23"></a>         contraception_approach,</span>
+<span id="cb2-24"><a href="#cb2-24"></a>         contraception_method_broad,</span>
+<span id="cb2-25"><a href="#cb2-25"></a>         contraception_meeting_partner,</span>
+<span id="cb2-26"><a href="#cb2-26"></a>         partner_attractiveness_face,</span>
+<span id="cb2-27"><a href="#cb2-27"></a>         partner_attractiveness_body,</span>
+<span id="cb2-28"><a href="#cb2-28"></a>         relationship_satisfaction_overall,</span>
+<span id="cb2-29"><a href="#cb2-29"></a>         relationship_satisfaction_<span class="dv">2</span>,</span>
+<span id="cb2-30"><a href="#cb2-30"></a>         relationship_satisfaction_<span class="dv">3</span>,</span>
+<span id="cb2-31"><a href="#cb2-31"></a>         relationship_problems_R,</span>
+<span id="cb2-32"><a href="#cb2-32"></a>         relationship_conflict_R,</span>
+<span id="cb2-33"><a href="#cb2-33"></a>         satisfaction_sexual_intercourse,</span>
+<span id="cb2-34"><a href="#cb2-34"></a>         reasons_for_exclusion,</span>
+<span id="cb2-35"><a href="#cb2-35"></a>         pregnant_trying)</span></code></pre></div>
 </div>
 <div id="diary" class="section level3">
 <h3>Diary</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_diary =<span class="st"> </span>diary <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(session,
-         reasons_for_exclusion,
-         high_libido,
-         sex_active, sex_activity_anal_sex, sex_activity_bdsm_dom, sex_activity_bdsm_sub,
-         sex_activity_cuddling, sex_activity_cunnilingus, sex_activity_cybersex,
-         sex_activity_dirty_talk,
-         sex_activity_fellatio, sex_activity_kissing,  sex_activity_masturbated_by_partner,
-         sex_activity_masturbated_partner, sex_activity_masturbation, sex_activity_other,
-         sex_activity_phone_skype_sex, sex_activity_pornography, sex_activity_sex, 
-         sex_activity_touch_other, 
-         sex_activity_toys, sex_activity_unclear,  sex_other, sex_solo, sex_unclear,
-         days_done)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>data_diary =<span class="st"> </span>diary <span class="op">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw">select</span>(session,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>         reasons_for_exclusion,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>         high_libido,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>         sex_active, sex_activity_anal_sex, sex_activity_bdsm_dom, sex_activity_bdsm_sub,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>         sex_activity_cuddling, sex_activity_cunnilingus, sex_activity_cybersex,</span>
+<span id="cb3-7"><a href="#cb3-7"></a>         sex_activity_dirty_talk,</span>
+<span id="cb3-8"><a href="#cb3-8"></a>         sex_activity_fellatio, sex_activity_kissing,  sex_activity_masturbated_by_partner,</span>
+<span id="cb3-9"><a href="#cb3-9"></a>         sex_activity_masturbated_partner, sex_activity_masturbation, sex_activity_other,</span>
+<span id="cb3-10"><a href="#cb3-10"></a>         sex_activity_phone_skype_sex, sex_activity_pornography, sex_activity_sex, </span>
+<span id="cb3-11"><a href="#cb3-11"></a>         sex_activity_touch_other, </span>
+<span id="cb3-12"><a href="#cb3-12"></a>         sex_activity_toys, sex_activity_unclear,  sex_other, sex_solo, sex_unclear,</span>
+<span id="cb3-13"><a href="#cb3-13"></a>         days_done)</span></code></pre></div>
 </div>
 </div>
 <div id="exclusion" class="section level2 tabset">
 <h2>Exclusion</h2>
 <div id="initial-survey-1" class="section level3">
 <h3>Initial Survey</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_excluded =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">!=</span><span class="st"> &quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nrow</span>()
-data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">==</span><span class="st"> &quot;&quot;</span>)</code></pre></div>
-<p>585 people were excluded.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>n_excluded =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">!=</span><span class="st"> &quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nrow</span>()</span>
+<span id="cb4-2"><a href="#cb4-2"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">==</span><span class="st"> &quot;&quot;</span>)</span></code></pre></div>
+<p>475 people were excluded.</p>
 </div>
 <div id="diary-1" class="section level3 tabset">
 <h3>Diary</h3>
 <div id="exclusion-criteria-based-on-initial" class="section level4">
 <h4>Exclusion criteria based on initial</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">session_codes =<span class="st"> </span>data<span class="op">$</span>session
-
-data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(session <span class="op">%in%</span><span class="st"> </span>session_codes)
-
-<span class="kw">length</span>(data_diary<span class="op">$</span>session)</code></pre></div>
-<pre><code>## [1] 48067</code></pre>
-<p>The 1075 participants filled out 48067.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>session_codes =<span class="st"> </span>data<span class="op">$</span>session</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a>data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span><span class="kw">filter</span>(session <span class="op">%in%</span><span class="st"> </span>session_codes)</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="kw">length</span>(data_diary<span class="op">$</span>session)</span></code></pre></div>
+<pre><code>## [1] 53483</code></pre>
+<p>The 1185 participants filled out 53483.</p>
 </div>
 <div id="skipped-diary-entry" class="section level4">
 <h4>Skipped diary entry</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_skipped_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;skipped_diary_entry&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>()
-
-data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;skipped_diary_entry&quot;</span>))</code></pre></div>
-<p>676 days were skipped.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>n_skipped_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;skipped_diary_entry&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw">count</span>()</span>
+<span id="cb7-4"><a href="#cb7-4"></a></span>
+<span id="cb7-5"><a href="#cb7-5"></a>data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;skipped_diary_entry&quot;</span>))</span></code></pre></div>
+<p>748 days were skipped.</p>
 </div>
 <div id="dishonest-answers" class="section level4">
 <h4>Dishonest answers</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_dishonest =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;dishonest&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>()
-
-data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;dishonest&quot;</span>))</code></pre></div>
-<p>126 days contained dishonest answers.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>n_dishonest =<span class="st"> </span>data_diary <span class="op">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;dishonest&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw">count</span>()</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;dishonest&quot;</span>))</span></code></pre></div>
+<p>142 days contained dishonest answers.</p>
 </div>
-<div id="filled-out-less-than-30-days" class="section level4">
-<h4>Filled out less than 30 days</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">number_of_days =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(session) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">rename</span>(<span class="dt">number_of_days =</span> n)
-  
-data_diary =<span class="st"> </span><span class="kw">left_join</span>(data_diary, number_of_days, <span class="dt">by =</span> <span class="st">&quot;session&quot;</span>)
-
-data_diary_include =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(<span class="kw">as.numeric</span>(number_of_days) <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>)
-
-data_diary_exclude =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(<span class="kw">as.numeric</span>(number_of_days) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>)
-
-data_diary =<span class="st"> </span>data_diary_include</code></pre></div>
-<p>300 participants were excluded because they filled out less than 30 days - resulting in 4149 excluded days.</p>
+<div id="filled-out-less-than-14-days" class="section level4">
+<h4>Filled out less than 14 days</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>number_of_days =<span class="st"> </span>data_diary <span class="op">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span><span class="kw">group_by</span>(session) <span class="op">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">number_of_days =</span> n)</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  </span>
+<span id="cb9-6"><a href="#cb9-6"></a>data_diary =<span class="st"> </span><span class="kw">left_join</span>(data_diary, number_of_days, <span class="dt">by =</span> <span class="st">&quot;session&quot;</span>)</span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a>data_diary_include =<span class="st"> </span>data_diary <span class="op">%&gt;%</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">as.numeric</span>(number_of_days) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">14</span>)</span>
+<span id="cb9-10"><a href="#cb9-10"></a></span>
+<span id="cb9-11"><a href="#cb9-11"></a>data_diary_exclude =<span class="st"> </span>data_diary <span class="op">%&gt;%</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">as.numeric</span>(number_of_days) <span class="op">&lt;</span><span class="st"> </span><span class="dv">14</span>)</span>
+<span id="cb9-13"><a href="#cb9-13"></a></span>
+<span id="cb9-14"><a href="#cb9-14"></a>data_diary =<span class="st"> </span>data_diary_include</span></code></pre></div>
+<p>173 participants were excluded because they filled out less than 14 days - resulting in 1027 excluded days.</p>
 </div>
 <div id="summary" class="section level4 active">
 <h4>Summary</h4>
-<p>In total 740 participants with 43116 diary days were included for the analyses in which outcomes were based on diary information.</p>
+<p>In total 971 participants with 51566 diary days were included for the analyses in which outcomes were based on diary information.</p>
 </div>
 </div>
 </div>
 <div id="wrangle-data" class="section level2 tabset">
 <h2>Wrangle data</h2>
+<div id="income" class="section level3">
+<h3>Income</h3>
+<p>Set factor level correctly</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">net_income =</span> <span class="kw">factor</span>(net_income,</span>
+<span id="cb10-3"><a href="#cb10-3"></a>                             <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;euro_lt_500&quot;</span>, <span class="st">&quot;euro_500_1000&quot;</span>,</span>
+<span id="cb10-4"><a href="#cb10-4"></a>                                        <span class="st">&quot;euro_1000_2000&quot;</span>, <span class="st">&quot;euro_2000_3000&quot;</span>,</span>
+<span id="cb10-5"><a href="#cb10-5"></a>                                        <span class="st">&quot;euro_gt_3000&quot;</span>, <span class="st">&quot;dont_tell&quot;</span>)))</span></code></pre></div>
+</div>
+<div id="relationship-status-single-vs-partnered" class="section level3">
+<h3>Relationship status (single vs partnered)</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="dt">relationship_status =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(duration_relationship_month), <span class="st">&quot;Single&quot;</span>, <span class="st">&quot;Partnered&quot;</span>))</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="kw">qplot</span>(data<span class="op">$</span>relationship_status) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="relationship-duration" class="section level3">
+<h3>Relationship duration</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relationship_duration =</span> duration_relationship_years <span class="op">*</span><span class="st"> </span><span class="dv">12</span> <span class="op">+</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="st">           </span>duration_relationship_month)</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="kw">qplot</span>(data<span class="op">$</span>relationship_duration)</span></code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">relationship_duration_factor =</span> </span>
+<span id="cb13-3"><a href="#cb13-3"></a>            <span class="kw">factor</span>(<span class="kw">ifelse</span>(relationship_status <span class="op">==</span><span class="st"> &quot;Single&quot;</span>,</span>
+<span id="cb13-4"><a href="#cb13-4"></a>                   <span class="st">&quot;Single&quot;</span>,</span>
+<span id="cb13-5"><a href="#cb13-5"></a>                   <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">12</span>,</span>
+<span id="cb13-6"><a href="#cb13-6"></a>                          <span class="st">&quot;Partnered_upto12months&quot;</span>,</span>
+<span id="cb13-7"><a href="#cb13-7"></a>                          <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">28</span>, </span>
+<span id="cb13-8"><a href="#cb13-8"></a>                                 <span class="st">&quot;Partnered_upto28months&quot;</span>,</span>
+<span id="cb13-9"><a href="#cb13-9"></a>                                 <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span><span class="dv">52</span>,</span>
+<span id="cb13-10"><a href="#cb13-10"></a>                                        <span class="st">&quot;Partnered_upto52months&quot;</span>,</span>
+<span id="cb13-11"><a href="#cb13-11"></a>                                        <span class="kw">ifelse</span>(relationship_duration <span class="op">&gt;</span><span class="st"> </span><span class="dv">52</span>,</span>
+<span id="cb13-12"><a href="#cb13-12"></a>                                        <span class="st">&quot;Partnered_morethan52months&quot;</span>,</span>
+<span id="cb13-13"><a href="#cb13-13"></a>                                        <span class="ot">NA</span>))))),</span>
+<span id="cb13-14"><a href="#cb13-14"></a>                   <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Single&quot;</span>, <span class="st">&quot;Partnered_upto12months&quot;</span>,</span>
+<span id="cb13-15"><a href="#cb13-15"></a>                              <span class="st">&quot;Partnered_upto28months&quot;</span>, <span class="st">&quot;Partnered_upto52months&quot;</span>,</span>
+<span id="cb13-16"><a href="#cb13-16"></a>                              <span class="st">&quot;Partnered_morethan52months&quot;</span>)))</span>
+<span id="cb13-17"><a href="#cb13-17"></a></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="kw">qplot</span>(data<span class="op">$</span>relationship_duration_factor)</span></code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">ggplot</span>(data, <span class="kw">aes</span>(relationship_duration)) <span class="op">+</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> relationship_duration_factor), <span class="dt">bins =</span> <span class="dv">100</span>)</span></code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>quantiles =<span class="st"> </span><span class="kw">quantile</span>(<span class="kw">as.numeric</span>(data<span class="op">$</span>relationship_duration),</span>
+<span id="cb15-2"><a href="#cb15-2"></a>                     <span class="dt">na.rm =</span> T,</span>
+<span id="cb15-3"><a href="#cb15-3"></a>                     <span class="dt">probs =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.125</span>, <span class="fl">0.25</span>, <span class="fl">0.375</span>, <span class="fl">0.5</span>,<span class="fl">0.625</span>, <span class="fl">0.75</span>, <span class="fl">0.875</span>, <span class="dv">1</span>))</span>
+<span id="cb15-4"><a href="#cb15-4"></a></span>
+<span id="cb15-5"><a href="#cb15-5"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">relationship_duration_factor2 =</span> </span>
+<span id="cb15-7"><a href="#cb15-7"></a>           <span class="kw">factor</span>(<span class="kw">ifelse</span>(relationship_status <span class="op">==</span><span class="st"> &quot;Single&quot;</span>,</span>
+<span id="cb15-8"><a href="#cb15-8"></a>                  <span class="st">&quot;Single&quot;</span>,</span>
+<span id="cb15-9"><a href="#cb15-9"></a>                  <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">2</span>],</span>
+<span id="cb15-10"><a href="#cb15-10"></a>                         <span class="st">&quot;Partnered_upto6months&quot;</span>,</span>
+<span id="cb15-11"><a href="#cb15-11"></a>                         <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">3</span>],</span>
+<span id="cb15-12"><a href="#cb15-12"></a>                                <span class="st">&quot;Partnered_upto12months&quot;</span>,</span>
+<span id="cb15-13"><a href="#cb15-13"></a>                                <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">4</span>],</span>
+<span id="cb15-14"><a href="#cb15-14"></a>                                       <span class="st">&quot;Partnered_upto20months&quot;</span>,</span>
+<span id="cb15-15"><a href="#cb15-15"></a>                                       <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">5</span>],</span>
+<span id="cb15-16"><a href="#cb15-16"></a>                                              <span class="st">&quot;Partnered_upto28months&quot;</span>,</span>
+<span id="cb15-17"><a href="#cb15-17"></a>           <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">6</span>],</span>
+<span id="cb15-18"><a href="#cb15-18"></a>                  <span class="st">&quot;Partnered_upto38months&quot;</span>,</span>
+<span id="cb15-19"><a href="#cb15-19"></a>                  <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">7</span>],</span>
+<span id="cb15-20"><a href="#cb15-20"></a>                         <span class="st">&quot;Partnered_upto52months&quot;</span>,</span>
+<span id="cb15-21"><a href="#cb15-21"></a>                         <span class="kw">ifelse</span>(relationship_duration <span class="op">&lt;=</span><span class="st"> </span>quantiles[<span class="dv">8</span>],</span>
+<span id="cb15-22"><a href="#cb15-22"></a>                                <span class="st">&quot;Partnered_upto85months&quot;</span>,</span>
+<span id="cb15-23"><a href="#cb15-23"></a>                                <span class="kw">ifelse</span>(relationship_duration <span class="op">&gt;</span><span class="st"> </span>quantiles[<span class="dv">8</span>],</span>
+<span id="cb15-24"><a href="#cb15-24"></a>                                       <span class="st">&quot;Partnered_morethan85months&quot;</span>,</span>
+<span id="cb15-25"><a href="#cb15-25"></a>                                       <span class="ot">NA</span>))))))))),</span>
+<span id="cb15-26"><a href="#cb15-26"></a>           <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Single&quot;</span>, <span class="st">&quot;Partnered_upto6months&quot;</span>, <span class="st">&quot;Partnered_upto12months&quot;</span>,</span>
+<span id="cb15-27"><a href="#cb15-27"></a>                      <span class="st">&quot;Partnered_upto20months&quot;</span>, <span class="st">&quot;Partnered_upto28months&quot;</span>,</span>
+<span id="cb15-28"><a href="#cb15-28"></a>                      <span class="st">&quot;Partnered_upto38months&quot;</span>, <span class="st">&quot;Partnered_upto52months&quot;</span>,</span>
+<span id="cb15-29"><a href="#cb15-29"></a>                      <span class="st">&quot;Partnered_upto85months&quot;</span>, <span class="st">&quot;Partnered_morethan85months&quot;</span>)))</span></code></pre></div>
+</div>
 <div id="contraception-approach" class="section level3">
 <h3>Contraception approach</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(
-    <span class="dt">contraception_method =</span> <span class="kw">if_else</span>(<span class="kw">is.na</span>(contraception_method), <span class="st">&quot;&quot;</span>,
-                                   <span class="kw">as.character</span>(contraception_method)),
-    <span class="dt">com =</span> contraception_method,
-    <span class="dt">contraception_approach =</span> <span class="kw">if_else</span>(
-        <span class="dt">condition =</span> com <span class="op">%contains%</span><span class="st"> &quot;hormonal_pill&quot;</span> <span class="op">|</span><span class="st"> </span>com <span class="op">%contains%</span><span class="st"> &quot;hormonal_other&quot;</span>,
-        <span class="dt">true =</span> <span class="kw">if_else</span>(
-            <span class="dt">condition =</span> com <span class="op">==</span><span class="st"> &quot;hormonal_pill&quot;</span> <span class="op">|</span><span class="st"> </span>com <span class="op">==</span><span class="st"> &quot;hormonal_other&quot;</span> <span class="op">|</span>
-<span class="st">              </span>com <span class="op">==</span><span class="st"> &quot;hormonal_morning_after_pill&quot;</span>,
-            <span class="dt">true =</span> <span class="kw">if_else</span>(com <span class="op">==</span><span class="st"> &quot;hormonal_pill&quot;</span>, 
-                           <span class="dt">true =</span> <span class="st">&quot;hormonal_pill_only&quot;</span>,
-                           <span class="dt">false =</span> <span class="st">&quot;hormonal_other_only&quot;</span>),
-            <span class="dt">false =</span> <span class="st">&quot;hormonal+barrier&quot;</span>),
-        <span class="kw">if_else</span>(
-            <span class="dt">condition =</span> <span class="op">!</span><span class="st"> </span>com <span class="op">%contains%</span><span class="st"> &quot;awareness&quot;</span>, 
-            <span class="dt">true =</span> <span class="kw">if_else</span>(<span class="dt">condition =</span> com <span class="op">!=</span><span class="st"> &quot;&quot;</span>,
-                           <span class="dt">true =</span> <span class="kw">if_else</span>(<span class="dt">condition =</span> com <span class="op">%contains%</span><span class="st"> &quot;barrier_intrauterine_pessar&quot;</span>,
-                                          <span class="dt">true =</span> <span class="st">&quot;barrier_pessar&quot;</span>,
-                                          <span class="kw">if_else</span>(<span class="dt">condition =</span> com <span class="op">%contains%</span><span class="st"> &quot;barrier_condoms&quot;</span>,
-                                                  <span class="dt">true =</span> <span class="st">&quot;condoms&quot;</span>,
-                                                  <span class="dt">false =</span> <span class="st">&quot;other&quot;</span>)),
-                           <span class="dt">false =</span> <span class="st">&quot;nothing&quot;</span>),
-            <span class="dt">false =</span> <span class="st">&quot;awareness&quot;</span>)))
-
-
-
-data<span class="op">$</span>contraception_approach =<span class="st"> </span><span class="kw">factor</span>(data<span class="op">$</span>contraception_approach,
-                                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;condoms&quot;</span>, <span class="st">&quot;barrier_pessar&quot;</span>,
-                                                       <span class="st">&quot;hormonal+barrier&quot;</span>,
-                                                       <span class="st">&quot;hormonal_pill_only&quot;</span>, <span class="st">&quot;hormonal_other_only&quot;</span>,
-                                                       <span class="st">&quot;awareness&quot;</span>, <span class="st">&quot;nothing&quot;</span>, <span class="st">&quot;other&quot;</span>))
-
-<span class="kw">qplot</span>(data<span class="op">$</span>contraception_approach) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>datax =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(</span>
+<span id="cb16-2"><a href="#cb16-2"></a>    <span class="dt">contraception_method =</span> <span class="kw">if_else</span>(contraception_at_all <span class="op">==</span><span class="st"> </span><span class="dv">5</span>,</span>
+<span id="cb16-3"><a href="#cb16-3"></a>                                   <span class="st">&quot;barrier_no_penetrative_sex&quot;</span>,</span>
+<span id="cb16-4"><a href="#cb16-4"></a>                                   contraception_method),</span>
+<span id="cb16-5"><a href="#cb16-5"></a>    <span class="dt">com =</span> contraception_method,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="dt">contraception_approach =</span> <span class="kw">if_else</span>(</span>
+<span id="cb16-7"><a href="#cb16-7"></a>        <span class="dt">condition =</span> com <span class="op">%contains%</span><span class="st"> &quot;hormonal_pill&quot;</span> <span class="op">|</span><span class="st"> </span>com <span class="op">%contains%</span><span class="st"> &quot;hormonal_other&quot;</span>,</span>
+<span id="cb16-8"><a href="#cb16-8"></a>        <span class="dt">true =</span> <span class="kw">if_else</span>(</span>
+<span id="cb16-9"><a href="#cb16-9"></a>          <span class="dt">condition =</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>            com <span class="op">==</span><span class="st"> &quot;hormonal_pill&quot;</span> <span class="op">|</span><span class="st"> </span>com <span class="op">==</span><span class="st"> &quot;hormonal_other&quot;</span> <span class="op">|</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="st">            </span>com <span class="op">==</span><span class="st"> &quot;hormonal_morning_after_pill&quot;</span>,</span>
+<span id="cb16-12"><a href="#cb16-12"></a>          <span class="dt">true =</span> <span class="kw">if_else</span>(com <span class="op">==</span><span class="st"> &quot;hormonal_pill&quot;</span>, </span>
+<span id="cb16-13"><a href="#cb16-13"></a>                         <span class="dt">true =</span> <span class="st">&quot;hormonal_pill_only&quot;</span>,</span>
+<span id="cb16-14"><a href="#cb16-14"></a>                         <span class="dt">false =</span> <span class="st">&quot;hormonal_other_only&quot;</span>),</span>
+<span id="cb16-15"><a href="#cb16-15"></a>          <span class="dt">false =</span> <span class="st">&quot;hormonal+barrier&quot;</span>),</span>
+<span id="cb16-16"><a href="#cb16-16"></a>        <span class="kw">if_else</span>(</span>
+<span id="cb16-17"><a href="#cb16-17"></a>          <span class="dt">condition =</span> <span class="op">!</span>(com <span class="op">%contains%</span><span class="st"> &quot;awareness&quot;</span>),</span>
+<span id="cb16-18"><a href="#cb16-18"></a>          <span class="dt">true =</span> <span class="kw">if_else</span>(<span class="dt">condition =</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a>                           com <span class="op">!=</span><span class="st"> &quot;&quot;</span>,</span>
+<span id="cb16-20"><a href="#cb16-20"></a>                         <span class="dt">true =</span> <span class="kw">if_else</span>(<span class="dt">condition =</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a>                                          com <span class="op">%contains%</span><span class="st"> &quot;barrier_intrauterine_pessar&quot;</span>,</span>
+<span id="cb16-22"><a href="#cb16-22"></a>                                        <span class="dt">true =</span> <span class="st">&quot;barrier_pessar&quot;</span>,</span>
+<span id="cb16-23"><a href="#cb16-23"></a>                                        <span class="kw">if_else</span>(<span class="dt">condition =</span></span>
+<span id="cb16-24"><a href="#cb16-24"></a>                                                  com <span class="op">%contains%</span><span class="st"> &quot;barrier_condoms&quot;</span>,</span>
+<span id="cb16-25"><a href="#cb16-25"></a>                                                <span class="dt">true =</span> <span class="st">&quot;condoms&quot;</span>,</span>
+<span id="cb16-26"><a href="#cb16-26"></a>                                                <span class="dt">false =</span> <span class="st">&quot;other&quot;</span>)),</span>
+<span id="cb16-27"><a href="#cb16-27"></a>                         <span class="dt">false =</span> <span class="st">&quot;nothing&quot;</span>),</span>
+<span id="cb16-28"><a href="#cb16-28"></a>          <span class="dt">false =</span> <span class="st">&quot;awareness&quot;</span>)))</span>
+<span id="cb16-29"><a href="#cb16-29"></a></span>
+<span id="cb16-30"><a href="#cb16-30"></a></span>
+<span id="cb16-31"><a href="#cb16-31"></a></span>
+<span id="cb16-32"><a href="#cb16-32"></a>data<span class="op">$</span>contraception_approach =<span class="st"> </span><span class="kw">factor</span>(data<span class="op">$</span>contraception_approach,</span>
+<span id="cb16-33"><a href="#cb16-33"></a>                                            <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;condoms&quot;</span>, <span class="st">&quot;barrier_pessar&quot;</span>,</span>
+<span id="cb16-34"><a href="#cb16-34"></a>                                                       <span class="st">&quot;hormonal+barrier&quot;</span>,</span>
+<span id="cb16-35"><a href="#cb16-35"></a>                                                       <span class="st">&quot;hormonal_pill_only&quot;</span>,</span>
+<span id="cb16-36"><a href="#cb16-36"></a>                                                       <span class="st">&quot;hormonal_other_only&quot;</span>,</span>
+<span id="cb16-37"><a href="#cb16-37"></a>                                                       <span class="st">&quot;awareness&quot;</span>, <span class="st">&quot;nothing&quot;</span>,</span>
+<span id="cb16-38"><a href="#cb16-38"></a>                                                       <span class="st">&quot;other&quot;</span>))</span>
+<span id="cb16-39"><a href="#cb16-39"></a></span>
+<span id="cb16-40"><a href="#cb16-40"></a><span class="kw">qplot</span>(data<span class="op">$</span>contraception_approach) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
 <p><img src="2_datawrangling_files/figure-html/contraception%20approach-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">table</span>(data<span class="op">$</span>contraception_approach)</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">table</span>(data<span class="op">$</span>contraception_approach)</span></code></pre></div>
 <pre><code>## 
 ##             condoms      barrier_pessar    hormonal+barrier  hormonal_pill_only hormonal_other_only 
-##                 371                  86                 178                 254                  61 
+##                 380                  86                 180                 254                  61 
 ##           awareness             nothing               other 
-##                 111                   0                  14</code></pre>
+##                 120                  88                  16</code></pre>
 </div>
-<div id="current-contraceptive-status-hormonal-vs.non-hormonal" class="section level3">
+<div id="current-contraceptive-status-hormonal-vs.-non-hormonal" class="section level3">
 <h3>Current contraceptive status (hormonal vs. non hormonal)</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(
-  <span class="dt">contraception_hormonal =</span> <span class="kw">factor</span>(<span class="kw">ifelse</span>(contraception_approach <span class="op">%contains%</span><span class="st"> &quot;hormonal&quot;</span>,
-                                         <span class="st">&quot;yes&quot;</span>,
-                                         <span class="st">&quot;no&quot;</span>)))
-<span class="kw">qplot</span>(data<span class="op">$</span>contraception_hormonal) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
-<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(</span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="dt">contraception_hormonal =</span> <span class="kw">factor</span>(<span class="kw">ifelse</span>(contraception_approach <span class="op">%contains%</span><span class="st"> &quot;hormonal&quot;</span>,</span>
+<span id="cb19-3"><a href="#cb19-3"></a>                                         <span class="st">&quot;yes&quot;</span>,</span>
+<span id="cb19-4"><a href="#cb19-4"></a>                                         <span class="st">&quot;no&quot;</span>)))</span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="kw">qplot</span>(data<span class="op">$</span>contraception_hormonal) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 </div>
 <div id="changed-contraception-since-meeting-their-partner" class="section level3">
 <h3>Changed contraception since meeting their partner</h3>
 <p>There will be NAs because we asked about contracetion when meeting partner only if participants were currently in a relationship</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">crosstabs</span>(<span class="op">~</span>contraception_hormonal <span class="op">+</span><span class="st"> </span>contraception_meeting_partner, <span class="dt">data =</span> data)</code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">crosstabs</span>(<span class="op">~</span>contraception_hormonal <span class="op">+</span><span class="st"> </span>contraception_meeting_partner, <span class="dt">data =</span> data)</span></code></pre></div>
 <pre><code>##                       contraception_meeting_partner
 ## contraception_hormonal   0   1 &lt;NA&gt;
-##                    no  229 144  209
-##                    yes 134 241  118</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(
-  <span class="dt">contraception_change_since_meeting_partner =</span>
-    <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,
-           <span class="st">&quot;congruent_hormonal&quot;</span>,
-           <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;no&quot;</span> <span class="op">&amp;</span><span class="st"> </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,
-                  <span class="st">&quot;congruent_nonhormonal&quot;</span>,
-                  <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,
-                         <span class="st">&quot;switched_to_hormonal&quot;</span>,
-                         <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;no&quot;</span> <span class="op">&amp;</span>
-<span class="st">                                  </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;switched_to_nonhormonal&quot;</span>,
-                                <span class="ot">NA</span>)))))
-
-<span class="kw">qplot</span>(data<span class="op">$</span>contraception_change_since_meeting_partner) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
-<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+##                    no  252 151  287
+##                    yes 135 242  118</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(</span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="dt">contraception_change_since_meeting_partner =</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>    <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,</span>
+<span id="cb22-4"><a href="#cb22-4"></a>           <span class="st">&quot;congruent_hormonal&quot;</span>,</span>
+<span id="cb22-5"><a href="#cb22-5"></a>           <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;no&quot;</span> <span class="op">&amp;</span><span class="st"> </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,</span>
+<span id="cb22-6"><a href="#cb22-6"></a>                  <span class="st">&quot;congruent_nonhormonal&quot;</span>,</span>
+<span id="cb22-7"><a href="#cb22-7"></a>                  <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">0</span>,</span>
+<span id="cb22-8"><a href="#cb22-8"></a>                         <span class="st">&quot;switched_to_hormonal&quot;</span>,</span>
+<span id="cb22-9"><a href="#cb22-9"></a>                         <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;no&quot;</span> <span class="op">&amp;</span></span>
+<span id="cb22-10"><a href="#cb22-10"></a><span class="st">                                  </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;switched_to_nonhormonal&quot;</span>,</span>
+<span id="cb22-11"><a href="#cb22-11"></a>                                <span class="ot">NA</span>)))))</span>
+<span id="cb22-12"><a href="#cb22-12"></a></span>
+<span id="cb22-13"><a href="#cb22-13"></a><span class="kw">qplot</span>(data<span class="op">$</span>contraception_change_since_meeting_partner) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</span></code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="contraception-meeting-partner" class="section level3">
 <h3>Contraception meeting partner</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">contraception_meeting_partner =</span> <span class="kw">factor</span>(<span class="kw">if_else</span>(
-    contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,
-    <span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>)))</code></pre></div>
-</div>
-<div id="relationship-status-single-vs-partnered" class="section level3">
-<h3>Relationship status (single vs partnered)</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(
-  <span class="dt">relationship_status =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(duration_relationship_month), <span class="st">&quot;Single&quot;</span>, <span class="st">&quot;Partnered&quot;</span>))
-
-<span class="kw">qplot</span>(data<span class="op">$</span>relationship_status) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()</code></pre></div>
-<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">contraception_meeting_partner =</span> <span class="kw">factor</span>(<span class="kw">if_else</span>(</span>
+<span id="cb23-3"><a href="#cb23-3"></a>    contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,</span>
+<span id="cb23-4"><a href="#cb23-4"></a>    <span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>)))</span></code></pre></div>
 </div>
 <div id="diary-information" class="section level3">
 <h3>Diary information</h3>
 <p>calculate mean of libido, sex_active_frequency and actual sex frequency based on diary</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_diary_means =<span class="st"> </span>data_diary <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(session) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">diary_libido_mean =</span> <span class="kw">mean</span>(high_libido, <span class="dt">na.rm =</span> T),
-            <span class="dt">diary_sex_active_mean =</span> <span class="kw">mean</span>(sex_active, <span class="dt">na.rm =</span> T),
-            <span class="dt">diary_sex_active_sex_mean =</span> <span class="kw">mean</span>(sex_activity_sex, <span class="dt">na.rm =</span> T))
-
-<span class="kw">qplot</span>(data_diary_means<span class="op">$</span>diary_libido_mean)</code></pre></div>
-<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(data_diary_means<span class="op">$</span>diary_sex_active_mean)</code></pre></div>
-<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qplot</span>(data_diary_means<span class="op">$</span>diary_sex_active_sex_mean)</code></pre></div>
-<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-9-3.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data =<span class="st"> </span><span class="kw">left_join</span>(data, data_diary_means, <span class="dt">by =</span> <span class="st">&quot;session&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>data_diary_means =<span class="st"> </span>data_diary <span class="op">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="st">  </span><span class="kw">group_by</span>(session) <span class="op">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">diary_libido_mean =</span> <span class="kw">mean</span>(high_libido, <span class="dt">na.rm =</span> T),</span>
+<span id="cb24-4"><a href="#cb24-4"></a>            <span class="dt">diary_sex_active_mean =</span> <span class="kw">mean</span>(sex_active, <span class="dt">na.rm =</span> T),</span>
+<span id="cb24-5"><a href="#cb24-5"></a>            <span class="dt">diary_sex_active_sex_mean =</span> <span class="kw">mean</span>(sex_activity_sex, <span class="dt">na.rm =</span> T))</span>
+<span id="cb24-6"><a href="#cb24-6"></a></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="kw">qplot</span>(data_diary_means<span class="op">$</span>diary_libido_mean)</span></code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">qplot</span>(data_diary_means<span class="op">$</span>diary_sex_active_mean)</span></code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">qplot</span>(data_diary_means<span class="op">$</span>diary_sex_active_sex_mean)</span></code></pre></div>
+<p><img src="2_datawrangling_files/figure-html/unnamed-chunk-11-3.png" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>data =<span class="st"> </span><span class="kw">left_join</span>(data, data_diary_means, <span class="dt">by =</span> <span class="st">&quot;session&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="save-data" class="section level2">
 <h2>Save Data</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">save</span>(data, data, <span class="dt">file =</span> <span class="st">&quot;data/cleaned_selected_wrangled.rdata&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">save</span>(data, data, <span class="dt">file =</span> <span class="st">&quot;data/cleaned_selected_wrangled.rdata&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 
-<div id="rmd-source-code">CiMgRGF0YXdyYW5nbGluZyB7LnRhYnNldH0KCiMjIERhdGEgYW5kIEZ1bmN0aW9ucwpgYGB7ciBkYXRhIGFuZCBmdW5jdGlvbiwgcmVzdWx0cz0naGlkZScsbWVzc2FnZT1GLHdhcm5pbmc9Rn0Kc291cmNlKCIwX2hlbHBlcnMuUiIpCmtuaXRyOjpvcHRzX2NodW5rJHNldCh3YXJuaW5nID0gRkFMU0UsIG1lc3NhZ2UgPSBGQUxTRSkKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCJ0YWJsZS5zcGxpdC50YWJsZSIsIEluZikKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCdyb3VuZCcsMikKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCdkaWdpdHMnLDIpCnBhbmRlcjo6cGFuZGVyT3B0aW9ucygna2VlcC50cmFpbGluZy56ZXJvcycsVFJVRSkKCmxvYWQoImRhdGEvY2xlYW5lZF9zZWxlY3RlZC5yZGF0YSIpCmBgYAoKCiMjIFNlbGVjdCBWYXJpYWJsZXMgey50YWJzZXR9CiMjIyBJbml0aWFsIFN1cnZleQpgYGB7ciBzZWxlY3QgdmFyaWFibGVzfQpkYXRhID0gYWxsX3N1cnZleXMgJT4lCiAgc2VsZWN0KHNlc3Npb24sCiAgICAgICAgIGFnZSwKICAgICAgICAgZWR1Y2F0aW9uX3llYXJzLAogICAgICAgICBuZXRfaW5jb21lLAogICAgICAgICBzdGFydHNfd2l0aCgiYmZpX2FncmVlIiksCiAgICAgICAgIHN0YXJ0c193aXRoKCJiZmlfY29uc2MiKSwKICAgICAgICAgc3RhcnRzX3dpdGgoImJmaV9vcGVuIiksCiAgICAgICAgIHN0YXJ0c193aXRoKCJiZmlfZXh0cmEiKSwKICAgICAgICAgc3RhcnRzX3dpdGgoImJmaV9uZXVybyIpLAogICAgICAgICByZWxpZ2lvc2l0eSwKICAgICAgICAgcHJlZ25hbnRfc3RyZXNzLAogICAgICAgICBkdXJhdGlvbl9yZWxhdGlvbnNoaXBfeWVhcnMsCiAgICAgICAgIGR1cmF0aW9uX3JlbGF0aW9uc2hpcF9tb250aCwKICAgICAgICAgZGF5c193aXRoX3BhcnRuZXIsCiAgICAgICAgIG5pZ2h0c193aXRoX3BhcnRuZXIsCiAgICAgICAgIHN0YXJ0c193aXRoKCJzb2lfciIpLAogICAgICAgICBzb2lfcl9iZWhhdmlvciwKICAgICAgICAgc29pX3JfZGVzaXJlLAogICAgICAgICBudW1iZXJfc2V4dWFsX3BhcnRuZXIsCiAgICAgICAgIGNvbnRyYWNlcHRpb25fbWV0aG9kLAogICAgICAgICBjb250cmFjZXB0aW9uX2FwcHJvYWNoLAogICAgICAgICBjb250cmFjZXB0aW9uX21ldGhvZF9icm9hZCwKICAgICAgICAgY29udHJhY2VwdGlvbl9tZWV0aW5nX3BhcnRuZXIsCiAgICAgICAgIHBhcnRuZXJfYXR0cmFjdGl2ZW5lc3NfZmFjZSwKICAgICAgICAgcGFydG5lcl9hdHRyYWN0aXZlbmVzc19ib2R5LAogICAgICAgICByZWxhdGlvbnNoaXBfc2F0aXNmYWN0aW9uX292ZXJhbGwsCiAgICAgICAgIHJlbGF0aW9uc2hpcF9zYXRpc2ZhY3Rpb25fMiwKICAgICAgICAgcmVsYXRpb25zaGlwX3NhdGlzZmFjdGlvbl8zLAogICAgICAgICByZWxhdGlvbnNoaXBfcHJvYmxlbXNfUiwKICAgICAgICAgcmVsYXRpb25zaGlwX2NvbmZsaWN0X1IsCiAgICAgICAgIHNhdGlzZmFjdGlvbl9zZXh1YWxfaW50ZXJjb3Vyc2UsCiAgICAgICAgIHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiwKICAgICAgICAgcHJlZ25hbnRfdHJ5aW5nKQpgYGAKCiMjIyBEaWFyeQpgYGB7ciBzZWxlY3QgdmFyaWFibGVzIGRpYXJ5fQpkYXRhX2RpYXJ5ID0gZGlhcnkgJT4lCiAgc2VsZWN0KHNlc3Npb24sCiAgICAgICAgIHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiwKICAgICAgICAgaGlnaF9saWJpZG8sCiAgICAgICAgIHNleF9hY3RpdmUsIHNleF9hY3Rpdml0eV9hbmFsX3NleCwgc2V4X2FjdGl2aXR5X2Jkc21fZG9tLCBzZXhfYWN0aXZpdHlfYmRzbV9zdWIsCiAgICAgICAgIHNleF9hY3Rpdml0eV9jdWRkbGluZywgc2V4X2FjdGl2aXR5X2N1bm5pbGluZ3VzLCBzZXhfYWN0aXZpdHlfY3liZXJzZXgsCiAgICAgICAgIHNleF9hY3Rpdml0eV9kaXJ0eV90YWxrLAogICAgICAgICBzZXhfYWN0aXZpdHlfZmVsbGF0aW8sIHNleF9hY3Rpdml0eV9raXNzaW5nLCAgc2V4X2FjdGl2aXR5X21hc3R1cmJhdGVkX2J5X3BhcnRuZXIsCiAgICAgICAgIHNleF9hY3Rpdml0eV9tYXN0dXJiYXRlZF9wYXJ0bmVyLCBzZXhfYWN0aXZpdHlfbWFzdHVyYmF0aW9uLCBzZXhfYWN0aXZpdHlfb3RoZXIsCiAgICAgICAgIHNleF9hY3Rpdml0eV9waG9uZV9za3lwZV9zZXgsIHNleF9hY3Rpdml0eV9wb3Jub2dyYXBoeSwgc2V4X2FjdGl2aXR5X3NleCwgCiAgICAgICAgIHNleF9hY3Rpdml0eV90b3VjaF9vdGhlciwgCiAgICAgICAgIHNleF9hY3Rpdml0eV90b3lzLCBzZXhfYWN0aXZpdHlfdW5jbGVhciwgIHNleF9vdGhlciwgc2V4X3NvbG8sIHNleF91bmNsZWFyLAogICAgICAgICBkYXlzX2RvbmUpCmBgYAoKCiMjIEV4Y2x1c2lvbiB7LnRhYnNldH0KIyMjIEluaXRpYWwgU3VydmV5CmBgYHtyIGV4Y2x1c2lvbiBpbml0aWFsIHN1cnZleX0Kbl9leGNsdWRlZCA9IGRhdGEgJT4lIGZpbHRlcihyZWFzb25zX2Zvcl9leGNsdXNpb24gIT0gIiIpICU+JSBucm93KCkKZGF0YSA9IGRhdGEgJT4lIGZpbHRlcihyZWFzb25zX2Zvcl9leGNsdXNpb24gPT0gIiIpCmBgYApgciBuX2V4Y2x1ZGVkYCBwZW9wbGUgd2VyZSBleGNsdWRlZC4KCiMjIyBEaWFyeSAgey50YWJzZXR9CiMjIyMgRXhjbHVzaW9uIGNyaXRlcmlhIGJhc2VkIG9uIGluaXRpYWwKYGBge3J9CnNlc3Npb25fY29kZXMgPSBkYXRhJHNlc3Npb24KCmRhdGFfZGlhcnkgPSBkYXRhX2RpYXJ5ICU+JQogIGZpbHRlcihzZXNzaW9uICVpbiUgc2Vzc2lvbl9jb2RlcykKCmxlbmd0aChkYXRhX2RpYXJ5JHNlc3Npb24pCmBgYApUaGUgYHIgbGVuZ3RoKHVuaXF1ZShkYXRhX2RpYXJ5JHNlc3Npb24pKWAgcGFydGljaXBhbnRzIGZpbGxlZCBvdXQgYHIgbGVuZ3RoKGRhdGFfZGlhcnkkc2Vzc2lvbilgLgoKIyMjIyBTa2lwcGVkIGRpYXJ5IGVudHJ5CmBgYHtyfQpuX3NraXBwZWRfZGlhcnkgPSBkYXRhX2RpYXJ5ICU+JQogIGZpbHRlcihyZWFzb25zX2Zvcl9leGNsdXNpb24gJWNvbnRhaW5zJSAic2tpcHBlZF9kaWFyeV9lbnRyeSIpICU+JQogIGNvdW50KCkKCmRhdGFfZGlhcnkgPSBkYXRhX2RpYXJ5ICU+JQogIGZpbHRlcighKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiAlY29udGFpbnMlICJza2lwcGVkX2RpYXJ5X2VudHJ5IikpCmBgYApgciBuX3NraXBwZWRfZGlhcnlgIGRheXMgd2VyZSBza2lwcGVkLgoKIyMjIyBEaXNob25lc3QgYW5zd2VycwpgYGB7cn0Kbl9kaXNob25lc3QgPSBkYXRhX2RpYXJ5ICU+JQogIGZpbHRlcihyZWFzb25zX2Zvcl9leGNsdXNpb24gJWNvbnRhaW5zJSAiZGlzaG9uZXN0IikgJT4lCiAgY291bnQoKQoKZGF0YV9kaWFyeSA9IGRhdGFfZGlhcnkgJT4lCiAgZmlsdGVyKCEocmVhc29uc19mb3JfZXhjbHVzaW9uICVjb250YWlucyUgImRpc2hvbmVzdCIpKQpgYGAKYHIgbl9kaXNob25lc3RgIGRheXMgY29udGFpbmVkIGRpc2hvbmVzdCBhbnN3ZXJzLgoKIyMjIyBGaWxsZWQgb3V0IGxlc3MgdGhhbiAzMCBkYXlzCmBgYHtyfQpudW1iZXJfb2ZfZGF5cyA9IGRhdGFfZGlhcnkgJT4lCiAgZ3JvdXBfYnkoc2Vzc2lvbikgJT4lCiAgc3VtbWFyaXNlKG4gPSBuKCkpICU+JQogIHJlbmFtZShudW1iZXJfb2ZfZGF5cyA9IG4pCiAgCmRhdGFfZGlhcnkgPSBsZWZ0X2pvaW4oZGF0YV9kaWFyeSwgbnVtYmVyX29mX2RheXMsIGJ5ID0gInNlc3Npb24iKQoKZGF0YV9kaWFyeV9pbmNsdWRlID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIoYXMubnVtZXJpYyhudW1iZXJfb2ZfZGF5cykgPiAzMCkKCmRhdGFfZGlhcnlfZXhjbHVkZSA9IGRhdGFfZGlhcnkgJT4lCiAgZmlsdGVyKGFzLm51bWVyaWMobnVtYmVyX29mX2RheXMpIDw9IDMwKQoKZGF0YV9kaWFyeSA9IGRhdGFfZGlhcnlfaW5jbHVkZQpgYGAKYHIgbGVuZ3RoKHVuaXF1ZShkYXRhX2RpYXJ5X2V4Y2x1ZGUkc2Vzc2lvbikpYCBwYXJ0aWNpcGFudHMgd2VyZSBleGNsdWRlZCBiZWNhdXNlIHRoZXkgZmlsbGVkIG91dCBsZXNzIHRoYW4gMzAgZGF5cyAtIHJlc3VsdGluZyBpbiBgciBsZW5ndGgoZGF0YV9kaWFyeV9leGNsdWRlJHNlc3Npb24pYCBleGNsdWRlZCBkYXlzLgoKIyMjIyBTdW1tYXJ5IHsuYWN0aXZlfQpJbiB0b3RhbCBgciBsZW5ndGgodW5pcXVlKGRhdGFfZGlhcnkkc2Vzc2lvbikpYCBwYXJ0aWNpcGFudHMgd2l0aCBgciBsZW5ndGgoZGF0YV9kaWFyeSRzZXNzaW9uKWAgZGlhcnkgZGF5cyB3ZXJlIGluY2x1ZGVkIGZvciB0aGUgYW5hbHlzZXMgaW4gd2hpY2ggb3V0Y29tZXMgd2VyZSBiYXNlZCBvbiBkaWFyeSBpbmZvcm1hdGlvbi4gCgojIyBXcmFuZ2xlIGRhdGEgey50YWJzZXR9CiMjIyBDb250cmFjZXB0aW9uIGFwcHJvYWNoCmBgYHtyIGNvbnRyYWNlcHRpb24gYXBwcm9hY2h9CmRhdGEgPSBkYXRhICU+JSBtdXRhdGUoCiAgICBjb250cmFjZXB0aW9uX21ldGhvZCA9IGlmX2Vsc2UoaXMubmEoY29udHJhY2VwdGlvbl9tZXRob2QpLCAiIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcy5jaGFyYWN0ZXIoY29udHJhY2VwdGlvbl9tZXRob2QpKSwKICAgIGNvbSA9IGNvbnRyYWNlcHRpb25fbWV0aG9kLAogICAgY29udHJhY2VwdGlvbl9hcHByb2FjaCA9IGlmX2Vsc2UoCiAgICAgICAgY29uZGl0aW9uID0gY29tICVjb250YWlucyUgImhvcm1vbmFsX3BpbGwiIHwgY29tICVjb250YWlucyUgImhvcm1vbmFsX290aGVyIiwKICAgICAgICB0cnVlID0gaWZfZWxzZSgKICAgICAgICAgICAgY29uZGl0aW9uID0gY29tID09ICJob3Jtb25hbF9waWxsIiB8IGNvbSA9PSAiaG9ybW9uYWxfb3RoZXIiIHwKICAgICAgICAgICAgICBjb20gPT0gImhvcm1vbmFsX21vcm5pbmdfYWZ0ZXJfcGlsbCIsCiAgICAgICAgICAgIHRydWUgPSBpZl9lbHNlKGNvbSA9PSAiaG9ybW9uYWxfcGlsbCIsIAogICAgICAgICAgICAgICAgICAgICAgICAgICB0cnVlID0gImhvcm1vbmFsX3BpbGxfb25seSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhbHNlID0gImhvcm1vbmFsX290aGVyX29ubHkiKSwKICAgICAgICAgICAgZmFsc2UgPSAiaG9ybW9uYWwrYmFycmllciIpLAogICAgICAgIGlmX2Vsc2UoCiAgICAgICAgICAgIGNvbmRpdGlvbiA9ICEgY29tICVjb250YWlucyUgImF3YXJlbmVzcyIsIAogICAgICAgICAgICB0cnVlID0gaWZfZWxzZShjb25kaXRpb24gPSBjb20gIT0gIiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgIHRydWUgPSBpZl9lbHNlKGNvbmRpdGlvbiA9IGNvbSAlY29udGFpbnMlICJiYXJyaWVyX2ludHJhdXRlcmluZV9wZXNzYXIiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0cnVlID0gImJhcnJpZXJfcGVzc2FyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWZfZWxzZShjb25kaXRpb24gPSBjb20gJWNvbnRhaW5zJSAiYmFycmllcl9jb25kb21zIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0cnVlID0gImNvbmRvbXMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhbHNlID0gIm90aGVyIikpLAogICAgICAgICAgICAgICAgICAgICAgICAgICBmYWxzZSA9ICJub3RoaW5nIiksCiAgICAgICAgICAgIGZhbHNlID0gImF3YXJlbmVzcyIpKSkKCgoKZGF0YSRjb250cmFjZXB0aW9uX2FwcHJvYWNoID0gZmFjdG9yKGRhdGEkY29udHJhY2VwdGlvbl9hcHByb2FjaCwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsZXZlbHMgPSBjKCJjb25kb21zIiwgImJhcnJpZXJfcGVzc2FyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJob3Jtb25hbCtiYXJyaWVyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJob3Jtb25hbF9waWxsX29ubHkiLCAiaG9ybW9uYWxfb3RoZXJfb25seSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiYXdhcmVuZXNzIiwgIm5vdGhpbmciLCAib3RoZXIiKSkKCnFwbG90KGRhdGEkY29udHJhY2VwdGlvbl9hcHByb2FjaCkgKyBjb29yZF9mbGlwKCkKdGFibGUoZGF0YSRjb250cmFjZXB0aW9uX2FwcHJvYWNoKQpgYGAKCiMjIyBDdXJyZW50IGNvbnRyYWNlcHRpdmUgc3RhdHVzIChob3Jtb25hbCB2cy4gbm9uIGhvcm1vbmFsKQpgYGB7cn0KZGF0YSA9IGRhdGEgJT4lIG11dGF0ZSgKICBjb250cmFjZXB0aW9uX2hvcm1vbmFsID0gZmFjdG9yKGlmZWxzZShjb250cmFjZXB0aW9uX2FwcHJvYWNoICVjb250YWlucyUgImhvcm1vbmFsIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAieWVzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAibm8iKSkpCnFwbG90KGRhdGEkY29udHJhY2VwdGlvbl9ob3Jtb25hbCkgKyBjb29yZF9mbGlwKCkKYGBgCgoKIyMjIENoYW5nZWQgY29udHJhY2VwdGlvbiBzaW5jZSBtZWV0aW5nIHRoZWlyIHBhcnRuZXIKVGhlcmUgd2lsbCBiZSBOQXMgYmVjYXVzZSB3ZSBhc2tlZCBhYm91dCBjb250cmFjZXRpb24gd2hlbiBtZWV0aW5nIHBhcnRuZXIgb25seSBpZiBwYXJ0aWNpcGFudHMgd2VyZSBjdXJyZW50bHkgaW4gYSByZWxhdGlvbnNoaXAKYGBge3J9CmNyb3NzdGFicyh+Y29udHJhY2VwdGlvbl9ob3Jtb25hbCArIGNvbnRyYWNlcHRpb25fbWVldGluZ19wYXJ0bmVyLCBkYXRhID0gZGF0YSkKZGF0YSA9IGRhdGEgJT4lIG11dGF0ZSgKICBjb250cmFjZXB0aW9uX2NoYW5nZV9zaW5jZV9tZWV0aW5nX3BhcnRuZXIgPQogICAgaWZlbHNlKGNvbnRyYWNlcHRpb25faG9ybW9uYWwgPT0gInllcyIgJiBjb250cmFjZXB0aW9uX21lZXRpbmdfcGFydG5lciA9PSAxLAogICAgICAgICAgICJjb25ncnVlbnRfaG9ybW9uYWwiLAogICAgICAgICAgIGlmZWxzZShjb250cmFjZXB0aW9uX2hvcm1vbmFsID09ICJubyIgJiBjb250cmFjZXB0aW9uX21lZXRpbmdfcGFydG5lciA9PSAwLAogICAgICAgICAgICAgICAgICAiY29uZ3J1ZW50X25vbmhvcm1vbmFsIiwKICAgICAgICAgICAgICAgICAgaWZlbHNlKGNvbnRyYWNlcHRpb25faG9ybW9uYWwgPT0gInllcyIgJiBjb250cmFjZXB0aW9uX21lZXRpbmdfcGFydG5lciA9PSAwLAogICAgICAgICAgICAgICAgICAgICAgICAgInN3aXRjaGVkX3RvX2hvcm1vbmFsIiwKICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShjb250cmFjZXB0aW9uX2hvcm1vbmFsID09ICJubyIgJgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29udHJhY2VwdGlvbl9tZWV0aW5nX3BhcnRuZXIgPT0gMSwgInN3aXRjaGVkX3RvX25vbmhvcm1vbmFsIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBOQSkpKSkpCgpxcGxvdChkYXRhJGNvbnRyYWNlcHRpb25fY2hhbmdlX3NpbmNlX21lZXRpbmdfcGFydG5lcikgKyBjb29yZF9mbGlwKCkKYGBgCgojIyMgQ29udHJhY2VwdGlvbiBtZWV0aW5nIHBhcnRuZXIKYGBge3J9CmRhdGEgPSBkYXRhICU+JQogIG11dGF0ZShjb250cmFjZXB0aW9uX21lZXRpbmdfcGFydG5lciA9IGZhY3RvcihpZl9lbHNlKAogICAgY29udHJhY2VwdGlvbl9tZWV0aW5nX3BhcnRuZXIgPT0gMSwKICAgICJ5ZXMiLCAibm8iKSkpCmBgYAoKIyMjIFJlbGF0aW9uc2hpcCBzdGF0dXMgKHNpbmdsZSB2cyBwYXJ0bmVyZWQpCmBgYHtyfQpkYXRhID0gZGF0YSAlPiUgbXV0YXRlKAogIHJlbGF0aW9uc2hpcF9zdGF0dXMgPSBpZmVsc2UoaXMubmEoZHVyYXRpb25fcmVsYXRpb25zaGlwX21vbnRoKSwgIlNpbmdsZSIsICJQYXJ0bmVyZWQiKSkKCnFwbG90KGRhdGEkcmVsYXRpb25zaGlwX3N0YXR1cykgKyBjb29yZF9mbGlwKCkKYGBgCgojIyMgRGlhcnkgaW5mb3JtYXRpb24KY2FsY3VsYXRlIG1lYW4gb2YgbGliaWRvLCBzZXhfYWN0aXZlX2ZyZXF1ZW5jeSBhbmQgYWN0dWFsIHNleCBmcmVxdWVuY3kgYmFzZWQgb24gZGlhcnkKYGBge3J9CmRhdGFfZGlhcnlfbWVhbnMgPSBkYXRhX2RpYXJ5ICU+JQogIGdyb3VwX2J5KHNlc3Npb24pICU+JQogIHN1bW1hcmlzZShkaWFyeV9saWJpZG9fbWVhbiA9IG1lYW4oaGlnaF9saWJpZG8sIG5hLnJtID0gVCksCiAgICAgICAgICAgIGRpYXJ5X3NleF9hY3RpdmVfbWVhbiA9IG1lYW4oc2V4X2FjdGl2ZSwgbmEucm0gPSBUKSwKICAgICAgICAgICAgZGlhcnlfc2V4X2FjdGl2ZV9zZXhfbWVhbiA9IG1lYW4oc2V4X2FjdGl2aXR5X3NleCwgbmEucm0gPSBUKSkKCnFwbG90KGRhdGFfZGlhcnlfbWVhbnMkZGlhcnlfbGliaWRvX21lYW4pCnFwbG90KGRhdGFfZGlhcnlfbWVhbnMkZGlhcnlfc2V4X2FjdGl2ZV9tZWFuKQpxcGxvdChkYXRhX2RpYXJ5X21lYW5zJGRpYXJ5X3NleF9hY3RpdmVfc2V4X21lYW4pCgpkYXRhID0gbGVmdF9qb2luKGRhdGEsIGRhdGFfZGlhcnlfbWVhbnMsIGJ5ID0gInNlc3Npb24iKQpgYGAKCgojIyBTYXZlIERhdGEKYGBge3J9CnNhdmUoZGF0YSwgZGF0YSwgZmlsZSA9ICJkYXRhL2NsZWFuZWRfc2VsZWN0ZWRfd3JhbmdsZWQucmRhdGEiKQpgYGAKCg==</div>
+<div id="rmd-source-code">CiMgRGF0YXdyYW5nbGluZyB7LnRhYnNldH0KCiMjIERhdGEgYW5kIEZ1bmN0aW9ucwpgYGB7ciBkYXRhIGFuZCBmdW5jdGlvbiwgcmVzdWx0cz0naGlkZScsbWVzc2FnZT1GLHdhcm5pbmc9Rn0Kc291cmNlKCIwX2hlbHBlcnMuUiIpCmtuaXRyOjpvcHRzX2NodW5rJHNldCh3YXJuaW5nID0gRkFMU0UsIG1lc3NhZ2UgPSBGQUxTRSkKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCJ0YWJsZS5zcGxpdC50YWJsZSIsIEluZikKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCdyb3VuZCcsMikKcGFuZGVyOjpwYW5kZXJPcHRpb25zKCdkaWdpdHMnLDIpCnBhbmRlcjo6cGFuZGVyT3B0aW9ucygna2VlcC50cmFpbGluZy56ZXJvcycsVFJVRSkKCmxvYWQoImRhdGEvY2xlYW5lZF9zZWxlY3RlZC5yZGF0YSIpCmBgYAoKCiMjIFNlbGVjdCBWYXJpYWJsZXMgey50YWJzZXR9CiMjIyBJbml0aWFsIFN1cnZleQpgYGB7ciBzZWxlY3QgdmFyaWFibGVzfQpkYXRhID0gYWxsX3N1cnZleXMgJT4lCiAgc2VsZWN0KHNlc3Npb24sCiAgICAgICAgIGFnZSwKICAgICAgICAgZWR1Y2F0aW9uX3llYXJzLAogICAgICAgICBuZXRfaW5jb21lLAogICAgICAgICBzdGFydHNfd2l0aCgiYmZpX2FncmVlIiksCiAgICAgICAgIHN0YXJ0c193aXRoKCJiZmlfY29uc2MiKSwKICAgICAgICAgc3RhcnRzX3dpdGgoImJmaV9vcGVuIiksCiAgICAgICAgIHN0YXJ0c193aXRoKCJiZmlfZXh0cmEiKSwKICAgICAgICAgc3RhcnRzX3dpdGgoImJmaV9uZXVybyIpLAogICAgICAgICByZWxpZ2lvc2l0eSwKICAgICAgICAgcHJlZ25hbnRfc3RyZXNzLAogICAgICAgICBkdXJhdGlvbl9yZWxhdGlvbnNoaXBfeWVhcnMsCiAgICAgICAgIGR1cmF0aW9uX3JlbGF0aW9uc2hpcF9tb250aCwKICAgICAgICAgZGF5c193aXRoX3BhcnRuZXIsCiAgICAgICAgIG5pZ2h0c193aXRoX3BhcnRuZXIsCiAgICAgICAgIHN0YXJ0c193aXRoKCJzb2lfciIpLAogICAgICAgICBzb2lfcl9iZWhhdmlvciwKICAgICAgICAgc29pX3JfZGVzaXJlLAogICAgICAgICBudW1iZXJfc2V4dWFsX3BhcnRuZXIsCiAgICAgICAgIGNvbnRyYWNlcHRpb25fYXRfYWxsLAogICAgICAgICBjb250cmFjZXB0aW9uX21ldGhvZCwKICAgICAgICAgY29udHJhY2VwdGlvbl9hcHByb2FjaCwKICAgICAgICAgY29udHJhY2VwdGlvbl9tZXRob2RfYnJvYWQsCiAgICAgICAgIGNvbnRyYWNlcHRpb25fbWVldGluZ19wYXJ0bmVyLAogICAgICAgICBwYXJ0bmVyX2F0dHJhY3RpdmVuZXNzX2ZhY2UsCiAgICAgICAgIHBhcnRuZXJfYXR0cmFjdGl2ZW5lc3NfYm9keSwKICAgICAgICAgcmVsYXRpb25zaGlwX3NhdGlzZmFjdGlvbl9vdmVyYWxsLAogICAgICAgICByZWxhdGlvbnNoaXBfc2F0aXNmYWN0aW9uXzIsCiAgICAgICAgIHJlbGF0aW9uc2hpcF9zYXRpc2ZhY3Rpb25fMywKICAgICAgICAgcmVsYXRpb25zaGlwX3Byb2JsZW1zX1IsCiAgICAgICAgIHJlbGF0aW9uc2hpcF9jb25mbGljdF9SLAogICAgICAgICBzYXRpc2ZhY3Rpb25fc2V4dWFsX2ludGVyY291cnNlLAogICAgICAgICByZWFzb25zX2Zvcl9leGNsdXNpb24sCiAgICAgICAgIHByZWduYW50X3RyeWluZykKYGBgCgojIyMgRGlhcnkKYGBge3Igc2VsZWN0IHZhcmlhYmxlcyBkaWFyeX0KZGF0YV9kaWFyeSA9IGRpYXJ5ICU+JQogIHNlbGVjdChzZXNzaW9uLAogICAgICAgICByZWFzb25zX2Zvcl9leGNsdXNpb24sCiAgICAgICAgIGhpZ2hfbGliaWRvLAogICAgICAgICBzZXhfYWN0aXZlLCBzZXhfYWN0aXZpdHlfYW5hbF9zZXgsIHNleF9hY3Rpdml0eV9iZHNtX2RvbSwgc2V4X2FjdGl2aXR5X2Jkc21fc3ViLAogICAgICAgICBzZXhfYWN0aXZpdHlfY3VkZGxpbmcsIHNleF9hY3Rpdml0eV9jdW5uaWxpbmd1cywgc2V4X2FjdGl2aXR5X2N5YmVyc2V4LAogICAgICAgICBzZXhfYWN0aXZpdHlfZGlydHlfdGFsaywKICAgICAgICAgc2V4X2FjdGl2aXR5X2ZlbGxhdGlvLCBzZXhfYWN0aXZpdHlfa2lzc2luZywgIHNleF9hY3Rpdml0eV9tYXN0dXJiYXRlZF9ieV9wYXJ0bmVyLAogICAgICAgICBzZXhfYWN0aXZpdHlfbWFzdHVyYmF0ZWRfcGFydG5lciwgc2V4X2FjdGl2aXR5X21hc3R1cmJhdGlvbiwgc2V4X2FjdGl2aXR5X290aGVyLAogICAgICAgICBzZXhfYWN0aXZpdHlfcGhvbmVfc2t5cGVfc2V4LCBzZXhfYWN0aXZpdHlfcG9ybm9ncmFwaHksIHNleF9hY3Rpdml0eV9zZXgsIAogICAgICAgICBzZXhfYWN0aXZpdHlfdG91Y2hfb3RoZXIsIAogICAgICAgICBzZXhfYWN0aXZpdHlfdG95cywgc2V4X2FjdGl2aXR5X3VuY2xlYXIsICBzZXhfb3RoZXIsIHNleF9zb2xvLCBzZXhfdW5jbGVhciwKICAgICAgICAgZGF5c19kb25lKQpgYGAKCgojIyBFeGNsdXNpb24gey50YWJzZXR9CiMjIyBJbml0aWFsIFN1cnZleQpgYGB7ciBleGNsdXNpb24gaW5pdGlhbCBzdXJ2ZXl9Cm5fZXhjbHVkZWQgPSBkYXRhICU+JSBmaWx0ZXIocmVhc29uc19mb3JfZXhjbHVzaW9uICE9ICIiKSAlPiUgbnJvdygpCmRhdGEgPSBkYXRhICU+JSBmaWx0ZXIocmVhc29uc19mb3JfZXhjbHVzaW9uID09ICIiKQpgYGAKYHIgbl9leGNsdWRlZGAgcGVvcGxlIHdlcmUgZXhjbHVkZWQuCgojIyMgRGlhcnkgIHsudGFic2V0fQojIyMjIEV4Y2x1c2lvbiBjcml0ZXJpYSBiYXNlZCBvbiBpbml0aWFsCmBgYHtyfQpzZXNzaW9uX2NvZGVzID0gZGF0YSRzZXNzaW9uCgpkYXRhX2RpYXJ5ID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIoc2Vzc2lvbiAlaW4lIHNlc3Npb25fY29kZXMpCgpsZW5ndGgoZGF0YV9kaWFyeSRzZXNzaW9uKQpgYGAKVGhlIGByIGxlbmd0aCh1bmlxdWUoZGF0YV9kaWFyeSRzZXNzaW9uKSlgIHBhcnRpY2lwYW50cyBmaWxsZWQgb3V0IGByIGxlbmd0aChkYXRhX2RpYXJ5JHNlc3Npb24pYC4KCiMjIyMgU2tpcHBlZCBkaWFyeSBlbnRyeQpgYGB7cn0Kbl9za2lwcGVkX2RpYXJ5ID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIocmVhc29uc19mb3JfZXhjbHVzaW9uICVjb250YWlucyUgInNraXBwZWRfZGlhcnlfZW50cnkiKSAlPiUKICBjb3VudCgpCgpkYXRhX2RpYXJ5ID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIoIShyZWFzb25zX2Zvcl9leGNsdXNpb24gJWNvbnRhaW5zJSAic2tpcHBlZF9kaWFyeV9lbnRyeSIpKQpgYGAKYHIgbl9za2lwcGVkX2RpYXJ5YCBkYXlzIHdlcmUgc2tpcHBlZC4KCiMjIyMgRGlzaG9uZXN0IGFuc3dlcnMKYGBge3J9Cm5fZGlzaG9uZXN0ID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIocmVhc29uc19mb3JfZXhjbHVzaW9uICVjb250YWlucyUgImRpc2hvbmVzdCIpICU+JQogIGNvdW50KCkKCmRhdGFfZGlhcnkgPSBkYXRhX2RpYXJ5ICU+JQogIGZpbHRlcighKHJlYXNvbnNfZm9yX2V4Y2x1c2lvbiAlY29udGFpbnMlICJkaXNob25lc3QiKSkKYGBgCmByIG5fZGlzaG9uZXN0YCBkYXlzIGNvbnRhaW5lZCBkaXNob25lc3QgYW5zd2Vycy4KCiMjIyMgRmlsbGVkIG91dCBsZXNzIHRoYW4gMTQgZGF5cwpgYGB7cn0KbnVtYmVyX29mX2RheXMgPSBkYXRhX2RpYXJ5ICU+JQogIGdyb3VwX2J5KHNlc3Npb24pICU+JQogIHN1bW1hcmlzZShuID0gbigpKSAlPiUKICByZW5hbWUobnVtYmVyX29mX2RheXMgPSBuKQogIApkYXRhX2RpYXJ5ID0gbGVmdF9qb2luKGRhdGFfZGlhcnksIG51bWJlcl9vZl9kYXlzLCBieSA9ICJzZXNzaW9uIikKCmRhdGFfZGlhcnlfaW5jbHVkZSA9IGRhdGFfZGlhcnkgJT4lCiAgZmlsdGVyKGFzLm51bWVyaWMobnVtYmVyX29mX2RheXMpID49IDE0KQoKZGF0YV9kaWFyeV9leGNsdWRlID0gZGF0YV9kaWFyeSAlPiUKICBmaWx0ZXIoYXMubnVtZXJpYyhudW1iZXJfb2ZfZGF5cykgPCAxNCkKCmRhdGFfZGlhcnkgPSBkYXRhX2RpYXJ5X2luY2x1ZGUKYGBgCmByIGxlbmd0aCh1bmlxdWUoZGF0YV9kaWFyeV9leGNsdWRlJHNlc3Npb24pKWAgcGFydGljaXBhbnRzIHdlcmUgZXhjbHVkZWQgYmVjYXVzZSB0aGV5IGZpbGxlZCBvdXQgbGVzcyB0aGFuIDE0IGRheXMgLSByZXN1bHRpbmcgaW4gYHIgbGVuZ3RoKGRhdGFfZGlhcnlfZXhjbHVkZSRzZXNzaW9uKWAgZXhjbHVkZWQgZGF5cy4KCiMjIyMgU3VtbWFyeSB7LmFjdGl2ZX0KSW4gdG90YWwgYHIgbGVuZ3RoKHVuaXF1ZShkYXRhX2RpYXJ5JHNlc3Npb24pKWAgcGFydGljaXBhbnRzIHdpdGggYHIgbGVuZ3RoKGRhdGFfZGlhcnkkc2Vzc2lvbilgIGRpYXJ5IGRheXMgd2VyZSBpbmNsdWRlZCBmb3IgdGhlIGFuYWx5c2VzIGluIHdoaWNoIG91dGNvbWVzIHdlcmUgYmFzZWQgb24gZGlhcnkgaW5mb3JtYXRpb24uIAoKIyMgV3JhbmdsZSBkYXRhIHsudGFic2V0fQoKIyMjIEluY29tZQpTZXQgZmFjdG9yIGxldmVsIGNvcnJlY3RseQpgYGB7cn0KZGF0YSA9IGRhdGEgJT4lCiAgbXV0YXRlKG5ldF9pbmNvbWUgPSBmYWN0b3IobmV0X2luY29tZSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICBsZXZlbHMgPSBjKCJldXJvX2x0XzUwMCIsICJldXJvXzUwMF8xMDAwIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJldXJvXzEwMDBfMjAwMCIsICJldXJvXzIwMDBfMzAwMCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiZXVyb19ndF8zMDAwIiwgImRvbnRfdGVsbCIpKSkKYGBgCgojIyMgUmVsYXRpb25zaGlwIHN0YXR1cyAoc2luZ2xlIHZzIHBhcnRuZXJlZCkKYGBge3J9CmRhdGEgPSBkYXRhICU+JSBtdXRhdGUoCiAgcmVsYXRpb25zaGlwX3N0YXR1cyA9IGlmZWxzZShpcy5uYShkdXJhdGlvbl9yZWxhdGlvbnNoaXBfbW9udGgpLCAiU2luZ2xlIiwgIlBhcnRuZXJlZCIpKQoKcXBsb3QoZGF0YSRyZWxhdGlvbnNoaXBfc3RhdHVzKSArIGNvb3JkX2ZsaXAoKQpgYGAKCiMjIyBSZWxhdGlvbnNoaXAgZHVyYXRpb24KYGBge3J9CmRhdGEgPSBkYXRhICU+JQogIG11dGF0ZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPSBkdXJhdGlvbl9yZWxhdGlvbnNoaXBfeWVhcnMgKiAxMiArCiAgICAgICAgICAgZHVyYXRpb25fcmVsYXRpb25zaGlwX21vbnRoKQoKcXBsb3QoZGF0YSRyZWxhdGlvbnNoaXBfZHVyYXRpb24pCgoKZGF0YSA9IGRhdGEgJT4lCiAgIG11dGF0ZShyZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yID0gCiAgICAgICAgICAgIGZhY3RvcihpZmVsc2UocmVsYXRpb25zaGlwX3N0YXR1cyA9PSAiU2luZ2xlIiwKICAgICAgICAgICAgICAgICAgICJTaW5nbGUiLAogICAgICAgICAgICAgICAgICAgaWZlbHNlKHJlbGF0aW9uc2hpcF9kdXJhdGlvbiA8PSAxMiwKICAgICAgICAgICAgICAgICAgICAgICAgICAiUGFydG5lcmVkX3VwdG8xMm1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKHJlbGF0aW9uc2hpcF9kdXJhdGlvbiA8PSAyOCwgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJQYXJ0bmVyZWRfdXB0bzI4bW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKHJlbGF0aW9uc2hpcF9kdXJhdGlvbiA8PSA1MiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJQYXJ0bmVyZWRfdXB0bzUybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPiA1MiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJQYXJ0bmVyZWRfbW9yZXRoYW41Mm1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBOQSkpKSkpLAogICAgICAgICAgICAgICAgICAgbGV2ZWxzID0gYygiU2luZ2xlIiwgIlBhcnRuZXJlZF91cHRvMTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiUGFydG5lcmVkX3VwdG8yOG1vbnRocyIsICJQYXJ0bmVyZWRfdXB0bzUybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIlBhcnRuZXJlZF9tb3JldGhhbjUybW9udGhzIikpKQoKcXBsb3QoZGF0YSRyZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yKQoKZ2dwbG90KGRhdGEsIGFlcyhyZWxhdGlvbnNoaXBfZHVyYXRpb24pKSArCiAgZ2VvbV9oaXN0b2dyYW0oYWVzKGZpbGwgPSByZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yKSwgYmlucyA9IDEwMCkKCnF1YW50aWxlcyA9IHF1YW50aWxlKGFzLm51bWVyaWMoZGF0YSRyZWxhdGlvbnNoaXBfZHVyYXRpb24pLAogICAgICAgICAgICAgICAgICAgICBuYS5ybSA9IFQsCiAgICAgICAgICAgICAgICAgICAgIHByb2JzID0gYygwLCAwLjEyNSwgMC4yNSwgMC4zNzUsIDAuNSwwLjYyNSwgMC43NSwgMC44NzUsIDEpKQoKZGF0YSA9IGRhdGEgJT4lCiAgbXV0YXRlKHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IyID0gCiAgICAgICAgICAgZmFjdG9yKGlmZWxzZShyZWxhdGlvbnNoaXBfc3RhdHVzID09ICJTaW5nbGUiLAogICAgICAgICAgICAgICAgICAiU2luZ2xlIiwKICAgICAgICAgICAgICAgICAgaWZlbHNlKHJlbGF0aW9uc2hpcF9kdXJhdGlvbiA8PSBxdWFudGlsZXNbMl0sCiAgICAgICAgICAgICAgICAgICAgICAgICAiUGFydG5lcmVkX3VwdG82bW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPD0gcXVhbnRpbGVzWzNdLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJQYXJ0bmVyZWRfdXB0bzEybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UocmVsYXRpb25zaGlwX2R1cmF0aW9uIDw9IHF1YW50aWxlc1s0XSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIlBhcnRuZXJlZF91cHRvMjBtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UocmVsYXRpb25zaGlwX2R1cmF0aW9uIDw9IHF1YW50aWxlc1s1XSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJQYXJ0bmVyZWRfdXB0bzI4bW9udGhzIiwKICAgICAgICAgICBpZmVsc2UocmVsYXRpb25zaGlwX2R1cmF0aW9uIDw9IHF1YW50aWxlc1s2XSwKICAgICAgICAgICAgICAgICAgIlBhcnRuZXJlZF91cHRvMzhtb250aHMiLAogICAgICAgICAgICAgICAgICBpZmVsc2UocmVsYXRpb25zaGlwX2R1cmF0aW9uIDw9IHF1YW50aWxlc1s3XSwKICAgICAgICAgICAgICAgICAgICAgICAgICJQYXJ0bmVyZWRfdXB0bzUybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShyZWxhdGlvbnNoaXBfZHVyYXRpb24gPD0gcXVhbnRpbGVzWzhdLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJQYXJ0bmVyZWRfdXB0bzg1bW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UocmVsYXRpb25zaGlwX2R1cmF0aW9uID4gcXVhbnRpbGVzWzhdLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiUGFydG5lcmVkX21vcmV0aGFuODVtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBOQSkpKSkpKSkpKSwKICAgICAgICAgICBsZXZlbHMgPSBjKCJTaW5nbGUiLCAiUGFydG5lcmVkX3VwdG82bW9udGhzIiwgIlBhcnRuZXJlZF91cHRvMTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgIlBhcnRuZXJlZF91cHRvMjBtb250aHMiLCAiUGFydG5lcmVkX3VwdG8yOG1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAiUGFydG5lcmVkX3VwdG8zOG1vbnRocyIsICJQYXJ0bmVyZWRfdXB0bzUybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICJQYXJ0bmVyZWRfdXB0bzg1bW9udGhzIiwgIlBhcnRuZXJlZF9tb3JldGhhbjg1bW9udGhzIikpKQpgYGAKCgojIyMgQ29udHJhY2VwdGlvbiBhcHByb2FjaApgYGB7ciBjb250cmFjZXB0aW9uIGFwcHJvYWNofQpkYXRheCA9IGRhdGEgJT4lIG11dGF0ZSgKICAgIGNvbnRyYWNlcHRpb25fbWV0aG9kID0gaWZfZWxzZShjb250cmFjZXB0aW9uX2F0X2FsbCA9PSA1LAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJiYXJyaWVyX25vX3BlbmV0cmF0aXZlX3NleCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29udHJhY2VwdGlvbl9tZXRob2QpLAogICAgY29tID0gY29udHJhY2VwdGlvbl9tZXRob2QsCiAgICBjb250cmFjZXB0aW9uX2FwcHJvYWNoID0gaWZfZWxzZSgKICAgICAgICBjb25kaXRpb24gPSBjb20gJWNvbnRhaW5zJSAiaG9ybW9uYWxfcGlsbCIgfCBjb20gJWNvbnRhaW5zJSAiaG9ybW9uYWxfb3RoZXIiLAogICAgICAgIHRydWUgPSBpZl9lbHNlKAogICAgICAgICAgY29uZGl0aW9uID0KICAgICAgICAgICAgY29tID09ICJob3Jtb25hbF9waWxsIiB8IGNvbSA9PSAiaG9ybW9uYWxfb3RoZXIiIHwKICAgICAgICAgICAgY29tID09ICJob3Jtb25hbF9tb3JuaW5nX2FmdGVyX3BpbGwiLAogICAgICAgICAgdHJ1ZSA9IGlmX2Vsc2UoY29tID09ICJob3Jtb25hbF9waWxsIiwgCiAgICAgICAgICAgICAgICAgICAgICAgICB0cnVlID0gImhvcm1vbmFsX3BpbGxfb25seSIsCiAgICAgICAgICAgICAgICAgICAgICAgICBmYWxzZSA9ICJob3Jtb25hbF9vdGhlcl9vbmx5IiksCiAgICAgICAgICBmYWxzZSA9ICJob3Jtb25hbCtiYXJyaWVyIiksCiAgICAgICAgaWZfZWxzZSgKICAgICAgICAgIGNvbmRpdGlvbiA9ICEoY29tICVjb250YWlucyUgImF3YXJlbmVzcyIpLAogICAgICAgICAgdHJ1ZSA9IGlmX2Vsc2UoY29uZGl0aW9uID0KICAgICAgICAgICAgICAgICAgICAgICAgICAgY29tICE9ICIiLAogICAgICAgICAgICAgICAgICAgICAgICAgdHJ1ZSA9IGlmX2Vsc2UoY29uZGl0aW9uID0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29tICVjb250YWlucyUgImJhcnJpZXJfaW50cmF1dGVyaW5lX3Blc3NhciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB0cnVlID0gImJhcnJpZXJfcGVzc2FyIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmX2Vsc2UoY29uZGl0aW9uID0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb20gJWNvbnRhaW5zJSAiYmFycmllcl9jb25kb21zIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdHJ1ZSA9ICJjb25kb21zIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFsc2UgPSAib3RoZXIiKSksCiAgICAgICAgICAgICAgICAgICAgICAgICBmYWxzZSA9ICJub3RoaW5nIiksCiAgICAgICAgICBmYWxzZSA9ICJhd2FyZW5lc3MiKSkpCgoKCmRhdGEkY29udHJhY2VwdGlvbl9hcHByb2FjaCA9IGZhY3RvcihkYXRhJGNvbnRyYWNlcHRpb25fYXBwcm9hY2gsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbGV2ZWxzID0gYygiY29uZG9tcyIsICJiYXJyaWVyX3Blc3NhciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiaG9ybW9uYWwrYmFycmllciIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiaG9ybW9uYWxfcGlsbF9vbmx5IiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJob3Jtb25hbF9vdGhlcl9vbmx5IiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJhd2FyZW5lc3MiLCAibm90aGluZyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAib3RoZXIiKSkKCnFwbG90KGRhdGEkY29udHJhY2VwdGlvbl9hcHByb2FjaCkgKyBjb29yZF9mbGlwKCkKdGFibGUoZGF0YSRjb250cmFjZXB0aW9uX2FwcHJvYWNoKQpgYGAKCiMjIyBDdXJyZW50IGNvbnRyYWNlcHRpdmUgc3RhdHVzIChob3Jtb25hbCB2cy4gbm9uIGhvcm1vbmFsKQpgYGB7cn0KZGF0YSA9IGRhdGEgJT4lIG11dGF0ZSgKICBjb250cmFjZXB0aW9uX2hvcm1vbmFsID0gZmFjdG9yKGlmZWxzZShjb250cmFjZXB0aW9uX2FwcHJvYWNoICVjb250YWlucyUgImhvcm1vbmFsIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAieWVzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAibm8iKSkpCnFwbG90KGRhdGEkY29udHJhY2VwdGlvbl9ob3Jtb25hbCkgKyBjb29yZF9mbGlwKCkKYGBgCgoKIyMjIENoYW5nZWQgY29udHJhY2VwdGlvbiBzaW5jZSBtZWV0aW5nIHRoZWlyIHBhcnRuZXIKVGhlcmUgd2lsbCBiZSBOQXMgYmVjYXVzZSB3ZSBhc2tlZCBhYm91dCBjb250cmFjZXRpb24gd2hlbiBtZWV0aW5nIHBhcnRuZXIgb25seSBpZiBwYXJ0aWNpcGFudHMgd2VyZSBjdXJyZW50bHkgaW4gYSByZWxhdGlvbnNoaXAKYGBge3J9CmNyb3NzdGFicyh+Y29udHJhY2VwdGlvbl9ob3Jtb25hbCArIGNvbnRyYWNlcHRpb25fbWVldGluZ19wYXJ0bmVyLCBkYXRhID0gZGF0YSkKZGF0YSA9IGRhdGEgJT4lIG11dGF0ZSgKICBjb250cmFjZXB0aW9uX2NoYW5nZV9zaW5jZV9tZWV0aW5nX3BhcnRuZXIgPQogICAgaWZlbHNlKGNvbnRyYWNlcHRpb25faG9ybW9uYWwgPT0gInllcyIgJiBjb250cmFjZXB0aW9uX21lZXRpbmdfcGFydG5lciA9PSAxLAogICAgICAgICAgICJjb25ncnVlbnRfaG9ybW9uYWwiLAogICAgICAgICAgIGlmZWxzZShjb250cmFjZXB0aW9uX2hvcm1vbmFsID09ICJubyIgJiBjb250cmFjZXB0aW9uX21lZXRpbmdfcGFydG5lciA9PSAwLAogICAgICAgICAgICAgICAgICAiY29uZ3J1ZW50X25vbmhvcm1vbmFsIiwKICAgICAgICAgICAgICAgICAgaWZlbHNlKGNvbnRyYWNlcHRpb25faG9ybW9uYWwgPT0gInllcyIgJiBjb250cmFjZXB0aW9uX21lZXRpbmdfcGFydG5lciA9PSAwLAogICAgICAgICAgICAgICAgICAgICAgICAgInN3aXRjaGVkX3RvX2hvcm1vbmFsIiwKICAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShjb250cmFjZXB0aW9uX2hvcm1vbmFsID09ICJubyIgJgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29udHJhY2VwdGlvbl9tZWV0aW5nX3BhcnRuZXIgPT0gMSwgInN3aXRjaGVkX3RvX25vbmhvcm1vbmFsIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBOQSkpKSkpCgpxcGxvdChkYXRhJGNvbnRyYWNlcHRpb25fY2hhbmdlX3NpbmNlX21lZXRpbmdfcGFydG5lcikgKyBjb29yZF9mbGlwKCkKYGBgCgojIyMgQ29udHJhY2VwdGlvbiBtZWV0aW5nIHBhcnRuZXIKYGBge3J9CmRhdGEgPSBkYXRhICU+JQogIG11dGF0ZShjb250cmFjZXB0aW9uX21lZXRpbmdfcGFydG5lciA9IGZhY3RvcihpZl9lbHNlKAogICAgY29udHJhY2VwdGlvbl9tZWV0aW5nX3BhcnRuZXIgPT0gMSwKICAgICJ5ZXMiLCAibm8iKSkpCmBgYAoKCgojIyMgRGlhcnkgaW5mb3JtYXRpb24KY2FsY3VsYXRlIG1lYW4gb2YgbGliaWRvLCBzZXhfYWN0aXZlX2ZyZXF1ZW5jeSBhbmQgYWN0dWFsIHNleCBmcmVxdWVuY3kgYmFzZWQgb24gZGlhcnkKYGBge3J9CmRhdGFfZGlhcnlfbWVhbnMgPSBkYXRhX2RpYXJ5ICU+JQogIGdyb3VwX2J5KHNlc3Npb24pICU+JQogIHN1bW1hcmlzZShkaWFyeV9saWJpZG9fbWVhbiA9IG1lYW4oaGlnaF9saWJpZG8sIG5hLnJtID0gVCksCiAgICAgICAgICAgIGRpYXJ5X3NleF9hY3RpdmVfbWVhbiA9IG1lYW4oc2V4X2FjdGl2ZSwgbmEucm0gPSBUKSwKICAgICAgICAgICAgZGlhcnlfc2V4X2FjdGl2ZV9zZXhfbWVhbiA9IG1lYW4oc2V4X2FjdGl2aXR5X3NleCwgbmEucm0gPSBUKSkKCnFwbG90KGRhdGFfZGlhcnlfbWVhbnMkZGlhcnlfbGliaWRvX21lYW4pCnFwbG90KGRhdGFfZGlhcnlfbWVhbnMkZGlhcnlfc2V4X2FjdGl2ZV9tZWFuKQpxcGxvdChkYXRhX2RpYXJ5X21lYW5zJGRpYXJ5X3NleF9hY3RpdmVfc2V4X21lYW4pCgpkYXRhID0gbGVmdF9qb2luKGRhdGEsIGRhdGFfZGlhcnlfbWVhbnMsIGJ5ID0gInNlc3Npb24iKQpgYGAKCgojIyBTYXZlIERhdGEKYGBge3J9CnNhdmUoZGF0YSwgZGF0YSwgZmlsZSA9ICJkYXRhL2NsZWFuZWRfc2VsZWN0ZWRfd3JhbmdsZWQucmRhdGEiKQpgYGAKCg==</div>
 
 
 
