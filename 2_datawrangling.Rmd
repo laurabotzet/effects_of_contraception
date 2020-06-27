@@ -221,46 +221,69 @@ data = data %>%
 
 ### Contraception approach
 ```{r contraception approach}
-datax = data %>% mutate(
-    contraception_method = if_else(contraception_at_all == 5,
+data = data %>%
+  mutate(# Participants, who indicated having no penetrative sex:
+         contraception_method = if_else(contraception_at_all == 5,
                                    "barrier_no_penetrative_sex",
                                    contraception_method),
-    com = contraception_method,
-    contraception_approach = if_else(
-        condition = com %contains% "hormonal_pill" | com %contains% "hormonal_other",
-        true = if_else(
-          condition =
-            com == "hormonal_pill" | com == "hormonal_other" |
-            com == "hormonal_morning_after_pill",
-          true = if_else(com == "hormonal_pill", 
-                         true = "hormonal_pill_only",
-                         false = "hormonal_other_only"),
-          false = "hormonal+barrier"),
-        if_else(
-          condition = !(com %contains% "awareness"),
-          true = if_else(condition =
-                           com != "",
-                         true = if_else(condition =
-                                          com %contains% "barrier_intrauterine_pessar",
-                                        true = "barrier_pessar",
-                                        if_else(condition =
-                                                  com %contains% "barrier_condoms",
-                                                true = "condoms",
-                                                false = "other")),
-                         false = "nothing"),
-          false = "awareness")))
+         # Participants, who indicated having no penetrative sex
+         # use no contraceptives
+         contraception_approach = factor(ifelse(
+           contraception_method =="barrier_no_penetrative_sex",
+           "nothing",
+           as.character(contraception_approach))),
+         # Fixed contraception_approach for
+         # "hormonal_pill, barrier_coitus_interruptus"
+         contraception_approach = factor(ifelse(
+           contraception_method == "hormonal_pill, barrier_coitus_interruptus",
+           "hormonal_pill_only",
+           as.character(contraception_approach))),
+         # Fixed contraception_approach for
+         # "hormonal_pill, barrier_no_penetrative_sex"
+         contraception_approach = factor(ifelse(
+           contraception_method == "hormonal_pill, barrier_no_penetrative_sex",
+           "hormonal_pill_only",
+           as.character(contraception_approach))),
+         # Fixed contraception_approach for
+         # "hormonal_other, barrier_condoms"
+         contraception_approach = factor(ifelse(
+           contraception_method == "hormonal_other, barrier_condoms",
+           "hormonal_other+condoms",
+           as.character(contraception_approach))),
+         # Fixed contraception_approach for
+         # "hormonal_other, barrier_condoms, barrier_coitus_interruptus"
+         contraception_approach = factor(ifelse(
+           contraception_method ==
+             "hormonal_other, barrier_condoms, barrier_coitus_interruptus",
+           "hormonal_other+condoms",
+           as.character(contraception_approach))),
+         contraception_approach = factor(ifelse(
+           contraception_approach == "hormonal+barrier",
+           "hormonal_pill+condoms",
+           as.character(contraception_approach))),
+         contraception_approach = factor(ifelse(
+           contraception_method %contains% "awareness" &
+             contraception_method %contains% "condoms" &
+             !(contraception_method %contains% "hormonal"),
+           "awareness+condoms",
+           as.character(contraception_approach))))
 
 
+data = data %>%
+  mutate(contraception_approach = factor(contraception_approach,
+                                         levels = c("hormonal_pill_only",
+                                                    "hormonal_other_only",
+                                                    "hormonal_pill+condoms",
+                                                    "hormonal_other+condoms",
+                                                    "barrier_pessar",
+                                                    "awareness",
+                                                    "awareness+condoms",
+                                                    "condoms",
+                                                    "other",
+                                                    "nothing")))
 
-data$contraception_approach = factor(data$contraception_approach,
-                                            levels = c("condoms", "barrier_pessar",
-                                                       "hormonal+barrier",
-                                                       "hormonal_pill_only",
-                                                       "hormonal_other_only",
-                                                       "awareness", "nothing",
-                                                       "other"))
-
-qplot(data$contraception_approach) + coord_flip()
+qplot(factor(data$contraception_approach, levels = rev(levels(data$contraception_approach)))) +
+  coord_flip()
 table(data$contraception_approach)
 ```
 
@@ -271,6 +294,7 @@ data = data %>% mutate(
                                          "yes",
                                          "no")))
 qplot(data$contraception_hormonal) + coord_flip()
+table(data$contraception_hormonal)
 ```
 
 

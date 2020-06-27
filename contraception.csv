@@ -1,0 +1,47 @@
+"";"Var1";"Freq"
+"1";"awareness_calendar";3
+"2";"awareness_temperature_billings";1
+"3";"awareness_temperature_billings, awareness_computer";1
+"4";"barrier_coitus_interruptus";12
+"5";"barrier_coitus_interruptus, awareness_calendar";9
+"6";"barrier_coitus_interruptus, awareness_calendar, awareness_temperature_billings";1
+"7";"barrier_coitus_interruptus, awareness_temperature_billings";2
+"8";"barrier_condoms";339
+"9";"barrier_condoms, awareness_calendar";31
+"10";"barrier_condoms, awareness_calendar, awareness_temperature_billings";8
+"11";"barrier_condoms, awareness_calendar, awareness_temperature_billings, awareness_computer";1
+"12";"barrier_condoms, awareness_computer";3
+"13";"barrier_condoms, awareness_temperature_billings";29
+"14";"barrier_condoms, barrier_coitus_interruptus";27
+"15";"barrier_condoms, barrier_coitus_interruptus, awareness_calendar";12
+"16";"barrier_condoms, barrier_coitus_interruptus, awareness_calendar, awareness_temperature_billings";2
+"17";"barrier_condoms, barrier_coitus_interruptus, awareness_temperature_billings";4
+"18";"barrier_condoms, barrier_coitus_interruptus, awareness_temperature_billings, awareness_computer";1
+"19";"barrier_condoms, barrier_coitus_interruptus, barrier_no_penetrative_sex";6
+"20";"barrier_condoms, barrier_coitus_interruptus, barrier_no_penetrative_sex, awareness_calendar";2
+"21";"barrier_condoms, barrier_coitus_interruptus, barrier_no_penetrative_sex, awareness_calendar, awareness_temperature_billings";1
+"22";"barrier_condoms, barrier_intrauterine_pessar";14
+"23";"barrier_condoms, barrier_no_penetrative_sex";3
+"24";"barrier_condoms, barrier_no_penetrative_sex, awareness_calendar";3
+"25";"barrier_condoms, barrier_no_penetrative_sex, awareness_calendar, awareness_temperature_billings";1
+"26";"barrier_condoms, barrier_no_penetrative_sex, awareness_temperature_billings";1
+"27";"barrier_condoms, barrier_other";4
+"28";"barrier_condoms, barrier_other, awareness_temperature_billings";1
+"29";"barrier_condoms, barrier_other, barrier_chemical";1
+"30";"barrier_intrauterine_pessar";72
+"31";"barrier_no_penetrative_sex";90
+"32";"barrier_no_penetrative_sex, awareness_calendar, awareness_temperature_billings, awareness_computer";1
+"33";"barrier_other";2
+"34";"barrier_other, awareness_calendar";1
+"35";"barrier_other, awareness_temperature_billings";1
+"36";"hormonal_other";61
+"37";"hormonal_other, barrier_condoms";15
+"38";"hormonal_other, barrier_condoms, barrier_coitus_interruptus";2
+"39";"hormonal_pill";254
+"40";"hormonal_pill, barrier_coitus_interruptus";2
+"41";"hormonal_pill, barrier_condoms";154
+"42";"hormonal_pill, barrier_condoms, awareness_calendar";2
+"43";"hormonal_pill, barrier_condoms, barrier_coitus_interruptus";2
+"44";"hormonal_pill, barrier_condoms, barrier_no_penetrative_sex";1
+"45";"hormonal_pill, barrier_no_penetrative_sex";1
+"46";"hormonal_pill, hormonal_other, barrier_condoms";1
