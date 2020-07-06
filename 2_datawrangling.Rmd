@@ -1,5 +1,13 @@
-
-# Datawrangling {.tabset}
+---
+title: "Datawrangling"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'hide'
+    self_contained: false
+---
 
 ## Data and Functions
 ```{r data and function, results='hide',message=F,warning=F}
@@ -28,15 +36,8 @@ data = all_surveys %>%
          starts_with("bfi_extra"),
          starts_with("bfi_neuro"),
          religiosity,
-         pregnant_stress,
          duration_relationship_years,
          duration_relationship_month,
-         days_with_partner,
-         nights_with_partner,
-         starts_with("soi_r"),
-         soi_r_behavior,
-         soi_r_desire,
-         number_sexual_partner,
          contraception_at_all,
          contraception_method,
          contraception_approach,
@@ -50,8 +51,7 @@ data = all_surveys %>%
          relationship_problems_R,
          relationship_conflict_R,
          satisfaction_sexual_intercourse,
-         reasons_for_exclusion,
-         pregnant_trying)
+         reasons_for_exclusion)
 ```
 
 ### Diary
@@ -148,6 +148,7 @@ data = data %>%
                                         "euro_gt_3000", "dont_tell")))
 ```
 
+
 ### Relationship status (single vs partnered)
 ```{r}
 data = data %>% mutate(
@@ -217,6 +218,7 @@ data = data %>%
                       "Partnered_upto38months", "Partnered_upto52months",
                       "Partnered_upto85months", "Partnered_morethan85months")))
 ```
+
 
 
 ### Contraception approach
@@ -326,7 +328,6 @@ data = data %>%
 ```
 
 
-
 ### Diary information
 calculate mean of libido, sex_active_frequency and actual sex frequency based on diary
 ```{r}
@@ -343,7 +344,15 @@ qplot(data_diary_means$diary_sex_active_sex_mean)
 data = left_join(data, data_diary_means, by = "session")
 ```
 
+## Select Data
+```{r}
+data = data %>%
+  select(-duration_relationship_years, -duration_relationship_month,
+         -contraception_at_all, -contraception_method, -contraception_approach, -contraception_method_broad,
+         -reasons_for_exclusion)
+```
 
+ 
 ## Save Data
 ```{r}
 save(data, data, file = "data/cleaned_selected_wrangled.rdata")
