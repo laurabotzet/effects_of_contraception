@@ -9,148 +9,14 @@ pander::panderOptions('round',2)
 pander::panderOptions('digits',2)
 pander::panderOptions('keep.trailing.zeros',TRUE)
 
-load("data/cleaned_selected.rdata")
+load("data/cleaned_selected_wrangled.rdata")
 ```
-
-
-## Select Variables {.tabset}
-### Initial Survey
-```{r select variables}
-data = all_surveys %>%
-  select(session,
-         age,
-         education_years,
-         net_income,
-         starts_with("bfi_agree"),
-         starts_with("bfi_consc"),
-         starts_with("bfi_open"),
-         starts_with("bfi_extra"),
-         starts_with("bfi_neuro"),
-         religiosity,
-         pregnant_stress,
-         duration_relationship_years,
-         duration_relationship_month,
-         days_with_partner,
-         nights_with_partner,
-         starts_with("soi_r"),
-         soi_r_behavior,
-         soi_r_desire,
-         number_sexual_partner,
-         contraception_at_all,
-         contraception_method,
-         contraception_approach,
-         contraception_method_broad,
-         contraception_meeting_partner,
-         partner_attractiveness_face,
-         partner_attractiveness_body,
-         relationship_satisfaction_overall,
-         relationship_satisfaction_2,
-         relationship_satisfaction_3,
-         relationship_problems_R,
-         relationship_conflict_R,
-         satisfaction_sexual_intercourse,
-         reasons_for_exclusion,
-         pregnant_trying)
-```
-
-### Diary
-```{r select variables diary}
-data_diary = diary %>%
-  select(session,
-         reasons_for_exclusion,
-         high_libido,
-         sex_active, sex_activity_anal_sex, sex_activity_bdsm_dom, sex_activity_bdsm_sub,
-         sex_activity_cuddling, sex_activity_cunnilingus, sex_activity_cybersex,
-         sex_activity_dirty_talk,
-         sex_activity_fellatio, sex_activity_kissing,  sex_activity_masturbated_by_partner,
-         sex_activity_masturbated_partner, sex_activity_masturbation, sex_activity_other,
-         sex_activity_phone_skype_sex, sex_activity_pornography, sex_activity_sex, 
-         sex_activity_touch_other, 
-         sex_activity_toys, sex_activity_unclear,  sex_other, sex_solo, sex_unclear,
-         days_done)
-```
-
-
-## Exclusion {.tabset}
-### Initial Survey
-```{r exclusion initial survey}
-n_excluded = data %>% filter(reasons_for_exclusion != "") %>% nrow()
-data = data %>% filter(reasons_for_exclusion == "")
-```
-`r n_excluded` people were excluded.
-
-### Diary  {.tabset}
-#### Exclusion criteria based on initial
-```{r}
-session_codes = data$session
-
-data_diary = data_diary %>%
-  filter(session %in% session_codes)
-
-length(data_diary$session)
-```
-The `r length(unique(data_diary$session))` participants filled out `r length(data_diary$session)`.
-
-#### Skipped diary entry
-```{r}
-n_skipped_diary = data_diary %>%
-  filter(reasons_for_exclusion %contains% "skipped_diary_entry") %>%
-  count()
-
-data_diary = data_diary %>%
-  filter(!(reasons_for_exclusion %contains% "skipped_diary_entry"))
-```
-`r n_skipped_diary` days were skipped.
-
-#### Dishonest answers
-```{r}
-n_dishonest = data_diary %>%
-  filter(reasons_for_exclusion %contains% "dishonest") %>%
-  count()
-
-data_diary = data_diary %>%
-  filter(!(reasons_for_exclusion %contains% "dishonest"))
-```
-`r n_dishonest` days contained dishonest answers.
-
-#### Filled out less than 14 days
-```{r}
-number_of_days = data_diary %>%
-  group_by(session) %>%
-  summarise(n = n()) %>%
-  rename(number_of_days = n)
-  
-data_diary = left_join(data_diary, number_of_days, by = "session")
-
-data_diary_include = data_diary %>%
-  filter(as.numeric(number_of_days) >= 14)
-
-data_diary_exclude = data_diary %>%
-  filter(as.numeric(number_of_days) < 14)
-
-data_diary = data_diary_include
-```
-`r length(unique(data_diary_exclude$session))` participants were excluded because they filled out less than 14 days - resulting in `r length(data_diary_exclude$session)` excluded days.
-
-#### Summary {.active}
-In total `r length(unique(data_diary$session))` participants with `r length(data_diary$session)` diary days were included for the analyses in which outcomes were based on diary information. 
 
 ## Wrangle data {.tabset .active}
-### Relationship status (single vs partnered)
-```{r}
-data = data %>% mutate(
-  relationship_status = ifelse(is.na(duration_relationship_month), "Single", "Partnered"))
-
-qplot(data$relationship_status) + coord_flip()
-```
 
 ### Relationship duration {.active .tabset}
 #### Linear relationship duration
 ```{r}
-data = data %>%
-  mutate(relationship_duration = duration_relationship_years * 12 +
-           duration_relationship_month)
-
 qplot(data$relationship_duration)
 ```
 
@@ -158,7 +24,7 @@ qplot(data$relationship_duration)
 Divide relationship duration into quartiles
 ```{r}
 data = data %>%
-   mutate(relationship_duration_factor = 
+   mutate(relationship_duration_factor_quartiles = 
             factor(ifelse(relationship_status == "Single",
                    "Single",
                    ifelse(relationship_duration <= 12,
@@ -176,22 +42,22 @@ data = data %>%
 
 
 data %>% 
-  group_by(relationship_duration_factor) %>%
+  group_by(relationship_duration_factor_quartiles) %>%
   summarise(count = n()) %>%
   add_column(duration_in_years = c("Single",
                                    "upto1year",
                                    "upto2.3years",
                                    "upto4.3years",
                                    "morethan4.3years")) %>%
-  select(relationship_duration_factor, duration_in_years, count) %>%
+  select(relationship_duration_factor_quartiles, duration_in_years, count) %>%
   kable()
  
 
-qplot(data$relationship_duration_factor)
+qplot(data$relationship_duration_factor_quartiles)
 
 
 ggplot(data, aes(relationship_duration)) +
-  geom_histogram(aes(fill = relationship_duration_factor), bins = 200) +
+  geom_histogram(aes(fill = relationship_duration_factor_quartiles), bins = 200) +
   theme(legend.title = element_blank(), legend.position = "bottom")
 
 ```
@@ -204,7 +70,7 @@ quantiles = quantile(as.numeric(data$relationship_duration),
                      probs = c(0, 0.125, 0.25, 0.375, 0.5,0.625, 0.75, 0.875, 1))
 
 data = data %>%
-  mutate(relationship_duration_factor2 = 
+  mutate(relationship_duration_factor_finegrained = 
            factor(ifelse(relationship_status == "Single",
                   "Single",
                   ifelse(relationship_duration <= quantiles[2],
@@ -230,7 +96,7 @@ data = data %>%
                       "upto85months", "morethan85months")))
 
 data %>% 
-  group_by(relationship_duration_factor2) %>%
+  group_by(relationship_duration_factor_finegrained) %>%
   summarise(count = n()) %>%
   add_column(duration_in_years = c("Single",
                                    "upto0.5years",
@@ -241,14 +107,14 @@ data %>%
                                    "upto4.3years",
                                    "upto7.1years",
                                    "morethan7.1years")) %>%
-  select(relationship_duration_factor2, duration_in_years, count)  %>%
+  select(relationship_duration_factor_finegrained, duration_in_years, count)  %>%
   kable()
 
-qplot(data$relationship_duration_factor2) +
+qplot(data$relationship_duration_factor_finegrained) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ggplot(data, aes(relationship_duration)) +
-  geom_histogram(aes(fill = relationship_duration_factor2), bins = 200) +
+  geom_histogram(aes(fill = relationship_duration_factor_finegrained), bins = 200) +
   theme(legend.title = element_blank(), legend.position = "bottom")
 
 ```
@@ -276,7 +142,7 @@ Relationship Duration
 
 ```{r}
 data = data %>%
-  mutate(relationship_duration_factor3 = 
+  mutate(relationship_duration_factor_schroeder = 
            factor(ifelse(relationship_status == "Single",
                   "Single",
                   ifelse(relationship_duration < 6,
@@ -306,19 +172,210 @@ data = data %>%
                       "8to10years", "morethan10years")))
 
 data %>% 
-  group_by(relationship_duration_factor3) %>%
+  group_by(relationship_duration_factor_schroeder) %>%
   summarise(count = n()) %>%
   kable()
   
   
-qplot(data$relationship_duration_factor3) +
+qplot(data$relationship_duration_factor_schroeder) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 
 ggplot(data, aes(relationship_duration)) +
-  geom_histogram(aes(fill = relationship_duration_factor3), bins = 200) +
+  geom_histogram(aes(fill = relationship_duration_factor_schroeder), bins = 200) +
   theme(legend.title = element_blank(), legend.position = "bottom")
 
 ```
 
+## Analyses {.active}
+### Libido
+#### Factor quartiles
+```{r}
+library(brms)
+
+m_simple_factor_quartiles = brm(
+  diary_libido_mean ~ relationship_duration_factor_quartiles,
+  data = data,
+  family = gaussian())
+
+m_complex_factor_quartiles = brm(
+  diary_libido_mean ~ relationship_duration_factor_quartiles +
+    contraception_hormonal +
+    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
+    bfi_agree + bfi_neuro + religiosity,
+  data = data,
+  family = gaussian())
+```
+
+#### Factor finegrained
+```{r}
+m_simple_factor_finegrained = brm(
+  diary_libido_mean ~ relationship_duration_factor_finegrained,
+  data = data,
+  family = gaussian())
+
+m_complex_factor_finegrained = brm(
+  diary_libido_mean ~ relationship_duration_factor_finegrained +
+    contraception_hormonal +
+    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
+    bfi_agree + bfi_neuro + religiosity,
+  data = data,
+  family = gaussian())
+```
+
+#### Factor Schröder
+```{r}
+m_simple_factor_schroeder = brm(
+  diary_libido_mean ~ relationship_duration_factor_schroeder,
+  data = data,
+  family = gaussian())
+
+m_complex_factor_schroeder = brm(
+  diary_libido_mean ~ relationship_duration_factor_schroeder +
+    contraception_hormonal +
+    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
+    bfi_agree + bfi_neuro + religiosity,
+  data = data,
+  family = gaussian())
+```
+
+
+#### Comparisons {.tabset .active}
+##### Simple models
+```{r}
+library(loo)
+comp_simple_quart_fine = loo(m_simple_factor_quartiles,
+                             m_simple_factor_finegrained)
+comp_simple_quart_fine
+
+comp_simple_quart_schroeder = loo(m_simple_factor_quartiles,
+                             m_simple_factor_schroeder)
+comp_simple_quart_schroeder
+
+comp_simple_fine_schroeder = loo(m_simple_factor_finegrained,
+                             m_simple_factor_schroeder)
+comp_simple_fine_schroeder
+
+```
+
+##### Complex models
+```{r}
+comp_complex_quart_fine = loo(m_complex_factor_quartiles,
+                             m_complex_factor_finegrained)
+comp_complex_quart_fine
+
+comp_complex_quart_schroeder = loo(m_complex_factor_quartiles,
+                             m_complex_factor_schroeder)
+comp_complex_quart_schroeder
+
+comp_complex_fine_schroeder = loo(m_complex_factor_finegrained,
+                             m_complex_factor_schroeder)
+comp_complex_fine_schroeder
+```
+
+### Sex Frequency
+#### Factor quartiles
+```{r}
+m_simple_factor_quartiles = brm(
+  diary_sex_active_sex_mean ~ relationship_duration_factor_quartiles,
+  data = data,
+  family = gaussian())
+
+m_complex_factor_quartiles = brm(
+  diary_sex_active_sex_mean ~ relationship_duration_factor_quartiles +
+    contraception_hormonal +
+    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
+    bfi_agree + bfi_neuro + religiosity,
+  data = data,
+  family = gaussian())
+```
+
+#### Factor finegrained
+```{r}
+m_simple_factor_finegrained = brm(
+  diary_sex_active_sex_mean ~ relationship_duration_factor_finegrained,
+  data = data,
+  family = gaussian())
+
+m_complex_factor_finegrained = brm(
+  diary_sex_active_sex_mean ~ relationship_duration_factor_finegrained +
+    contraception_hormonal +
+    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
+    bfi_agree + bfi_neuro + religiosity,
+  data = data,
+  family = gaussian())
+```
+
+#### Factor Schröder
+```{r}
+m_simple_factor_schroeder = brm(
+  diary_sex_active_sex_mean ~ relationship_duration_factor_schroeder,
+  data = data,
+  family = gaussian())
+
+m_complex_factor_schroeder = brm(
+  diary_sex_active_sex_mean ~ relationship_duration_factor_schroeder +
+    contraception_hormonal +
+    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
+    bfi_agree + bfi_neuro + religiosity,
+  data = data,
+  family = gaussian())
+```
+
+
+#### Comparisons {.tabset .active}
+##### Simple models
+```{r}
+library(loo)
+comp_simple_quart_fine = loo(m_simple_factor_quartiles,
+                             m_simple_factor_finegrained)
+comp_simple_quart_fine
+
+comp_simple_quart_schroeder = loo(m_simple_factor_quartiles,
+                             m_simple_factor_schroeder)
+comp_simple_quart_schroeder
+
+comp_simple_fine_schroeder = loo(m_simple_factor_finegrained,
+                             m_simple_factor_schroeder)
+comp_simple_fine_schroeder
+
+```
+
+##### Complex models
+```{r}
+comp_complex_quart_fine = loo(m_complex_factor_quartiles,
+                             m_complex_factor_finegrained)
+comp_complex_quart_fine
+
+comp_complex_quart_schroeder = loo(m_complex_factor_quartiles,
+                             m_complex_factor_schroeder)
+comp_complex_quart_schroeder
+
+comp_complex_fine_schroeder = loo(m_complex_factor_finegrained,
+                             m_complex_factor_schroeder)
+comp_complex_fine_schroeder
+```
+
+### Plots
+```{r}
+ggplot(data, aes(relationship_duration_factor_finegrained, diary_libido_mean)) +
+  geom_jitter() +
+  stat_summary(fun.data=mean_cl_normal, geom="pointrange", color="red")
+
+ggplot(data, aes(relationship_duration_factor_finegrained, diary_sex_active_sex_mean)) +
+  geom_jitter() +
+  stat_summary(fun.data=mean_cl_normal, geom="pointrange", color="red")
+
+ggplot(data, aes(relationship_duration_factor_finegrained, partner_attractiveness_body)) +
+  geom_jitter() +
+  stat_summary(fun.data=mean_cl_normal, geom="pointrange", color="red")
+
+ggplot(data, aes(relationship_duration_factor_finegrained, relationship_satisfaction_overall)) +
+  geom_jitter() +
+  stat_summary(fun.data=mean_cl_normal, geom="pointrange", color="red")
+
+ggplot(data, aes(relationship_duration_factor_finegrained, satisfaction_sexual_intercourse)) +
+  geom_jitter() +
+  stat_summary(fun.data=mean_cl_normal, geom="pointrange", color="red")
+```
 
