@@ -223,5 +223,3 @@ correlations_table = apa.cor.table(correlations, filename = "Table.doc", table.n
 correlations_table
 
 ```
-
-
