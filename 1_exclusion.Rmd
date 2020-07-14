@@ -1,3 +1,14 @@
+---
+title: "Exclusion"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'hide'
+    self_contained: false
+---
+
 # Reasons for Exclusion {.tabset}
 
 The following reasons for exclusion apply:
@@ -5,6 +16,7 @@ The following reasons for exclusion apply:
 * missing data (not finishing the initial survey)
 * not female
 * homosexuality
+* currently in a homosexual relationship
 * older than 50
 * menopausal
 * pregnant
@@ -77,6 +89,16 @@ all_surveys = all_surveys %>%
                                                "not_heterosexual_female, ", "", "")))
 
 kable(table(all_surveys$reasons_for_exclusion %contains% "not_heterosexual_female"))
+```
+
+### Currently in a non-heterosexual relationship
+```{r}
+all_surveys = all_surveys %>%
+  mutate(reasons_for_exclusion = str_c(reasons_for_exclusion,
+                                       if_else(partner_gender == 1,
+                                               "non_heterosexual_relationship, ", "", "")))
+
+kable(table(all_surveys$reasons_for_exclusion %contains% "non_heterosexual_relationship"))
 ```
 
 ### Older than 50
@@ -297,12 +319,14 @@ exclusion_reasons = all_surveys %>%
   select(-session) 
 
 exclusion_reasons %>% 
-  summarise_all(sum) %>% sort() %>% 
+  summarise_all(sum) %>%
+  sort() %>% 
   gather(reason, n) %>% 
-  left_join(all_surveys %>% mutate(reason = str_sub(reasons_for_exclusion, 1, -3)) %>% group_by(reason) %>% summarise(unique = n())) %>% 
+  left_join(all_surveys %>% mutate(reason = str_sub(reasons_for_exclusion, 1, -3)) %>%
+              group_by(reason) %>%
+              summarise(unique = n())) %>% 
   mutate(unique = if_else(is.na(unique), 0L, unique)) %>% 
   knitr::kable()
-
 ```
 
 ### Figure 3: Exclusion criteria and most common combinations of exclusion criteria. {.active}
@@ -323,9 +347,11 @@ exclusion_reasons %>%
          `Pregnant` = pregnant,
          `“Taking a Chance” of Becoming Pregnant` = pregnant_chance,
          `Trying to Become Pregnant` = pregnant_trying,
-         `Medication Including Sex Hormones` = sex_hormones) %>%
+         `Medication Including Sex Hormones` = sex_hormones,
+         `Currently in a Homosexual Relationship` = non_heterosexual_relationship) %>%
   filter(included == 0) %>% 
   select(-included) %>% 
+  as.data.frame() %>%
   {
   upset(., ncol(.), 20, order.by = "freq",
       main.bar.color = "#6E8691",
@@ -352,15 +378,19 @@ exclusion_reasons %>%
          `Pregnant` = pregnant,
          `“Taking a Chance” of Becoming Pregnant` = pregnant_chance,
          `Trying to Become Pregnant` = pregnant_trying,
-         `Medication Including Sex Hormones` = sex_hormones) %>%
+         `Medication Including Sex Hormones` = sex_hormones,
+         `Currently in a Homosexual Relationship` = non_heterosexual_relationship) %>%
   filter(included == 0) %>% 
   select(-included) %>% 
+  as.data.frame() %>% 
   {
   upset(., ncol(.), 80, order.by = "freq",
       main.bar.color = "#6E8691",
       matrix.color = "#6E8691",
       sets.bar.color = "#53AC9B")
   }
+
+
 ```
 
 

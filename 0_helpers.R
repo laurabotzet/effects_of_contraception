@@ -262,6 +262,13 @@ bar_count = function(data, variable, na.rm = FALSE) {
 
 theme_set(theme_tufte(base_size = 20))
 
+apatheme=theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border=element_blank(),
+        axis.line=element_line(),
+        text = element_text(size=20))
+
 plot_interaction = function(model, nr = 3) {
   ef = allEffects(model, xlevels = 2)
   # ef = allEffects(model, x.var = "fertile_fab", xlevels = 2)

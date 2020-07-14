@@ -557,7 +557,7 @@ div.tocify {
 <h3>Initial Survey</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>n_excluded =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">!=</span><span class="st"> &quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nrow</span>()</span>
 <span id="cb4-2"><a href="#cb4-2"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(reasons_for_exclusion <span class="op">==</span><span class="st"> &quot;&quot;</span>)</span></code></pre></div>
-<p>475 people were excluded.</p>
+<p>481 people were excluded.</p>
 </div>
 <div id="diary-1" class="section level3 tabset">
 <h3>Diary</h3>
@@ -569,8 +569,8 @@ div.tocify {
 <span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span><span class="kw">filter</span>(session <span class="op">%in%</span><span class="st"> </span>session_codes)</span>
 <span id="cb5-5"><a href="#cb5-5"></a></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="kw">length</span>(data_diary<span class="op">$</span>session)</span></code></pre></div>
-<pre><code>## [1] 53483</code></pre>
-<p>The 1185 participants filled out 53483.</p>
+<pre><code>## [1] 53332</code></pre>
+<p>The 1179 participants filled out 53332.</p>
 </div>
 <div id="skipped-diary-entry" class="section level4">
 <h4>Skipped diary entry</h4>
@@ -580,7 +580,7 @@ div.tocify {
 <span id="cb7-4"><a href="#cb7-4"></a></span>
 <span id="cb7-5"><a href="#cb7-5"></a>data_diary =<span class="st"> </span>data_diary <span class="op">%&gt;%</span></span>
 <span id="cb7-6"><a href="#cb7-6"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(reasons_for_exclusion <span class="op">%contains%</span><span class="st"> &quot;skipped_diary_entry&quot;</span>))</span></code></pre></div>
-<p>748 days were skipped.</p>
+<p>745 days were skipped.</p>
 </div>
 <div id="dishonest-answers" class="section level4">
 <h4>Dishonest answers</h4>
@@ -608,11 +608,11 @@ div.tocify {
 <span id="cb9-12"><a href="#cb9-12"></a><span class="st">  </span><span class="kw">filter</span>(<span class="kw">as.numeric</span>(number_of_days) <span class="op">&lt;</span><span class="st"> </span><span class="dv">14</span>)</span>
 <span id="cb9-13"><a href="#cb9-13"></a></span>
 <span id="cb9-14"><a href="#cb9-14"></a>data_diary =<span class="st"> </span>data_diary_include</span></code></pre></div>
-<p>173 participants were excluded because they filled out less than 14 days - resulting in 1027 excluded days.</p>
+<p>170 participants were excluded because they filled out less than 14 days - resulting in 1014 excluded days.</p>
 </div>
 <div id="summary" class="section level4 active">
 <h4>Summary</h4>
-<p>In total 971 participants with 51566 diary days were included for the analyses in which outcomes were based on diary information.</p>
+<p>In total 968 participants with 51431 diary days were included for the analyses in which outcomes were based on diary information.</p>
 </div>
 </div>
 </div>
@@ -764,11 +764,11 @@ div.tocify {
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">table</span>(data<span class="op">$</span>contraception_approach)</span></code></pre></div>
 <pre><code>## 
 ##     hormonal_pill_only    hormonal_other_only  hormonal_pill+condoms hormonal_other+condoms 
-##                    257                     61                    160                     17 
+##                    254                     61                    159                     17 
 ##         barrier_pessar              awareness      awareness+condoms                condoms 
-##                     86                     20                    100                    380 
+##                     85                     20                    100                    380 
 ##                  other                nothing 
-##                     14                     90</code></pre>
+##                     14                     89</code></pre>
 </div>
 <div id="current-contraceptive-status-hormonal-vs.-non-hormonal" class="section level3">
 <h3>Current contraceptive status (hormonal vs. non hormonal)</h3>
@@ -781,7 +781,7 @@ div.tocify {
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">table</span>(data<span class="op">$</span>contraception_hormonal)</span></code></pre></div>
 <pre><code>## 
 ##  no yes 
-## 690 495</code></pre>
+## 688 491</code></pre>
 </div>
 <div id="changed-contraception-since-meeting-their-partner" class="section level3">
 <h3>Changed contraception since meeting their partner</h3>
@@ -789,8 +789,8 @@ div.tocify {
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">crosstabs</span>(<span class="op">~</span>contraception_hormonal <span class="op">+</span><span class="st"> </span>contraception_meeting_partner, <span class="dt">data =</span> data)</span></code></pre></div>
 <pre><code>##                       contraception_meeting_partner
 ## contraception_hormonal   0   1 &lt;NA&gt;
-##                    no  252 151  287
-##                    yes 135 242  118</code></pre>
+##                    no  251 150  287
+##                    yes 133 240  118</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>data =<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(</span>
 <span id="cb24-2"><a href="#cb24-2"></a>  <span class="dt">contraception_change_since_meeting_partner =</span></span>
 <span id="cb24-3"><a href="#cb24-3"></a>    <span class="kw">ifelse</span>(contraception_hormonal <span class="op">==</span><span class="st"> &quot;yes&quot;</span> <span class="op">&amp;</span><span class="st"> </span>contraception_meeting_partner <span class="op">==</span><span class="st"> </span><span class="dv">1</span>,</span>

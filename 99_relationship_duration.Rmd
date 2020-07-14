@@ -57,8 +57,19 @@ qplot(data$relationship_duration_factor_quartiles)
 
 
 ggplot(data, aes(relationship_duration)) +
-  geom_histogram(aes(fill = relationship_duration_factor_quartiles), bins = 200) +
-  theme(legend.title = element_blank(), legend.position = "bottom")
+  geom_histogram(aes(fill = relationship_duration_factor_quartiles), bins = 300) +
+  labs(x = "Relationship Duration (in months)",
+       y = "Count") + 
+  scale_x_continuous(breaks = c(c(0:30) * 12),
+                     labels = c(c(0:30) * 12)) +
+  scale_fill_discrete(name = "Categories\nRelationship\nDuration",
+                      labels = c("0-12 months",
+                                 "13-28 months",
+                                 "29-52 months",
+                                 ">52 months")) +
+  apatheme +
+  #theme(legend.position = "bottom") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
 
