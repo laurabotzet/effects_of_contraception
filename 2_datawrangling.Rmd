@@ -287,6 +287,11 @@ data = data %>% mutate(
                                 NA)))))
 
 qplot(data$contraception_change_since_meeting_partner) + coord_flip()
+
+data = data %>% 
+  mutate(congruent_contraception = 
+           factor(ifelse(contraception_change_since_meeting_partner %contains% "congruent",
+                  1, 0)))
 ```
 
 ### Contraception meeting partner

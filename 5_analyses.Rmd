@@ -14,129 +14,1117 @@ output:
 source("0_helpers.R")
 
 load("data/cleaned_selected_wrangled.rdata")
-
-knitr::opts_chunk$set(echo = FALSE, error = TRUE, dev = "CairoPNG")
-library(ggplot2)
-theme_set(theme_bw())
 ```
 
 
-## First Selection Model
+## Selection Model {.tabset}
+### Hormonal Contraception {.tabset}
+#### Simple Model {.tabset}
+##### Model
 ```{r}
-library(brms)
-m1_simple = brm(contraception_hormonal ~ age + net_income + duration_relationship_years,
-    data = data, family = bernoulli("probit"))
+m_selection_hc_simple = brm(contraception_hormonal ~
+                              age + net_income + relationship_duration_factor,
+                            data = data,
+                            family = bernoulli("probit"),
+                            file = "m_selection_hc_simple")
+```
 
-m1_complex = brm(contraception_hormonal ~ age + net_income + 
-                   education_years + bfi_open + bfi_consc + bfi_extra +
-    bfi_agree + bfi_neuro + religiosity +
-    duration_relationship_years,
-    data = data, family = bernoulli())
+##### Summary
+```{r}
+kable(tidy(m_selection_hc_simple))
+summary(m_selection_hc_simple)
+```
 
-summary(m1_complex)
+##### Plots
+```{r}
+conditional_effects(m_selection_hc_simple, ask = FALSE)
+```
 
-m1_complex
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_selection_hc_simple %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__") %>%
+  mutate(group = ifelse(term %contains% "b_relationship_duration_factor",
+                        "Relationship Duration",
+                        ifelse(term %contains% "b_net_income",
+                               "Income",
+                               NA)),
+         term = ifelse(term == "b_age", "Age",
+                ifelse(term == "b_net_incomeeuro_500_1000", "500-1000 Euro",
+                ifelse(term == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
+                ifelse(term == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
+                ifelse(term == "b_net_incomeeuro_gt_3000", ">3000 Euro",
+                ifelse(term == "b_net_incomedont_tell", "do not tell",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto12months",
+                       "0-12 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto28months",
+                       "13-28 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto52months",
+                       "29-52 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_morethan52months",
+                       ">52 months",
+                       term)))))))))),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Age",
+                                        "500-1000 Euro", "1000-2000 Euro",
+                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
+                                        "0-12 months", "13-28 months", "29-52 months",
+                                        ">52 months")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
 ```
 
 
-## First Outcome Models relationship satisfaction overall
-### Standardize
+#### Complex Model {.tabset}
+##### Model
 ```{r}
-data = data %>%
-  mutate(relationship_satisfaction_overall_z = scale(relationship_satisfaction_overall,
-                                                     center = TRUE, scale = TRUE))
+m_selection_hc_complex = brm(contraception_hormonal ~
+                              age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                            data = data,
+                            family = bernoulli("probit"),
+                            file = "m_selection_hc_complex")
 ```
 
+##### Summary
 ```{r}
-library(brms)
-m1 = brm(relationship_satisfaction_overall_z ~ contraception_hormonal + contraception_meeting_partner +
-    contraception_hormonal : contraception_meeting_partner +
-    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
-    bfi_agree + bfi_neuro + religiosity + pregnant_stress +
-    duration_relationship_years + days_with_partner + 
-    nights_with_partner + soi_r_behavior + soi_r_attitude +
-    soi_r_desire + number_sexual_partner,
-    data = data, family = gaussian())
+tidy(m_selection_hc_complex)
+summary(m_selection_hc_complex)
+```
 
-summary(m1)
+##### Plots
+```{r}
+conditional_effects(m_selection_hc_complex, ask = FALSE)
+```
 
-m1_1 = brm(relationship_satisfaction_overall_z ~ contraception_hormonal + contraception_meeting_partner +
-    contraception_hormonal : contraception_meeting_partner +
-    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
-    bfi_agree + bfi_neuro + religiosity +
-    duration_relationship_years,
-    data = data, family = gaussian())
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_selection_hc_complex %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__") %>%
+  mutate(group = ifelse(term %contains% "b_relationship_duration_factor",
+                        "Relationship Duration",
+                        ifelse(term %contains% "b_net_income",
+                               "Income",
+                               NA)),
+         term = ifelse(term == "b_age", "Age",
+                ifelse(term == "b_net_incomeeuro_500_1000", "500-1000 Euro",
+                ifelse(term == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
+                ifelse(term == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
+                ifelse(term == "b_net_incomeeuro_gt_3000", ">3000 Euro",
+                ifelse(term == "b_net_incomedont_tell", "do not tell",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto12months",
+                       "0-12 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto28months",
+                       "13-28 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto52months",
+                       "29-52 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_morethan52months",
+                       ">52 months",
+                ifelse(term == "b_education_years", "Years of Education",
+                ifelse(term == "b_bfi_extra", "Extraversion",
+                ifelse(term == "b_bfi_neuro", "Neuroticism",
+                ifelse(term == "b_bfi_agree", "Agreeableness",
+                ifelse(term == "b_bfi_consc", "Conscientiousness",
+                ifelse(term == "b_bfi_open", "Openness",
+                ifelse(term == "b_religiosity", "Religiosity",
+                       term))))))))))))))))),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Age",
+                                        "500-1000 Euro", "1000-2000 Euro",
+                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
+                                        "0-12 months", "13-28 months", "29-52 months",
+                                        ">52 months",
+                                        "Years of Education",
+                                        "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness","Religiosity")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
 
-summary(m1_1)
 
-m1_unadj = brm(
-  relationship_satisfaction_overall_z ~ contraception_hormonal + contraception_meeting_partner +
-           contraception_hormonal : contraception_meeting_partner,
-         data = data, family = gaussian(), cores = 4) %>% 
-  add_criterion("loo") %>% 
-  add_criterion("R2")
-summary(m1_unadj)
-# plot(m1_unadj)
+#### Comparison {.active}
+```{r}
+compare_models = loo(m_selection_hc_simple, m_selection_hc_complex)
+```
+LooIC first model: `r round(compare_models$loos$m_selection_hc_simple$estimates[3,1], 2)`
 
-library(loo)
-compare_models <- loo(m1, m1_unadj)
+LooIC second model: `r round(compare_models$loos$m_selection_hc_complex$estimates[3,1], 2)`
+
+Model Comparisons: The difference between models is `r round(compare_models$diffs[2,1], 2)` compared to a standard error of `r round(compare_models$diffs[2,2], 2)`
+
+```{r}
 compare_models
-
-loo_R2(m1)
-loo_R2(m1_unadj)
-
-loo(m1)
-print(loo_compare(m1_unadj, m1), simplify = F)
-
-library(sjPl)
-sjPlot::tab_model(m1_unadj, show.hdi50 = FALSE, bpe = "mean",ci.hyphen = ";", prefix.labels = "label")
-
-library(bayestestR)
-equiv_test <- equivalence_test(m1_unadj, range = c(-0.1, 0.1))
-equiv_test
-
-
-equiv_test <- equivalence_test(m1, range = c(-0.1, 0.1))
-equiv_test
-
-marginal_effects(m1_unadj)
-marginal_effects(m1, effects = c("bfi_open", "bfi_consc"))
-
-broom::tidy()
-
-
-library(brms)
-marginal_smooths(m1_unadj) # no valid term
 ```
 
-
+### (In)congruent use of hormonal contraceptives {.tabset}
+#### Simple Model {.tabset}
+##### Model
 ```{r}
-m3 = brm(diary_libido_mean ~ contraception_hormonal + contraception_meeting_partner +
-           contraception_hormonal : contraception_meeting_partner,
-    data = data, family = gaussian(), cores = 4)
+m_selection_congruent_simple = brm(congruent_contraception ~
+                              age + net_income + relationship_duration_factor,
+                            data = data,
+                            family = bernoulli("probit"),
+                            file = "m_selection_congruent_simple")
 
-m4 = brm(diary_libido_mean ~ contraception_hormonal + contraception_meeting_partner +
-           contraception_hormonal : contraception_meeting_partner +
- 
-             age + education_years + net_income + bfi_open + bfi_consc + bfi_extra + bfi_agree + bfi_neuro + religiosity + pregnant_stress +
-    duration_relationship_years + days_with_partner + 
-    nights_with_partner + soi_r_behavior + soi_r_attitude +
-    soi_r_desire + number_sexual_partner,
-    data = data, family = gaussian(), cores = 4)
+m_selection_congruent_simple_includinghc = brm(congruent_contraception ~
+                              age + net_income + relationship_duration_factor +
+                                contraception_hormonal,
+                            data = data,
+                            family = bernoulli("probit"),
+                            file = "m_selection_congruent_simple_includinghc")
+```
+
+##### Summary
+```{r}
+kable(tidy(m_selection_congruent_simple))
+summary(m_selection_congruent_simple)
+
+kable(tidy(m_selection_congruent_simple_includinghc))
+summary(m_selection_congruent_simple_includinghc)
+```
+
+##### Plots
+```{r}
+conditional_effects(m_selection_congruent_simple, ask = FALSE)
+
+conditional_effects(m_selection_congruent_simple_includinghc, ask = FALSE)
 
 ```
 
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_selection_congruent_simple %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__") %>%
+  mutate(group = ifelse(term %contains% "b_relationship_duration_factor",
+                        "Relationship Duration",
+                        ifelse(term %contains% "b_net_income",
+                               "Income",
+                               NA)),
+         term = ifelse(term == "b_age", "Age",
+                ifelse(term == "b_net_incomeeuro_500_1000", "500-1000 Euro",
+                ifelse(term == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
+                ifelse(term == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
+                ifelse(term == "b_net_incomeeuro_gt_3000", ">3000 Euro",
+                ifelse(term == "b_net_incomedont_tell", "do not tell",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto12months",
+                       "0-12 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto28months",
+                       "13-28 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto52months",
+                       "29-52 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_morethan52months",
+                       ">52 months",
+                       term)))))))))),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Age",
+                                        "500-1000 Euro", "1000-2000 Euro",
+                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
+                                        "0-12 months", "13-28 months", "29-52 months",
+                                        ">52 months")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+
+m_selection_congruent_simple_includinghc %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__") %>%
+  mutate(group = ifelse(term %contains% "b_relationship_duration_factor",
+                        "Relationship Duration",
+                        ifelse(term %contains% "b_net_income",
+                               "Income",
+                               NA)),
+         term = ifelse(term == "b_age", "Age",
+                ifelse(term == "b_net_incomeeuro_500_1000", "500-1000 Euro",
+                ifelse(term == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
+                ifelse(term == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
+                ifelse(term == "b_net_incomeeuro_gt_3000", ">3000 Euro",
+                ifelse(term == "b_net_incomedont_tell", "do not tell",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto12months",
+                       "0-12 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto28months",
+                       "13-28 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto52months",
+                       "29-52 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_morethan52months",
+                       ">52 months",
+                ifelse(term == "b_contraception_hormonalyes",
+                       "Currently Using HCs",
+                       term))))))))))),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Age",
+                                        "500-1000 Euro", "1000-2000 Euro",
+                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
+                                        "0-12 months", "13-28 months", "29-52 months",
+                                        ">52 months",
+                                        "Currently Using HCs")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+
+#### Complex Model {.tabset}
+##### Model
+```{r}
+m_selection_congruent_complex = brm(congruent_contraception ~
+                              age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                            data = data,
+                            family = bernoulli("probit"),
+                            file = "m_selection_congruent_complex")
+
+m_selection_congruent_complex_includinghc = brm(congruent_contraception ~
+                              age + net_income + relationship_duration_factor  +
+                                contraception_hormonal +
+                                education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                            data = data,
+                            family = bernoulli("probit"),
+                            file = "m_selection_congruent_complex_includinghc")
+```
+
+##### Summary
+```{r}
+tidy(m_selection_congruent_complex)
+summary(m_selection_congruent_complex)
+
+tidy(m_selection_congruent_complex_includinghc)
+summary(m_selection_congruent_complex_includinghc)
+```
+
+##### Plots
+```{r}
+conditional_effects(m_selection_congruent_complex, ask = FALSE)
+conditional_effects(m_selection_congruent_complex_includinghc, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_selection_congruent_complex %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__") %>%
+  mutate(group = ifelse(term %contains% "b_relationship_duration_factor",
+                        "Relationship Duration",
+                        ifelse(term %contains% "b_net_income",
+                               "Income",
+                               NA)),
+         term = ifelse(term == "b_age", "Age",
+                ifelse(term == "b_net_incomeeuro_500_1000", "500-1000 Euro",
+                ifelse(term == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
+                ifelse(term == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
+                ifelse(term == "b_net_incomeeuro_gt_3000", ">3000 Euro",
+                ifelse(term == "b_net_incomedont_tell", "do not tell",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto12months",
+                       "0-12 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto28months",
+                       "13-28 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto52months",
+                       "29-52 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_morethan52months",
+                       ">52 months",
+                ifelse(term == "b_education_years", "Years of Education",
+                ifelse(term == "b_bfi_extra", "Extraversion",
+                ifelse(term == "b_bfi_neuro", "Neuroticism",
+                ifelse(term == "b_bfi_agree", "Agreeableness",
+                ifelse(term == "b_bfi_consc", "Conscientiousness",
+                ifelse(term == "b_bfi_open", "Openness",
+                ifelse(term == "b_religiosity", "Religiosity",
+                       term))))))))))))))))),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Age",
+                                        "500-1000 Euro", "1000-2000 Euro",
+                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
+                                        "0-12 months", "13-28 months", "29-52 months",
+                                        ">52 months",
+                                        "Years of Education",
+                                        "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness","Religiosity")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+
+
+m_selection_congruent_complex_includinghc %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__") %>%
+  mutate(group = ifelse(term %contains% "b_relationship_duration_factor",
+                        "Relationship Duration",
+                        ifelse(term %contains% "b_net_income",
+                               "Income",
+                               NA)),
+         term = ifelse(term == "b_age", "Age",
+                ifelse(term == "b_net_incomeeuro_500_1000", "500-1000 Euro",
+                ifelse(term == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
+                ifelse(term == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
+                ifelse(term == "b_net_incomeeuro_gt_3000", ">3000 Euro",
+                ifelse(term == "b_net_incomedont_tell", "do not tell",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto12months",
+                       "0-12 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto28months",
+                       "13-28 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_upto52months",
+                       "29-52 months",
+                ifelse(term == "b_relationship_duration_factorPartnered_morethan52months",
+                       ">52 months",
+                ifelse(term == "b_contraception_hormonalyes",
+                       "Currently Using HCs",
+                ifelse(term == "b_education_years", "Years of Education",
+                ifelse(term == "b_bfi_extra", "Extraversion",
+                ifelse(term == "b_bfi_neuro", "Neuroticism",
+                ifelse(term == "b_bfi_agree", "Agreeableness",
+                ifelse(term == "b_bfi_consc", "Conscientiousness",
+                ifelse(term == "b_bfi_open", "Openness",
+                ifelse(term == "b_religiosity", "Religiosity",
+                       term)))))))))))))))))),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Age",
+                                        "500-1000 Euro", "1000-2000 Euro",
+                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
+                                        "0-12 months", "13-28 months", "29-52 months",
+                                        ">52 months",
+                                        "Currently Using HCs",
+                                        "Years of Education",
+                                        "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness","Religiosity")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+
+#### Comparison {.active}
+```{r}
+compare_models = loo(m_selection_congruent_simple, m_selection_congruent_complex)
+```
+LooIC first model: `r round(compare_models$loos$m_selection_congruent_simple$estimates[3,1], 2)`
+
+LooIC second model: `r round(compare_models$loos$m_selection_congruent_complex$estimates[3,1], 2)`
+
+Model Comparisons: The difference between models is `r round(compare_models$diffs[2,1], 2)` compared to a standard error of `r round(compare_models$diffs[2,2], 2)`
 
 ```{r}
-qplot(log(15/30/12 + all_surveys$duration_relationship_month / 12 + all_surveys$duration_relationship_years))
-qplot(all_surveys$number_sexual_partner, bins = 50) + scale_x_continuous(trans = "log1p", breaks = c(0,1,2,5,10,50,100))
-qplot(residuals(lm(all_surveys$number_sexual_partner ~ all_surveys$age)), bins = 50) +xlim(-20,20)
-+ scale_x_continuous(trans = "log1p", breaks = c(0,1,2,5,10,50,100))
+compare_models
+```
 
-qplot(all_surveys$number_sexual_partner / (all_surveys$age - mean(all_surveys$first_time, na.rm = T)), bins = 50)
-+xlim(-20,20)
+## Effects of Hormonl Contraceptives {.tabset}
+### Attractiveness of Partner {.tabset}
+#### Model
+```{r}
+m_hc_atrr = brm(attractiveness_partner ~ contraception_hormonal,
+                data = data, family = gaussian(),
+                file = "m_hc_atrr")
+```
 
-library(tidyverse)
-all_surveys %>% filter(number_sexual_partner > 50) %>% select(number_sexual_partner, age, first_time, number_sexual_partner_certainty, reasons_for_exclusion, free_not_covered_demo) %>% arrange(number_sexual_partner)
+##### Summary
+```{r}
+tidy(m_hc_atrr)
+summary(m_hc_atrr)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_hc_atrr, range = c(-0.07, 0.07))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_hc_atrr, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_hc_atrr %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                        term),
+         group = ifelse(term == "b_contraception_hormonalyes", "Contraception",
+                        term),
+    group = ifelse(is.na(group), term, group)) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.07, linetype = "dotted") +
+  geom_vline(xintercept = 0.07, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+### Relationship Satisfaction {.tabset}
+#### Model
+```{r}
+m_hc_relsat = brm(relationship_satisfaction ~ contraception_hormonal,
+                data = data, family = gaussian(),
+                file = "m_hc_relsat")
+```
+
+##### Summary
+```{r}
+tidy(m_hc_relsat)
+summary(m_hc_relsat)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_hc_relsat, range = c(-0.04, 0.04))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_hc_relsat, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_hc_relsat %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                        term),
+         group = ifelse(term == "b_contraception_hormonalyes", "Contraception",
+                        term),
+    group = ifelse(is.na(group), term, group)) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.04, linetype = "dotted") +
+  geom_vline(xintercept = 0.04, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+
+### Sexual Satisfaction {.tabset}
+#### Model
+```{r}
+m_hc_sexsat = brm(satisfaction_sexual_intercourse ~ contraception_hormonal,
+                data = data, family = gaussian(),
+                file = "m_hc_sexsat")
+```
+
+##### Summary
+```{r}
+tidy(m_hc_sexsat)
+summary(m_hc_sexsat)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_hc_sexsat, range = c(-0.11, 0.11))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_hc_sexsat, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_hc_sexsat %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                        term),
+         group = ifelse(term == "b_contraception_hormonalyes", "Contraception",
+                        term),
+    group = ifelse(is.na(group), term, group)) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.11, linetype = "dotted") +
+  geom_vline(xintercept = 0.11, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+### Libido
+
+#### Model
+```{r}
+m_hc_libido = brm(diary_libido_mean ~ contraception_hormonal,
+                data = data, family = gaussian(),
+                file = "m_hc_libido")
+```
+
+##### Summary
+```{r}
+tidy(m_hc_libido)
+summary(m_hc_libido)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_hc_libido, range = c(-0.06, 0.06))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_hc_libido, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_hc_libido %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                        term),
+         group = ifelse(term == "b_contraception_hormonalyes", "Contraception",
+                        term),
+    group = ifelse(is.na(group), term, group)) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.06, linetype = "dotted") +
+  geom_vline(xintercept = 0.06, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+### Sexual Frequency (Penetrative Intercourse) {.tabset}
+#### Model
+```{r}
+m_hc_sexfreqpen = brm(diary_sex_active_sex_mean ~ contraception_hormonal,
+                data = data, family = gaussian(),
+                file = "m_hc_sexfreqpen")
+```
+
+##### Summary
+```{r}
+tidy(m_hc_sexfreqpen)
+summary(m_hc_sexfreqpen)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_hc_sexfreqpen, range = c(-0.01, 0.01))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_hc_sexfreqpen, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_hc_sexfreqpen %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                        term),
+         group = ifelse(term == "b_contraception_hormonalyes", "Contraception",
+                        term),
+    group = ifelse(is.na(group), term, group)) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.01, linetype = "dotted") +
+  geom_vline(xintercept = 0.01, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+### Sexual Frequency {.tabset}
+
+#### Model
+```{r}
+m_hc_sexfreq = brm(diary_sex_active_mean ~ contraception_hormonal,
+                data = data, family = gaussian(),
+                file = "m_hc_sexfreq")
+```
+
+##### Summary
+```{r}
+tidy(m_hc_sexfreq)
+summary(m_hc_sexfreq)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_hc_sexfreq, range = c(-0.02, 0.02))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_hc_sexfreq, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_hc_sexfreq %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                        term),
+         group = ifelse(term == "b_contraception_hormonalyes", "Contraception",
+                        term),
+    group = ifelse(is.na(group), term, group)) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.02, linetype = "dotted") +
+  geom_vline(xintercept = 0.02, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+## Effects of (in)congruenct HC use {.tabset}
+### Attractiveness of Partner  {.tabset}
+#### Model
+```{r}
+m_congruency_atrr = brm(attractiveness_partner ~
+                          contraception_hormonal * congruent_contraception,
+                data = data, family = gaussian(),
+                file = "m_congruency_atrr")
+```
+
+##### Summary
+```{r}
+tidy(m_congruency_atrr)
+summary(m_congruency_atrr)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_congruency_atrr, range = c(-0.07, 0.07))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_congruency_atrr, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_congruency_atrr %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                ifelse(term == "b_congruent_contraception1", "Congruent Contraception",
+                ifelse(term == "b_contraception_hormonalyes:congruent_contraception1",
+                       "Interaction Hormonal Contracpetion and Congruent Contraception",
+                       term))),
+         group = ifelse(term %contains% "ontraception", "Contraception",
+                        term),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Hormonal Contraception",
+                                            "Congruent Contraception",
+                                            "Interaction Hormonal Contracpetion and Congruent Contraception")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.07, linetype = "dotted") +
+  geom_vline(xintercept = 0.07, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+### Relationship Satisfaction {.tabset}
+#### Model
+```{r}
+m_congruency_relsat = brm(relationship_satisfaction ~
+                          contraception_hormonal * congruent_contraception,
+                data = data, family = gaussian(),
+                file = "m_congruency_relsat")
+```
+
+##### Summary
+```{r}
+tidy(m_congruency_relsat)
+summary(m_congruency_relsat)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_congruency_relsat, range = c(-0.04, 0.04))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_congruency_relsat, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_congruency_relsat %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                ifelse(term == "b_congruent_contraception1", "Congruent Contraception",
+                ifelse(term == "b_contraception_hormonalyes:congruent_contraception1",
+                       "Interaction Hormonal Contracpetion and Congruent Contraception",
+                       term))),
+         group = ifelse(term %contains% "ontraception", "Contraception",
+                        term),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Hormonal Contraception",
+                                            "Congruent Contraception",
+                                            "Interaction Hormonal Contracpetion and Congruent Contraception")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.04, linetype = "dotted") +
+  geom_vline(xintercept = 0.04, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+### Sexual Satisfaction {.tabset}
+#### Model
+```{r}
+m_congruency_sexsat = brm(satisfaction_sexual_intercourse ~
+                          contraception_hormonal * congruent_contraception,
+                data = data, family = gaussian(),
+                file = "m_congruency_sexsat")
+```
+
+##### Summary
+```{r}
+tidy(m_congruency_sexsat)
+summary(m_congruency_sexsat)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_congruency_sexsat, range = c(-0.11, 0.11))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_congruency_sexsat, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_congruency_sexsat %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                ifelse(term == "b_congruent_contraception1", "Congruent Contraception",
+                ifelse(term == "b_contraception_hormonalyes:congruent_contraception1",
+                       "Interaction Hormonal Contracpetion and Congruent Contraception",
+                       term))),
+         group = ifelse(term %contains% "ontraception", "Contraception",
+                        term),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Hormonal Contraception",
+                                            "Congruent Contraception",
+                                            "Interaction Hormonal Contracpetion and Congruent Contraception")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.11, linetype = "dotted") +
+  geom_vline(xintercept = 0.11, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+### Libido {.tabset}
+#### Model
+```{r}
+m_congruency_libido = brm(diary_libido_mean ~
+                          contraception_hormonal * congruent_contraception,
+                data = data, family = gaussian(),
+                file = "m_congruency_libido")
+
+```
+
+##### Summary
+```{r}
+tidy(m_congruency_libido)
+summary(m_congruency_libido)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_congruency_libido, range = c(-0.06, 0.06))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_congruency_libido, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_congruency_libido %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                ifelse(term == "b_congruent_contraception1", "Congruent Contraception",
+                ifelse(term == "b_contraception_hormonalyes:congruent_contraception1",
+                       "Interaction Hormonal Contracpetion and Congruent Contraception",
+                       term))),
+         group = ifelse(term %contains% "ontraception", "Contraception",
+                        term),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Hormonal Contraception",
+                                            "Congruent Contraception",
+                                            "Interaction Hormonal Contracpetion and Congruent Contraception")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.06, linetype = "dotted") +
+  geom_vline(xintercept = 0.06, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+### Sexual Frequency (Penetrative Intercourse) {.tabset}
+#### Model
+```{r}
+m_congruency_sexfreqpen = brm(diary_sex_active_sex_mean ~
+                          contraception_hormonal * congruent_contraception,
+                data = data, family = gaussian(),
+                file = "m_congruency_sexfreqpen")
+```
+
+##### Summary
+```{r}
+tidy(m_congruency_sexfreqpen)
+summary(m_congruency_sexfreqpen)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_congruency_sexfreqpen, range = c(-0.01, 0.01))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_congruency_sexfreqpen, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_congruency_sexfreqpen %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                ifelse(term == "b_congruent_contraception1", "Congruent Contraception",
+                ifelse(term == "b_contraception_hormonalyes:congruent_contraception1",
+                       "Interaction Hormonal Contracpetion and Congruent Contraception",
+                       term))),
+         group = ifelse(term %contains% "ontraception", "Contraception",
+                        term),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Hormonal Contraception",
+                                            "Congruent Contraception",
+                                            "Interaction Hormonal Contracpetion and Congruent Contraception")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.01, linetype = "dotted") +
+  geom_vline(xintercept = 0.01, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+#### Sexual Freguency {.tabset}
+#### Model
+```{r}
+m_congruency_sexfreq = brm(diary_sex_active_mean ~
+                          contraception_hormonal * congruent_contraception,
+                data = data, family = gaussian(),
+                file = "m_congruency_sexfreq")
+```
+
+##### Summary
+```{r}
+tidy(m_congruency_sexfreq)
+summary(m_congruency_sexfreq)
+```
+
+##### Comparison with ROPE
+```{r}
+equivalence_test(m_congruency_sexfreq, range = c(-0.02, 0.02))
+```
+
+##### Plots
+```{r}
+conditional_effects(m_congruency_sexfreq, ask = FALSE)
+```
+
+##### Forest Plot for Effect Sizes {.active}
+```{r}
+m_congruency_sexfreq %>%
+  tidy() %>%
+  filter(term != "b_Intercept",
+         term != "lp__",
+         term != "sigma") %>%
+  mutate(term = ifelse(term == "b_contraception_hormonalyes", "Hormonal Contraception",
+                ifelse(term == "b_congruent_contraception1", "Congruent Contraception",
+                ifelse(term == "b_contraception_hormonalyes:congruent_contraception1",
+                       "Interaction Hormonal Contracpetion and Congruent Contraception",
+                       term))),
+         group = ifelse(term %contains% "ontraception", "Contraception",
+                        term),
+         group = ifelse(is.na(group), term, group),
+         term = factor(term, levels = rev(c("Hormonal Contraception",
+                                            "Congruent Contraception",
+                                            "Interaction Hormonal Contracpetion and Congruent Contraception")))) %>%
+  ggplot(., aes(y = term, x = estimate, xmin = lower, xmax = upper, color = group)) +
+  geom_pointinterval() + 
+  geom_vline(xintercept = -0.02, linetype = "dotted") +
+  geom_vline(xintercept = 0.02, linetype = "dotted") +
+  apatheme +
+  theme(legend.title = element_blank()) +
+  labs(x = "Effect Size Estimate", y = "Predictor")
+```
+
+## Controlloed Models
+```{r}
+m_hc_atrr_controlled = brm(attractiveness_partner ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_atrr_controlled")
+
+m_hc_relsat_controlled = brm(relationship_satisfaction ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_relsat_controlled")
+
+m_hc_sexsat_controlled = brm(satisfaction_sexual_intercourse ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_sexsat_controlled")
+
+m_hc_libido_controlled = brm(diary_libido_mean ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_libido")
+
+m_hc_sexfreq_controlled = brm(diary_sex_active_mean ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_sexfreq_controlled")
+
+m_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_mean ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_sexfreqpen_controlled")
+
+m_congruency_atrr_controlled = brm(attractiveness_partner ~
+                          contraception_hormonal * congruent_contraception +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_congruency_atrr_controlled")
+
+m_congruency_relsat_controlled = brm(relationship_satisfaction ~
+                          contraception_hormonal * congruent_contraception +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_congruency_relsat_controlled")
+
+m_congruency_sexsat_controlled = brm(satisfaction_sexual_intercourse ~
+                          contraception_hormonal * congruent_contraception +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_congruency_sexsat_controlled")
+
+m_congruency_libido_controlled = brm(diary_libido_mean ~
+                          contraception_hormonal * congruent_contraception +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_congruency_libido_controlled")
+
+m_congruency_sexfreq_controlled = brm(diary_sex_active_mean ~
+                          contraception_hormonal * congruent_contraception +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_congruency_sexfreq_controlled")
+
+m_congruency_sexfreqpen_controlled = brm(diary_sex_active_sex_mean ~
+                          contraception_hormonal * congruent_contraception +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_congruency_sexfreqpen_controlled")
+
 ```
 

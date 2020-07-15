@@ -33,11 +33,14 @@ library(stringr)
 library(broom)
 #' grammar of graphics plots
 library(ggplot2)
+library(ggdist)
 library(ggthemes)
 library(codebook)
 library(apaTables)
 library(brms)
 library(loo)
+library(bayestestR)
+
 
 
 
