@@ -33,12 +33,11 @@ library(stringr)
 library(broom)
 #' grammar of graphics plots
 library(ggplot2)
-#' svg graphs
-#' library(svglite);
 library(ggthemes)
 library(codebook)
 library(apaTables)
 library(brms)
+library(loo)
 
 
 
