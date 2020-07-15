@@ -21,19 +21,6 @@ pander::panderOptions('keep.trailing.zeros',TRUE)
 load("data/cleaned_selected_wrangled.rdata")
 ```
 
-## Form Scales
-```{r}
-data = data %>%
-  mutate(attractiveness_partner = as.numeric(
-    (partner_attractiveness_face + partner_attractiveness_body)/2),
-         relationship_satisfaction = as.numeric(
-           (relationship_satisfaction_overall +
-                                        relationship_satisfaction_2 +
-                                        relationship_satisfaction_3 +
-                                        (6 - relationship_problems_R) +
-                                        (6 - relationship_conflict_R))/5))
-```
-
 
 ## Means, Standard Deviations and Ranges
 ```{r}
