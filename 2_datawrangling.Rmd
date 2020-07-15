@@ -187,36 +187,6 @@ qplot(data$relationship_duration_factor)
 
 ggplot(data, aes(relationship_duration)) +
   geom_histogram(aes(fill = relationship_duration_factor), bins = 100)
-
-quantiles = quantile(as.numeric(data$relationship_duration),
-                     na.rm = T,
-                     probs = c(0, 0.125, 0.25, 0.375, 0.5,0.625, 0.75, 0.875, 1))
-
-data = data %>%
-  mutate(relationship_duration_factor2 = 
-           factor(ifelse(relationship_status == "Single",
-                  "Single",
-                  ifelse(relationship_duration <= quantiles[2],
-                         "Partnered_upto6months",
-                         ifelse(relationship_duration <= quantiles[3],
-                                "Partnered_upto12months",
-                                ifelse(relationship_duration <= quantiles[4],
-                                       "Partnered_upto20months",
-                                       ifelse(relationship_duration <= quantiles[5],
-                                              "Partnered_upto28months",
-           ifelse(relationship_duration <= quantiles[6],
-                  "Partnered_upto38months",
-                  ifelse(relationship_duration <= quantiles[7],
-                         "Partnered_upto52months",
-                         ifelse(relationship_duration <= quantiles[8],
-                                "Partnered_upto85months",
-                                ifelse(relationship_duration > quantiles[8],
-                                       "Partnered_morethan85months",
-                                       NA))))))))),
-           levels = c("Single", "Partnered_upto6months", "Partnered_upto12months",
-                      "Partnered_upto20months", "Partnered_upto28months",
-                      "Partnered_upto38months", "Partnered_upto52months",
-                      "Partnered_upto85months", "Partnered_morethan85months")))
 ```
 
 

@@ -356,7 +356,8 @@ exclusion_reasons %>%
   upset(., ncol(.), 20, order.by = "freq",
       main.bar.color = "#6E8691",
       matrix.color = "#6E8691",
-      sets.bar.color = "#53AC9B")
+      sets.bar.color = "#53AC9B",
+      text.scale = 1.5)
   }
 ```
 
@@ -387,12 +388,11 @@ exclusion_reasons %>%
   upset(., ncol(.), 80, order.by = "freq",
       main.bar.color = "#6E8691",
       matrix.color = "#6E8691",
-      sets.bar.color = "#53AC9B")
+      sets.bar.color = "#53AC9B",
+      text.scale = 1.5)
   }
 
-
 ```
-
 
 
 
