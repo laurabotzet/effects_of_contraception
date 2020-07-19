@@ -40,7 +40,15 @@ library(apaTables)
 library(brms)
 library(loo)
 library(bayestestR)
-
+library(magrittr)
+library(purrr)
+library(forcats)
+library(modelr)
+library(ggdist)
+library(tidybayes)
+library(cowplot)
+library(rstan)
+library(RColorBrewer)
 
 
 

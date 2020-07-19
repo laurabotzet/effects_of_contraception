@@ -309,7 +309,7 @@ data = data %>%
     (partner_attractiveness_face + partner_attractiveness_body)/2))
 ```
 
-## Relationship Satisfaction Scale
+### Relationship Satisfaction Scale
 ```{r}
 data = data %>%
   mutate(relationship_satisfaction = as.numeric(
@@ -324,7 +324,7 @@ data = data %>%
 calculate mean of libido, sex_active_frequency and actual sex frequency based on diary
 ```{r}
 data_diary_means = data_diary %>%
-  group_by(session) %>%
+  group_by(session, number_of_days) %>%
   summarise(diary_libido_mean = mean(high_libido, na.rm = T),
             diary_sex_active_mean = mean(sex_active, na.rm = T),
             diary_sex_active_sex_mean = mean(sex_activity_sex, na.rm = T))
@@ -332,6 +332,10 @@ data_diary_means = data_diary %>%
 qplot(data_diary_means$diary_libido_mean)
 qplot(data_diary_means$diary_sex_active_mean)
 qplot(data_diary_means$diary_sex_active_sex_mean)
+
+data_diary_means = data_diary_means %>%
+  mutate(diary_sex_active_sex_sum = as.integer(diary_sex_active_sex_mean*number_of_days),
+         diary_sex_active_sum = as.integer(diary_sex_active_mean*number_of_days))
 
 data = left_join(data, data_diary_means, by = "session")
 ```
