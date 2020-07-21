@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Plots Effects of Contraception</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Effects of Contraception</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Overview</a>
+</li>
+<li>
+  <a href="1_wrangle_data.html">Data wrangling</a>
+</li>
+<li>
+  <a href="2_descriptives.html">Descriptives &amp; Exclusion</a>
+</li>
+<li>
+  <a href="3_analyses.html">Analyses</a>
+</li>
+<li>
+  <a href="4_robustness_analyses.html">Robustness Analyses</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/laurabotzet/effects_of_contraception">
+    <span class="fa fa-github"></span>
+     
+    
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Plots Effects of Contraception</h1>
+
+</div>
+
+
+<div id="data" class="section level2">
+<h2>Data</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">source</span>(<span class="st">&quot;0_helpers.R&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">load</span>(<span class="st">&quot;data/cleaned_selected_wrangled.rdata&quot;</span>)</span></code></pre></div>
+</div>
+<div id="selection-model" class="section level2 tabset">
+<h2>Selection Model</h2>
+<div id="hormonal-contraception" class="section level3 tabset">
+<h3>Hormonal Contraception</h3>
+<div id="simple-model" class="section level4">
+<h4>Simple Model</h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>m_selection_hc_simple =<span class="st"> </span><span class="kw">brm</span>(contraception_hormonal <span class="op">~</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">                              </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>                            <span class="dt">data =</span> data,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>                            <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="st">&quot;probit&quot;</span>),</span>
+<span id="cb2-5"><a href="#cb2-5"></a>                            <span class="dt">file =</span> <span class="st">&quot;m_selection_hc_simple&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a>m_selection_hc_simple <span class="op">%&gt;%</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="st">  </span><span class="kw">spread_draws</span>(b_age,</span>
+<span id="cb2-9"><a href="#cb2-9"></a>               b_net_incomeeuro_<span class="dv">500</span>_<span class="dv">1000</span>, b_net_incomeeuro_<span class="dv">1000</span>_<span class="dv">2000</span>, </span>
+<span id="cb2-10"><a href="#cb2-10"></a>               b_net_incomeeuro_<span class="dv">2000</span>_<span class="dv">3000</span>, b_net_incomeeuro_gt_<span class="dv">3000</span>, b_net_incomedont_tell,</span>
+<span id="cb2-11"><a href="#cb2-11"></a>               b_relationship_duration_factorPartnered_upto12months,</span>
+<span id="cb2-12"><a href="#cb2-12"></a>               b_relationship_duration_factorPartnered_upto28months,</span>
+<span id="cb2-13"><a href="#cb2-13"></a>               b_relationship_duration_factorPartnered_upto52months,</span>
+<span id="cb2-14"><a href="#cb2-14"></a>               b_relationship_duration_factorPartnered_morethan52months) <span class="op">%&gt;%</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_age,</span>
+<span id="cb2-16"><a href="#cb2-16"></a>               b_net_incomeeuro_<span class="dv">500</span>_<span class="dv">1000</span>, b_net_incomeeuro_<span class="dv">1000</span>_<span class="dv">2000</span>, </span>
+<span id="cb2-17"><a href="#cb2-17"></a>               b_net_incomeeuro_<span class="dv">2000</span>_<span class="dv">3000</span>, b_net_incomeeuro_gt_<span class="dv">3000</span>, b_net_incomedont_tell,</span>
+<span id="cb2-18"><a href="#cb2-18"></a>               b_relationship_duration_factorPartnered_upto12months,</span>
+<span id="cb2-19"><a href="#cb2-19"></a>               b_relationship_duration_factorPartnered_upto28months,</span>
+<span id="cb2-20"><a href="#cb2-20"></a>               b_relationship_duration_factorPartnered_upto52months,</span>
+<span id="cb2-21"><a href="#cb2-21"></a>               b_relationship_duration_factorPartnered_morethan52months),</span>
+<span id="cb2-22"><a href="#cb2-22"></a>               <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb2-23"><a href="#cb2-23"></a>               <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">condition_mean =</span> r_condition,</span>
+<span id="cb2-25"><a href="#cb2-25"></a>         <span class="dt">group =</span> <span class="kw">ifelse</span>(condition <span class="op">%contains%</span><span class="st"> &quot;b_relationship_duration_factor&quot;</span>,</span>
+<span id="cb2-26"><a href="#cb2-26"></a>                        <span class="st">&quot;Relationship Duration&quot;</span>,</span>
+<span id="cb2-27"><a href="#cb2-27"></a>                        <span class="kw">ifelse</span>(condition <span class="op">%contains%</span><span class="st"> &quot;b_net_income&quot;</span>,</span>
+<span id="cb2-28"><a href="#cb2-28"></a>                               <span class="st">&quot;Income&quot;</span>,</span>
+<span id="cb2-29"><a href="#cb2-29"></a>                               <span class="ot">NA</span>)),</span>
+<span id="cb2-30"><a href="#cb2-30"></a>         <span class="dt">condition =</span> <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_age&quot;</span>, <span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb2-31"><a href="#cb2-31"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_500_1000&quot;</span>, <span class="st">&quot;500-1000 Euro&quot;</span>,</span>
+<span id="cb2-32"><a href="#cb2-32"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_1000_2000&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb2-33"><a href="#cb2-33"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_2000_3000&quot;</span>, <span class="st">&quot;2000-3000 Euro&quot;</span>,</span>
+<span id="cb2-34"><a href="#cb2-34"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_gt_3000&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>,</span>
+<span id="cb2-35"><a href="#cb2-35"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomedont_tell&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb2-36"><a href="#cb2-36"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto12months&quot;</span>,</span>
+<span id="cb2-37"><a href="#cb2-37"></a>                       <span class="st">&quot;0-12 months&quot;</span>,</span>
+<span id="cb2-38"><a href="#cb2-38"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto28months&quot;</span>,</span>
+<span id="cb2-39"><a href="#cb2-39"></a>                       <span class="st">&quot;13-28 months&quot;</span>,</span>
+<span id="cb2-40"><a href="#cb2-40"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto52months&quot;</span>,</span>
+<span id="cb2-41"><a href="#cb2-41"></a>                       <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb2-42"><a href="#cb2-42"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_morethan52months&quot;</span>,</span>
+<span id="cb2-43"><a href="#cb2-43"></a>                       <span class="st">&quot;&gt;52 months&quot;</span>,</span>
+<span id="cb2-44"><a href="#cb2-44"></a>                       condition)))))))))),</span>
+<span id="cb2-45"><a href="#cb2-45"></a>         <span class="dt">group =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(group), condition, group),</span>
+<span id="cb2-46"><a href="#cb2-46"></a>         <span class="dt">condition =</span> <span class="kw">factor</span>(condition, <span class="dt">levels =</span> <span class="kw">rev</span>(<span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb2-47"><a href="#cb2-47"></a>                                        <span class="st">&quot;500-1000 Euro&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb2-48"><a href="#cb2-48"></a>                                        <span class="st">&quot;2000-3000 Euro&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb2-49"><a href="#cb2-49"></a>                                        <span class="st">&quot;0-12 months&quot;</span>, <span class="st">&quot;13-28 months&quot;</span>, <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb2-50"><a href="#cb2-50"></a>                                        <span class="st">&quot;&gt;52 months&quot;</span>)))) <span class="op">%&gt;%</span></span>
+<span id="cb2-51"><a href="#cb2-51"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y =</span> condition, <span class="dt">x =</span> condition_mean, <span class="dt">color =</span> group)) <span class="op">+</span></span>
+<span id="cb2-52"><a href="#cb2-52"></a><span class="st">  </span><span class="kw">stat_halfeye</span>() <span class="op">+</span></span>
+<span id="cb2-53"><a href="#cb2-53"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb2-54"><a href="#cb2-54"></a><span class="st">  </span>apatheme <span class="op">+</span></span>
+<span id="cb2-55"><a href="#cb2-55"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb2-56"><a href="#cb2-56"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Effect Size Estimates&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Predictors&quot;</span>)</span></code></pre></div>
+<p><img src="6_plots_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="complex-model" class="section level4">
+<h4>Complex Model</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>m_selection_hc_complex =<span class="st"> </span><span class="kw">brm</span>(contraception_hormonal <span class="op">~</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="st">                              </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor <span class="op">+</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="st">                              </span>education_years <span class="op">+</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="st">                              </span>bfi_extra <span class="op">+</span><span class="st"> </span>bfi_neuro <span class="op">+</span><span class="st"> </span>bfi_agree <span class="op">+</span><span class="st"> </span>bfi_consc <span class="op">+</span><span class="st"> </span>bfi_open <span class="op">+</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="st">                              </span>religiosity,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>                            <span class="dt">data =</span> data,</span>
+<span id="cb3-7"><a href="#cb3-7"></a>                            <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="st">&quot;probit&quot;</span>),</span>
+<span id="cb3-8"><a href="#cb3-8"></a>                            <span class="dt">file =</span> <span class="st">&quot;m_selection_hc_complex&quot;</span>)</span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a>m_selection_hc_complex <span class="op">%&gt;%</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="st">  </span><span class="kw">spread_draws</span>(b_age,</span>
+<span id="cb3-12"><a href="#cb3-12"></a>               b_net_incomeeuro_<span class="dv">500</span>_<span class="dv">1000</span>, b_net_incomeeuro_<span class="dv">1000</span>_<span class="dv">2000</span>, </span>
+<span id="cb3-13"><a href="#cb3-13"></a>               b_net_incomeeuro_<span class="dv">2000</span>_<span class="dv">3000</span>, b_net_incomeeuro_gt_<span class="dv">3000</span>, b_net_incomedont_tell,</span>
+<span id="cb3-14"><a href="#cb3-14"></a>               b_relationship_duration_factorPartnered_upto12months,</span>
+<span id="cb3-15"><a href="#cb3-15"></a>               b_relationship_duration_factorPartnered_upto28months,</span>
+<span id="cb3-16"><a href="#cb3-16"></a>               b_relationship_duration_factorPartnered_upto52months,</span>
+<span id="cb3-17"><a href="#cb3-17"></a>               b_relationship_duration_factorPartnered_morethan52months,</span>
+<span id="cb3-18"><a href="#cb3-18"></a>               b_education_years,</span>
+<span id="cb3-19"><a href="#cb3-19"></a>               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, </span>
+<span id="cb3-20"><a href="#cb3-20"></a>               b_religiosity) <span class="op">%&gt;%</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_age,</span>
+<span id="cb3-22"><a href="#cb3-22"></a>               b_net_incomeeuro_<span class="dv">500</span>_<span class="dv">1000</span>, b_net_incomeeuro_<span class="dv">1000</span>_<span class="dv">2000</span>, </span>
+<span id="cb3-23"><a href="#cb3-23"></a>               b_net_incomeeuro_<span class="dv">2000</span>_<span class="dv">3000</span>, b_net_incomeeuro_gt_<span class="dv">3000</span>, b_net_incomedont_tell,</span>
+<span id="cb3-24"><a href="#cb3-24"></a>               b_relationship_duration_factorPartnered_upto12months,</span>
+<span id="cb3-25"><a href="#cb3-25"></a>               b_relationship_duration_factorPartnered_upto28months,</span>
+<span id="cb3-26"><a href="#cb3-26"></a>               b_relationship_duration_factorPartnered_upto52months,</span>
+<span id="cb3-27"><a href="#cb3-27"></a>               b_relationship_duration_factorPartnered_morethan52months,</span>
+<span id="cb3-28"><a href="#cb3-28"></a>               b_education_years,</span>
+<span id="cb3-29"><a href="#cb3-29"></a>               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, </span>
+<span id="cb3-30"><a href="#cb3-30"></a>               b_religiosity),</span>
+<span id="cb3-31"><a href="#cb3-31"></a>               <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-32"><a href="#cb3-32"></a>               <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">condition_mean =</span> r_condition,</span>
+<span id="cb3-34"><a href="#cb3-34"></a>         <span class="dt">group =</span> <span class="kw">ifelse</span>(condition <span class="op">%contains%</span><span class="st"> &quot;b_relationship_duration_factor&quot;</span>,</span>
+<span id="cb3-35"><a href="#cb3-35"></a>                        <span class="st">&quot;Relationship Duration&quot;</span>,</span>
+<span id="cb3-36"><a href="#cb3-36"></a>                        <span class="kw">ifelse</span>(condition <span class="op">%contains%</span><span class="st"> &quot;b_net_income&quot;</span>,</span>
+<span id="cb3-37"><a href="#cb3-37"></a>                               <span class="st">&quot;Income&quot;</span>,</span>
+<span id="cb3-38"><a href="#cb3-38"></a>                               <span class="ot">NA</span>)),</span>
+<span id="cb3-39"><a href="#cb3-39"></a>         <span class="dt">condition =</span> <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_age&quot;</span>, <span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb3-40"><a href="#cb3-40"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_500_1000&quot;</span>, <span class="st">&quot;500-1000 Euro&quot;</span>,</span>
+<span id="cb3-41"><a href="#cb3-41"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_1000_2000&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb3-42"><a href="#cb3-42"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_2000_3000&quot;</span>, <span class="st">&quot;2000-3000 Euro&quot;</span>,</span>
+<span id="cb3-43"><a href="#cb3-43"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_gt_3000&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>,</span>
+<span id="cb3-44"><a href="#cb3-44"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomedont_tell&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb3-45"><a href="#cb3-45"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto12months&quot;</span>,</span>
+<span id="cb3-46"><a href="#cb3-46"></a>                       <span class="st">&quot;0-12 months&quot;</span>,</span>
+<span id="cb3-47"><a href="#cb3-47"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto28months&quot;</span>,</span>
+<span id="cb3-48"><a href="#cb3-48"></a>                       <span class="st">&quot;13-28 months&quot;</span>,</span>
+<span id="cb3-49"><a href="#cb3-49"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto52months&quot;</span>,</span>
+<span id="cb3-50"><a href="#cb3-50"></a>                       <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb3-51"><a href="#cb3-51"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_morethan52months&quot;</span>,</span>
+<span id="cb3-52"><a href="#cb3-52"></a>                       <span class="st">&quot;&gt;52 months&quot;</span>,</span>
+<span id="cb3-53"><a href="#cb3-53"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_education_years&quot;</span>, <span class="st">&quot;Years of Education&quot;</span>,</span>
+<span id="cb3-54"><a href="#cb3-54"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_bfi_extra&quot;</span>, <span class="st">&quot;Extraversion&quot;</span>,</span>
+<span id="cb3-55"><a href="#cb3-55"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_bfi_neuro&quot;</span>, <span class="st">&quot;Neuroticism&quot;</span>,</span>
+<span id="cb3-56"><a href="#cb3-56"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_bfi_agree&quot;</span>, <span class="st">&quot;Agreeableness&quot;</span>,</span>
+<span id="cb3-57"><a href="#cb3-57"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_bfi_consc&quot;</span>, <span class="st">&quot;Conscientiousness&quot;</span>,</span>
+<span id="cb3-58"><a href="#cb3-58"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_bfi_open&quot;</span>, <span class="st">&quot;Openness&quot;</span>,</span>
+<span id="cb3-59"><a href="#cb3-59"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_religiosity&quot;</span>, <span class="st">&quot;Religiosity&quot;</span>,</span>
+<span id="cb3-60"><a href="#cb3-60"></a>                       condition))))))))))))))))),</span>
+<span id="cb3-61"><a href="#cb3-61"></a>         <span class="dt">group =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(group), condition, group),</span>
+<span id="cb3-62"><a href="#cb3-62"></a>         <span class="dt">condition =</span> <span class="kw">factor</span>(condition, <span class="dt">levels =</span> <span class="kw">rev</span>(<span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb3-63"><a href="#cb3-63"></a>                                        <span class="st">&quot;500-1000 Euro&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb3-64"><a href="#cb3-64"></a>                                        <span class="st">&quot;2000-3000 Euro&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb3-65"><a href="#cb3-65"></a>                                        <span class="st">&quot;0-12 months&quot;</span>, <span class="st">&quot;13-28 months&quot;</span>, <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb3-66"><a href="#cb3-66"></a>                                        <span class="st">&quot;&gt;52 months&quot;</span>,</span>
+<span id="cb3-67"><a href="#cb3-67"></a>                                        <span class="st">&quot;Years of Education&quot;</span>,</span>
+<span id="cb3-68"><a href="#cb3-68"></a>                                        <span class="st">&quot;Extraversion&quot;</span>, <span class="st">&quot;Neuroticism&quot;</span>, <span class="st">&quot;Agreeableness&quot;</span>,</span>
+<span id="cb3-69"><a href="#cb3-69"></a>                                         <span class="st">&quot;Conscientiousness&quot;</span>,<span class="st">&quot;Openness&quot;</span>,<span class="st">&quot;Religiosity&quot;</span>))),</span>
+<span id="cb3-70"><a href="#cb3-70"></a>         <span class="dt">group =</span> <span class="kw">factor</span>(group, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Relationship Duration&quot;</span>,</span>
+<span id="cb3-71"><a href="#cb3-71"></a>                                          </span>
+<span id="cb3-72"><a href="#cb3-72"></a>                                          <span class="st">&quot;Years of Education&quot;</span>,</span>
+<span id="cb3-73"><a href="#cb3-73"></a>                                          <span class="st">&quot;Extraversion&quot;</span>, <span class="st">&quot;Neuroticism&quot;</span>, <span class="st">&quot;Agreeableness&quot;</span>,</span>
+<span id="cb3-74"><a href="#cb3-74"></a>                                         <span class="st">&quot;Conscientiousness&quot;</span>,<span class="st">&quot;Openness&quot;</span>,<span class="st">&quot;Religiosity&quot;</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb3-75"><a href="#cb3-75"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y =</span> condition, <span class="dt">x =</span> condition_mean, <span class="dt">color =</span> group)) <span class="op">+</span></span>
+<span id="cb3-76"><a href="#cb3-76"></a><span class="st">  </span><span class="kw">stat_halfeye</span>() <span class="op">+</span></span>
+<span id="cb3-77"><a href="#cb3-77"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb3-78"><a href="#cb3-78"></a><span class="st">  </span>apatheme <span class="op">+</span></span>
+<span id="cb3-79"><a href="#cb3-79"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb3-80"><a href="#cb3-80"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Effect Size Estimates&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Predictors&quot;</span>)</span></code></pre></div>
+<p><img src="6_plots_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+</div>
+<div id="incongruent-use-of-hormonal-contraceptives" class="section level3 tabset">
+<h3>(In)congruent use of hormonal contraceptives</h3>
+<div id="simple-model-1" class="section level4">
+<h4>Simple Model</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>m_selection_congruent_simple =<span class="st"> </span><span class="kw">brm</span>(congruent_contraception <span class="op">~</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">                              </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>                            <span class="dt">data =</span> data,</span>
+<span id="cb4-4"><a href="#cb4-4"></a>                            <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="st">&quot;probit&quot;</span>),</span>
+<span id="cb4-5"><a href="#cb4-5"></a>                            <span class="dt">file =</span> <span class="st">&quot;m_selection_congruent_simple&quot;</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a>m_selection_congruent_simple_includinghc =<span class="st"> </span><span class="kw">brm</span>(congruent_contraception <span class="op">~</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="st">                              </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor <span class="op">+</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="st">                                </span>contraception_hormonal,</span>
+<span id="cb4-10"><a href="#cb4-10"></a>                            <span class="dt">data =</span> data,</span>
+<span id="cb4-11"><a href="#cb4-11"></a>                            <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="st">&quot;probit&quot;</span>),</span>
+<span id="cb4-12"><a href="#cb4-12"></a>                            <span class="dt">file =</span> <span class="st">&quot;m_selection_congruent_simple_includinghc&quot;</span>)</span>
+<span id="cb4-13"><a href="#cb4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a>m_selection_congruent_simple <span class="op">%&gt;%</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="st">  </span><span class="kw">spread_draws</span>(b_age,</span>
+<span id="cb4-16"><a href="#cb4-16"></a>               b_net_incomeeuro_<span class="dv">500</span>_<span class="dv">1000</span>, b_net_incomeeuro_<span class="dv">1000</span>_<span class="dv">2000</span>, </span>
+<span id="cb4-17"><a href="#cb4-17"></a>               b_net_incomeeuro_<span class="dv">2000</span>_<span class="dv">3000</span>, b_net_incomeeuro_gt_<span class="dv">3000</span>, b_net_incomedont_tell,</span>
+<span id="cb4-18"><a href="#cb4-18"></a>               b_relationship_duration_factorPartnered_upto28months,</span>
+<span id="cb4-19"><a href="#cb4-19"></a>               b_relationship_duration_factorPartnered_upto52months,</span>
+<span id="cb4-20"><a href="#cb4-20"></a>               b_relationship_duration_factorPartnered_morethan52months) <span class="op">%&gt;%</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_age,</span>
+<span id="cb4-22"><a href="#cb4-22"></a>               b_net_incomeeuro_<span class="dv">500</span>_<span class="dv">1000</span>, b_net_incomeeuro_<span class="dv">1000</span>_<span class="dv">2000</span>, </span>
+<span id="cb4-23"><a href="#cb4-23"></a>               b_net_incomeeuro_<span class="dv">2000</span>_<span class="dv">3000</span>, b_net_incomeeuro_gt_<span class="dv">3000</span>, b_net_incomedont_tell,</span>
+<span id="cb4-24"><a href="#cb4-24"></a>               b_relationship_duration_factorPartnered_upto28months,</span>
+<span id="cb4-25"><a href="#cb4-25"></a>               b_relationship_duration_factorPartnered_upto52months,</span>
+<span id="cb4-26"><a href="#cb4-26"></a>               b_relationship_duration_factorPartnered_morethan52months),</span>
+<span id="cb4-27"><a href="#cb4-27"></a>               <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb4-28"><a href="#cb4-28"></a>               <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb4-29"><a href="#cb4-29"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">condition_mean =</span> r_condition,</span>
+<span id="cb4-30"><a href="#cb4-30"></a>         <span class="dt">group =</span> <span class="kw">ifelse</span>(condition <span class="op">%contains%</span><span class="st"> &quot;b_relationship_duration_factor&quot;</span>,</span>
+<span id="cb4-31"><a href="#cb4-31"></a>                        <span class="st">&quot;Relationship Duration&quot;</span>,</span>
+<span id="cb4-32"><a href="#cb4-32"></a>                        <span class="kw">ifelse</span>(condition <span class="op">%contains%</span><span class="st"> &quot;b_net_income&quot;</span>,</span>
+<span id="cb4-33"><a href="#cb4-33"></a>                               <span class="st">&quot;Income&quot;</span>,</span>
+<span id="cb4-34"><a href="#cb4-34"></a>                               <span class="ot">NA</span>)),</span>
+<span id="cb4-35"><a href="#cb4-35"></a>         <span class="dt">condition =</span> <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_age&quot;</span>, <span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb4-36"><a href="#cb4-36"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_500_1000&quot;</span>, <span class="st">&quot;500-1000 Euro&quot;</span>,</span>
+<span id="cb4-37"><a href="#cb4-37"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_1000_2000&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb4-38"><a href="#cb4-38"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_2000_3000&quot;</span>, <span class="st">&quot;2000-3000 Euro&quot;</span>,</span>
+<span id="cb4-39"><a href="#cb4-39"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_gt_3000&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>,</span>
+<span id="cb4-40"><a href="#cb4-40"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomedont_tell&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb4-41"><a href="#cb4-41"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto12months&quot;</span>,</span>
+<span id="cb4-42"><a href="#cb4-42"></a>                       <span class="st">&quot;0-12 months&quot;</span>,</span>
+<span id="cb4-43"><a href="#cb4-43"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto28months&quot;</span>,</span>
+<span id="cb4-44"><a href="#cb4-44"></a>                       <span class="st">&quot;13-28 months&quot;</span>,</span>
+<span id="cb4-45"><a href="#cb4-45"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto52months&quot;</span>,</span>
+<span id="cb4-46"><a href="#cb4-46"></a>                       <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb4-47"><a href="#cb4-47"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_morethan52months&quot;</span>,</span>
+<span id="cb4-48"><a href="#cb4-48"></a>                       <span class="st">&quot;&gt;52 months&quot;</span>,</span>
+<span id="cb4-49"><a href="#cb4-49"></a>                       condition)))))))))),</span>
+<span id="cb4-50"><a href="#cb4-50"></a>         <span class="dt">group =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(group), condition, group),</span>
+<span id="cb4-51"><a href="#cb4-51"></a>         <span class="dt">condition =</span> <span class="kw">factor</span>(condition, <span class="dt">levels =</span> <span class="kw">rev</span>(<span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb4-52"><a href="#cb4-52"></a>                                        <span class="st">&quot;500-1000 Euro&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb4-53"><a href="#cb4-53"></a>                                        <span class="st">&quot;2000-3000 Euro&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb4-54"><a href="#cb4-54"></a>                                        <span class="st">&quot;13-28 months&quot;</span>, <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb4-55"><a href="#cb4-55"></a>                                        <span class="st">&quot;&gt;52 months&quot;</span>)))) <span class="op">%&gt;%</span></span>
+<span id="cb4-56"><a href="#cb4-56"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y =</span> condition, <span class="dt">x =</span> condition_mean, <span class="dt">color =</span> group)) <span class="op">+</span></span>
+<span id="cb4-57"><a href="#cb4-57"></a><span class="st">  </span><span class="kw">stat_halfeye</span>() <span class="op">+</span></span>
+<span id="cb4-58"><a href="#cb4-58"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb4-59"><a href="#cb4-59"></a><span class="st">  </span>apatheme <span class="op">+</span></span>
+<span id="cb4-60"><a href="#cb4-60"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb4-61"><a href="#cb4-61"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Effect Size Estimates&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Predictors&quot;</span>)</span></code></pre></div>
+<p><img src="6_plots_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>m_selection_congruent_simple_includinghc <span class="op">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw">spread_draws</span>(b_age,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>               b_net_incomeeuro_<span class="dv">500</span>_<span class="dv">1000</span>, b_net_incomeeuro_<span class="dv">1000</span>_<span class="dv">2000</span>, </span>
+<span id="cb5-4"><a href="#cb5-4"></a>               b_net_incomeeuro_<span class="dv">2000</span>_<span class="dv">3000</span>, b_net_incomeeuro_gt_<span class="dv">3000</span>, b_net_incomedont_tell,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>               b_relationship_duration_factorPartnered_upto28months,</span>
+<span id="cb5-6"><a href="#cb5-6"></a>               b_relationship_duration_factorPartnered_upto52months,</span>
+<span id="cb5-7"><a href="#cb5-7"></a>               b_relationship_duration_factorPartnered_morethan52months,</span>
+<span id="cb5-8"><a href="#cb5-8"></a>               b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_age,</span>
+<span id="cb5-10"><a href="#cb5-10"></a>               b_net_incomeeuro_<span class="dv">500</span>_<span class="dv">1000</span>, b_net_incomeeuro_<span class="dv">1000</span>_<span class="dv">2000</span>, </span>
+<span id="cb5-11"><a href="#cb5-11"></a>               b_net_incomeeuro_<span class="dv">2000</span>_<span class="dv">3000</span>, b_net_incomeeuro_gt_<span class="dv">3000</span>, b_net_incomedont_tell,</span>
+<span id="cb5-12"><a href="#cb5-12"></a>               b_relationship_duration_factorPartnered_upto28months,</span>
+<span id="cb5-13"><a href="#cb5-13"></a>               b_relationship_duration_factorPartnered_upto52months,</span>
+<span id="cb5-14"><a href="#cb5-14"></a>               b_relationship_duration_factorPartnered_morethan52months,</span>
+<span id="cb5-15"><a href="#cb5-15"></a>               b_contraception_hormonalyes),</span>
+<span id="cb5-16"><a href="#cb5-16"></a>               <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb5-17"><a href="#cb5-17"></a>               <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">condition_mean =</span> r_condition,</span>
+<span id="cb5-19"><a href="#cb5-19"></a>         <span class="dt">group =</span> <span class="kw">ifelse</span>(condition <span class="op">%contains%</span><span class="st"> &quot;b_relationship_duration_factor&quot;</span>,</span>
+<span id="cb5-20"><a href="#cb5-20"></a>                        <span class="st">&quot;Relationship Duration&quot;</span>,</span>
+<span id="cb5-21"><a href="#cb5-21"></a>                        <span class="kw">ifelse</span>(condition <span class="op">%contains%</span><span class="st"> &quot;b_net_income&quot;</span>,</span>
+<span id="cb5-22"><a href="#cb5-22"></a>                               <span class="st">&quot;Income&quot;</span>,</span>
+<span id="cb5-23"><a href="#cb5-23"></a>                               <span class="ot">NA</span>)),</span>
+<span id="cb5-24"><a href="#cb5-24"></a>         <span class="dt">condition =</span> <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_age&quot;</span>, <span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb5-25"><a href="#cb5-25"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_500_1000&quot;</span>, <span class="st">&quot;500-1000 Euro&quot;</span>,</span>
+<span id="cb5-26"><a href="#cb5-26"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_1000_2000&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb5-27"><a href="#cb5-27"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_2000_3000&quot;</span>, <span class="st">&quot;2000-3000 Euro&quot;</span>,</span>
+<span id="cb5-28"><a href="#cb5-28"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_gt_3000&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>,</span>
+<span id="cb5-29"><a href="#cb5-29"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomedont_tell&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb5-30"><a href="#cb5-30"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto12months&quot;</span>,</span>
+<span id="cb5-31"><a href="#cb5-31"></a>                       <span class="st">&quot;0-12 months&quot;</span>,</span>
+<span id="cb5-32"><a href="#cb5-32"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto28months&quot;</span>,</span>
+<span id="cb5-33"><a href="#cb5-33"></a>                       <span class="st">&quot;13-28 months&quot;</span>,</span>
+<span id="cb5-34"><a href="#cb5-34"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto52months&quot;</span>,</span>
+<span id="cb5-35"><a href="#cb5-35"></a>                       <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb5-36"><a href="#cb5-36"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_morethan52months&quot;</span>,</span>
+<span id="cb5-37"><a href="#cb5-37"></a>                       <span class="st">&quot;&gt;52 months&quot;</span>,</span>
+<span id="cb5-38"><a href="#cb5-38"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_contraception_hormonalyes&quot;</span>,</span>
+<span id="cb5-39"><a href="#cb5-39"></a>                       <span class="st">&quot;Currently Using HCs&quot;</span>,</span>
+<span id="cb5-40"><a href="#cb5-40"></a>                       condition))))))))))),</span>
+<span id="cb5-41"><a href="#cb5-41"></a>         <span class="dt">group =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(group), condition, group),</span>
+<span id="cb5-42"><a href="#cb5-42"></a>         <span class="dt">condition =</span> <span class="kw">factor</span>(condition, <span class="dt">levels =</span> <span class="kw">rev</span>(<span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb5-43"><a href="#cb5-43"></a>                                        <span class="st">&quot;500-1000 Euro&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb5-44"><a href="#cb5-44"></a>                                        <span class="st">&quot;2000-3000 Euro&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb5-45"><a href="#cb5-45"></a>                                        <span class="st">&quot;13-28 months&quot;</span>, <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb5-46"><a href="#cb5-46"></a>                                        <span class="st">&quot;&gt;52 months&quot;</span>,</span>
+<span id="cb5-47"><a href="#cb5-47"></a>                                        <span class="st">&quot;Currently Using HCs&quot;</span>))),</span>
+<span id="cb5-48"><a href="#cb5-48"></a>         <span class="dt">group =</span> <span class="kw">factor</span>(group, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Relationship Duration&quot;</span>,</span>
+<span id="cb5-49"><a href="#cb5-49"></a>                                          <span class="st">&quot;Currently Using HCs&quot;</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb5-50"><a href="#cb5-50"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y =</span> condition, <span class="dt">x =</span> condition_mean, <span class="dt">color =</span> group)) <span class="op">+</span></span>
+<span id="cb5-51"><a href="#cb5-51"></a><span class="st">  </span><span class="kw">stat_halfeye</span>() <span class="op">+</span></span>
+<span id="cb5-52"><a href="#cb5-52"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb5-53"><a href="#cb5-53"></a><span class="st">  </span>apatheme <span class="op">+</span></span>
+<span id="cb5-54"><a href="#cb5-54"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb5-55"><a href="#cb5-55"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Effect Size Estimates&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Predictors&quot;</span>)</span></code></pre></div>
+<p><img src="6_plots_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+</div>
+<div id="complex-model-1" class="section level4">
+<h4>Complex Model</h4>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>m_selection_congruent_complex =<span class="st"> </span><span class="kw">brm</span>(congruent_contraception <span class="op">~</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">                              </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor <span class="op">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="st">                              </span>education_years <span class="op">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="st">                              </span>bfi_extra <span class="op">+</span><span class="st"> </span>bfi_neuro <span class="op">+</span><span class="st"> </span>bfi_agree <span class="op">+</span><span class="st"> </span>bfi_consc <span class="op">+</span><span class="st"> </span>bfi_open <span class="op">+</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="st">                              </span>religiosity,</span>
+<span id="cb6-6"><a href="#cb6-6"></a>                            <span class="dt">data =</span> data,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>                            <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="st">&quot;probit&quot;</span>),</span>
+<span id="cb6-8"><a href="#cb6-8"></a>                            <span class="dt">file =</span> <span class="st">&quot;m_selection_congruent_complex&quot;</span>)</span>
+<span id="cb6-9"><a href="#cb6-9"></a></span>
+<span id="cb6-10"><a href="#cb6-10"></a>m_selection_congruent_complex_includinghc =<span class="st"> </span><span class="kw">brm</span>(congruent_contraception <span class="op">~</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="st">                              </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor  <span class="op">+</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="st">                                </span>contraception_hormonal <span class="op">+</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="st">                                </span>education_years <span class="op">+</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="st">                              </span>bfi_extra <span class="op">+</span><span class="st"> </span>bfi_neuro <span class="op">+</span><span class="st"> </span>bfi_agree <span class="op">+</span><span class="st"> </span>bfi_consc <span class="op">+</span><span class="st"> </span>bfi_open <span class="op">+</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="st">                              </span>religiosity,</span>
+<span id="cb6-16"><a href="#cb6-16"></a>                            <span class="dt">data =</span> data,</span>
+<span id="cb6-17"><a href="#cb6-17"></a>                            <span class="dt">family =</span> <span class="kw">bernoulli</span>(<span class="st">&quot;probit&quot;</span>),</span>
+<span id="cb6-18"><a href="#cb6-18"></a>                            <span class="dt">file =</span> <span class="st">&quot;m_selection_congruent_complex_includinghc&quot;</span>)</span>
+<span id="cb6-19"><a href="#cb6-19"></a>m_selection_congruent_complex <span class="op">%&gt;%</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="st">  </span><span class="kw">spread_draws</span>(b_age,</span>
+<span id="cb6-21"><a href="#cb6-21"></a>               b_net_incomeeuro_<span class="dv">500</span>_<span class="dv">1000</span>, b_net_incomeeuro_<span class="dv">1000</span>_<span class="dv">2000</span>, </span>
+<span id="cb6-22"><a href="#cb6-22"></a>               b_net_incomeeuro_<span class="dv">2000</span>_<span class="dv">3000</span>, b_net_incomeeuro_gt_<span class="dv">3000</span>, b_net_incomedont_tell,</span>
+<span id="cb6-23"><a href="#cb6-23"></a>               b_relationship_duration_factorPartnered_upto28months,</span>
+<span id="cb6-24"><a href="#cb6-24"></a>               b_relationship_duration_factorPartnered_upto52months,</span>
+<span id="cb6-25"><a href="#cb6-25"></a>               b_relationship_duration_factorPartnered_morethan52months,</span>
+<span id="cb6-26"><a href="#cb6-26"></a>               b_education_years,</span>
+<span id="cb6-27"><a href="#cb6-27"></a>               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, </span>
+<span id="cb6-28"><a href="#cb6-28"></a>               b_religiosity) <span class="op">%&gt;%</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_age,</span>
+<span id="cb6-30"><a href="#cb6-30"></a>               b_net_incomeeuro_<span class="dv">500</span>_<span class="dv">1000</span>, b_net_incomeeuro_<span class="dv">1000</span>_<span class="dv">2000</span>, </span>
+<span id="cb6-31"><a href="#cb6-31"></a>               b_net_incomeeuro_<span class="dv">2000</span>_<span class="dv">3000</span>, b_net_incomeeuro_gt_<span class="dv">3000</span>, b_net_incomedont_tell,</span>
+<span id="cb6-32"><a href="#cb6-32"></a>               b_relationship_duration_factorPartnered_upto28months,</span>
+<span id="cb6-33"><a href="#cb6-33"></a>               b_relationship_duration_factorPartnered_upto52months,</span>
+<span id="cb6-34"><a href="#cb6-34"></a>               b_relationship_duration_factorPartnered_morethan52months,</span>
+<span id="cb6-35"><a href="#cb6-35"></a>               b_education_years,</span>
+<span id="cb6-36"><a href="#cb6-36"></a>               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, </span>
+<span id="cb6-37"><a href="#cb6-37"></a>               b_religiosity),</span>
+<span id="cb6-38"><a href="#cb6-38"></a>               <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb6-39"><a href="#cb6-39"></a>               <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">condition_mean =</span> r_condition,</span>
+<span id="cb6-41"><a href="#cb6-41"></a>         <span class="dt">group =</span> <span class="kw">ifelse</span>(condition <span class="op">%contains%</span><span class="st"> &quot;b_relationship_duration_factor&quot;</span>,</span>
+<span id="cb6-42"><a href="#cb6-42"></a>                        <span class="st">&quot;Relationship Duration&quot;</span>,</span>
+<span id="cb6-43"><a href="#cb6-43"></a>                        <span class="kw">ifelse</span>(condition <span class="op">%contains%</span><span class="st"> &quot;b_net_income&quot;</span>,</span>
+<span id="cb6-44"><a href="#cb6-44"></a>                               <span class="st">&quot;Income&quot;</span>,</span>
+<span id="cb6-45"><a href="#cb6-45"></a>                               <span class="ot">NA</span>)),</span>
+<span id="cb6-46"><a href="#cb6-46"></a>         <span class="dt">condition =</span> <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_age&quot;</span>, <span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb6-47"><a href="#cb6-47"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_500_1000&quot;</span>, <span class="st">&quot;500-1000 Euro&quot;</span>,</span>
+<span id="cb6-48"><a href="#cb6-48"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_1000_2000&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb6-49"><a href="#cb6-49"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_2000_3000&quot;</span>, <span class="st">&quot;2000-3000 Euro&quot;</span>,</span>
+<span id="cb6-50"><a href="#cb6-50"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_gt_3000&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>,</span>
+<span id="cb6-51"><a href="#cb6-51"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_net_incomedont_tell&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb6-52"><a href="#cb6-52"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto12months&quot;</span>,</span>
+<span id="cb6-53"><a href="#cb6-53"></a>                       <span class="st">&quot;0-12 months&quot;</span>,</span>
+<span id="cb6-54"><a href="#cb6-54"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto28months&quot;</span>,</span>
+<span id="cb6-55"><a href="#cb6-55"></a>                       <span class="st">&quot;13-28 months&quot;</span>,</span>
+<span id="cb6-56"><a href="#cb6-56"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto52months&quot;</span>,</span>
+<span id="cb6-57"><a href="#cb6-57"></a>                       <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb6-58"><a href="#cb6-58"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_morethan52months&quot;</span>,</span>
+<span id="cb6-59"><a href="#cb6-59"></a>                       <span class="st">&quot;&gt;52 months&quot;</span>,</span>
+<span id="cb6-60"><a href="#cb6-60"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_education_years&quot;</span>, <span class="st">&quot;Years of Education&quot;</span>,</span>
+<span id="cb6-61"><a href="#cb6-61"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_bfi_extra&quot;</span>, <span class="st">&quot;Extraversion&quot;</span>,</span>
+<span id="cb6-62"><a href="#cb6-62"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_bfi_neuro&quot;</span>, <span class="st">&quot;Neuroticism&quot;</span>,</span>
+<span id="cb6-63"><a href="#cb6-63"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_bfi_agree&quot;</span>, <span class="st">&quot;Agreeableness&quot;</span>,</span>
+<span id="cb6-64"><a href="#cb6-64"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_bfi_consc&quot;</span>, <span class="st">&quot;Conscientiousness&quot;</span>,</span>
+<span id="cb6-65"><a href="#cb6-65"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_bfi_open&quot;</span>, <span class="st">&quot;Openness&quot;</span>,</span>
+<span id="cb6-66"><a href="#cb6-66"></a>                <span class="kw">ifelse</span>(condition <span class="op">==</span><span class="st"> &quot;b_religiosity&quot;</span>, <span class="st">&quot;Religiosity&quot;</span>,</span>
+<span id="cb6-67"><a href="#cb6-67"></a>                       condition))))))))))))))))),</span>
+<span id="cb6-68"><a href="#cb6-68"></a>         <span class="dt">group =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(group), condition, group),</span>
+<span id="cb6-69"><a href="#cb6-69"></a>         <span class="dt">condition =</span> <span class="kw">factor</span>(condition, <span class="dt">levels =</span> <span class="kw">rev</span>(<span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb6-70"><a href="#cb6-70"></a>                                        <span class="st">&quot;500-1000 Euro&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb6-71"><a href="#cb6-71"></a>                                        <span class="st">&quot;2000-3000 Euro&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb6-72"><a href="#cb6-72"></a>                                        <span class="st">&quot;13-28 months&quot;</span>, <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb6-73"><a href="#cb6-73"></a>                                        <span class="st">&quot;&gt;52 months&quot;</span>,</span>
+<span id="cb6-74"><a href="#cb6-74"></a>                                        <span class="st">&quot;Years of Education&quot;</span>,</span>
+<span id="cb6-75"><a href="#cb6-75"></a>                                        <span class="st">&quot;Extraversion&quot;</span>, <span class="st">&quot;Neuroticism&quot;</span>, <span class="st">&quot;Agreeableness&quot;</span>,</span>
+<span id="cb6-76"><a href="#cb6-76"></a>                                         <span class="st">&quot;Conscientiousness&quot;</span>,<span class="st">&quot;Openness&quot;</span>,<span class="st">&quot;Religiosity&quot;</span>))),</span>
+<span id="cb6-77"><a href="#cb6-77"></a>         <span class="dt">group =</span> <span class="kw">factor</span>(group, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Income&quot;</span>, <span class="st">&quot;Relationship Duration&quot;</span>,</span>
+<span id="cb6-78"><a href="#cb6-78"></a>                                          </span>
+<span id="cb6-79"><a href="#cb6-79"></a>                                          <span class="st">&quot;Years of Education&quot;</span>,</span>
+<span id="cb6-80"><a href="#cb6-80"></a>                                          <span class="st">&quot;Extraversion&quot;</span>, <span class="st">&quot;Neuroticism&quot;</span>, <span class="st">&quot;Agreeableness&quot;</span>,</span>
+<span id="cb6-81"><a href="#cb6-81"></a>                                         <span class="st">&quot;Conscientiousness&quot;</span>,<span class="st">&quot;Openness&quot;</span>,<span class="st">&quot;Religiosity&quot;</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb6-82"><a href="#cb6-82"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y =</span> condition, <span class="dt">x =</span> condition_mean, <span class="dt">color =</span> group)) <span class="op">+</span></span>
+<span id="cb6-83"><a href="#cb6-83"></a><span class="st">  </span><span class="kw">stat_halfeye</span>() <span class="op">+</span></span>
+<span id="cb6-84"><a href="#cb6-84"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb6-85"><a href="#cb6-85"></a><span class="st">  </span>apatheme <span class="op">+</span></span>
+<span id="cb6-86"><a href="#cb6-86"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb6-87"><a href="#cb6-87"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Effect Size Estimates&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Predictors&quot;</span>)</span></code></pre></div>
+<p><img src="6_plots_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>m_selection_congruent_complex_includinghc <span class="op">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw">tidy</span>(., <span class="dt">intervals =</span> T, <span class="dt">prob =</span> <span class="fl">0.95</span>) <span class="op">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw">filter</span>(term <span class="op">!=</span><span class="st"> &quot;b_Intercept&quot;</span>,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>         term <span class="op">!=</span><span class="st"> &quot;lp__&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">group =</span> <span class="kw">ifelse</span>(term <span class="op">%contains%</span><span class="st"> &quot;b_relationship_duration_factor&quot;</span>,</span>
+<span id="cb7-6"><a href="#cb7-6"></a>                        <span class="st">&quot;Relationship Duration&quot;</span>,</span>
+<span id="cb7-7"><a href="#cb7-7"></a>                        <span class="kw">ifelse</span>(term <span class="op">%contains%</span><span class="st"> &quot;b_net_income&quot;</span>,</span>
+<span id="cb7-8"><a href="#cb7-8"></a>                               <span class="st">&quot;Income&quot;</span>,</span>
+<span id="cb7-9"><a href="#cb7-9"></a>                               <span class="ot">NA</span>)),</span>
+<span id="cb7-10"><a href="#cb7-10"></a>         <span class="dt">term =</span> <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_age&quot;</span>, <span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb7-11"><a href="#cb7-11"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_500_1000&quot;</span>, <span class="st">&quot;500-1000 Euro&quot;</span>,</span>
+<span id="cb7-12"><a href="#cb7-12"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_1000_2000&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb7-13"><a href="#cb7-13"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_2000_3000&quot;</span>, <span class="st">&quot;2000-3000 Euro&quot;</span>,</span>
+<span id="cb7-14"><a href="#cb7-14"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_net_incomeeuro_gt_3000&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>,</span>
+<span id="cb7-15"><a href="#cb7-15"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_net_incomedont_tell&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb7-16"><a href="#cb7-16"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto12months&quot;</span>,</span>
+<span id="cb7-17"><a href="#cb7-17"></a>                       <span class="st">&quot;0-12 months&quot;</span>,</span>
+<span id="cb7-18"><a href="#cb7-18"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto28months&quot;</span>,</span>
+<span id="cb7-19"><a href="#cb7-19"></a>                       <span class="st">&quot;13-28 months&quot;</span>,</span>
+<span id="cb7-20"><a href="#cb7-20"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_upto52months&quot;</span>,</span>
+<span id="cb7-21"><a href="#cb7-21"></a>                       <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb7-22"><a href="#cb7-22"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_relationship_duration_factorPartnered_morethan52months&quot;</span>,</span>
+<span id="cb7-23"><a href="#cb7-23"></a>                       <span class="st">&quot;&gt;52 months&quot;</span>,</span>
+<span id="cb7-24"><a href="#cb7-24"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_contraception_hormonalyes&quot;</span>,</span>
+<span id="cb7-25"><a href="#cb7-25"></a>                       <span class="st">&quot;Currently Using HCs&quot;</span>,</span>
+<span id="cb7-26"><a href="#cb7-26"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_education_years&quot;</span>, <span class="st">&quot;Years of Education&quot;</span>,</span>
+<span id="cb7-27"><a href="#cb7-27"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_bfi_extra&quot;</span>, <span class="st">&quot;Extraversion&quot;</span>,</span>
+<span id="cb7-28"><a href="#cb7-28"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_bfi_neuro&quot;</span>, <span class="st">&quot;Neuroticism&quot;</span>,</span>
+<span id="cb7-29"><a href="#cb7-29"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_bfi_agree&quot;</span>, <span class="st">&quot;Agreeableness&quot;</span>,</span>
+<span id="cb7-30"><a href="#cb7-30"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_bfi_consc&quot;</span>, <span class="st">&quot;Conscientiousness&quot;</span>,</span>
+<span id="cb7-31"><a href="#cb7-31"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_bfi_open&quot;</span>, <span class="st">&quot;Openness&quot;</span>,</span>
+<span id="cb7-32"><a href="#cb7-32"></a>                <span class="kw">ifelse</span>(term <span class="op">==</span><span class="st"> &quot;b_religiosity&quot;</span>, <span class="st">&quot;Religiosity&quot;</span>,</span>
+<span id="cb7-33"><a href="#cb7-33"></a>                       term)))))))))))))))))),</span>
+<span id="cb7-34"><a href="#cb7-34"></a>         <span class="dt">group =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(group), term, group),</span>
+<span id="cb7-35"><a href="#cb7-35"></a>         <span class="dt">term =</span> <span class="kw">factor</span>(term, <span class="dt">levels =</span> <span class="kw">rev</span>(<span class="kw">c</span>(<span class="st">&quot;Age&quot;</span>,</span>
+<span id="cb7-36"><a href="#cb7-36"></a>                                        <span class="st">&quot;500-1000 Euro&quot;</span>, <span class="st">&quot;1000-2000 Euro&quot;</span>,</span>
+<span id="cb7-37"><a href="#cb7-37"></a>                                        <span class="st">&quot;2000-3000 Euro&quot;</span>, <span class="st">&quot;&gt;3000 Euro&quot;</span>, <span class="st">&quot;do not tell&quot;</span>,</span>
+<span id="cb7-38"><a href="#cb7-38"></a>                                        <span class="st">&quot;0-12 months&quot;</span>, <span class="st">&quot;13-28 months&quot;</span>, <span class="st">&quot;29-52 months&quot;</span>,</span>
+<span id="cb7-39"><a href="#cb7-39"></a>                                        <span class="st">&quot;&gt;52 months&quot;</span>,</span>
+<span id="cb7-40"><a href="#cb7-40"></a>                                        <span class="st">&quot;Currently Using HCs&quot;</span>,</span>
+<span id="cb7-41"><a href="#cb7-41"></a>                                        <span class="st">&quot;Years of Education&quot;</span>,</span>
+<span id="cb7-42"><a href="#cb7-42"></a>                                        <span class="st">&quot;Extraversion&quot;</span>, <span class="st">&quot;Neuroticism&quot;</span>, <span class="st">&quot;Agreeableness&quot;</span>,</span>
+<span id="cb7-43"><a href="#cb7-43"></a>                                         <span class="st">&quot;Conscientiousness&quot;</span>,<span class="st">&quot;Openness&quot;</span>,<span class="st">&quot;Religiosity&quot;</span>)))) <span class="op">%&gt;%</span></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="st">  </span><span class="kw">ggplot</span>(., <span class="kw">aes</span>(<span class="dt">y =</span> term, <span class="dt">x =</span> estimate, <span class="dt">xmin =</span> lower, <span class="dt">xmax =</span> upper, <span class="dt">color =</span> group)) <span class="op">+</span></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="st">  </span><span class="kw">geom_pointinterval</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="st">  </span>apatheme <span class="op">+</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>()) <span class="op">+</span></span>
+<span id="cb7-48"><a href="#cb7-48"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Effect Size Estimates&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Predictors&quot;</span>)</span></code></pre></div>
+<p><img src="6_plots_files/figure-html/unnamed-chunk-5-2.png" width="672" /> ## Effects of Hormonal Contraceptives {.tabset} ### Models</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>m_hc_atrr =<span class="st"> </span><span class="kw">brm</span>(attractiveness_partner <span class="op">~</span><span class="st"> </span>contraception_hormonal,</span>
+<span id="cb8-2"><a href="#cb8-2"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb8-3"><a href="#cb8-3"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_atrr&quot;</span>)</span>
+<span id="cb8-4"><a href="#cb8-4"></a>m_hc_relsat =<span class="st"> </span><span class="kw">brm</span>(relationship_satisfaction <span class="op">~</span><span class="st"> </span>contraception_hormonal,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb8-6"><a href="#cb8-6"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_relsat&quot;</span>)</span>
+<span id="cb8-7"><a href="#cb8-7"></a>m_hc_sexsat =<span class="st"> </span><span class="kw">brm</span>(satisfaction_sexual_intercourse <span class="op">~</span><span class="st"> </span>contraception_hormonal,</span>
+<span id="cb8-8"><a href="#cb8-8"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb8-9"><a href="#cb8-9"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_sexsat&quot;</span>)</span>
+<span id="cb8-10"><a href="#cb8-10"></a>m_hc_libido =<span class="st"> </span><span class="kw">brm</span>(diary_libido_mean <span class="op">~</span><span class="st"> </span>contraception_hormonal,</span>
+<span id="cb8-11"><a href="#cb8-11"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb8-12"><a href="#cb8-12"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_libido&quot;</span>)</span>
+<span id="cb8-13"><a href="#cb8-13"></a>m_hc_sexfreqpen =<span class="st"> </span><span class="kw">brm</span>(diary_sex_active_sex_sum <span class="op">~</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="st">                        </span><span class="kw">offset</span>(<span class="kw">log</span>(number_of_days)) <span class="op">+</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="st">                        </span>contraception_hormonal,</span>
+<span id="cb8-16"><a href="#cb8-16"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">poisson</span>(),</span>
+<span id="cb8-17"><a href="#cb8-17"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_sexfreqpen&quot;</span>)</span>
+<span id="cb8-18"><a href="#cb8-18"></a>m_hc_sexfreq =<span class="st"> </span><span class="kw">brm</span>(diary_sex_active_sum <span class="op">~</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(number_of_days)) <span class="op">+</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a><span class="st">                     </span>contraception_hormonal,</span>
+<span id="cb8-20"><a href="#cb8-20"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb8-21"><a href="#cb8-21"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_sexfreq&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="forest-plot-for-effect-sizes" class="section level3 active">
+<h3>Forest Plot for Effect Sizes</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>models =<span class="st"> </span><span class="kw">rbind</span>(</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  m_hc_atrr <span class="op">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb9-5"><a href="#cb9-5"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Attractiveness of Partner&quot;</span>,</span>
+<span id="cb9-8"><a href="#cb9-8"></a>           <span class="dt">ROPE =</span> <span class="fl">0.07</span>),</span>
+<span id="cb9-9"><a href="#cb9-9"></a>  m_hc_relsat <span class="op">%&gt;%</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb9-12"><a href="#cb9-12"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb9-13"><a href="#cb9-13"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Relationship Satisfaction&quot;</span>,</span>
+<span id="cb9-15"><a href="#cb9-15"></a>           <span class="dt">ROPE =</span> <span class="fl">0.04</span>),</span>
+<span id="cb9-16"><a href="#cb9-16"></a>  m_hc_sexsat <span class="op">%&gt;%</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb9-19"><a href="#cb9-19"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb9-20"><a href="#cb9-20"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Sexual Satisfaction&quot;</span>,</span>
+<span id="cb9-22"><a href="#cb9-22"></a>           <span class="dt">ROPE =</span> <span class="fl">0.11</span>),</span>
+<span id="cb9-23"><a href="#cb9-23"></a>  m_hc_libido <span class="op">%&gt;%</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb9-26"><a href="#cb9-26"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb9-27"><a href="#cb9-27"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Libido&quot;</span>,</span>
+<span id="cb9-29"><a href="#cb9-29"></a>           <span class="dt">ROPE =</span> <span class="fl">0.06</span>),</span>
+<span id="cb9-30"><a href="#cb9-30"></a>  m_hc_sexfreqpen <span class="op">%&gt;%</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb9-33"><a href="#cb9-33"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb9-34"><a href="#cb9-34"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Sexual Frequency</span><span class="ch">\n</span><span class="st">(Penetrative Intercourse)&quot;</span>,</span>
+<span id="cb9-36"><a href="#cb9-36"></a>           <span class="dt">ROPE =</span> <span class="fl">0.71</span>),</span>
+<span id="cb9-37"><a href="#cb9-37"></a>  m_hc_sexfreq <span class="op">%&gt;%</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb9-40"><a href="#cb9-40"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb9-41"><a href="#cb9-41"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Sexual Frequency&quot;</span>,</span>
+<span id="cb9-43"><a href="#cb9-43"></a>           <span class="dt">ROPE =</span> <span class="fl">1.12</span>))</span>
+<span id="cb9-44"><a href="#cb9-44"></a>  </span>
+<span id="cb9-45"><a href="#cb9-45"></a>models <span class="op">%&gt;%</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">factor</span>(model, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Sexual Frequency&quot;</span>, </span>
+<span id="cb9-47"><a href="#cb9-47"></a>                                          <span class="st">&quot;Sexual Frequency</span><span class="ch">\n</span><span class="st">(Penetrative Intercourse)&quot;</span>,</span>
+<span id="cb9-48"><a href="#cb9-48"></a>                                          <span class="st">&quot;Libido&quot;</span>,</span>
+<span id="cb9-49"><a href="#cb9-49"></a>                                          <span class="st">&quot;Sexual Satisfaction&quot;</span>,</span>
+<span id="cb9-50"><a href="#cb9-50"></a>                                          <span class="st">&quot;Relationship Satisfaction&quot;</span>,</span>
+<span id="cb9-51"><a href="#cb9-51"></a>                                          <span class="st">&quot;Attractiveness of Partner&quot;</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb9-52"><a href="#cb9-52"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y =</span> model,</span>
+<span id="cb9-53"><a href="#cb9-53"></a>             <span class="dt">x =</span> r_condition,</span>
+<span id="cb9-54"><a href="#cb9-54"></a>             <span class="dt">fill =</span> <span class="kw">stat</span>(<span class="kw">abs</span>(x) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.1</span>))) <span class="op">+</span></span>
+<span id="cb9-55"><a href="#cb9-55"></a><span class="st">  </span><span class="kw">stat_halfeye</span>() <span class="op">+</span></span>
+<span id="cb9-56"><a href="#cb9-56"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.1</span>, <span class="fl">0.1</span>), <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-57"><a href="#cb9-57"></a><span class="st">  </span>apatheme <span class="op">+</span></span>
+<span id="cb9-58"><a href="#cb9-58"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-59"><a href="#cb9-59"></a><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;gray80&quot;</span>, <span class="st">&quot;skyblue&quot;</span>)) <span class="op">+</span></span>
+<span id="cb9-60"><a href="#cb9-60"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Effect Size Estimates&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Models&quot;</span>)</span></code></pre></div>
+<p><img src="6_plots_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>models2 =<span class="st"> </span>models <span class="op">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw">group_by</span>(model, ROPE) <span class="op">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="st">  </span><span class="kw">mean_qi</span>(<span class="dt">condition_mean =</span> r_condition)</span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a>models <span class="op">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="st">  </span><span class="kw">group_by</span>(model, ROPE) <span class="op">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">factor</span>(model, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Sexual Frequency&quot;</span>, </span>
+<span id="cb10-8"><a href="#cb10-8"></a>                                          <span class="st">&quot;Sexual Frequency</span><span class="ch">\n</span><span class="st">(Penetrative Intercourse)&quot;</span>,</span>
+<span id="cb10-9"><a href="#cb10-9"></a>                                          <span class="st">&quot;Libido&quot;</span>,</span>
+<span id="cb10-10"><a href="#cb10-10"></a>                                          <span class="st">&quot;Sexual Satisfaction&quot;</span>,</span>
+<span id="cb10-11"><a href="#cb10-11"></a>                                          <span class="st">&quot;Relationship Satisfaction&quot;</span>,</span>
+<span id="cb10-12"><a href="#cb10-12"></a>                                          <span class="st">&quot;Attractiveness of Partner&quot;</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="st">  </span><span class="kw">mean_qi</span>(<span class="dt">condition_mean =</span> r_condition,</span>
+<span id="cb10-14"><a href="#cb10-14"></a>          <span class="dt">.width =</span> <span class="kw">c</span>(.<span class="dv">89</span>, <span class="fl">.95</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">text =</span> <span class="kw">ifelse</span>(.width <span class="op">==</span><span class="st"> </span><span class="fl">.95</span>,</span>
+<span id="cb10-16"><a href="#cb10-16"></a>                       <span class="kw">str_c</span>(<span class="kw">round</span>(condition_mean, <span class="dv">2</span>),</span>
+<span id="cb10-17"><a href="#cb10-17"></a>                             <span class="st">&quot; [&quot;</span>,</span>
+<span id="cb10-18"><a href="#cb10-18"></a>                             <span class="kw">round</span>(.lower, <span class="dv">2</span>),</span>
+<span id="cb10-19"><a href="#cb10-19"></a>                             <span class="st">&quot;; &quot;</span>,</span>
+<span id="cb10-20"><a href="#cb10-20"></a>                             <span class="kw">round</span>(.upper, <span class="dv">2</span>),</span>
+<span id="cb10-21"><a href="#cb10-21"></a>                             <span class="st">&quot;]&quot;</span>), <span class="ot">NA</span>),</span>
+<span id="cb10-22"><a href="#cb10-22"></a>         <span class="dt">sig =</span> <span class="kw">ifelse</span>(.lower <span class="op">&gt;</span><span class="st"> </span>ROPE <span class="op">|</span><span class="st"> </span>.upper <span class="op">&lt;</span><span class="st"> </span><span class="op">-</span>ROPE, T, F)) <span class="op">%&gt;%</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">y =</span> model,</span>
+<span id="cb10-24"><a href="#cb10-24"></a>             <span class="dt">x =</span> condition_mean,</span>
+<span id="cb10-25"><a href="#cb10-25"></a>             <span class="dt">xmin =</span> .lower,</span>
+<span id="cb10-26"><a href="#cb10-26"></a>             <span class="dt">xmax =</span> .upper,</span>
+<span id="cb10-27"><a href="#cb10-27"></a>             <span class="dt">color =</span> sig)) <span class="op">+</span></span>
+<span id="cb10-28"><a href="#cb10-28"></a><span class="st">  </span><span class="kw">geom_pointinterval</span>() <span class="op">+</span></span>
+<span id="cb10-29"><a href="#cb10-29"></a><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">y =</span> model,</span>
+<span id="cb10-30"><a href="#cb10-30"></a>                <span class="dt">x =</span> condition_mean, </span>
+<span id="cb10-31"><a href="#cb10-31"></a>                <span class="dt">label =</span> text),</span>
+<span id="cb10-32"><a href="#cb10-32"></a>            <span class="dt">vjust =</span> <span class="dv">-1</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb10-33"><a href="#cb10-33"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">c</span>(<span class="dv">0</span>), <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">+</span></span>
+<span id="cb10-34"><a href="#cb10-34"></a><span class="st">  </span>apatheme <span class="op">+</span></span>
+<span id="cb10-35"><a href="#cb10-35"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span></span>
+<span id="cb10-36"><a href="#cb10-36"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;Blue&quot;</span>, <span class="st">&quot;Red&quot;</span>)) <span class="op">+</span></span>
+<span id="cb10-37"><a href="#cb10-37"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Effect Size Estimates&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Models&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 6 rows containing missing values (geom_text).</code></pre>
+<p><img src="6_plots_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUGxvdHMgRWZmZWN0cyBvZiBDb250cmFjZXB0aW9uIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgdG9jX2RlcHRoOiA0CiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIGNvZGVfZm9sZGluZzogJ2hpZGUnCiAgICBzZWxmX2NvbnRhaW5lZDogZmFsc2UKLS0tCiAgCiMjIERhdGEgCmBgYHtyIHJlc3VsdHM9J2hpZGUnLG1lc3NhZ2U9Rix3YXJuaW5nPUZ9CnNvdXJjZSgiMF9oZWxwZXJzLlIiKQoKbG9hZCgiZGF0YS9jbGVhbmVkX3NlbGVjdGVkX3dyYW5nbGVkLnJkYXRhIikKYGBgCgoKIyMgU2VsZWN0aW9uIE1vZGVsIHsudGFic2V0fQojIyMgSG9ybW9uYWwgQ29udHJhY2VwdGlvbiB7LnRhYnNldH0KIyMjIyBTaW1wbGUgTW9kZWwKYGBge3J9Cm1fc2VsZWN0aW9uX2hjX3NpbXBsZSA9IGJybShjb250cmFjZXB0aW9uX2hvcm1vbmFsIH4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYWdlICsgbmV0X2luY29tZSArIHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBkYXRhID0gZGF0YSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhbWlseSA9IGJlcm5vdWxsaSgicHJvYml0IiksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBmaWxlID0gIm1fc2VsZWN0aW9uX2hjX3NpbXBsZSIpCgptX3NlbGVjdGlvbl9oY19zaW1wbGUgJT4lCiAgc3ByZWFkX2RyYXdzKGJfYWdlLAogICAgICAgICAgICAgICBiX25ldF9pbmNvbWVldXJvXzUwMF8xMDAwLCBiX25ldF9pbmNvbWVldXJvXzEwMDBfMjAwMCwgCiAgICAgICAgICAgICAgIGJfbmV0X2luY29tZWV1cm9fMjAwMF8zMDAwLCBiX25ldF9pbmNvbWVldXJvX2d0XzMwMDAsIGJfbmV0X2luY29tZWRvbnRfdGVsbCwKICAgICAgICAgICAgICAgYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG8xMm1vbnRocywKICAgICAgICAgICAgICAgYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG8yOG1vbnRocywKICAgICAgICAgICAgICAgYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG81Mm1vbnRocywKICAgICAgICAgICAgICAgYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX21vcmV0aGFuNTJtb250aHMpICU+JQogIHBpdm90X2xvbmdlcihjb2xzID0gYyhiX2FnZSwKICAgICAgICAgICAgICAgYl9uZXRfaW5jb21lZXVyb181MDBfMTAwMCwgYl9uZXRfaW5jb21lZXVyb18xMDAwXzIwMDAsIAogICAgICAgICAgICAgICBiX25ldF9pbmNvbWVldXJvXzIwMDBfMzAwMCwgYl9uZXRfaW5jb21lZXVyb19ndF8zMDAwLCBiX25ldF9pbmNvbWVkb250X3RlbGwsCiAgICAgICAgICAgICAgIGJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF91cHRvMTJtb250aHMsCiAgICAgICAgICAgICAgIGJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF91cHRvMjhtb250aHMsCiAgICAgICAgICAgICAgIGJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF91cHRvNTJtb250aHMsCiAgICAgICAgICAgICAgIGJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF9tb3JldGhhbjUybW9udGhzKSwKICAgICAgICAgICAgICAgbmFtZXNfdG8gPSAiY29uZGl0aW9uIiwKICAgICAgICAgICAgICAgdmFsdWVzX3RvID0gInJfY29uZGl0aW9uIikgJT4lCiAgbXV0YXRlKGNvbmRpdGlvbl9tZWFuID0gcl9jb25kaXRpb24sCiAgICAgICAgIGdyb3VwID0gaWZlbHNlKGNvbmRpdGlvbiAlY29udGFpbnMlICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IiLAogICAgICAgICAgICAgICAgICAgICAgICAiUmVsYXRpb25zaGlwIER1cmF0aW9uIiwKICAgICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiAlY29udGFpbnMlICJiX25ldF9pbmNvbWUiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkluY29tZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBOQSkpLAogICAgICAgICBjb25kaXRpb24gPSBpZmVsc2UoY29uZGl0aW9uID09ICJiX2FnZSIsICJBZ2UiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9uZXRfaW5jb21lZXVyb181MDBfMTAwMCIsICI1MDAtMTAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWV1cm9fMTAwMF8yMDAwIiwgIjEwMDAtMjAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWV1cm9fMjAwMF8zMDAwIiwgIjIwMDAtMzAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWV1cm9fZ3RfMzAwMCIsICI+MzAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWRvbnRfdGVsbCIsICJkbyBub3QgdGVsbCIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzEybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiMC0xMiBtb250aHMiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG8yOG1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgIjEzLTI4IG1vbnRocyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzUybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiMjktNTIgbW9udGhzIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF9tb3JldGhhbjUybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiPjUyIG1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgY29uZGl0aW9uKSkpKSkpKSkpKSwKICAgICAgICAgZ3JvdXAgPSBpZmVsc2UoaXMubmEoZ3JvdXApLCBjb25kaXRpb24sIGdyb3VwKSwKICAgICAgICAgY29uZGl0aW9uID0gZmFjdG9yKGNvbmRpdGlvbiwgbGV2ZWxzID0gcmV2KGMoIkFnZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiNTAwLTEwMDAgRXVybyIsICIxMDAwLTIwMDAgRXVybyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiMjAwMC0zMDAwIEV1cm8iLCAiPjMwMDAgRXVybyIsICJkbyBub3QgdGVsbCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiMC0xMiBtb250aHMiLCAiMTMtMjggbW9udGhzIiwgIjI5LTUyIG1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiPjUyIG1vbnRocyIpKSkpICU+JQogIGdncGxvdChhZXMoeSA9IGNvbmRpdGlvbiwgeCA9IGNvbmRpdGlvbl9tZWFuLCBjb2xvciA9IGdyb3VwKSkgKwogIHN0YXRfaGFsZmV5ZSgpICsKICBnZW9tX3ZsaW5lKHhpbnRlcmNlcHQgPSAwLCBsaW5ldHlwZSA9ICJkb3R0ZWQiLCBzaXplID0gMSkgKwogIGFwYXRoZW1lICsKICB0aGVtZShsZWdlbmQudGl0bGUgPSBlbGVtZW50X2JsYW5rKCkpICsKICBsYWJzKHggPSAiRWZmZWN0IFNpemUgRXN0aW1hdGVzIiwgeSA9ICJQcmVkaWN0b3JzIikKYGBgCgojIyMjIENvbXBsZXggTW9kZWwKYGBge3J9Cm1fc2VsZWN0aW9uX2hjX2NvbXBsZXggPSBicm0oY29udHJhY2VwdGlvbl9ob3Jtb25hbCB+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGFnZSArIG5ldF9pbmNvbWUgKyByZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yICsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZWR1Y2F0aW9uX3llYXJzICsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmZpX2V4dHJhICsgYmZpX25ldXJvICsgYmZpX2FncmVlICsgYmZpX2NvbnNjICsgYmZpX29wZW4gKwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZWxpZ2lvc2l0eSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFtaWx5ID0gYmVybm91bGxpKCJwcm9iaXQiKSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZpbGUgPSAibV9zZWxlY3Rpb25faGNfY29tcGxleCIpCgptX3NlbGVjdGlvbl9oY19jb21wbGV4ICU+JQogIHNwcmVhZF9kcmF3cyhiX2FnZSwKICAgICAgICAgICAgICAgYl9uZXRfaW5jb21lZXVyb181MDBfMTAwMCwgYl9uZXRfaW5jb21lZXVyb18xMDAwXzIwMDAsIAogICAgICAgICAgICAgICBiX25ldF9pbmNvbWVldXJvXzIwMDBfMzAwMCwgYl9uZXRfaW5jb21lZXVyb19ndF8zMDAwLCBiX25ldF9pbmNvbWVkb250X3RlbGwsCiAgICAgICAgICAgICAgIGJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF91cHRvMTJtb250aHMsCiAgICAgICAgICAgICAgIGJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF91cHRvMjhtb250aHMsCiAgICAgICAgICAgICAgIGJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF91cHRvNTJtb250aHMsCiAgICAgICAgICAgICAgIGJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF9tb3JldGhhbjUybW9udGhzLAogICAgICAgICAgICAgICBiX2VkdWNhdGlvbl95ZWFycywKICAgICAgICAgICAgICAgYl9iZmlfZXh0cmEsIGJfYmZpX25ldXJvLCBiX2JmaV9hZ3JlZSwgYl9iZmlfY29uc2MsIGJfYmZpX29wZW4sIAogICAgICAgICAgICAgICBiX3JlbGlnaW9zaXR5KSAlPiUKICBwaXZvdF9sb25nZXIoY29scyA9IGMoYl9hZ2UsCiAgICAgICAgICAgICAgIGJfbmV0X2luY29tZWV1cm9fNTAwXzEwMDAsIGJfbmV0X2luY29tZWV1cm9fMTAwMF8yMDAwLCAKICAgICAgICAgICAgICAgYl9uZXRfaW5jb21lZXVyb18yMDAwXzMwMDAsIGJfbmV0X2luY29tZWV1cm9fZ3RfMzAwMCwgYl9uZXRfaW5jb21lZG9udF90ZWxsLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzEybW9udGhzLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzI4bW9udGhzLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzUybW9udGhzLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfbW9yZXRoYW41Mm1vbnRocywKICAgICAgICAgICAgICAgYl9lZHVjYXRpb25feWVhcnMsCiAgICAgICAgICAgICAgIGJfYmZpX2V4dHJhLCBiX2JmaV9uZXVybywgYl9iZmlfYWdyZWUsIGJfYmZpX2NvbnNjLCBiX2JmaV9vcGVuLCAKICAgICAgICAgICAgICAgYl9yZWxpZ2lvc2l0eSksCiAgICAgICAgICAgICAgIG5hbWVzX3RvID0gImNvbmRpdGlvbiIsCiAgICAgICAgICAgICAgIHZhbHVlc190byA9ICJyX2NvbmRpdGlvbiIpICU+JQogIG11dGF0ZShjb25kaXRpb25fbWVhbiA9IHJfY29uZGl0aW9uLAogICAgICAgICBncm91cCA9IGlmZWxzZShjb25kaXRpb24gJWNvbnRhaW5zJSAiYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yIiwKICAgICAgICAgICAgICAgICAgICAgICAgIlJlbGF0aW9uc2hpcCBEdXJhdGlvbiIsCiAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gJWNvbnRhaW5zJSAiYl9uZXRfaW5jb21lIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJJbmNvbWUiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTkEpKSwKICAgICAgICAgY29uZGl0aW9uID0gaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9hZ2UiLCAiQWdlIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWV1cm9fNTAwXzEwMDAiLCAiNTAwLTEwMDAgRXVybyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX25ldF9pbmNvbWVldXJvXzEwMDBfMjAwMCIsICIxMDAwLTIwMDAgRXVybyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX25ldF9pbmNvbWVldXJvXzIwMDBfMzAwMCIsICIyMDAwLTMwMDAgRXVybyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX25ldF9pbmNvbWVldXJvX2d0XzMwMDAiLCAiPjMwMDAgRXVybyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX25ldF9pbmNvbWVkb250X3RlbGwiLCAiZG8gbm90IHRlbGwiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG8xMm1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgIjAtMTIgbW9udGhzIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF91cHRvMjhtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICIxMy0yOCBtb250aHMiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG81Mm1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgIjI5LTUyIG1vbnRocyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfbW9yZXRoYW41Mm1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgIj41MiBtb250aHMiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9lZHVjYXRpb25feWVhcnMiLCAiWWVhcnMgb2YgRWR1Y2F0aW9uIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfYmZpX2V4dHJhIiwgIkV4dHJhdmVyc2lvbiIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX2JmaV9uZXVybyIsICJOZXVyb3RpY2lzbSIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX2JmaV9hZ3JlZSIsICJBZ3JlZWFibGVuZXNzIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfYmZpX2NvbnNjIiwgIkNvbnNjaWVudGlvdXNuZXNzIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfYmZpX29wZW4iLCAiT3Blbm5lc3MiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9yZWxpZ2lvc2l0eSIsICJSZWxpZ2lvc2l0eSIsCiAgICAgICAgICAgICAgICAgICAgICAgY29uZGl0aW9uKSkpKSkpKSkpKSkpKSkpKSksCiAgICAgICAgIGdyb3VwID0gaWZlbHNlKGlzLm5hKGdyb3VwKSwgY29uZGl0aW9uLCBncm91cCksCiAgICAgICAgIGNvbmRpdGlvbiA9IGZhY3Rvcihjb25kaXRpb24sIGxldmVscyA9IHJldihjKCJBZ2UiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIjUwMC0xMDAwIEV1cm8iLCAiMTAwMC0yMDAwIEV1cm8iLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIjIwMDAtMzAwMCBFdXJvIiwgIj4zMDAwIEV1cm8iLCAiZG8gbm90IHRlbGwiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIjAtMTIgbW9udGhzIiwgIjEzLTI4IG1vbnRocyIsICIyOS01MiBtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIj41MiBtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIlllYXJzIG9mIEVkdWNhdGlvbiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiRXh0cmF2ZXJzaW9uIiwgIk5ldXJvdGljaXNtIiwgIkFncmVlYWJsZW5lc3MiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJDb25zY2llbnRpb3VzbmVzcyIsIk9wZW5uZXNzIiwiUmVsaWdpb3NpdHkiKSkpLAogICAgICAgICBncm91cCA9IGZhY3Rvcihncm91cCwgbGV2ZWxzID0gYygiQWdlIiwgIkluY29tZSIsICJSZWxhdGlvbnNoaXAgRHVyYXRpb24iLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIlllYXJzIG9mIEVkdWNhdGlvbiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJFeHRyYXZlcnNpb24iLCAiTmV1cm90aWNpc20iLCAiQWdyZWVhYmxlbmVzcyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkNvbnNjaWVudGlvdXNuZXNzIiwiT3Blbm5lc3MiLCJSZWxpZ2lvc2l0eSIpKSkgJT4lCiAgZ2dwbG90KGFlcyh5ID0gY29uZGl0aW9uLCB4ID0gY29uZGl0aW9uX21lYW4sIGNvbG9yID0gZ3JvdXApKSArCiAgc3RhdF9oYWxmZXllKCkgKwogIGdlb21fdmxpbmUoeGludGVyY2VwdCA9IDAsIGxpbmV0eXBlID0gImRvdHRlZCIsIHNpemUgPSAxKSArCiAgYXBhdGhlbWUgKwogIHRoZW1lKGxlZ2VuZC50aXRsZSA9IGVsZW1lbnRfYmxhbmsoKSkgKwogIGxhYnMoeCA9ICJFZmZlY3QgU2l6ZSBFc3RpbWF0ZXMiLCB5ID0gIlByZWRpY3RvcnMiKQpgYGAKCiMjIyAoSW4pY29uZ3J1ZW50IHVzZSBvZiBob3Jtb25hbCBjb250cmFjZXB0aXZlcyB7LnRhYnNldH0KIyMjIyBTaW1wbGUgTW9kZWwKYGBge3J9Cm1fc2VsZWN0aW9uX2NvbmdydWVudF9zaW1wbGUgPSBicm0oY29uZ3J1ZW50X2NvbnRyYWNlcHRpb24gfgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhZ2UgKyBuZXRfaW5jb21lICsgcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvciwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFtaWx5ID0gYmVybm91bGxpKCJwcm9iaXQiKSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZpbGUgPSAibV9zZWxlY3Rpb25fY29uZ3J1ZW50X3NpbXBsZSIpCgptX3NlbGVjdGlvbl9jb25ncnVlbnRfc2ltcGxlX2luY2x1ZGluZ2hjID0gYnJtKGNvbmdydWVudF9jb250cmFjZXB0aW9uIH4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYWdlICsgbmV0X2luY29tZSArIHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IgKwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRyYWNlcHRpb25faG9ybW9uYWwsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBkYXRhID0gZGF0YSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhbWlseSA9IGJlcm5vdWxsaSgicHJvYml0IiksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBmaWxlID0gIm1fc2VsZWN0aW9uX2NvbmdydWVudF9zaW1wbGVfaW5jbHVkaW5naGMiKQoKbV9zZWxlY3Rpb25fY29uZ3J1ZW50X3NpbXBsZSAlPiUKICBzcHJlYWRfZHJhd3MoYl9hZ2UsCiAgICAgICAgICAgICAgIGJfbmV0X2luY29tZWV1cm9fNTAwXzEwMDAsIGJfbmV0X2luY29tZWV1cm9fMTAwMF8yMDAwLCAKICAgICAgICAgICAgICAgYl9uZXRfaW5jb21lZXVyb18yMDAwXzMwMDAsIGJfbmV0X2luY29tZWV1cm9fZ3RfMzAwMCwgYl9uZXRfaW5jb21lZG9udF90ZWxsLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzI4bW9udGhzLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzUybW9udGhzLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfbW9yZXRoYW41Mm1vbnRocykgJT4lCiAgcGl2b3RfbG9uZ2VyKGNvbHMgPSBjKGJfYWdlLAogICAgICAgICAgICAgICBiX25ldF9pbmNvbWVldXJvXzUwMF8xMDAwLCBiX25ldF9pbmNvbWVldXJvXzEwMDBfMjAwMCwgCiAgICAgICAgICAgICAgIGJfbmV0X2luY29tZWV1cm9fMjAwMF8zMDAwLCBiX25ldF9pbmNvbWVldXJvX2d0XzMwMDAsIGJfbmV0X2luY29tZWRvbnRfdGVsbCwKICAgICAgICAgICAgICAgYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG8yOG1vbnRocywKICAgICAgICAgICAgICAgYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG81Mm1vbnRocywKICAgICAgICAgICAgICAgYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX21vcmV0aGFuNTJtb250aHMpLAogICAgICAgICAgICAgICBuYW1lc190byA9ICJjb25kaXRpb24iLAogICAgICAgICAgICAgICB2YWx1ZXNfdG8gPSAicl9jb25kaXRpb24iKSAlPiUKICBtdXRhdGUoY29uZGl0aW9uX21lYW4gPSByX2NvbmRpdGlvbiwKICAgICAgICAgZ3JvdXAgPSBpZmVsc2UoY29uZGl0aW9uICVjb250YWlucyUgImJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvciIsCiAgICAgICAgICAgICAgICAgICAgICAgICJSZWxhdGlvbnNoaXAgRHVyYXRpb24iLAogICAgICAgICAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uICVjb250YWlucyUgImJfbmV0X2luY29tZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiSW5jb21lIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE5BKSksCiAgICAgICAgIGNvbmRpdGlvbiA9IGlmZWxzZShjb25kaXRpb24gPT0gImJfYWdlIiwgIkFnZSIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX25ldF9pbmNvbWVldXJvXzUwMF8xMDAwIiwgIjUwMC0xMDAwIEV1cm8iLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9uZXRfaW5jb21lZXVyb18xMDAwXzIwMDAiLCAiMTAwMC0yMDAwIEV1cm8iLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9uZXRfaW5jb21lZXVyb18yMDAwXzMwMDAiLCAiMjAwMC0zMDAwIEV1cm8iLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9uZXRfaW5jb21lZXVyb19ndF8zMDAwIiwgIj4zMDAwIEV1cm8iLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9uZXRfaW5jb21lZG9udF90ZWxsIiwgImRvIG5vdCB0ZWxsIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF91cHRvMTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICIwLTEyIG1vbnRocyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzI4bW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiMTMtMjggbW9udGhzIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF91cHRvNTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICIyOS01MiBtb250aHMiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX21vcmV0aGFuNTJtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICI+NTIgbW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICBjb25kaXRpb24pKSkpKSkpKSkpLAogICAgICAgICBncm91cCA9IGlmZWxzZShpcy5uYShncm91cCksIGNvbmRpdGlvbiwgZ3JvdXApLAogICAgICAgICBjb25kaXRpb24gPSBmYWN0b3IoY29uZGl0aW9uLCBsZXZlbHMgPSByZXYoYygiQWdlIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICI1MDAtMTAwMCBFdXJvIiwgIjEwMDAtMjAwMCBFdXJvIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICIyMDAwLTMwMDAgRXVybyIsICI+MzAwMCBFdXJvIiwgImRvIG5vdCB0ZWxsIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICIxMy0yOCBtb250aHMiLCAiMjktNTIgbW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICI+NTIgbW9udGhzIikpKSkgJT4lCiAgZ2dwbG90KGFlcyh5ID0gY29uZGl0aW9uLCB4ID0gY29uZGl0aW9uX21lYW4sIGNvbG9yID0gZ3JvdXApKSArCiAgc3RhdF9oYWxmZXllKCkgKwogIGdlb21fdmxpbmUoeGludGVyY2VwdCA9IDAsIGxpbmV0eXBlID0gImRvdHRlZCIsIHNpemUgPSAxKSArCiAgYXBhdGhlbWUgKwogIHRoZW1lKGxlZ2VuZC50aXRsZSA9IGVsZW1lbnRfYmxhbmsoKSkgKwogIGxhYnMoeCA9ICJFZmZlY3QgU2l6ZSBFc3RpbWF0ZXMiLCB5ID0gIlByZWRpY3RvcnMiKQoKbV9zZWxlY3Rpb25fY29uZ3J1ZW50X3NpbXBsZV9pbmNsdWRpbmdoYyAlPiUKICBzcHJlYWRfZHJhd3MoYl9hZ2UsCiAgICAgICAgICAgICAgIGJfbmV0X2luY29tZWV1cm9fNTAwXzEwMDAsIGJfbmV0X2luY29tZWV1cm9fMTAwMF8yMDAwLCAKICAgICAgICAgICAgICAgYl9uZXRfaW5jb21lZXVyb18yMDAwXzMwMDAsIGJfbmV0X2luY29tZWV1cm9fZ3RfMzAwMCwgYl9uZXRfaW5jb21lZG9udF90ZWxsLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzI4bW9udGhzLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzUybW9udGhzLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfbW9yZXRoYW41Mm1vbnRocywKICAgICAgICAgICAgICAgYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSAlPiUKICBwaXZvdF9sb25nZXIoY29scyA9IGMoYl9hZ2UsCiAgICAgICAgICAgICAgIGJfbmV0X2luY29tZWV1cm9fNTAwXzEwMDAsIGJfbmV0X2luY29tZWV1cm9fMTAwMF8yMDAwLCAKICAgICAgICAgICAgICAgYl9uZXRfaW5jb21lZXVyb18yMDAwXzMwMDAsIGJfbmV0X2luY29tZWV1cm9fZ3RfMzAwMCwgYl9uZXRfaW5jb21lZG9udF90ZWxsLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzI4bW9udGhzLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzUybW9udGhzLAogICAgICAgICAgICAgICBiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfbW9yZXRoYW41Mm1vbnRocywKICAgICAgICAgICAgICAgYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSwKICAgICAgICAgICAgICAgbmFtZXNfdG8gPSAiY29uZGl0aW9uIiwKICAgICAgICAgICAgICAgdmFsdWVzX3RvID0gInJfY29uZGl0aW9uIikgJT4lCiAgbXV0YXRlKGNvbmRpdGlvbl9tZWFuID0gcl9jb25kaXRpb24sCiAgICAgICAgIGdyb3VwID0gaWZlbHNlKGNvbmRpdGlvbiAlY29udGFpbnMlICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IiLAogICAgICAgICAgICAgICAgICAgICAgICAiUmVsYXRpb25zaGlwIER1cmF0aW9uIiwKICAgICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiAlY29udGFpbnMlICJiX25ldF9pbmNvbWUiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkluY29tZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBOQSkpLAogICAgICAgICBjb25kaXRpb24gPSBpZmVsc2UoY29uZGl0aW9uID09ICJiX2FnZSIsICJBZ2UiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9uZXRfaW5jb21lZXVyb181MDBfMTAwMCIsICI1MDAtMTAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWV1cm9fMTAwMF8yMDAwIiwgIjEwMDAtMjAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWV1cm9fMjAwMF8zMDAwIiwgIjIwMDAtMzAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWV1cm9fZ3RfMzAwMCIsICI+MzAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWRvbnRfdGVsbCIsICJkbyBub3QgdGVsbCIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzEybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiMC0xMiBtb250aHMiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG8yOG1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgIjEzLTI4IG1vbnRocyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzUybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiMjktNTIgbW9udGhzIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF9tb3JldGhhbjUybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiPjUyIG1vbnRocyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMiLAogICAgICAgICAgICAgICAgICAgICAgICJDdXJyZW50bHkgVXNpbmcgSENzIiwKICAgICAgICAgICAgICAgICAgICAgICBjb25kaXRpb24pKSkpKSkpKSkpKSwKICAgICAgICAgZ3JvdXAgPSBpZmVsc2UoaXMubmEoZ3JvdXApLCBjb25kaXRpb24sIGdyb3VwKSwKICAgICAgICAgY29uZGl0aW9uID0gZmFjdG9yKGNvbmRpdGlvbiwgbGV2ZWxzID0gcmV2KGMoIkFnZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiNTAwLTEwMDAgRXVybyIsICIxMDAwLTIwMDAgRXVybyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiMjAwMC0zMDAwIEV1cm8iLCAiPjMwMDAgRXVybyIsICJkbyBub3QgdGVsbCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiMTMtMjggbW9udGhzIiwgIjI5LTUyIG1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiPjUyIG1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiQ3VycmVudGx5IFVzaW5nIEhDcyIpKSksCiAgICAgICAgIGdyb3VwID0gZmFjdG9yKGdyb3VwLCBsZXZlbHMgPSBjKCJBZ2UiLCAiSW5jb21lIiwgIlJlbGF0aW9uc2hpcCBEdXJhdGlvbiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJDdXJyZW50bHkgVXNpbmcgSENzIikpKSAlPiUKICBnZ3Bsb3QoYWVzKHkgPSBjb25kaXRpb24sIHggPSBjb25kaXRpb25fbWVhbiwgY29sb3IgPSBncm91cCkpICsKICBzdGF0X2hhbGZleWUoKSArCiAgZ2VvbV92bGluZSh4aW50ZXJjZXB0ID0gMCwgbGluZXR5cGUgPSAiZG90dGVkIiwgc2l6ZSA9IDEpICsKICBhcGF0aGVtZSArCiAgdGhlbWUobGVnZW5kLnRpdGxlID0gZWxlbWVudF9ibGFuaygpKSArCiAgbGFicyh4ID0gIkVmZmVjdCBTaXplIEVzdGltYXRlcyIsIHkgPSAiUHJlZGljdG9ycyIpCmBgYAoKIyMjIyBDb21wbGV4IE1vZGVsCmBgYHtyfQptX3NlbGVjdGlvbl9jb25ncnVlbnRfY29tcGxleCA9IGJybShjb25ncnVlbnRfY29udHJhY2VwdGlvbiB+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGFnZSArIG5ldF9pbmNvbWUgKyByZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yICsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZWR1Y2F0aW9uX3llYXJzICsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmZpX2V4dHJhICsgYmZpX25ldXJvICsgYmZpX2FncmVlICsgYmZpX2NvbnNjICsgYmZpX29wZW4gKwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZWxpZ2lvc2l0eSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgZmFtaWx5ID0gYmVybm91bGxpKCJwcm9iaXQiKSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZpbGUgPSAibV9zZWxlY3Rpb25fY29uZ3J1ZW50X2NvbXBsZXgiKQoKbV9zZWxlY3Rpb25fY29uZ3J1ZW50X2NvbXBsZXhfaW5jbHVkaW5naGMgPSBicm0oY29uZ3J1ZW50X2NvbnRyYWNlcHRpb24gfgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhZ2UgKyBuZXRfaW5jb21lICsgcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvciAgKwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRyYWNlcHRpb25faG9ybW9uYWwgKwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGVkdWNhdGlvbl95ZWFycyArCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJmaV9leHRyYSArIGJmaV9uZXVybyArIGJmaV9hZ3JlZSArIGJmaV9jb25zYyArIGJmaV9vcGVuICsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVsaWdpb3NpdHksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBkYXRhID0gZGF0YSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZhbWlseSA9IGJlcm5vdWxsaSgicHJvYml0IiksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBmaWxlID0gIm1fc2VsZWN0aW9uX2NvbmdydWVudF9jb21wbGV4X2luY2x1ZGluZ2hjIikKbV9zZWxlY3Rpb25fY29uZ3J1ZW50X2NvbXBsZXggJT4lCiAgc3ByZWFkX2RyYXdzKGJfYWdlLAogICAgICAgICAgICAgICBiX25ldF9pbmNvbWVldXJvXzUwMF8xMDAwLCBiX25ldF9pbmNvbWVldXJvXzEwMDBfMjAwMCwgCiAgICAgICAgICAgICAgIGJfbmV0X2luY29tZWV1cm9fMjAwMF8zMDAwLCBiX25ldF9pbmNvbWVldXJvX2d0XzMwMDAsIGJfbmV0X2luY29tZWRvbnRfdGVsbCwKICAgICAgICAgICAgICAgYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG8yOG1vbnRocywKICAgICAgICAgICAgICAgYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG81Mm1vbnRocywKICAgICAgICAgICAgICAgYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX21vcmV0aGFuNTJtb250aHMsCiAgICAgICAgICAgICAgIGJfZWR1Y2F0aW9uX3llYXJzLAogICAgICAgICAgICAgICBiX2JmaV9leHRyYSwgYl9iZmlfbmV1cm8sIGJfYmZpX2FncmVlLCBiX2JmaV9jb25zYywgYl9iZmlfb3BlbiwgCiAgICAgICAgICAgICAgIGJfcmVsaWdpb3NpdHkpICU+JQogIHBpdm90X2xvbmdlcihjb2xzID0gYyhiX2FnZSwKICAgICAgICAgICAgICAgYl9uZXRfaW5jb21lZXVyb181MDBfMTAwMCwgYl9uZXRfaW5jb21lZXVyb18xMDAwXzIwMDAsIAogICAgICAgICAgICAgICBiX25ldF9pbmNvbWVldXJvXzIwMDBfMzAwMCwgYl9uZXRfaW5jb21lZXVyb19ndF8zMDAwLCBiX25ldF9pbmNvbWVkb250X3RlbGwsCiAgICAgICAgICAgICAgIGJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF91cHRvMjhtb250aHMsCiAgICAgICAgICAgICAgIGJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF91cHRvNTJtb250aHMsCiAgICAgICAgICAgICAgIGJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF9tb3JldGhhbjUybW9udGhzLAogICAgICAgICAgICAgICBiX2VkdWNhdGlvbl95ZWFycywKICAgICAgICAgICAgICAgYl9iZmlfZXh0cmEsIGJfYmZpX25ldXJvLCBiX2JmaV9hZ3JlZSwgYl9iZmlfY29uc2MsIGJfYmZpX29wZW4sIAogICAgICAgICAgICAgICBiX3JlbGlnaW9zaXR5KSwKICAgICAgICAgICAgICAgbmFtZXNfdG8gPSAiY29uZGl0aW9uIiwKICAgICAgICAgICAgICAgdmFsdWVzX3RvID0gInJfY29uZGl0aW9uIikgJT4lCiAgbXV0YXRlKGNvbmRpdGlvbl9tZWFuID0gcl9jb25kaXRpb24sCiAgICAgICAgIGdyb3VwID0gaWZlbHNlKGNvbmRpdGlvbiAlY29udGFpbnMlICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IiLAogICAgICAgICAgICAgICAgICAgICAgICAiUmVsYXRpb25zaGlwIER1cmF0aW9uIiwKICAgICAgICAgICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiAlY29udGFpbnMlICJiX25ldF9pbmNvbWUiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkluY29tZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBOQSkpLAogICAgICAgICBjb25kaXRpb24gPSBpZmVsc2UoY29uZGl0aW9uID09ICJiX2FnZSIsICJBZ2UiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9uZXRfaW5jb21lZXVyb181MDBfMTAwMCIsICI1MDAtMTAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWV1cm9fMTAwMF8yMDAwIiwgIjEwMDAtMjAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWV1cm9fMjAwMF8zMDAwIiwgIjIwMDAtMzAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWV1cm9fZ3RfMzAwMCIsICI+MzAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfbmV0X2luY29tZWRvbnRfdGVsbCIsICJkbyBub3QgdGVsbCIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzEybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiMC0xMiBtb250aHMiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG8yOG1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgIjEzLTI4IG1vbnRocyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzUybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiMjktNTIgbW9udGhzIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvclBhcnRuZXJlZF9tb3JldGhhbjUybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiPjUyIG1vbnRocyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX2VkdWNhdGlvbl95ZWFycyIsICJZZWFycyBvZiBFZHVjYXRpb24iLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9iZmlfZXh0cmEiLCAiRXh0cmF2ZXJzaW9uIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfYmZpX25ldXJvIiwgIk5ldXJvdGljaXNtIiwKICAgICAgICAgICAgICAgIGlmZWxzZShjb25kaXRpb24gPT0gImJfYmZpX2FncmVlIiwgIkFncmVlYWJsZW5lc3MiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9iZmlfY29uc2MiLCAiQ29uc2NpZW50aW91c25lc3MiLAogICAgICAgICAgICAgICAgaWZlbHNlKGNvbmRpdGlvbiA9PSAiYl9iZmlfb3BlbiIsICJPcGVubmVzcyIsCiAgICAgICAgICAgICAgICBpZmVsc2UoY29uZGl0aW9uID09ICJiX3JlbGlnaW9zaXR5IiwgIlJlbGlnaW9zaXR5IiwKICAgICAgICAgICAgICAgICAgICAgICBjb25kaXRpb24pKSkpKSkpKSkpKSkpKSkpKSwKICAgICAgICAgZ3JvdXAgPSBpZmVsc2UoaXMubmEoZ3JvdXApLCBjb25kaXRpb24sIGdyb3VwKSwKICAgICAgICAgY29uZGl0aW9uID0gZmFjdG9yKGNvbmRpdGlvbiwgbGV2ZWxzID0gcmV2KGMoIkFnZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiNTAwLTEwMDAgRXVybyIsICIxMDAwLTIwMDAgRXVybyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiMjAwMC0zMDAwIEV1cm8iLCAiPjMwMDAgRXVybyIsICJkbyBub3QgdGVsbCIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiMTMtMjggbW9udGhzIiwgIjI5LTUyIG1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiPjUyIG1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiWWVhcnMgb2YgRWR1Y2F0aW9uIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJFeHRyYXZlcnNpb24iLCAiTmV1cm90aWNpc20iLCAiQWdyZWVhYmxlbmVzcyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkNvbnNjaWVudGlvdXNuZXNzIiwiT3Blbm5lc3MiLCJSZWxpZ2lvc2l0eSIpKSksCiAgICAgICAgIGdyb3VwID0gZmFjdG9yKGdyb3VwLCBsZXZlbHMgPSBjKCJBZ2UiLCAiSW5jb21lIiwgIlJlbGF0aW9uc2hpcCBEdXJhdGlvbiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiWWVhcnMgb2YgRWR1Y2F0aW9uIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkV4dHJhdmVyc2lvbiIsICJOZXVyb3RpY2lzbSIsICJBZ3JlZWFibGVuZXNzIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiQ29uc2NpZW50aW91c25lc3MiLCJPcGVubmVzcyIsIlJlbGlnaW9zaXR5IikpKSAlPiUKICBnZ3Bsb3QoYWVzKHkgPSBjb25kaXRpb24sIHggPSBjb25kaXRpb25fbWVhbiwgY29sb3IgPSBncm91cCkpICsKICBzdGF0X2hhbGZleWUoKSArCiAgZ2VvbV92bGluZSh4aW50ZXJjZXB0ID0gMCwgbGluZXR5cGUgPSAiZG90dGVkIiwgc2l6ZSA9IDEpICsKICBhcGF0aGVtZSArCiAgdGhlbWUobGVnZW5kLnRpdGxlID0gZWxlbWVudF9ibGFuaygpKSArCiAgbGFicyh4ID0gIkVmZmVjdCBTaXplIEVzdGltYXRlcyIsIHkgPSAiUHJlZGljdG9ycyIpCgptX3NlbGVjdGlvbl9jb25ncnVlbnRfY29tcGxleF9pbmNsdWRpbmdoYyAlPiUKICB0aWR5KC4sIGludGVydmFscyA9IFQsIHByb2IgPSAwLjk1KSAlPiUKICBmaWx0ZXIodGVybSAhPSAiYl9JbnRlcmNlcHQiLAogICAgICAgICB0ZXJtICE9ICJscF9fIikgJT4lCiAgbXV0YXRlKGdyb3VwID0gaWZlbHNlKHRlcm0gJWNvbnRhaW5zJSAiYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yIiwKICAgICAgICAgICAgICAgICAgICAgICAgIlJlbGF0aW9uc2hpcCBEdXJhdGlvbiIsCiAgICAgICAgICAgICAgICAgICAgICAgIGlmZWxzZSh0ZXJtICVjb250YWlucyUgImJfbmV0X2luY29tZSIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiSW5jb21lIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIE5BKSksCiAgICAgICAgIHRlcm0gPSBpZmVsc2UodGVybSA9PSAiYl9hZ2UiLCAiQWdlIiwKICAgICAgICAgICAgICAgIGlmZWxzZSh0ZXJtID09ICJiX25ldF9pbmNvbWVldXJvXzUwMF8xMDAwIiwgIjUwMC0xMDAwIEV1cm8iLAogICAgICAgICAgICAgICAgaWZlbHNlKHRlcm0gPT0gImJfbmV0X2luY29tZWV1cm9fMTAwMF8yMDAwIiwgIjEwMDAtMjAwMCBFdXJvIiwKICAgICAgICAgICAgICAgIGlmZWxzZSh0ZXJtID09ICJiX25ldF9pbmNvbWVldXJvXzIwMDBfMzAwMCIsICIyMDAwLTMwMDAgRXVybyIsCiAgICAgICAgICAgICAgICBpZmVsc2UodGVybSA9PSAiYl9uZXRfaW5jb21lZXVyb19ndF8zMDAwIiwgIj4zMDAwIEV1cm8iLAogICAgICAgICAgICAgICAgaWZlbHNlKHRlcm0gPT0gImJfbmV0X2luY29tZWRvbnRfdGVsbCIsICJkbyBub3QgdGVsbCIsCiAgICAgICAgICAgICAgICBpZmVsc2UodGVybSA9PSAiYl9yZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yUGFydG5lcmVkX3VwdG8xMm1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgIjAtMTIgbW9udGhzIiwKICAgICAgICAgICAgICAgIGlmZWxzZSh0ZXJtID09ICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzI4bW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiMTMtMjggbW9udGhzIiwKICAgICAgICAgICAgICAgIGlmZWxzZSh0ZXJtID09ICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfdXB0bzUybW9udGhzIiwKICAgICAgICAgICAgICAgICAgICAgICAiMjktNTIgbW9udGhzIiwKICAgICAgICAgICAgICAgIGlmZWxzZSh0ZXJtID09ICJiX3JlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3JQYXJ0bmVyZWRfbW9yZXRoYW41Mm1vbnRocyIsCiAgICAgICAgICAgICAgICAgICAgICAgIj41MiBtb250aHMiLAogICAgICAgICAgICAgICAgaWZlbHNlKHRlcm0gPT0gImJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcyIsCiAgICAgICAgICAgICAgICAgICAgICAgIkN1cnJlbnRseSBVc2luZyBIQ3MiLAogICAgICAgICAgICAgICAgaWZlbHNlKHRlcm0gPT0gImJfZWR1Y2F0aW9uX3llYXJzIiwgIlllYXJzIG9mIEVkdWNhdGlvbiIsCiAgICAgICAgICAgICAgICBpZmVsc2UodGVybSA9PSAiYl9iZmlfZXh0cmEiLCAiRXh0cmF2ZXJzaW9uIiwKICAgICAgICAgICAgICAgIGlmZWxzZSh0ZXJtID09ICJiX2JmaV9uZXVybyIsICJOZXVyb3RpY2lzbSIsCiAgICAgICAgICAgICAgICBpZmVsc2UodGVybSA9PSAiYl9iZmlfYWdyZWUiLCAiQWdyZWVhYmxlbmVzcyIsCiAgICAgICAgICAgICAgICBpZmVsc2UodGVybSA9PSAiYl9iZmlfY29uc2MiLCAiQ29uc2NpZW50aW91c25lc3MiLAogICAgICAgICAgICAgICAgaWZlbHNlKHRlcm0gPT0gImJfYmZpX29wZW4iLCAiT3Blbm5lc3MiLAogICAgICAgICAgICAgICAgaWZlbHNlKHRlcm0gPT0gImJfcmVsaWdpb3NpdHkiLCAiUmVsaWdpb3NpdHkiLAogICAgICAgICAgICAgICAgICAgICAgIHRlcm0pKSkpKSkpKSkpKSkpKSkpKSksCiAgICAgICAgIGdyb3VwID0gaWZlbHNlKGlzLm5hKGdyb3VwKSwgdGVybSwgZ3JvdXApLAogICAgICAgICB0ZXJtID0gZmFjdG9yKHRlcm0sIGxldmVscyA9IHJldihjKCJBZ2UiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIjUwMC0xMDAwIEV1cm8iLCAiMTAwMC0yMDAwIEV1cm8iLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIjIwMDAtMzAwMCBFdXJvIiwgIj4zMDAwIEV1cm8iLCAiZG8gbm90IHRlbGwiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIjAtMTIgbW9udGhzIiwgIjEzLTI4IG1vbnRocyIsICIyOS01MiBtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIj41MiBtb250aHMiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkN1cnJlbnRseSBVc2luZyBIQ3MiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIlllYXJzIG9mIEVkdWNhdGlvbiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiRXh0cmF2ZXJzaW9uIiwgIk5ldXJvdGljaXNtIiwgIkFncmVlYWJsZW5lc3MiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJDb25zY2llbnRpb3VzbmVzcyIsIk9wZW5uZXNzIiwiUmVsaWdpb3NpdHkiKSkpKSAlPiUKICBnZ3Bsb3QoLiwgYWVzKHkgPSB0ZXJtLCB4ID0gZXN0aW1hdGUsIHhtaW4gPSBsb3dlciwgeG1heCA9IHVwcGVyLCBjb2xvciA9IGdyb3VwKSkgKwogIGdlb21fcG9pbnRpbnRlcnZhbCgpICsgCiAgYXBhdGhlbWUgKwogIHRoZW1lKGxlZ2VuZC50aXRsZSA9IGVsZW1lbnRfYmxhbmsoKSkgKwogIGxhYnMoeCA9ICJFZmZlY3QgU2l6ZSBFc3RpbWF0ZXMiLCB5ID0gIlByZWRpY3RvcnMiKQpgYGAKIyMgRWZmZWN0cyBvZiBIb3Jtb25hbCBDb250cmFjZXB0aXZlcyB7LnRhYnNldH0KIyMjIE1vZGVscwpgYGB7cn0KbV9oY19hdHJyID0gYnJtKGF0dHJhY3RpdmVuZXNzX3BhcnRuZXIgfiBjb250cmFjZXB0aW9uX2hvcm1vbmFsLAogICAgICAgICAgICAgICAgZGF0YSA9IGRhdGEsIGZhbWlseSA9IGdhdXNzaWFuKCksCiAgICAgICAgICAgICAgICBmaWxlID0gIm1faGNfYXRyciIpCm1faGNfcmVsc2F0ID0gYnJtKHJlbGF0aW9uc2hpcF9zYXRpc2ZhY3Rpb24gfiBjb250cmFjZXB0aW9uX2hvcm1vbmFsLAogICAgICAgICAgICAgICAgZGF0YSA9IGRhdGEsIGZhbWlseSA9IGdhdXNzaWFuKCksCiAgICAgICAgICAgICAgICBmaWxlID0gIm1faGNfcmVsc2F0IikKbV9oY19zZXhzYXQgPSBicm0oc2F0aXNmYWN0aW9uX3NleHVhbF9pbnRlcmNvdXJzZSB+IGNvbnRyYWNlcHRpb25faG9ybW9uYWwsCiAgICAgICAgICAgICAgICBkYXRhID0gZGF0YSwgZmFtaWx5ID0gZ2F1c3NpYW4oKSwKICAgICAgICAgICAgICAgIGZpbGUgPSAibV9oY19zZXhzYXQiKQptX2hjX2xpYmlkbyA9IGJybShkaWFyeV9saWJpZG9fbWVhbiB+IGNvbnRyYWNlcHRpb25faG9ybW9uYWwsCiAgICAgICAgICAgICAgICBkYXRhID0gZGF0YSwgZmFtaWx5ID0gZ2F1c3NpYW4oKSwKICAgICAgICAgICAgICAgIGZpbGUgPSAibV9oY19saWJpZG8iKQptX2hjX3NleGZyZXFwZW4gPSBicm0oZGlhcnlfc2V4X2FjdGl2ZV9zZXhfc3VtIH4KICAgICAgICAgICAgICAgICAgICAgICAgb2Zmc2V0KGxvZyhudW1iZXJfb2ZfZGF5cykpICsKICAgICAgICAgICAgICAgICAgICAgICAgY29udHJhY2VwdGlvbl9ob3Jtb25hbCwKICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLCBmYW1pbHkgPSBwb2lzc29uKCksCiAgICAgICAgICAgICAgICBmaWxlID0gIm1faGNfc2V4ZnJlcXBlbiIpCm1faGNfc2V4ZnJlcSA9IGJybShkaWFyeV9zZXhfYWN0aXZlX3N1bSB+IG9mZnNldChsb2cobnVtYmVyX29mX2RheXMpKSArCiAgICAgICAgICAgICAgICAgICAgIGNvbnRyYWNlcHRpb25faG9ybW9uYWwsCiAgICAgICAgICAgICAgICBkYXRhID0gZGF0YSwgZmFtaWx5ID0gZ2F1c3NpYW4oKSwKICAgICAgICAgICAgICAgIGZpbGUgPSAibV9oY19zZXhmcmVxIikKYGBgCgojIyMgRm9yZXN0IFBsb3QgZm9yIEVmZmVjdCBTaXplcyB7LmFjdGl2ZX0KYGBge3J9Cm1vZGVscyA9IHJiaW5kKAogIG1faGNfYXRyciAlPiUKICAgIHNwcmVhZF9kcmF3cyhiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMpICU+JQogICAgcGl2b3RfbG9uZ2VyKGNvbHMgPSBjKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcyksCiAgICAgICAgICAgICAgICAgbmFtZXNfdG8gPSAiY29uZGl0aW9uIiwKICAgICAgICAgICAgICAgICB2YWx1ZXNfdG8gPSAicl9jb25kaXRpb24iKSAlPiUKICAgIG11dGF0ZShtb2RlbCA9ICJBdHRyYWN0aXZlbmVzcyBvZiBQYXJ0bmVyIiwKICAgICAgICAgICBST1BFID0gMC4wNyksCiAgbV9oY19yZWxzYXQgJT4lCiAgICBzcHJlYWRfZHJhd3MoYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSAlPiUKICAgIHBpdm90X2xvbmdlcihjb2xzID0gYyhiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMpLAogICAgICAgICAgICAgICAgIG5hbWVzX3RvID0gImNvbmRpdGlvbiIsCiAgICAgICAgICAgICAgICAgdmFsdWVzX3RvID0gInJfY29uZGl0aW9uIikgJT4lCiAgICBtdXRhdGUobW9kZWwgPSAiUmVsYXRpb25zaGlwIFNhdGlzZmFjdGlvbiIsCiAgICAgICAgICAgUk9QRSA9IDAuMDQpLAogIG1faGNfc2V4c2F0ICU+JQogICAgc3ByZWFkX2RyYXdzKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcykgJT4lCiAgICBwaXZvdF9sb25nZXIoY29scyA9IGMoYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSwKICAgICAgICAgICAgICAgICBuYW1lc190byA9ICJjb25kaXRpb24iLAogICAgICAgICAgICAgICAgIHZhbHVlc190byA9ICJyX2NvbmRpdGlvbiIpICU+JQogICAgbXV0YXRlKG1vZGVsID0gIlNleHVhbCBTYXRpc2ZhY3Rpb24iLAogICAgICAgICAgIFJPUEUgPSAwLjExKSwKICBtX2hjX2xpYmlkbyAlPiUKICAgIHNwcmVhZF9kcmF3cyhiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMpICU+JQogICAgcGl2b3RfbG9uZ2VyKGNvbHMgPSBjKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcyksCiAgICAgICAgICAgICAgICAgbmFtZXNfdG8gPSAiY29uZGl0aW9uIiwKICAgICAgICAgICAgICAgICB2YWx1ZXNfdG8gPSAicl9jb25kaXRpb24iKSAlPiUKICAgIG11dGF0ZShtb2RlbCA9ICJMaWJpZG8iLAogICAgICAgICAgIFJPUEUgPSAwLjA2KSwKICBtX2hjX3NleGZyZXFwZW4gJT4lCiAgICBzcHJlYWRfZHJhd3MoYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSAlPiUKICAgIHBpdm90X2xvbmdlcihjb2xzID0gYyhiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMpLAogICAgICAgICAgICAgICAgIG5hbWVzX3RvID0gImNvbmRpdGlvbiIsCiAgICAgICAgICAgICAgICAgdmFsdWVzX3RvID0gInJfY29uZGl0aW9uIikgJT4lCiAgICBtdXRhdGUobW9kZWwgPSAiU2V4dWFsIEZyZXF1ZW5jeVxuKFBlbmV0cmF0aXZlIEludGVyY291cnNlKSIsCiAgICAgICAgICAgUk9QRSA9IDAuNzEpLAogIG1faGNfc2V4ZnJlcSAlPiUKICAgIHNwcmVhZF9kcmF3cyhiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMpICU+JQogICAgcGl2b3RfbG9uZ2VyKGNvbHMgPSBjKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcyksCiAgICAgICAgICAgICAgICAgbmFtZXNfdG8gPSAiY29uZGl0aW9uIiwKICAgICAgICAgICAgICAgICB2YWx1ZXNfdG8gPSAicl9jb25kaXRpb24iKSAlPiUKICAgIG11dGF0ZShtb2RlbCA9ICJTZXh1YWwgRnJlcXVlbmN5IiwKICAgICAgICAgICBST1BFID0gMS4xMikpCiAgCm1vZGVscyAlPiUKICBtdXRhdGUobW9kZWwgPSBmYWN0b3IobW9kZWwsIGxldmVscyA9IGMoIlNleHVhbCBGcmVxdWVuY3kiLCAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIlNleHVhbCBGcmVxdWVuY3lcbihQZW5ldHJhdGl2ZSBJbnRlcmNvdXJzZSkiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiTGliaWRvIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIlNleHVhbCBTYXRpc2ZhY3Rpb24iLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiUmVsYXRpb25zaGlwIFNhdGlzZmFjdGlvbiIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJBdHRyYWN0aXZlbmVzcyBvZiBQYXJ0bmVyIikpKSAlPiUKICBnZ3Bsb3QoYWVzKHkgPSBtb2RlbCwKICAgICAgICAgICAgIHggPSByX2NvbmRpdGlvbiwKICAgICAgICAgICAgIGZpbGwgPSBzdGF0KGFicyh4KSA8IDAuMSkpKSArCiAgc3RhdF9oYWxmZXllKCkgKwogIGdlb21fdmxpbmUoeGludGVyY2VwdCA9IGMoLTAuMSwgMC4xKSwgbGluZXR5cGUgPSAiZG90dGVkIikgKwogIGFwYXRoZW1lICsKICB0aGVtZShsZWdlbmQucG9zaXRpb24gPSAibm9uZSIpICsKICBzY2FsZV9maWxsX21hbnVhbCh2YWx1ZXMgPSBjKCJncmF5ODAiLCAic2t5Ymx1ZSIpKSArCiAgbGFicyh4ID0gIkVmZmVjdCBTaXplIEVzdGltYXRlcyIsIHkgPSAiTW9kZWxzIikKCm1vZGVsczIgPSBtb2RlbHMgJT4lCiAgZ3JvdXBfYnkobW9kZWwsIFJPUEUpICU+JQogIG1lYW5fcWkoY29uZGl0aW9uX21lYW4gPSByX2NvbmRpdGlvbikKCm1vZGVscyAlPiUKICBncm91cF9ieShtb2RlbCwgUk9QRSkgJT4lCiAgbXV0YXRlKG1vZGVsID0gZmFjdG9yKG1vZGVsLCBsZXZlbHMgPSBjKCJTZXh1YWwgRnJlcXVlbmN5IiwgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJTZXh1YWwgRnJlcXVlbmN5XG4oUGVuZXRyYXRpdmUgSW50ZXJjb3Vyc2UpIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIkxpYmlkbyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJTZXh1YWwgU2F0aXNmYWN0aW9uIiwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIlJlbGF0aW9uc2hpcCBTYXRpc2ZhY3Rpb24iLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiQXR0cmFjdGl2ZW5lc3Mgb2YgUGFydG5lciIpKSkgJT4lCiAgbWVhbl9xaShjb25kaXRpb25fbWVhbiA9IHJfY29uZGl0aW9uLAogICAgICAgICAgLndpZHRoID0gYyguODksIC45NSkpICU+JQogIG11dGF0ZSh0ZXh0ID0gaWZlbHNlKC53aWR0aCA9PSAuOTUsCiAgICAgICAgICAgICAgICAgICAgICAgc3RyX2Mocm91bmQoY29uZGl0aW9uX21lYW4sIDIpLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICIgWyIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcm91bmQoLmxvd2VyLCAyKSwKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiOyAiLAogICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJvdW5kKC51cHBlciwgMiksCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIl0iKSwgTkEpLAogICAgICAgICBzaWcgPSBpZmVsc2UoLmxvd2VyID4gUk9QRSB8IC51cHBlciA8IC1ST1BFLCBULCBGKSkgJT4lCiAgZ2dwbG90KGFlcyh5ID0gbW9kZWwsCiAgICAgICAgICAgICB4ID0gY29uZGl0aW9uX21lYW4sCiAgICAgICAgICAgICB4bWluID0gLmxvd2VyLAogICAgICAgICAgICAgeG1heCA9IC51cHBlciwKICAgICAgICAgICAgIGNvbG9yID0gc2lnKSkgKwogIGdlb21fcG9pbnRpbnRlcnZhbCgpICsKICBnZW9tX3RleHQoYWVzKHkgPSBtb2RlbCwKICAgICAgICAgICAgICAgIHggPSBjb25kaXRpb25fbWVhbiwgCiAgICAgICAgICAgICAgICBsYWJlbCA9IHRleHQpLAogICAgICAgICAgICB2anVzdCA9IC0xKSArIAogIGdlb21fdmxpbmUoeGludGVyY2VwdCA9IGMoMCksIGxpbmV0eXBlID0gImRvdHRlZCIpICsKICBhcGF0aGVtZSArCiAgdGhlbWUobGVnZW5kLnBvc2l0aW9uID0gIm5vbmUiKSArCiAgc2NhbGVfY29sb3JfbWFudWFsKHZhbHVlcyA9IGMoIkJsdWUiLCAiUmVkIikpICsKICBsYWJzKHggPSAiRWZmZWN0IFNpemUgRXN0aW1hdGVzIiwgeSA9ICJNb2RlbHMiKQpgYGAKCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("6_plots.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
