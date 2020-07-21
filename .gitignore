@@ -34,3 +34,5 @@ data
 *.rda
 *.xlsx
 *.nb.html
+.RDataTmp1
+.RDataTmp
