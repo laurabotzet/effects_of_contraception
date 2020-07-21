@@ -458,37 +458,43 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Attractiveness of Partner"),
+    mutate(model = "Attractiveness of Partner",
+           ROPE = 0.07),
   m_hc_relsat %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Relationship Satisfaction"),
+    mutate(model = "Relationship Satisfaction",
+           ROPE = 0.04),
   m_hc_sexsat %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Satisfaction"),
+    mutate(model = "Sexual Satisfaction",
+           ROPE = 0.11),
   m_hc_libido %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Libido"),
+    mutate(model = "Libido",
+           ROPE = 0.06),
   m_hc_sexfreqpen %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency\n(Penetrative Intercourse)"),
+    mutate(model = "Sexual Frequency\n(Penetrative Intercourse)",
+           ROPE = 0.71),
   m_hc_sexfreq %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency"))
+    mutate(model = "Sexual Frequency",
+           ROPE = 1.12))
   
 models %>%
   mutate(model = factor(model, levels = c("Sexual Frequency", 
@@ -508,32 +514,47 @@ models %>%
   labs(x = "Effect Size Estimates", y = "Models")
 
 models2 = models %>%
-  group_by(model) %>%
+  group_by(model, ROPE) %>%
   mean_qi(condition_mean = r_condition)
 
 models %>%
+  group_by(model, ROPE) %>%
   mutate(model = factor(model, levels = c("Sexual Frequency", 
                                           "Sexual Frequency\n(Penetrative Intercourse)",
                                           "Libido",
                                           "Sexual Satisfaction",
                                           "Relationship Satisfaction",
                                           "Attractiveness of Partner"))) %>%
-  group_by(model) %>%
   mean_qi(condition_mean = r_condition,
           .width = c(.89, .95)) %>%
-  mutate(sig = ifelse(.lower > 0 | .upper <0, T, F)) %>%
+  mutate(text = ifelse(.width == .95,
+                       str_c(round(condition_mean, 2),
+                             "[",
+                             round(.lower, 2),
+                             "; ",
+                             round(.upper, 2),
+                             "]"), NA),
+         sig = ifelse(.lower > ROPE | .upper < -ROPE, T, F)) %>%
   ggplot(aes(y = model,
              x = condition_mean,
              xmin = .lower,
              xmax = .upper,
              color = sig)) +
   geom_pointinterval() +
+  geom_text(aes(y = model,
+                x = condition_mean, 
+                label = text),
+            vjust = -1) + 
   geom_vline(xintercept = c(0), linetype = "dotted") +
   apatheme +
   theme(legend.position = "none") +
-  scale_color_manual(values = c("LightBlue", "Red")) +
+  scale_color_manual(values = c("Blue", "Red")) +
   labs(x = "Effect Size Estimates", y = "Models")
 ```
+
+##END
+
+
 
 ## Controlled Models: Effects of Hormonal Contraceptives {.tabset}
 ### Attractiveness of Partner {.tabset}
