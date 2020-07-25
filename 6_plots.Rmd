@@ -72,13 +72,14 @@ m_selection_hc_simple_plot = m_selection_hc_simple %>%
                                         "0-12 months", "13-28 months", "29-52 months",
                                         ">52 months")))) %>%
   ggplot(aes(y = condition, x = condition_mean, color = group)) +
-  stat_halfeye() +
+  stat_halfeye(.width = 0.9) +
   geom_vline(xintercept = 0, linetype = "dotted", size = 1) +
   apatheme +
   theme(legend.title = element_blank()) +
   labs(x = "Effect Size Estimates", y = "Predictors") +
   scale_x_continuous(limits = c(-1.2, 1.9),
-                     breaks= c(-1.0, -0.5, 0, 0.5, 1.0, 1.5))
+                     breaks= c(-1.0, -0.5, 0, 0.5, 1.0, 1.5)) +
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"))
 
 m_selection_hc_simple_plot
 ```
@@ -160,29 +161,29 @@ m_selection_hc_complex_plot = m_selection_hc_complex %>%
                                           "Extraversion", "Neuroticism", "Agreeableness",
                                          "Conscientiousness","Openness","Religiosity"))) %>%
   ggplot(aes(y = condition, x = condition_mean, color = group)) +
-  stat_halfeye() +
+  stat_halfeye(.width = 0.9) +
   geom_vline(xintercept = 0, linetype = "dotted", size = 1) +
   apatheme +
   theme(legend.title = element_blank()) +
   labs(x = "Effect Size Estimates", y = "Predictors") +
   scale_x_continuous(limits = c(-1.2, 1.9),
-                     breaks= c(-1.0, -0.5, 0, 0.5, 1.0, 1.5))
-  
-
+                     breaks = c(-1.0, -0.5, 0, 0.5, 1.0, 1.5)) +
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E",
+                                "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9"))
+                                 
 m_selection_hc_complex_plot
 ```
 
 #### Combine Plots
 ```{r}
 selection_hc =
-  ggarrange(m_selection_hc_simple_plot + theme(legend.position = "bottom",
-                                              legend.justification="left"),
-          m_selection_hc_complex_plot + theme(legend.position = "bottom",
-                                              legend.justification="left") + 
-            guides(color=guide_legend(nrow=3,byrow=TRUE)),
+  ggarrange(m_selection_hc_simple_plot + theme(legend.position = c(0.85,0.5),
+                                              plot.margin = margin(1,0,0,0,"cm")),
+          m_selection_hc_complex_plot + theme(legend.position = c(0.85,0.5),
+                                              plot.margin = margin(1,0,0,0,"cm")),
           labels = c("Simple Model", "Complex Model"),
           font.label = list(size = 20, color = "black", face = "bold", family = "sans"),
-          hjust = -0.1, vjust = 1.1,
+          hjust = -0.1,
           ncol = 1, nrow = 2,
           align = "v")
 
@@ -250,13 +251,14 @@ m_selection_congruent_simple_onceHC_plot = m_selection_congruent_simple_onceHC %
                                         "13-28 months", "29-52 months",
                                         ">52 months")))) %>%
   ggplot(aes(y = condition, x = condition_mean, color = group)) +
-  stat_halfeye() +
+  stat_halfeye(.width = .90) +
   geom_vline(xintercept = 0, linetype = "dotted", size = 1) +
   apatheme +
   theme(legend.title = element_blank()) +
   labs(x = "Effect Size Estimates", y = "Predictors") +
   scale_x_continuous(limits = c(-3, 3),
-                     breaks= c(-3:3))
+                     breaks= c(-3:3)) +
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"))
 m_selection_congruent_simple_onceHC_plot
 
 
@@ -303,13 +305,14 @@ m_selection_congruent_simple_oncenonHC_plot = m_selection_congruent_simple_oncen
                                         "13-28 months", "29-52 months",
                                         ">52 months")))) %>%
   ggplot(aes(y = condition, x = condition_mean, color = group)) +
-  stat_halfeye() +
+  stat_halfeye(.width = .90) +
   geom_vline(xintercept = 0, linetype = "dotted", size = 1) +
   apatheme +
   theme(legend.title = element_blank()) +
   labs(x = "Effect Size Estimates", y = "Predictors") +
   scale_x_continuous(limits = c(-3, 3),
-                     breaks= c(-3:3))
+                     breaks= c(-3:3)) +
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"))
 m_selection_congruent_simple_oncenonHC_plot
 ```
 
@@ -397,13 +400,15 @@ m_selection_congruent_complex_onceHC_plot = m_selection_congruent_complex_onceHC
                                           "Extraversion", "Neuroticism", "Agreeableness",
                                          "Conscientiousness","Openness","Religiosity"))) %>%
   ggplot(aes(y = condition, x = condition_mean, color = group)) +
-  stat_halfeye() +
+  stat_halfeye(.width = .90) +
   geom_vline(xintercept = 0, linetype = "dotted", size = 1) +
   apatheme +
   theme(legend.title = element_blank()) +
   labs(x = "Effect Size Estimates", y = "Predictors") +
   scale_x_continuous(limits = c(-3, 3),
-                     breaks = c(-3:3))
+                     breaks = c(-3:3)) +
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E",
+                                "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9"))
 m_selection_congruent_complex_onceHC_plot
 
 m_selection_congruent_complex_oncenonHC_plot = m_selection_congruent_complex_oncenonHC %>%
@@ -470,13 +475,15 @@ m_selection_congruent_complex_oncenonHC_plot = m_selection_congruent_complex_onc
                                           "Extraversion", "Neuroticism", "Agreeableness",
                                          "Conscientiousness","Openness","Religiosity"))) %>%
   ggplot(aes(y = condition, x = condition_mean, color = group)) +
-  stat_halfeye() +
+  stat_halfeye(.width = .90) +
   geom_vline(xintercept = 0, linetype = "dotted", size = 1) +
   apatheme +
   theme(legend.title = element_blank()) +
   labs(x = "Effect Size Estimates", y = "Predictors") +
   scale_x_continuous(limits = c(-3, 3),
-                     breaks = c(-3:3))
+                     breaks = c(-3:3)) +
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E",
+                                "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9"))
 
 m_selection_congruent_complex_oncenonHC_plot
 ```
@@ -484,21 +491,25 @@ m_selection_congruent_complex_oncenonHC_plot
 #### Combine Plots
 ```{r}
 selection_congruent =
-  ggarrange(m_selection_congruent_simple_onceHC_plot + theme(legend.position = "none"),
+  ggarrange(m_selection_congruent_simple_onceHC_plot +
+              theme(legend.position = "none", plot.margin = margin(1,0,0,0,"cm")),
             m_selection_congruent_simple_oncenonHC_plot +
-              theme(legend.position = c(0.85,0.5)),
-            m_selection_congruent_complex_onceHC_plot + theme(legend.position = "none"),
+              theme(legend.position = c(0.85,0.5), plot.margin = margin(1,0,0,0,"cm")),
+            m_selection_congruent_complex_onceHC_plot +
+              theme(legend.position = "none", plot.margin = margin(1,0,0,0,"cm")),
             m_selection_congruent_complex_oncenonHC_plot  +
-              theme(legend.position = c(0.85,0.5)),
-          labels = c("Simple Model Once HC-User", "Simple Model Once Non-HC-User",
-                     "Complex Model Once HC-User", "Complex Model Once Non-HC-User"),
+              theme(legend.position = c(0.85,0.5), plot.margin = margin(1,0,0,0,"cm")),
+          labels = c("Simple Model Once HC-User (n = 390)",
+                     "Simple Model Once Non-HC-User (n = 384)",
+                     "Complex Model Once HC-User (n = 390)",
+                     "Complex Model Once Non-HC-User (n = 384)"),
           font.label = list(size = 20, color = "black", face = "bold", family = "sans"),
           hjust = -0.1, vjust = 1.1,
           ncol = 2, nrow = 2,
           align = "v")
 
 jpeg('Effect size estimates for models with congruency in contraceptive method as an outcome.jpg', 
-     width = 1600, height = 1000, quality = 100)
+     width = 1600, height = 700, quality = 100)
 selection_congruent
 dev.off()
 ```
@@ -538,76 +549,108 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Attractiveness of Partner",
+    mutate(model = "Attractiveness of Partner\nROPE = [-0.07, 0.07]",
            ROPE = 0.07),
   m_hc_relsat %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Relationship Satisfaction",
+    mutate(model = "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
            ROPE = 0.04),
   m_hc_sexsat %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Satisfaction",
+    mutate(model = "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
            ROPE = 0.11),
   m_hc_libido %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Libido",
+    mutate(model = "Libido\nROPE = [-0.06, 0.06]",
            ROPE = 0.06),
   m_hc_sexfreqpen %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency\n(Penetrative Intercourse)",
+    mutate(model = "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
            ROPE = 0.05),
   m_hc_sexfreq %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency",
+    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
            ROPE = 0.05))
-  
-models %>%
-  mutate(model = factor(model, levels = c("Sexual Frequency", 
-                                          "Sexual Frequency\n(Penetrative Intercourse)",
-                                          "Libido",
-                                          "Sexual Satisfaction",
-                                          "Relationship Satisfaction",
-                                          "Attractiveness of Partner"))) %>%
-  ggplot(aes(y = model,
-             x = r_condition,
-             fill = stat(abs(x) < 0.1))) +
-  stat_halfeye() +
-  geom_vline(xintercept = c(-0.1, 0.1), linetype = "dotted") +
+
+data1 = models %>%
+  mutate(model = factor(model,
+                   levels = c("Sexual Frequency\nROPE = [-0.05, 0.05]",
+                              "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
+                              "Libido\nROPE = [-0.06, 0.06]",
+                              "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
+                              "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
+                              "Attractiveness of Partner\nROPE = [-0.07, 0.07]")))
+data2 = models %>%
+  group_by(model, ROPE) %>%
+  mutate(model = factor(model,
+                        levels = c("Sexual Frequency\nROPE = [-0.05, 0.05]",
+                                   "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
+                                   "Libido\nROPE = [-0.06, 0.06]",
+                                   "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
+                                   "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
+                                   "Attractiveness of Partner\nROPE = [-0.07, 0.07]"))) %>%
+  mean_qi(condition_mean = r_condition,
+          .width = c(.90)) %>%
+  mutate(text = ifelse(.width == .90,
+                       str_c(round(condition_mean, 2),
+                             " [",
+                             round(.lower, 2),
+                             "; ",
+                             round(.upper, 2),
+                             "]"), NA),
+         sig = ifelse(.lower > ROPE | .upper < -ROPE, T, F))
+
+
+ggplot() +
+  stat_halfeye(data = data1,
+               aes(y = model, x = r_condition),
+               .width = .90) +
+  geom_point(data = data1, aes(y = model, x = ROPE), shape = "|", size = 10, color = "#1B9E77") +
+  geom_point(data = data1, aes(y = model, x = -ROPE), shape = "|", size = 10, color = "#1B9E77") +
+  geom_vline(xintercept = 0, linetype = "dotted") +
+  geom_pointinterval(data = data2,
+                     aes(y = model,
+                         x = condition_mean,
+                         xmin = .lower,
+                         xmax = .upper,
+                         color = sig)) +
+  geom_text(data = data2,
+            aes(y = model,
+                x = condition_mean, 
+                label = text),
+            vjust = -1) + 
   apatheme +
   theme(legend.position = "none") +
-  scale_fill_manual(values = c("gray80", "skyblue")) +
-  labs(x = "Effect Size Estimates", y = "Models")
+  scale_fill_manual(values = c("skyblue", "gray80")) +
+  labs(x = "Effect Size Estimates of Hormonal Contraception", y = "Outcomes")
 
-models2 = models %>%
+plot2 = models %>%
   group_by(model, ROPE) %>%
-  mean_qi(condition_mean = r_condition)
-
-models %>%
-  group_by(model, ROPE) %>%
-  mutate(model = factor(model, levels = c("Sexual Frequency", 
-                                          "Sexual Frequency\n(Penetrative Intercourse)",
-                                          "Libido",
-                                          "Sexual Satisfaction",
-                                          "Relationship Satisfaction",
-                                          "Attractiveness of Partner"))) %>%
+  mutate(model = factor(model,
+                        levels = c("Sexual Frequency\nROPE = [-0.05, 0.05]",
+                                   "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
+                                   "Libido\nROPE = [-0.06, 0.06]",
+                                   "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
+                                   "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
+                                   "Attractiveness of Partner\nROPE = [-0.07, 0.07]"))) %>%
   mean_qi(condition_mean = r_condition,
-          .width = c(.89, .95)) %>%
-  mutate(text = ifelse(.width == .95,
+          .width = c(.90)) %>%
+  mutate(text = ifelse(.width == .90,
                        str_c(round(condition_mean, 2),
                              " [",
                              round(.lower, 2),
@@ -629,6 +672,8 @@ models %>%
   apatheme +
   theme(legend.position = "none") +
   scale_color_manual(values = c("Blue", "Red")) +
-  labs(x = "Effect Size Estimates", y = "Models")
+  labs(x = "Effect Size Estimates for Homonal Contraception", y = "Outcomes")
+
+
 ```
 
