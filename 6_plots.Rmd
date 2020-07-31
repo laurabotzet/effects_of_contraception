@@ -79,7 +79,8 @@ m_selection_hc_simple_plot = m_selection_hc_simple %>%
   labs(x = "Effect Size Estimates", y = "Predictors") +
   scale_x_continuous(limits = c(-1.2, 1.9),
                      breaks= c(-1.0, -0.5, 0, 0.5, 1.0, 1.5)) +
-  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"))
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3")) +
+  guides(color = guide_legend(override.aes = list(size = 10)))
 
 m_selection_hc_simple_plot
 ```
@@ -158,8 +159,8 @@ m_selection_hc_complex_plot = m_selection_hc_complex %>%
          group = factor(group, levels = c("Age", "Income", "Relationship Duration",
                                           
                                           "Years of Education",
-                                          "Extraversion", "Neuroticism", "Agreeableness",
-                                         "Conscientiousness","Openness","Religiosity"))) %>%
+                                        "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness", "Religiosity"))) %>%
   ggplot(aes(y = condition, x = condition_mean, color = group)) +
   stat_halfeye(.width = 0.9) +
   geom_vline(xintercept = 0, linetype = "dotted", size = 1) +
@@ -169,7 +170,8 @@ m_selection_hc_complex_plot = m_selection_hc_complex %>%
   scale_x_continuous(limits = c(-1.2, 1.9),
                      breaks = c(-1.0, -0.5, 0, 0.5, 1.0, 1.5)) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E",
-                                "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9"))
+                                "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9")) +
+  guides(color = guide_legend(override.aes = list(size = 10)))
                                  
 m_selection_hc_complex_plot
 ```
@@ -258,7 +260,8 @@ m_selection_congruent_simple_onceHC_plot = m_selection_congruent_simple_onceHC %
   labs(x = "Effect Size Estimates", y = "Predictors") +
   scale_x_continuous(limits = c(-3, 3),
                      breaks= c(-3:3)) +
-  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"))
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3")) +
+  guides(color = guide_legend(override.aes = list(size = 5)))
 m_selection_congruent_simple_onceHC_plot
 
 
@@ -312,7 +315,8 @@ m_selection_congruent_simple_oncenonHC_plot = m_selection_congruent_simple_oncen
   labs(x = "Effect Size Estimates", y = "Predictors") +
   scale_x_continuous(limits = c(-3, 3),
                      breaks= c(-3:3)) +
-  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"))
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3")) +
+  guides(color = guide_legend(override.aes = list(size = 5)))
 m_selection_congruent_simple_oncenonHC_plot
 ```
 
@@ -408,7 +412,8 @@ m_selection_congruent_complex_onceHC_plot = m_selection_congruent_complex_onceHC
   scale_x_continuous(limits = c(-3, 3),
                      breaks = c(-3:3)) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E",
-                                "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9"))
+                                "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9")) +
+  guides(color = guide_legend(override.aes = list(size = 5)))
 m_selection_congruent_complex_onceHC_plot
 
 m_selection_congruent_complex_oncenonHC_plot = m_selection_congruent_complex_oncenonHC %>%
@@ -483,7 +488,8 @@ m_selection_congruent_complex_oncenonHC_plot = m_selection_congruent_complex_onc
   scale_x_continuous(limits = c(-3, 3),
                      breaks = c(-3:3)) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E",
-                                "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9"))
+                                "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9")) +
+  guides(color = guide_legend(override.aes = list(size = 5)))
 
 m_selection_congruent_complex_oncenonHC_plot
 ```
@@ -496,13 +502,13 @@ selection_congruent =
             m_selection_congruent_simple_oncenonHC_plot +
               theme(legend.position = c(0.85,0.5), plot.margin = margin(1,0,0,0,"cm")),
             m_selection_congruent_complex_onceHC_plot +
-              theme(legend.position = "none", plot.margin = margin(1,0,0,0,"cm")),
+              theme(legend.position = "none", plot.margin = margin(2,0,0,0,"cm")),
             m_selection_congruent_complex_oncenonHC_plot  +
-              theme(legend.position = c(0.85,0.5), plot.margin = margin(1,0,0,0,"cm")),
+              theme(legend.position = c(0.85,0.5), plot.margin = margin(2,0,0,0,"cm")),
           labels = c("Simple Model Once HC-User (n = 390)",
                      "Simple Model Once Non-HC-User (n = 384)",
-                     "Complex Model Once HC-User (n = 390)",
-                     "Complex Model Once Non-HC-User (n = 384)"),
+                     "\nComplex Model Once HC-User (n = 390)",
+                     "\nComplex Model Once Non-HC-User (n = 384)"),
           font.label = list(size = 20, color = "black", face = "bold", family = "sans"),
           hjust = -0.1, vjust = 1.1,
           ncol = 2, nrow = 2,
@@ -516,7 +522,8 @@ dev.off()
 
 
 ## Effects of Hormonal Contraceptives {.tabset}
-### Models
+### Uncontrolled
+#### Models
 ```{r}
 m_hc_atrr = brm(attractiveness_partner ~ contraception_hormonal,
                 data = data, family = gaussian(),
@@ -541,7 +548,7 @@ m_hc_sexfreq = brm(diary_sex_active_sum ~ offset(log(number_of_days)) +
                 file = "m_hc_sexfreq")
 ```
 
-### Forest Plot for Effect Sizes {.active}
+#### Forest Plot for Effect Sizes {.active}
 ```{r}
 models = rbind(
   m_hc_atrr %>%
@@ -616,12 +623,11 @@ data2 = models %>%
          sig = ifelse(.lower > ROPE | .upper < -ROPE, T, F))
 
 
-ggplot() +
+hc_uncontrolled = ggplot() +
   stat_halfeye(data = data1,
-               aes(y = model, x = r_condition),
+               aes(y = model, x = r_condition,
+                   color = "grey"),
                .width = .90) +
-  geom_point(data = data1, aes(y = model, x = ROPE), shape = "|", size = 10, color = "#1B9E77") +
-  geom_point(data = data1, aes(y = model, x = -ROPE), shape = "|", size = 10, color = "#1B9E77") +
   geom_vline(xintercept = 0, linetype = "dotted") +
   geom_pointinterval(data = data2,
                      aes(y = model,
@@ -629,17 +635,130 @@ ggplot() +
                          xmin = .lower,
                          xmax = .upper,
                          color = sig)) +
-  geom_text(data = data2,
-            aes(y = model,
-                x = condition_mean, 
-                label = text),
-            vjust = -1) + 
+  geom_point(data = data1, aes(y = model, x = ROPE), shape = "|", size = 10, color = "black") +
+  geom_point(data = data1, aes(y = model, x = -ROPE), shape = "|", size = 10, color = "black") +
+  geom_point(data = data1, aes(y = model, x = ROPE), shape = 58, size = 10, color = "white") +
+  geom_point(data = data1, aes(y = model, x = -ROPE), shape = 58, size = 10, color = "white") +
   apatheme +
   theme(legend.position = "none") +
-  scale_fill_manual(values = c("skyblue", "gray80")) +
+  scale_color_manual(values = c("skyblue", "grey", "red")) +
+  scale_x_continuous(breaks = c(-0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5),
+                     limits = c(-0.2, 0.5)) +
   labs(x = "Effect Size Estimates of Hormonal Contraception", y = "Outcomes")
+hc_uncontrolled
+```
 
-plot2 = models %>%
+### Controlled
+#### Models
+```{r}
+m_hc_atrr_controlled = brm(attractiveness_partner ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_atrr_controlled")
+
+m_hc_relsat_controlled = brm(relationship_satisfaction ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_relsat_controlled")
+
+m_hc_sexsat_controlled = brm(satisfaction_sexual_intercourse ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_sexsat_controlled")
+
+m_hc_libido_controlled = brm(diary_libido_mean ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_libido_controlled")
+
+m_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson(),
+                file = "m_hc_sexfreqpen_controlled")
+
+m_hc_sexfreq_controlled = brm(diary_sex_active_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson(),
+                file = "m_hc_sexfreq_controlled")
+```
+
+#### Forest Plot for Effect Sizes {.active}
+```{r}
+models = rbind(
+  m_hc_atrr_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Attractiveness of Partner\nROPE = [-0.07, 0.07]",
+           ROPE = 0.07),
+  m_hc_relsat_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
+           ROPE = 0.04),
+  m_hc_sexsat_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
+           ROPE = 0.11),
+  m_hc_libido_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Libido\nROPE = [-0.06, 0.06]",
+           ROPE = 0.06),
+  m_hc_sexfreqpen_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
+           ROPE = 0.05),
+  m_hc_sexfreq_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
+           ROPE = 0.05))
+
+data1 = models %>%
+  mutate(model = factor(model,
+                   levels = c("Sexual Frequency\nROPE = [-0.05, 0.05]",
+                              "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
+                              "Libido\nROPE = [-0.06, 0.06]",
+                              "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
+                              "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
+                              "Attractiveness of Partner\nROPE = [-0.07, 0.07]")))
+data2 = models %>%
   group_by(model, ROPE) %>%
   mutate(model = factor(model,
                         levels = c("Sexual Frequency\nROPE = [-0.05, 0.05]",
@@ -657,23 +776,379 @@ plot2 = models %>%
                              "; ",
                              round(.upper, 2),
                              "]"), NA),
-         sig = ifelse(.lower > ROPE | .upper < -ROPE, T, F)) %>%
-  ggplot(aes(y = model,
-             x = condition_mean,
-             xmin = .lower,
-             xmax = .upper,
-             color = sig)) +
-  geom_pointinterval() +
-  geom_text(aes(y = model,
-                x = condition_mean, 
-                label = text),
-            vjust = -1) + 
-  geom_vline(xintercept = c(0), linetype = "dotted") +
+         sig = ifelse(.lower > ROPE | .upper < -ROPE, "declined",
+                      ifelse(abs(.lower) < ROPE  & .upper > ROPE, "undecidable", "accepted")))
+
+
+hc_controlled = ggplot() +
+  stat_halfeye(data = data1,
+               aes(y = model, x = r_condition,
+                   color = "grey"),
+               .width = .90) +
+  geom_vline(xintercept = 0, linetype = "dotted") +
+  geom_pointinterval(data = data2,
+                     aes(y = model,
+                         x = condition_mean,
+                         xmin = .lower,
+                         xmax = .upper,
+                         color = sig)) +
+  geom_point(data = data1, aes(y = model, x = ROPE), shape = "|", size = 10, color = "black") +
+  geom_point(data = data1, aes(y = model, x = -ROPE), shape = "|", size = 10, color = "black") +
+  geom_point(data = data1, aes(y = model, x = ROPE), shape = 58, size = 10, color = "white") +
+  geom_point(data = data1, aes(y = model, x = -ROPE), shape = 58, size = 10, color = "white") +
   apatheme +
   theme(legend.position = "none") +
-  scale_color_manual(values = c("Blue", "Red")) +
-  labs(x = "Effect Size Estimates for Homonal Contraception", y = "Outcomes")
+  scale_color_manual(values = c("green", "red", "grey", "skyblue")) +
+  scale_x_continuous(breaks = c(-0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5),
+                     limits = c(-0.2, 0.5)) +
+  labs(x = "Effect Size Estimates of Hormonal Contraception", y = "Outcomes")
+hc_controlled
+```
+
+### Combine Plots
+```{r}
+hc_plots =
+  ggarrange(hc_uncontrolled + theme(plot.margin = margin(1,0,0,0,"cm")),
+            hc_controlled + theme(plot.margin = margin(3,0,0,0,"cm")),
+          labels = c("Uncontrolled Model", "\nControlled Model"),
+          font.label = list(size = 20, color = "black", face = "bold", family = "sans"),
+          hjust = -0.1,
+          ncol = 1, nrow = 2,
+          align = "v")
+
+jpeg('Effect size estimates for hormonal contraceptives on outcomes.jpg', 
+     width = 800, height = 1000, quality = 100)
+hc_plots
+dev.off()
+```
+
+## Effects of (in)congruent use of hormonal contraceptives
+### Plots
+```{r}
+m_congruency_atrr = brm(attractiveness_partner ~
+                          contraception_hormonal * congruent_contraception,
+                data = data, family = gaussian(),
+                file = "m_congruency_atrr")
+
+m_congruency_atrr_ce = m_congruency_atrr %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_atrr_plot = 
+  plot(m_congruency_atrr_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Attractiveness of Partner") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_atrr_plot
+
+ m_congruency_relsat = brm(relationship_satisfaction ~
+                          contraception_hormonal * congruent_contraception,
+                data = data, family = gaussian(),
+                file = "m_congruency_relsat")
+
+m_congruency_relsat_ce = m_congruency_relsat %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_relsat_plot = 
+  plot(m_congruency_relsat_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Relationship Satisfaction") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_relsat_plot
+
+m_congruency_sexsat = brm(satisfaction_sexual_intercourse ~
+                          contraception_hormonal * congruent_contraception,
+                data = data, family = gaussian(),
+                file = "m_congruency_sexsat")
 
 
+m_congruency_sexsat_ce = m_congruency_sexsat %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_sexsat_plot = 
+  plot(m_congruency_sexsat_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Sexual Satisfaction") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_sexsat_plot
+
+m_congruency_libido = brm(diary_libido_mean ~
+                          contraception_hormonal * congruent_contraception,
+                data = data, family = gaussian(),
+                file = "m_congruency_libido")
+
+m_congruency_libido_ce = m_congruency_libido %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_libido_plot = 
+  plot(m_congruency_libido_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Libido") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_libido_plot
+
+m_congruency_sexfreqpen = brm(diary_sex_active_sex_sum ~ offset(log(number_of_days)) +
+                     contraception_hormonal * congruent_contraception,
+                data = data, family = poisson(),
+                file = "m_congruency_sexfreqpen")
+
+
+m_congruency_sexfreqpen_ce = m_congruency_sexfreqpen %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_sexfreqpen_plot = 
+  plot(m_congruency_sexfreqpen_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Sexual Frequency\n(Penetrative Intercourse)") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_sexfreqpen_plot
+
+m_congruency_sexfreq = brm(diary_sex_active_sum ~ offset(log(number_of_days)) +
+                             contraception_hormonal * congruent_contraception,
+                data = data, family = poisson(),
+                file = "m_congruency_sexfreq")
+
+m_congruency_sexfreq_ce = m_congruency_sexfreq %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_sexfreq_plot = 
+  plot(m_congruency_sexfreq_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Sexual Frequency") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_sexfreq_plot
+```
+
+### Combine Plots
+```{r}
+congruency_uncontrolled =
+  ggarrange(m_congruency_atrr_plot +
+              rremove("xlab"),
+            m_congruency_relsat_plot +
+              rremove("xlab"),
+            m_congruency_sexsat_plot +
+              rremove("xlab"),
+            m_congruency_libido_plot +
+              rremove("xlab"),
+            m_congruency_sexfreqpen_plot,
+            m_congruency_sexfreq_plot,
+          common.legend = TRUE, legend = "bottom",
+          ncol = 2, nrow = 3,
+          align = "v")
+
+jpeg('Differences in current contraceptive method, congruent use of contraceptive method, and their interaction.jpg', 
+     width = 800, height = 1000, quality = 100)
+congruency_uncontrolled
+dev.off()
+```
+
+## Controlled effects of (in)congruent use of hormonal contraceptives
+### Plots
+```{r}
+m_congruency_atrr_controlled = brm(attractiveness_partner ~
+                          contraception_hormonal * congruent_contraception +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_congruency_atrr_controlled")
+
+m_congruency_atrr_controlled_ce = m_congruency_atrr_controlled %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_atrr_controlled_plot = 
+  plot(m_congruency_atrr_controlled_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Attractiveness of Partner") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_atrr_controlled_plot
+
+m_congruency_relsat_controlled = brm(relationship_satisfaction ~
+                          contraception_hormonal * congruent_contraception +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_congruency_relsat_controlled")
+
+m_congruency_relsat_controlled_ce = m_congruency_relsat_controlled %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_relsat_controlled_plot = 
+  plot(m_congruency_relsat_controlled_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Relationship Satisfaction") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_relsat_controlled_plot
+
+m_congruency_sexsat_controlled = brm(satisfaction_sexual_intercourse ~
+                          contraception_hormonal * congruent_contraception +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_congruency_sexsat_controlled")
+
+m_congruency_sexsat_controlled_ce = m_congruency_sexsat_controlled %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_sexsat_controlled_plot = 
+  plot(m_congruency_sexsat_controlled_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Sexual Satisfaction") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_sexsat_controlled_plot
+
+m_congruency_libido_controlled = brm(diary_libido_mean ~
+                          contraception_hormonal * congruent_contraception +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_congruency_libido_controlled")
+
+m_congruency_libido_controlled_ce = m_congruency_libido_controlled %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_libido_controlled_plot = 
+  plot(m_congruency_libido_controlled_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Libido") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_libido_controlled_plot
+
+m_congruency_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal * congruent_contraception +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson(),
+                file = "m_congruency_sexfreqpen_controlled")
+
+m_congruency_sexfreqpen_controlled_ce = m_congruency_sexfreqpen_controlled %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_sexfreqpen_controlled_plot = 
+  plot(m_congruency_sexfreqpen_controlled_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Sexual Frequency\n(Penetrative Intercourse)") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_sexfreqpen_controlled_plot
+
+m_congruency_sexfreq_controlled = brm(diary_sex_active_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal * congruent_contraception +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson(),
+                file = "m_congruency_sexfreq_controlled")
+
+m_congruency_sexfreq_controlled_ce = m_congruency_sexfreq_controlled %>% 
+  conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
+                    probs = c(0.05, 0.95))
+
+m_congruency_sexfreq_controlled_plot = 
+  plot(m_congruency_sexfreq_controlled_ce, plot = FALSE)[[1]] +
+  labs(x = "Current Contraceptive Method",
+       y = "Sexual Frequency") +
+  scale_x_discrete(labels=c("Non-HC", "HC")) +
+  scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                     values=c("#D95F02", "#1B9E77")) +
+  scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
+                    values=c("#D95F02", "#1B9E77")) +
+  apatheme
+m_congruency_sexfreq_controlled_plot
+```
+
+### Combine Plots
+```{r}
+congruency_controlled =
+  ggarrange(m_congruency_atrr_controlled_plot + rremove("xlab"),
+            m_congruency_relsat_controlled_plot + rremove("xlab"),
+          m_congruency_sexsat_controlled_plot + rremove("xlab"),
+          m_congruency_libido_controlled_plot + rremove("xlab"),
+          m_congruency_sexfreqpen_controlled_plot,
+          m_congruency_sexfreq_controlled_plot,
+          common.legend = TRUE, legend = "bottom",
+          ncol = 2, nrow = 3,
+          align = "v")
+
+jpeg('Differences in current contraceptive method, congruent use of contraceptive method, and their interaction in controlled models.jpg', 
+     width = 800, height = 1000, quality = 100)
+congruency_controlled
+dev.off()
 ```
 

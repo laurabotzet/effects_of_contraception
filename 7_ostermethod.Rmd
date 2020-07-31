@@ -1,0 +1,156 @@
+---
+title: "Plots Effects of Contraception"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'hide'
+    self_contained: false
+---
+  
+## Data 
+```{r results='hide',message=F,warning=F}
+source("0_helpers.R")
+
+load("data/cleaned_selected_wrangled.rdata")
+```
+
+## Preparations
+### Change factors to numerics
+```{r}
+data = data %>%
+  mutate(contraception_hormonal_numeric = as.numeric(contraception_hormonal),
+         congruent_contraception_numeric = as.numeric(congruent_contraception))
+```
+
+### Covariates
+```{r}
+covariates = list("age",
+                   "net_incomeeuro_500_1000", "net_incomeeuro_1000_2000",
+                   "net_incomeeuro_2000_3000", "net_incomeeuro_gt_3000",
+                    "net_incomedont_tell",
+                   "relationship_duration_factorPartnered_upto28months",
+                   "relationship_duration_factorPartnered_upto52months",
+                   "relationship_duration_factorPartnered_morethan52months",
+                   "education_years", "bfi_extra", "bfi_neuro", "bfi_agree",
+                   "bfi_consc", "bfi_open", "religiosity")
+names(covariates) = c("age",
+                   "net_incomeeuro_500_1000", "net_incomeeuro_1000_2000",
+                   "net_incomeeuro_2000_3000", "net_incomeeuro_gt_3000",
+                    "net_incomedont_tell",
+                   "relationship_duration_factorPartnered_upto28months",
+                   "relationship_duration_factorPartnered_upto52months",
+                   "relationship_duration_factorPartnered_morethan52months",
+                   "education_years", "bfi_extra", "bfi_neuro", "bfi_agree",
+                   "bfi_consc", "bfi_open", "religiosity")
+```
+
+## Effects of Hormonal Contraception 
+### Attractiveness of Partner
+```{r}
+m_hc_atrr = lm(attractiveness_partner ~ contraception_hormonal_numeric +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+               data = data)
+summary(m_hc_atrr)
+tidy(m_hc_atrr)
+
+m_hc_atrr_sensitives <- sensemakr(model = m_hc_atrr, #model
+                                treatment = "contraception_hormonal_numeric", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_congruent1_atrr = lm(attractiveness_partner ~
+                 contraception_hormonal_numeric * congruent_contraception_numeric +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+               data = data)
+
+m_congruent2_atrr = lm(attractiveness_partner ~
+                 contraception_hormonal * congruent_contraception +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+               data = data)
+
+summary(m_congruent2_atrr)
+```
+
+### Sexual Frequency
+```{r}
+m_hc_sexfreq_controlled = glm(diary_sex_active_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson())
+
+summary(m_hc_sexfreq_controlled)
+
+m_hc_sexfreqpen_controlled = glm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson())
+
+summary(m_hc_sexfreqpen_controlled)
+```
+
+## Example
+```{r}
+data("darfur")
+
+darfur.model <- lm(peacefactor ~ directlyharmed  + village +  female +
+                     age + farmer_dar + herder_dar + pastvoted + hhsize_darfur, 
+                   data = darfur)
+summary(darfur.model)
+
+
+
+darfur.sensitivity <- sensemakr(model = darfur.model, #model
+                                treatment = "directlyharmed1", #predictor
+                                benchmark_covariates = "female", #the names of covariates that will be used to bound the plausible strength of the unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times stronger the confounder is related to the treatment (kd) and to the outcome (ky) in comparison to the observed benchmark covariate (female). In our example, setting kd = 1:3 and ky = 1:3 means we want to investigate the maximum strength of a confounder once, twice, or three times as strong as female (in explaining treatment and outcome variation). If only kd is given, ky will be set equal to it by default.
+                                ky = 1:3,  
+                                q = 1, #this allows the user to specify what fraction of the effect estimate would have to be explained away to be problematic. Setting q = 1, as we do here, means that a reduction of 100% of the current effect estimate, that is, a true effect of zero, would be deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #should we consider confounders acting towards increasing or reducing the absolute value of the estimate? The default is reduce = TRUE, which means we are considering confounders that pull the estimate towards (or through) zero.
+                                )
+
+darfur.sensitivity
+ovb_minimal_reporting(darfur.sensitivity, format = "html")
+plot(darfur.sensitivity)
+plot(darfur.sensitivity, sensitivity.of = "t-value")
+plot(darfur.sensitivity, type = "extreme")
+
+model <- lm(peacefactor ~ directlyharmed + age + farmer_dar + herder_dar +pastvoted + hhsize_darfur + female + village, data = darfur)
+ovb_bounds(model, treatment = "directlyharmed",benchmark_covariates = c("female", "pastvoted"),kd = 1:3)
+```
+

@@ -29,7 +29,7 @@ mean_sd_range1 = data %>%
          age, education_years,
          bfi_extra, bfi_neuro, bfi_agree, bfi_consc, bfi_open,
          religiosity,
-         diary_libido_mean, diary_sex_active_mean, diary_sex_active_sex_mean) %>%
+         diary_libido_mean, diary_sex_active_sum, diary_sex_active_sex_sum) %>%
   pivot_longer(-session, names_to = "Variable", values_to = "Value") %>%
   group_by(Variable) %>%
   summarise(n = sum(!is.na(Value)),
@@ -55,7 +55,7 @@ mean_sd_range2 = data %>%
 
 
 mean_sd_range = data.frame(x = c(1:16)) %>%
-  cbind(Variable = c("age", "education_years", "net_income", "bfi_extra", "bfi_neuro", "bfi_agree", "bfi_consc", "bfi_open", "religiosity", "relationship_duration", "attractiveness_partner", "relationship_satisfaction", "satisfaction_sexual_intercourse","diary_libido_mean", "diary_sex_active_sex_mean", "diary_sex_active_mean")) %>%
+  cbind(Variable = c("age", "education_years", "net_income", "bfi_extra", "bfi_neuro", "bfi_agree", "bfi_consc", "bfi_open", "religiosity", "relationship_duration", "attractiveness_partner", "relationship_satisfaction", "satisfaction_sexual_intercourse","diary_libido_mean", "diary_sex_active_sex_sum", "diary_sex_active_sum")) %>%
   select(-x)
 
 
@@ -203,10 +203,64 @@ correlations = data %>%
          attractiveness_partner, 
          relationship_satisfaction, 
          satisfaction_sexual_intercourse,
-         diary_libido_mean, diary_sex_active_mean, diary_sex_active_sex_mean)
+         diary_libido_mean, diary_sex_active_sum, diary_sex_active_sex_sum)
 
 correlations_table = apa.cor.table(correlations, filename = "Table.doc", table.number = 4)
 
 correlations_table
 
 ```
+
+### Means and sds by contraceptive group
+```{r}
+means_sd_congroup = data %>%
+  group_by(contraception_hormonal, congruent_contraception) %>%
+  summarize(count = n(),
+            count_diary = sum(!is.na(diary_libido_mean)),
+            age_mean = round(mean(age, na.rm = T), 2),
+            age_sd = round(sd(age, na.rm = T), 2),
+            education_years_mean = round(mean(education_years, na.rm = T), 2),
+            education_years_sd = round(sd(education_years, na.rm = T), 2),
+            bfi_extra_mean = round(mean(bfi_extra, na.rm = T), 2),
+            bfi_extra_sd = round(sd(bfi_extra, na.rm = T), 2),
+            bfi_neuro_mean = round(mean(bfi_neuro, na.rm = T), 2),
+            bfi_neuro_sd = round(sd(bfi_neuro, na.rm = T), 2),
+            bfi_agree_mean = round(mean(bfi_agree, na.rm = T), 2),
+            bfi_agree_sd = round(sd(bfi_agree, na.rm = T), 2),
+            bfi_consc_mean = round(mean(bfi_consc, na.rm = T), 2),
+            bfi_consc_sd = round(sd(bfi_consc, na.rm = T), 2),
+            bfi_open_mean = round(mean(bfi_open, na.rm = T), 2),
+            bfi_open_sd = round(sd(bfi_open, na.rm = T), 2),
+            religiosity_mean = round(mean(religiosity, na.rm = T), 2),
+            religiosity_sd = round(sd(religiosity, na.rm = T), 2),
+            attractiveness_partner_mean = round(mean(attractiveness_partner,
+                                                     na.rm = T), 2),
+            attractiveness_partner_sd = round(sd(attractiveness_partner,
+                                                 na.rm = T), 2),
+            relationship_satisfaction_mean = round(mean(relationship_satisfaction,
+                                                     na.rm = T), 2),
+            relationship_satisfaction_sd = round(sd(relationship_satisfaction,
+                                                 na.rm = T), 2),
+            satisfaction_sexual_intercourse_mean = round(
+              mean(satisfaction_sexual_intercourse, na.rm = T), 2),
+            satisfaction_sexual_intercourse_sd = round(
+              sd(satisfaction_sexual_intercourse, na.rm = T), 2),
+            diary_libido_mean_mean = round(mean(diary_libido_mean,
+                                                     na.rm = T), 2),
+            diary_libido_mean_sd = round(sd(diary_libido_mean,
+                                                 na.rm = T), 2),
+            diary_sex_active_sex_sum_mean = round(mean(diary_sex_active_sex_sum,
+                                                     na.rm = T), 2),
+            diary_sex_active_sex_sum_sd = round(sd(diary_sex_active_sex_sum,
+                                                 na.rm = T), 2),
+            diary_sex_active_sum_mean = round(mean(diary_sex_active_sum,
+                                                     na.rm = T), 2),
+            diary_sex_active_sum_sd = round(sd(diary_sex_active_sum,
+                                                 na.rm = T), 2))
+
+kable(means_sd_congroup)
+
+crosstabs(~ relationship_duration_factor + congruent_contraception + contraception_hormonal,
+          data = data)
+```
+

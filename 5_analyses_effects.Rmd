@@ -2122,3 +2122,48 @@ m_congruency_sexfreq_controlled %>%
   scale_fill_manual(values = c("gray80", "skyblue")) +
   labs(x = "Effect Size Estimates", y = "Predictors")
 ```
+
+### Model Comparison
+#### Attractiveness of partner
+```{r}
+compare_models = loo(m_hc_atrr, m_congruency_atrr)
+```
+LooIC first model: `r round(compare_models$loos$m_hc_atrr$estimates[3,1], 2)`
+
+LooIC second model: `r round(compare_models$loos$m_congruency_atrr$estimates[3,1], 2)`
+
+Model Comparisons: The difference between models is `r round(compare_models$diffs[2,1], 2)` compared to a standard error of `r round(compare_models$diffs[2,2], 2)`
+```{r}
+compare_models
+```
+
+#### Relationship satisfaction
+```{r}
+compare_models = loo(m_hc_relsat, m_congruency_relsat)
+```
+LooIC first model: `r round(compare_models$loos$m_hc_relsat$estimates[3,1], 2)`
+
+LooIC second model: `r round(compare_models$loos$m_congruency_relsat$estimates[3,1], 2)`
+
+Model Comparisons: The difference between models is `r round(compare_models$diffs[2,1], 2)` compared to a standard error of `r round(compare_models$diffs[2,2], 2)`
+```{r}
+compare_models
+```
+
+#### Sexual Satisfaction
+```{r}
+m_hc_sexsat$data$satisfaction_sexual_intercourse =
+  as.numeric(m_hc_sexsat$data$satisfaction_sexual_intercourse)
+m_congruency_sexsat$data$satisfaction_sexual_intercourse =
+  as.numeric(m_congruency_sexsat$data$satisfaction_sexual_intercourse)
+
+compare_models = loo(m_hc_sexsat, m_congruency_sexsat)
+```
+LooIC first model: `r round(compare_models$loos$m_hc_sexsat$estimates[3,1], 2)`
+
+LooIC second model: `r round(compare_models$loos$m_congruency_sexsat$estimates[3,1], 2)`
+
+Model Comparisons: The difference between models is `r round(compare_models$diffs[2,1], 2)` compared to a standard error of `r round(compare_models$diffs[2,2], 2)`
+```{r}
+compare_models
+```

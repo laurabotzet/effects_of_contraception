@@ -406,7 +406,7 @@ compare_models
 ```{r}
 m_selection_congruent_simple_includinghc = brm(congruent_contraception ~
                               (age + net_income + relationship_duration_factor) *
-                                as.factor(contraception_meeting_partner),
+                                contraception_meeting_partner,
                             data = data,
                             family = bernoulli("probit"),
                             file = "m_selection_congruent_simple_includinghc")
@@ -431,14 +431,16 @@ conditional_effects(m_selection_congruent_simple_includinghc, ask = FALSE)
 #### Complex Model {.tabset}
 ##### Model
 ```{r}
-m_selection_congruent_complex_includinghc = brm(congruent_contraception ~
+m_selection_congruent_complex_includinghc = brm(congruent_contraception  ~
                               (age + net_income + relationship_duration_factor +
-                              education_years +
+                                 education_years +
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity) *
                                 contraception_meeting_partner,
                             data = data,
-                            family = bernoulli("probit"))
+                            family = bernoulli("probit"),
+                            inits = "0",
+                            file = "m_selection_congruent_complex_includinghc")
 ```
 
 ##### Summary
@@ -459,12 +461,41 @@ conditional_effects(m_selection_congruent_complex_includinghc, ask = FALSE)
 
 #### Comparison {.active}
 ```{r}
-compare_models = loo(m_selectm_selection_congruent_simple_includinghc,
-                     m_selection_congruent_complex_includingHC)
+compare_models = loo(m_selection_congruent_simple_includinghc,
+                     m_selection_congruent_complex_includinghc)
 ```
-LooIC first model: `r round(compare_models$loos$m_selectm_selection_congruent_simple_includinghc$estimates[3,1], 2)`
+LooIC first model: `r round(compare_models$loos$m_selection_congruent_simple_includinghc$estimates[3,1], 2)`
 
-LooIC second model: `r round(compare_models$loos$m_selection_congruent_complex_includingHC$estimates[3,1], 2)`
+LooIC second model: `r round(compare_models$loos$m_selection_congruent_complex_includinghc$estimates[3,1], 2)`
+
+Model Comparisons: The difference between models is `r round(compare_models$diffs[2,1], 2)` compared to a standard error of `r round(compare_models$diffs[2,2], 2)`
+
+```{r}
+compare_models
+```
+
+```{r}
+compare_models = loo(m_selection_congruent_simple,
+                     m_selection_congruent_simple_includinghc)
+```
+LooIC first model: `r round(compare_models$loos$m_selection_congruent_simple$estimates[3,1], 2)`
+
+LooIC second model: `r round(compare_models$loos$m_selection_congruent_simple_includinghc$estimates[3,1], 2)`
+
+Model Comparisons: The difference between models is `r round(compare_models$diffs[2,1], 2)` compared to a standard error of `r round(compare_models$diffs[2,2], 2)`
+
+```{r}
+compare_models
+```
+
+
+```{r}
+compare_models = loo(m_selection_congruent_complex,
+                     m_selection_congruent_complex_includinghc)
+```
+LooIC first model: `r round(compare_models$loos$m_selection_congruent_complex$estimates[3,1], 2)`
+
+LooIC second model: `r round(compare_models$loos$m_selection_congruent_complex_includinghc$estimates[3,1], 2)`
 
 Model Comparisons: The difference between models is `r round(compare_models$diffs[2,1], 2)` compared to a standard error of `r round(compare_models$diffs[2,2], 2)`
 
