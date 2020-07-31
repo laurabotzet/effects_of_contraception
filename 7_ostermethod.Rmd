@@ -49,7 +49,7 @@ names(covariates) = c("age",
 ## Effects of Hormonal Contraception 
 ### Attractiveness of Partner
 ```{r}
-m_hc_atrr = lm(attractiveness_partner ~ contraception_hormonal_numeric +
+m_hc_atrr = lm(attractiveness_partner ~ contraception_hormonal +
                              age + net_income + relationship_duration_factor +
                               education_years +
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
@@ -59,7 +59,7 @@ summary(m_hc_atrr)
 tidy(m_hc_atrr)
 
 m_hc_atrr_sensitives <- sensemakr(model = m_hc_atrr, #model
-                                treatment = "contraception_hormonal_numeric", #predictor
+                                treatment = "contraception_hormonalyes", #predictor
                                 benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
                                                                    #plausible strength of the
