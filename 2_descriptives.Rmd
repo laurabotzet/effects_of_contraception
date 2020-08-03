@@ -29,7 +29,7 @@ mean_sd_range1 = data %>%
          age, education_years,
          bfi_extra, bfi_neuro, bfi_agree, bfi_consc, bfi_open,
          religiosity,
-         diary_libido_mean, diary_sex_active_sum, diary_sex_active_sex_sum) %>%
+         diary_libido_mean, diary_masturbation_sum, diary_sex_active_sex_sum) %>%
   pivot_longer(-session, names_to = "Variable", values_to = "Value") %>%
   group_by(Variable) %>%
   summarise(n = sum(!is.na(Value)),
@@ -55,7 +55,7 @@ mean_sd_range2 = data %>%
 
 
 mean_sd_range = data.frame(x = c(1:16)) %>%
-  cbind(Variable = c("age", "education_years", "net_income", "bfi_extra", "bfi_neuro", "bfi_agree", "bfi_consc", "bfi_open", "religiosity", "relationship_duration", "attractiveness_partner", "relationship_satisfaction", "satisfaction_sexual_intercourse","diary_libido_mean", "diary_sex_active_sex_sum", "diary_sex_active_sum")) %>%
+  cbind(Variable = c("age", "education_years", "net_income", "bfi_extra", "bfi_neuro", "bfi_agree", "bfi_consc", "bfi_open", "religiosity", "relationship_duration", "attractiveness_partner", "relationship_satisfaction", "satisfaction_sexual_intercourse","diary_libido_mean", "diary_sex_active_sex_sum", "diary_masturbation_sum")) %>%
   select(-x)
 
 
@@ -203,7 +203,7 @@ correlations = data %>%
          attractiveness_partner, 
          relationship_satisfaction, 
          satisfaction_sexual_intercourse,
-         diary_libido_mean, diary_sex_active_sum, diary_sex_active_sex_sum)
+         diary_libido_mean, diary_masturbation_sum, diary_sex_active_sex_sum)
 
 correlations_table = apa.cor.table(correlations, filename = "Table.doc", table.number = 4)
 
@@ -253,9 +253,9 @@ means_sd_congroup = data %>%
                                                      na.rm = T), 2),
             diary_sex_active_sex_sum_sd = round(sd(diary_sex_active_sex_sum,
                                                  na.rm = T), 2),
-            diary_sex_active_sum_mean = round(mean(diary_sex_active_sum,
+            diary_masturbation_sum_mean = round(mean(diary_masturbation_sum,
                                                      na.rm = T), 2),
-            diary_sex_active_sum_sd = round(sd(diary_sex_active_sum,
+            diary_masturbation_sum_sd = round(sd(diary_masturbation_sum,
                                                  na.rm = T), 2))
 
 kable(means_sd_congroup)
