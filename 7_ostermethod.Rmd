@@ -16,12 +16,21 @@ source("0_helpers.R")
 load("data/cleaned_selected_wrangled.rdata")
 ```
 
-## Preparations
-### Change factors to numerics
+## Preparations {.tabset}
+### Change factors to numerics, handcode interaction
 ```{r}
 data = data %>%
-  mutate(contraception_hormonal_numeric = as.numeric(contraception_hormonal),
-         congruent_contraception_numeric = as.numeric(congruent_contraception))
+  mutate(contraception_hormonal_numeric = ifelse(contraception_hormonal == "yes",
+                                                 1,
+                                                 ifelse(contraception_hormonal == "no",
+                                                        0, NA)),
+         congruent_contraception_numeric = ifelse(congruent_contraception == "0",
+                                                  0,
+                                                  ifelse(congruent_contraception == "1",
+                                                         1, NA)),
+         hc_con_interaction = ifelse(is.na(congruent_contraception), NA,
+                                     ifelse(contraception_hormonal == "yes" &
+                                              congruent_contraception == "1", 1, 0)))
 ```
 
 ### Covariates
@@ -46,10 +55,11 @@ names(covariates) = c("age",
                    "bfi_consc", "bfi_open", "religiosity")
 ```
 
-## Effects of Hormonal Contraception 
-### Attractiveness of Partner
+## Effects of Hormonal Contraception  {.tabset}
+### Attractiveness of Partner {.tabset}
+#### Model
 ```{r}
-m_hc_atrr = lm(attractiveness_partner ~ contraception_hormonal +
+m_hc_atrr = lm(attractiveness_partner ~ contraception_hormonal_numeric +
                              age + net_income + relationship_duration_factor +
                               education_years +
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
@@ -57,9 +67,59 @@ m_hc_atrr = lm(attractiveness_partner ~ contraception_hormonal +
                data = data)
 summary(m_hc_atrr)
 tidy(m_hc_atrr)
+```
 
-m_hc_atrr_sensitives <- sensemakr(model = m_hc_atrr, #model
-                                treatment = "contraception_hormonalyes", #predictor
+#### Sensitivity Analyses
+```{r}
+m_hc_atrr_sensitivity <- sensemakr(model = m_hc_atrr, #model
+                                treatment = "contraception_hormonal_numeric", #predictor
+                                benchmark_covariates = "bfi_agree", #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_hc_atrr_sensitivity
+summary(m_hc_atrr_sensitivity)
+```
+
+#### Plots
+```{r}
+plot(m_hc_atrr_sensitivity)
+plot(m_hc_atrr_sensitivity, sensitivity.of = "t-value")
+plot(m_hc_atrr_sensitivity, type = "extreme")
+```
+
+### Relationship Satisfaction {.tabset}
+#### Model
+```{r}
+m_hc_relsat = lm(relationship_satisfaction ~ contraception_hormonal_numeric +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+               data = data)
+summary(m_hc_relsat)
+tidy(m_hc_relsat)
+```
+
+#### Sensitivity Analyses
+```{r}
+m_hc_relsat_sensitivity <- sensemakr(model = m_hc_relsat, #model
+                                treatment = "contraception_hormonal_numeric", #predictor
                                 benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
                                                                    #plausible strength of the
@@ -79,78 +139,810 @@ m_hc_atrr_sensitives <- sensemakr(model = m_hc_atrr, #model
                                 )
 
 
-m_congruent1_atrr = lm(attractiveness_partner ~
-                 contraception_hormonal_numeric * congruent_contraception_numeric +
+m_hc_relsat_sensitivity
+summary(m_hc_relsat_sensitivity)
+```
+
+#### Plots
+```{r}
+plot(m_hc_relsat_sensitivity)
+plot(m_hc_relsat_sensitivity, sensitivity.of = "t-value")
+plot(m_hc_relsat_sensitivity, type = "extreme")
+```
+
+### Sexual Satisfaction {.tabset}
+#### Model
+```{r}
+m_hc_sexsat = lm(satisfaction_sexual_intercourse ~ contraception_hormonal_numeric +
                              age + net_income + relationship_duration_factor +
                               education_years +
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                data = data)
-
-m_congruent2_atrr = lm(attractiveness_partner ~
-                 contraception_hormonal * congruent_contraception +
-                             age + net_income + relationship_duration_factor +
-                              education_years +
-                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
-                              religiosity,
-               data = data)
-
-summary(m_congruent2_atrr)
+summary(m_hc_sexsat)
+tidy(m_hc_sexsat)
 ```
 
-### Sexual Frequency
+#### Sensitivity Analyses
 ```{r}
-m_hc_sexfreq_controlled = glm(diary_sex_active_sum ~
-                        offset(log(number_of_days)) +
-                        contraception_hormonal +
-                        age + net_income + relationship_duration_factor +
-                              education_years +
-                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
-                              religiosity,
-                data = data, family = poisson())
-
-summary(m_hc_sexfreq_controlled)
-
-m_hc_sexfreqpen_controlled = glm(diary_sex_active_sex_sum ~
-                        offset(log(number_of_days)) +
-                        contraception_hormonal +
-                        age + net_income + relationship_duration_factor +
-                              education_years +
-                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
-                              religiosity,
-                data = data, family = poisson())
-
-summary(m_hc_sexfreqpen_controlled)
-```
-
-## Example
-```{r}
-data("darfur")
-
-darfur.model <- lm(peacefactor ~ directlyharmed  + village +  female +
-                     age + farmer_dar + herder_dar + pastvoted + hhsize_darfur, 
-                   data = darfur)
-summary(darfur.model)
-
-
-
-darfur.sensitivity <- sensemakr(model = darfur.model, #model
-                                treatment = "directlyharmed1", #predictor
-                                benchmark_covariates = "female", #the names of covariates that will be used to bound the plausible strength of the unobserved confounders
-                                kd = 1:3, #these arguments parameterize how many times stronger the confounder is related to the treatment (kd) and to the outcome (ky) in comparison to the observed benchmark covariate (female). In our example, setting kd = 1:3 and ky = 1:3 means we want to investigate the maximum strength of a confounder once, twice, or three times as strong as female (in explaining treatment and outcome variation). If only kd is given, ky will be set equal to it by default.
-                                ky = 1:3,  
-                                q = 1, #this allows the user to specify what fraction of the effect estimate would have to be explained away to be problematic. Setting q = 1, as we do here, means that a reduction of 100% of the current effect estimate, that is, a true effect of zero, would be deemed problematic.
+m_hc_sexsat_sensitivity <- sensemakr(model = m_hc_sexsat, #model
+                                treatment = "contraception_hormonal_numeric", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
                                 alpha = 0.05, 
-                                reduce = TRUE #should we consider confounders acting towards increasing or reducing the absolute value of the estimate? The default is reduce = TRUE, which means we are considering confounders that pull the estimate towards (or through) zero.
+                                reduce = TRUE #confounder reduce absolute effect size
                                 )
 
-darfur.sensitivity
-ovb_minimal_reporting(darfur.sensitivity, format = "html")
-plot(darfur.sensitivity)
-plot(darfur.sensitivity, sensitivity.of = "t-value")
-plot(darfur.sensitivity, type = "extreme")
 
-model <- lm(peacefactor ~ directlyharmed + age + farmer_dar + herder_dar +pastvoted + hhsize_darfur + female + village, data = darfur)
-ovb_bounds(model, treatment = "directlyharmed",benchmark_covariates = c("female", "pastvoted"),kd = 1:3)
+m_hc_sexsat_sensitivity
+summary(m_hc_sexsat_sensitivity)
 ```
 
+#### Plots
+```{r}
+plot(m_hc_sexsat_sensitivity)
+plot(m_hc_sexsat_sensitivity, sensitivity.of = "t-value")
+plot(m_hc_sexsat_sensitivity, type = "extreme")
+```
+
+### Libido {.tabset}
+#### Model
+```{r}
+m_hc_libido = lm(diary_libido_mean ~ contraception_hormonal_numeric +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+               data = data)
+summary(m_hc_libido)
+tidy(m_hc_libido)
+```
+
+#### Sensitivity Analyses
+```{r}
+m_hc_libido_sensitivity <- sensemakr(model = m_hc_libido, #model
+                                treatment = "contraception_hormonal_numeric", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_hc_libido_sensitivity
+summary(m_hc_libido_sensitivity)
+```
+
+#### Plots
+```{r}
+plot(m_hc_relsat_sensitivity)
+plot(m_hc_relsat_sensitivity, sensitivity.of = "t-value")
+plot(m_hc_relsat_sensitivity, type = "extreme")
+```
+
+
+### Sexual Frequency (Penetrative Intercourse) {.tabset}
+#### Model
+```{r}
+m_hc_sexfreqpen = glm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal_numeric +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = "poisson")
+summary(m_hc_sexfreqpen)
+tidy(m_hc_sexfreqpen)
+```
+
+#### Sensitivity Analyses
+```{r}
+m_hc_sexfreqpen_sensitivity <- sensemakr(estimate = 0.230,
+                                         se = 0.02626,
+                                         dof = 949,
+                                         treatment = "contraception_hormonal_numeric",
+                                         benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_hc_sexfreqpen_sensitivity
+summary(m_hc_sexfreqpen_sensitivity)
+```
+
+#### Plots
+```{r}
+plot(m_hc_sexfreqpen_sensitivity)
+plot(m_hc_sexfreqpen_sensitivity, sensitivity.of = "t-value")
+plot(m_hc_sexfreqpen_sensitivity, type = "extreme")
+```
+
+### Sexual Frequency {.tabset}
+#### Model
+```{r}
+m_hc_sexfreq = glm(diary_sex_active_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal_numeric +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data,
+                family = "poisson")
+summary(m_hc_sexfreq)
+tidy(m_hc_sexfreq)
+```
+
+#### Sensitivity Analyses
+```{r}
+m_hc_sexfreq_sensitivity <- sensemakr(estimate = -0.00378,
+                                         se = 0.0172,
+                                         dof = 949,
+                                         treatment = "contraception_hormonal_numeric",
+                                         benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+m_hc_sexfreq_sensitivity
+summary(m_hc_sexfreq_sensitivity)
+```
+
+#### Plots
+```{r}
+plot(m_hc_sexfreq_sensitivity)
+plot(m_hc_sexfreq_sensitivity, sensitivity.of = "t-value")
+plot(m_hc_sexfreq_sensitivity, type = "extreme")
+```
+
+
+## HC, Congruent use of HC, and their interaction {.tabset}
+### Attractiveness of Partner {.tabset}
+#### Model
+```{r}
+m_con_atrr = lm(attractiveness_partner ~ contraception_hormonal_numeric +
+                 congruent_contraception_numeric + hc_con_interaction +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+               data = data)
+summary(m_con_atrr)
+tidy(m_con_atrr)
+```
+
+#### Sensitivity Analyses {.tabset}
+##### HC
+```{r}
+m_con_atrr_sensitivity_hc <- sensemakr(model = m_con_atrr, #model
+                                treatment = "contraception_hormonal_numeric", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_atrr_sensitivity_hc
+summary(m_con_atrr_sensitivity_hc)
+```
+
+
+##### Congruency
+```{r}
+m_con_atrr_sensitivity_con <- sensemakr(model = m_con_atrr, #model
+                                treatment = "congruent_contraception_numeric", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_atrr_sensitivity_con
+summary(m_con_atrr_sensitivity_con)
+```
+
+##### Interaction
+```{r}
+m_con_atrr_sensitivity_interaction <- sensemakr(model = m_con_atrr, #model
+                                treatment = "hc_con_interaction", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_atrr_sensitivity_interaction
+summary(m_con_atrr_sensitivity_interaction)
+```
+
+### Relationship Satisfaction {.tabset}
+#### Model
+```{r}
+m_con_relsat = lm(relationship_satisfaction ~ contraception_hormonal_numeric +
+                 congruent_contraception_numeric + hc_con_interaction +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+               data = data)
+summary(m_con_relsat)
+tidy(m_con_relsat)
+```
+
+#### Sensitivity Analyses
+##### HC
+```{r}
+m_con_relsat_sensitivity_hc <- sensemakr(model = m_con_relsat, #model
+                                treatment = "contraception_hormonal_numeric", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_relsat_sensitivity_hc
+summary(m_con_relsat_sensitivity_hc)
+```
+
+
+##### Congruency
+```{r}
+m_con_relsat_sensitivity_con <- sensemakr(model = m_con_relsat, #model
+                                treatment = "congruent_contraception_numeric", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_relsat_sensitivity_con
+summary(m_con_relsat_sensitivity_con)
+```
+
+##### Interaction
+```{r}
+m_con_relsat_sensitivity_interaction <- sensemakr(model = m_con_relsat, #model
+                                treatment = "hc_con_interaction", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_relsat_sensitivity_interaction
+summary(m_con_relsat_sensitivity_interaction)
+```
+
+### Sexual Satisfaction {.tabset}
+#### Model
+```{r}
+m_con_sexsat = lm(satisfaction_sexual_intercourse ~ contraception_hormonal_numeric +
+                 congruent_contraception_numeric + hc_con_interaction +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+               data = data)
+summary(m_con_sexsat)
+tidy(m_con_sexsat)
+```
+
+#### Sensitivity Analyses
+##### HC
+```{r}
+m_con_sexsat_sensitivity_hc <- sensemakr(model = m_con_sexsat, #model
+                                treatment = "contraception_hormonal_numeric", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_sexsat_sensitivity_hc
+summary(m_con_sexsat_sensitivity_hc)
+```
+
+
+##### Congruency
+```{r}
+m_con_sexsat_sensitivity_con <- sensemakr(model = m_con_sexsat, #model
+                                treatment = "congruent_contraception_numeric", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_sexsat_sensitivity_con
+summary(m_con_sexsat_sensitivity_con)
+```
+
+##### Interaction
+```{r}
+m_con_sexsat_sensitivity_interaction <- sensemakr(model = m_con_sexsat, #model
+                                treatment = "hc_con_interaction", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_sexsat_sensitivity_interaction
+summary(m_con_sexsat_sensitivity_interaction)
+```
+
+### Libido {.tabset}
+#### Model
+```{r}
+m_con_libido = lm(diary_libido_mean ~ contraception_hormonal_numeric +
+                 congruent_contraception_numeric + hc_con_interaction +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+               data = data)
+summary(m_con_libido)
+tidy(m_con_libido)
+```
+
+#### Sensitivity Analyses
+##### HC
+```{r}
+m_con_libido_sensitivity_hc <- sensemakr(model = m_con_libido, #model
+                                treatment = "contraception_hormonal_numeric", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_libido_sensitivity_hc
+summary(m_con_libido_sensitivity_hc)
+```
+
+
+##### Congruency
+```{r}
+m_con_libido_sensitivity_con <- sensemakr(model = m_con_libido, #model
+                                treatment = "congruent_contraception_numeric", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_libido_sensitivity_con
+summary(m_con_libido_sensitivity_con)
+```
+
+##### Interaction
+```{r}
+m_con_libido_sensitivity_interaction <- sensemakr(model = m_con_libido, #model
+                                treatment = "hc_con_interaction", #predictor
+                                benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome 
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05, 
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_libido_sensitivity_interaction
+summary(m_con_libido_sensitivity_interaction)
+```
+
+### Sexual Frequency (Penetrative Intercourse) {.tabset}
+#### Model
+```{r}
+m_con_sexfreqpen = glm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal_numeric + congruent_contraception_numeric +
+                         hc_con_interaction + 
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = "poisson")
+summary(m_con_sexfreqpen)
+tidy(m_con_sexfreqpen, conf.int = T)
+```
+
+#### Sensitivity Analyses {.tabset}
+##### HC
+```{r}
+m_con_sexfreqpen_sensitivity_hc <- sensemakr(estimate = 0.15534,
+                                         se = 0.04597,
+                                         dof = 612,
+                                         treatment = "contraception_hormonal_numeric",
+                                         benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_sexfreqpen_sensitivity_hc
+summary(m_con_sexfreqpen_sensitivity_hc)
+```
+
+
+##### Congruency
+```{r}
+m_con_sexfreqpen_sensitivity_con <- sensemakr(estimate = -0.07651,
+                                         se = 0.04141,
+                                         dof = 612,
+                                         treatment = "congruent_contraception_numeric",
+                                         benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_sexfreqpen_sensitivity_con
+summary(m_con_sexfreqpen_sensitivity_con)
+```
+
+##### Interaction
+```{r}
+m_con_sexfreqpen_sensitivity_interaction <- sensemakr(estimate = 0.07073,
+                                         se = 0.05733,
+                                         dof = 612,
+                                         treatment = "hc_con_interaction",
+                                         benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_sexfreqpen_sensitivity_interaction
+summary(m_con_sexfreqpen_sensitivity_interaction)
+```
+
+### Sexual Frequency {.tabset}
+#### Model
+```{r}
+m_con_sexfreq = glm(diary_sex_active_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal_numeric + congruent_contraception_numeric +
+                         hc_con_interaction + 
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = "poisson")
+summary(m_con_sexfreq)
+tidy(m_con_sexfreq)
+```
+
+#### Sensitivity Analyses {.tabset}
+##### HC
+```{r}
+m_con_sexfreq_sensitivity_hc <- sensemakr(estimate = -0.0423,
+                                         se = 0.0327,
+                                         dof = 612,
+                                         treatment = "contraception_hormonal_numeric",
+                                         benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_sexfreq_sensitivity_hc
+summary(m_con_sexfreq_sensitivity_hc)
+```
+
+
+##### Congruency
+```{r}
+m_con_sexfreq_sensitivity_con <- sensemakr(estimate = -0.00108,
+                                         se = 0.0279,
+                                         dof = 612,
+                                         treatment = "congruent_contraception_numeric",
+                                         benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_sexfreq_sensitivity_con
+summary(m_con_sexfreq_sensitivity_con)
+```
+
+##### Interaction
+```{r}
+m_con_sexfreq_sensitivity_interaction <- sensemakr(estimate = 0.0600,
+                                         se = 0.0406,
+                                         dof = 612,
+                                         treatment = "hc_con_interaction",
+                                         benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_con_sexfreq_sensitivity_interaction
+summary(m_con_sexfreq_sensitivity_interaction)
+```

@@ -542,10 +542,10 @@ m_hc_sexfreqpen = brm(diary_sex_active_sex_sum ~
                         contraception_hormonal,
                 data = data, family = poisson(),
                 file = "m_hc_sexfreqpen")
-m_hc_sexfreq = brm(diary_sex_active_sum ~ offset(log(number_of_days)) +
+m_hc_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
                      contraception_hormonal,
                 data = data, family = poisson(),
-                file = "m_hc_sexfreq")
+                file = "m_hc_masfreq")
 ```
 
 #### Forest Plot for Effect Sizes {.active}
@@ -584,20 +584,20 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
+    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
            ROPE = 0.05),
-  m_hc_sexfreq %>%
+  m_hc_masfreq %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
+    mutate(model = "Masturbation Frequency\nROPE = [-0.05, 0.05]",
            ROPE = 0.05))
 
 data1 = models %>%
   mutate(model = factor(model,
-                   levels = c("Sexual Frequency\nROPE = [-0.05, 0.05]",
-                              "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
+                   levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
+                              "Sexual Frequency\nROPE = [-0.05, 0.05]",
                               "Libido\nROPE = [-0.06, 0.06]",
                               "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                               "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
@@ -605,8 +605,8 @@ data1 = models %>%
 data2 = models %>%
   group_by(model, ROPE) %>%
   mutate(model = factor(model,
-                        levels = c("Sexual Frequency\nROPE = [-0.05, 0.05]",
-                                   "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
+                        levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
+                                   "Sexual Frequency\nROPE = [-0.05, 0.05]",
                                    "Libido\nROPE = [-0.06, 0.06]",
                                    "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                                    "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
@@ -642,8 +642,8 @@ hc_uncontrolled = ggplot() +
   apatheme +
   theme(legend.position = "none") +
   scale_color_manual(values = c("skyblue", "grey", "red")) +
-  scale_x_continuous(breaks = c(-0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5),
-                     limits = c(-0.2, 0.5)) +
+  scale_x_continuous(breaks = c(-0.5, -0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5),
+                     limits = c(-0.5, 0.5)) +
   labs(x = "Effect Size Estimates of Hormonal Contraception", y = "Outcomes")
 hc_uncontrolled
 ```
@@ -693,7 +693,7 @@ m_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
                 data = data, family = poisson(),
                 file = "m_hc_sexfreqpen_controlled")
 
-m_hc_sexfreq_controlled = brm(diary_sex_active_sum ~
+m_hc_masfreq_controlled = brm(diary_masturbation_sum ~
                         offset(log(number_of_days)) +
                         contraception_hormonal +
                         age + net_income + relationship_duration_factor +
@@ -701,7 +701,7 @@ m_hc_sexfreq_controlled = brm(diary_sex_active_sum ~
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                 data = data, family = poisson(),
-                file = "m_hc_sexfreq_controlled")
+                file = "m_hc_masfreq_controlled")
 ```
 
 #### Forest Plot for Effect Sizes {.active}
@@ -740,20 +740,20 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
+    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
            ROPE = 0.05),
-  m_hc_sexfreq_controlled %>%
+  m_hc_masfreq_controlled %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
+    mutate(model = "Masturbation Frequency\nROPE = [-0.05, 0.05]",
            ROPE = 0.05))
 
 data1 = models %>%
   mutate(model = factor(model,
-                   levels = c("Sexual Frequency\nROPE = [-0.05, 0.05]",
-                              "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
+                   levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
+                              "Sexual Frequency\nROPE = [-0.05, 0.05]",
                               "Libido\nROPE = [-0.06, 0.06]",
                               "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                               "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
@@ -761,8 +761,8 @@ data1 = models %>%
 data2 = models %>%
   group_by(model, ROPE) %>%
   mutate(model = factor(model,
-                        levels = c("Sexual Frequency\nROPE = [-0.05, 0.05]",
-                                   "Sexual Frequency\n(Penetrative Intercourse)\nROPE = [-0.05, 0.05]",
+                        levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
+                                   "Sexual Frequency\nROPE = [-0.05, 0.05]",
                                    "Libido\nROPE = [-0.06, 0.06]",
                                    "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                                    "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
@@ -798,9 +798,9 @@ hc_controlled = ggplot() +
   geom_point(data = data1, aes(y = model, x = -ROPE), shape = 58, size = 10, color = "white") +
   apatheme +
   theme(legend.position = "none") +
-  scale_color_manual(values = c("green", "red", "grey", "skyblue")) +
-  scale_x_continuous(breaks = c(-0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5),
-                     limits = c(-0.2, 0.5)) +
+  scale_color_manual(values = c("red", "green", "skyblue", "grey")) +
+  scale_x_continuous(breaks = c(-0.5, -0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5),
+                     limits = c(-0.5, 0.5)) +
   labs(x = "Effect Size Estimates of Hormonal Contraception", y = "Outcomes")
 hc_controlled
 ```
@@ -923,7 +923,7 @@ m_congruency_sexfreqpen_ce = m_congruency_sexfreqpen %>%
 m_congruency_sexfreqpen_plot = 
   plot(m_congruency_sexfreqpen_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Sexual Frequency\n(Penetrative Intercourse)") +
+       y = "Sexual Frequency") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
@@ -932,26 +932,26 @@ m_congruency_sexfreqpen_plot =
   apatheme
 m_congruency_sexfreqpen_plot
 
-m_congruency_sexfreq = brm(diary_sex_active_sum ~ offset(log(number_of_days)) +
+m_congruency_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
                              contraception_hormonal * congruent_contraception,
                 data = data, family = poisson(),
-                file = "m_congruency_sexfreq")
+                file = "m_congruency_masfreq")
 
-m_congruency_sexfreq_ce = m_congruency_sexfreq %>% 
+m_congruency_masfreq_ce = m_congruency_masfreq %>% 
   conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
                     probs = c(0.05, 0.95))
 
-m_congruency_sexfreq_plot = 
+m_congruency_masfreq_plot = 
   plot(m_congruency_sexfreq_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Sexual Frequency") +
+       y = "Masturbation Frequency") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
   apatheme
-m_congruency_sexfreq_plot
+m_congruency_masfreq_plot
 ```
 
 ### Combine Plots
@@ -966,7 +966,7 @@ congruency_uncontrolled =
             m_congruency_libido_plot +
               rremove("xlab"),
             m_congruency_sexfreqpen_plot,
-            m_congruency_sexfreq_plot,
+            m_congruency_masfreq_plot,
           common.legend = TRUE, legend = "bottom",
           ncol = 2, nrow = 3,
           align = "v")
@@ -1106,7 +1106,7 @@ m_congruency_sexfreqpen_controlled_plot =
   apatheme
 m_congruency_sexfreqpen_controlled_plot
 
-m_congruency_sexfreq_controlled = brm(diary_sex_active_sum ~
+m_congruency_masfreq_controlled = brm(diary_masturbation_sum ~
                         offset(log(number_of_days)) +
                         contraception_hormonal * congruent_contraception +
                         age + net_income + relationship_duration_factor +
@@ -1114,23 +1114,23 @@ m_congruency_sexfreq_controlled = brm(diary_sex_active_sum ~
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                 data = data, family = poisson(),
-                file = "m_congruency_sexfreq_controlled")
+                file = "m_congruency_masfreq_controlled")
 
-m_congruency_sexfreq_controlled_ce = m_congruency_sexfreq_controlled %>% 
+m_congruency_masfreq_controlled_ce = m_congruency_masfreq_controlled %>% 
   conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
                     probs = c(0.05, 0.95))
 
-m_congruency_sexfreq_controlled_plot = 
-  plot(m_congruency_sexfreq_controlled_ce, plot = FALSE)[[1]] +
+m_congruency_masfreq_controlled_plot = 
+  plot(m_congruency_masfreq_controlled_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Sexual Frequency") +
+       y = "Masturbation Frequency") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
   apatheme
-m_congruency_sexfreq_controlled_plot
+m_congruency_masfreq_controlled_plot
 ```
 
 ### Combine Plots
@@ -1141,7 +1141,7 @@ congruency_controlled =
           m_congruency_sexsat_controlled_plot + rremove("xlab"),
           m_congruency_libido_controlled_plot + rremove("xlab"),
           m_congruency_sexfreqpen_controlled_plot,
-          m_congruency_sexfreq_controlled_plot,
+          m_congruency_masfreq_controlled_plot,
           common.legend = TRUE, legend = "bottom",
           ncol = 2, nrow = 3,
           align = "v")
