@@ -52,7 +52,7 @@ library(RColorBrewer)
 library(cowplot)
 library(ggpubr)
 library(sensemakr)
-
+library(jtools)
 
 
 #'UpSetR is used to generate exclusion plots
@@ -137,7 +137,7 @@ pander_handler = function(x, ...) {
 }
 
 
-theme_set(theme_tufte(base_size = 20))
+theme_set(theme_tufte(base_size = 20, base_family='Helvetica Neue'))
 
 apatheme=theme_bw()+
   theme(panel.grid.major=element_blank(),

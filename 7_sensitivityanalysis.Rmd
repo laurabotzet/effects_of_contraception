@@ -1,5 +1,5 @@
 ---
-title: "Plots Effects of Contraception"
+title: "Sensitivity Analysis"
 output:
   html_document:
     toc: true
@@ -245,7 +245,7 @@ plot(m_hc_relsat_sensitivity, type = "extreme")
 ```
 
 
-### Sexual Frequency (Penetrative Intercourse) {.tabset}
+### Sexual Frequency{.tabset}
 #### Model
 ```{r}
 m_hc_sexfreqpen = glm(diary_sex_active_sex_sum ~
@@ -296,10 +296,10 @@ plot(m_hc_sexfreqpen_sensitivity, sensitivity.of = "t-value")
 plot(m_hc_sexfreqpen_sensitivity, type = "extreme")
 ```
 
-### Sexual Frequency {.tabset}
+### Masturbation Frequency {.tabset}
 #### Model
 ```{r}
-m_hc_sexfreq = glm(diary_sex_active_sum ~
+m_hc_masfreq = glm(diary_masturbation_sum ~
                         offset(log(number_of_days)) +
                         contraception_hormonal_numeric +
                         age + net_income + relationship_duration_factor +
@@ -308,14 +308,14 @@ m_hc_sexfreq = glm(diary_sex_active_sum ~
                               religiosity,
                 data = data,
                 family = "poisson")
-summary(m_hc_sexfreq)
-tidy(m_hc_sexfreq)
+summary(m_hc_masfreq)
+tidy(m_hc_masfreq, conf.int = T)
 ```
 
 #### Sensitivity Analyses
 ```{r}
-m_hc_sexfreq_sensitivity <- sensemakr(estimate = -0.00378,
-                                         se = 0.0172,
+m_hc_masfreq_sensitivity <- sensemakr(estimate = -0.265,
+                                         se = 0.0279,
                                          dof = 949,
                                          treatment = "contraception_hormonal_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
@@ -336,15 +336,15 @@ m_hc_sexfreq_sensitivity <- sensemakr(estimate = -0.00378,
                                 reduce = TRUE #confounder reduce absolute effect size
                                 )
 
-m_hc_sexfreq_sensitivity
-summary(m_hc_sexfreq_sensitivity)
+m_hc_masfreq_sensitivity
+summary(m_hc_masfreq_sensitivity)
 ```
 
 #### Plots
 ```{r}
-plot(m_hc_sexfreq_sensitivity)
-plot(m_hc_sexfreq_sensitivity, sensitivity.of = "t-value")
-plot(m_hc_sexfreq_sensitivity, type = "extreme")
+plot(m_hc_masfreq_sensitivity)
+plot(m_hc_masfreq_sensitivity, sensitivity.of = "t-value")
+plot(m_hc_masfreq_sensitivity, type = "extreme")
 ```
 
 
@@ -737,7 +737,7 @@ m_con_libido_sensitivity_interaction
 summary(m_con_libido_sensitivity_interaction)
 ```
 
-### Sexual Frequency (Penetrative Intercourse) {.tabset}
+### Sexual Frequency {.tabset}
 #### Model
 ```{r}
 m_con_sexfreqpen = glm(diary_sex_active_sex_sum ~
@@ -842,10 +842,10 @@ m_con_sexfreqpen_sensitivity_interaction
 summary(m_con_sexfreqpen_sensitivity_interaction)
 ```
 
-### Sexual Frequency {.tabset}
+### Masturbation Frequency {.tabset}
 #### Model
 ```{r}
-m_con_sexfreq = glm(diary_sex_active_sum ~
+m_con_masfreq = glm(diary_masturbation_sum ~
                         offset(log(number_of_days)) +
                         contraception_hormonal_numeric + congruent_contraception_numeric +
                          hc_con_interaction + 
@@ -854,15 +854,15 @@ m_con_sexfreq = glm(diary_sex_active_sum ~
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                 data = data, family = "poisson")
-summary(m_con_sexfreq)
-tidy(m_con_sexfreq)
+summary(m_con_masfreq)
+tidy(m_con_masfreq, conf.int = T)
 ```
 
 #### Sensitivity Analyses {.tabset}
 ##### HC
 ```{r}
-m_con_sexfreq_sensitivity_hc <- sensemakr(estimate = -0.0423,
-                                         se = 0.0327,
+m_con_masfreq_sensitivity_hc <- sensemakr(estimate = -0.39230,
+                                         se = 0.05928,
                                          dof = 612,
                                          treatment = "contraception_hormonal_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
@@ -884,15 +884,15 @@ m_con_sexfreq_sensitivity_hc <- sensemakr(estimate = -0.0423,
                                 )
 
 
-m_con_sexfreq_sensitivity_hc
-summary(m_con_sexfreq_sensitivity_hc)
+m_con_masfreq_sensitivity_hc
+summary(m_con_masfreq_sensitivity_hc)
 ```
 
 
 ##### Congruency
 ```{r}
-m_con_sexfreq_sensitivity_con <- sensemakr(estimate = -0.00108,
-                                         se = 0.0279,
+m_con_masfreq_sensitivity_con <- sensemakr(estimate = 0.01196,
+                                         se = 0.04594,
                                          dof = 612,
                                          treatment = "congruent_contraception_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
@@ -914,14 +914,14 @@ m_con_sexfreq_sensitivity_con <- sensemakr(estimate = -0.00108,
                                 )
 
 
-m_con_sexfreq_sensitivity_con
-summary(m_con_sexfreq_sensitivity_con)
+m_con_masfreq_sensitivity_con
+summary(m_con_masfreq_sensitivity_con)
 ```
 
 ##### Interaction
 ```{r}
-m_con_sexfreq_sensitivity_interaction <- sensemakr(estimate = 0.0600,
-                                         se = 0.0406,
+m_con_masfreq_sensitivity_interaction <- sensemakr(estimate = 0.12861,
+                                         se = 0.07310,
                                          dof = 612,
                                          treatment = "hc_con_interaction",
                                          benchmark_covariates = covariates, #covariates that will be
@@ -943,6 +943,6 @@ m_con_sexfreq_sensitivity_interaction <- sensemakr(estimate = 0.0600,
                                 )
 
 
-m_con_sexfreq_sensitivity_interaction
+m_con_masfreq_sensitivity_interaction
 summary(m_con_sexfreq_sensitivity_interaction)
 ```

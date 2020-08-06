@@ -333,7 +333,7 @@ exclusion_reasons %>%
 The horizontal green bars show for how many women this exclusion criteria applies. The blue bars show how many women are excluded for multiple reasons (e.g., not finishing the initial survey and being pregnant). Only the 20 most common overlaps are displayed. See Figure S1 in the supplementary materials for all combinations.
 
 ```{r}
-exclusion_reasons %>% 
+upset1 = exclusion_reasons %>% 
   rename(`Breastfeeding` = breast_feeding, 
          `Choice of Contraceptive Methode` = contraceptive_method,
          `Missing Data` = didnt_finish_initial,
@@ -353,19 +353,27 @@ exclusion_reasons %>%
   select(-included) %>% 
   as.data.frame() %>%
   {
-  upset(., ncol(.), 20, order.by = "freq",
+  upset(., ncol(.),
+        20,
+        order.by = "freq",
       main.bar.color = "#6E8691",
       matrix.color = "#6E8691",
       sets.bar.color = "#53AC9B",
       text.scale = 1.5)
   }
+upset1
+
+jpeg('Exclusion criteria and most common combinations of exclusion criteria.jpg', 
+     width = 900, height = 600, quality = 100)
+upset1
+dev.off()
 ```
 
 ### Figure S1: Exclusion criteria and all combinations of exclusion criteria. 
 The horizontal green bars show for how many women this exclusion criteria applies. The blue bars show how many women are excluded for multiple reasons (e.g., not finishing the initial survey and being pregnant). All 52 combinations of exclusion criteria are displayed. 
 
 ```{r}
-exclusion_reasons %>% 
+upset2 = exclusion_reasons %>% 
   rename(`Breastfeeding` = breast_feeding, 
          `Choice of Contraceptive Methode` = contraceptive_method,
          `Missing Data` = didnt_finish_initial,
@@ -391,7 +399,12 @@ exclusion_reasons %>%
       sets.bar.color = "#53AC9B",
       text.scale = 1.5)
   }
+upset2
 
+jpeg('Exclusion criteria and all combinations of exclusion criteria.jpg', 
+     width = 1000, height = 600, quality = 100)
+upset2
+dev.off()
 ```
 
 

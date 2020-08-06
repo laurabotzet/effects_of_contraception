@@ -918,12 +918,13 @@ m_congruency_sexfreqpen = brm(diary_sex_active_sex_sum ~ offset(log(number_of_da
 
 m_congruency_sexfreqpen_ce = m_congruency_sexfreqpen %>% 
   conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
-                    probs = c(0.05, 0.95))
+                    probs = c(0.05, 0.95),
+                    conditions = data.frame(number_of_days = 1))
 
 m_congruency_sexfreqpen_plot = 
   plot(m_congruency_sexfreqpen_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Sexual Frequency") +
+       y = "Sexual Frequency\n(Probablity per Day)") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
@@ -939,12 +940,13 @@ m_congruency_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) 
 
 m_congruency_masfreq_ce = m_congruency_masfreq %>% 
   conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
-                    probs = c(0.05, 0.95))
+                    probs = c(0.05, 0.95),
+                    conditions = data.frame(number_of_days = 1))
 
 m_congruency_masfreq_plot = 
-  plot(m_congruency_sexfreq_ce, plot = FALSE)[[1]] +
+  plot(m_congruency_masfreq_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Masturbation Frequency") +
+       y = "Masturbation Frequency\n(Probablity per Day)") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
@@ -1092,12 +1094,13 @@ m_congruency_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
 
 m_congruency_sexfreqpen_controlled_ce = m_congruency_sexfreqpen_controlled %>% 
   conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
-                    probs = c(0.05, 0.95))
+                    probs = c(0.05, 0.95),
+                    conditions = data.frame(number_of_days = 1))
 
 m_congruency_sexfreqpen_controlled_plot = 
   plot(m_congruency_sexfreqpen_controlled_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Sexual Frequency\n(Penetrative Intercourse)") +
+       y = "Sexual Frequency\n(Probability per Day)") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
@@ -1118,12 +1121,13 @@ m_congruency_masfreq_controlled = brm(diary_masturbation_sum ~
 
 m_congruency_masfreq_controlled_ce = m_congruency_masfreq_controlled %>% 
   conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
-                    probs = c(0.05, 0.95))
+                    probs = c(0.05, 0.95),
+                    conditions = data.frame(number_of_days = 1))
 
 m_congruency_masfreq_controlled_plot = 
   plot(m_congruency_masfreq_controlled_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Masturbation Frequency") +
+       y = "Masturbation Frequency\n(Probability per Day") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
