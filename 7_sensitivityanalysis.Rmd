@@ -362,7 +362,7 @@ m_hc_sexfreqpen = glm(diary_sex_active_sex_sum ~
                         contraception_hormonal_numeric,
                 data = data, family = "poisson")
 summary(m_hc_sexfreqpen)
-tidy(m_hc_sexfreqpen)
+tidy(m_hc_sexfreqpen, conf.int = T)
 ```
 
 ##### Sensitivity Analyses

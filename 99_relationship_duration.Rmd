@@ -62,14 +62,15 @@ ggplot(data, aes(relationship_duration)) +
        y = "Count") + 
   scale_x_continuous(breaks = c(c(0:30) * 12),
                      labels = c(c(0:30) * 12)) +
-  scale_fill_discrete(name = "Categories\nRelationship\nDuration",
-                      labels = c("0-12 months",
-                                 "13-28 months",
-                                 "29-52 months",
-                                 ">52 months")) +
   apatheme +
   #theme(legend.position = "bottom") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  scale_fill_manual(name = "Categories\nRelationship\nDuration",
+                    labels = c("0‒12 months",
+                                 "13‒28 months",
+                                 "29‒52 months",
+                                 "> 52 months"),
+                    values = c("#1B9E77", "#7570B3", "#D95F02", "#E7298A"))
 
 ```
 
