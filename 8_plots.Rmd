@@ -556,7 +556,7 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Attractiveness of Partner\nROPE = [-0.07, 0.07]",
+    mutate(model = "Partner Attractiveness\nROPE = [-0.07, 0.07]",
            ROPE = 0.07),
   m_hc_relsat %>%
     spread_draws(b_contraception_hormonalyes) %>%
@@ -601,7 +601,7 @@ data1 = models %>%
                               "Libido\nROPE = [-0.06, 0.06]",
                               "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                               "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
-                              "Attractiveness of Partner\nROPE = [-0.07, 0.07]")))
+                              "Partner Attractiveness\nROPE = [-0.07, 0.07]")))
 data2 = models %>%
   group_by(model, ROPE) %>%
   mutate(model = factor(model,
@@ -610,7 +610,7 @@ data2 = models %>%
                                    "Libido\nROPE = [-0.06, 0.06]",
                                    "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                                    "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
-                                   "Attractiveness of Partner\nROPE = [-0.07, 0.07]"))) %>%
+                                   "Partner Attractiveness\nROPE = [-0.07, 0.07]"))) %>%
   mean_qi(condition_mean = r_condition,
           .width = c(.90)) %>%
   mutate(text = ifelse(.width == .90,
@@ -712,7 +712,7 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Attractiveness of Partner\nROPE = [-0.07, 0.07]",
+    mutate(model = "Partner Attractiveness\nROPE = [-0.07, 0.07]",
            ROPE = 0.07),
   m_hc_relsat_controlled %>%
     spread_draws(b_contraception_hormonalyes) %>%
@@ -757,7 +757,7 @@ data1 = models %>%
                               "Libido\nROPE = [-0.06, 0.06]",
                               "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                               "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
-                              "Attractiveness of Partner\nROPE = [-0.07, 0.07]")))
+                              "Partner Attractiveness\nROPE = [-0.07, 0.07]")))
 data2 = models %>%
   group_by(model, ROPE) %>%
   mutate(model = factor(model,
@@ -766,7 +766,7 @@ data2 = models %>%
                                    "Libido\nROPE = [-0.06, 0.06]",
                                    "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                                    "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
-                                   "Attractiveness of Partner\nROPE = [-0.07, 0.07]"))) %>%
+                                   "Partner Attractiveness\nROPE = [-0.07, 0.07]"))) %>%
   mean_qi(condition_mean = r_condition,
           .width = c(.90)) %>%
   mutate(text = ifelse(.width == .90,
@@ -837,7 +837,7 @@ m_congruency_atrr_ce = m_congruency_atrr %>%
 m_congruency_atrr_plot = 
   plot(m_congruency_atrr_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Attractiveness of Partner") +
+       y = "Partner Attractiveness") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
@@ -998,7 +998,7 @@ m_congruency_atrr_controlled_ce = m_congruency_atrr_controlled %>%
 m_congruency_atrr_controlled_plot = 
   plot(m_congruency_atrr_controlled_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Attractiveness of Partner") +
+       y = "Partner Attractiveness") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +

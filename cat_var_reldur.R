@@ -94,7 +94,7 @@ tidy(model, conf.int = T)
 reldur_attractiveness =
   effect_plot(model, pred = relationship_duration_factor, colors = "CUD", plot.points = FALSE, point.color = "grey",
               jitter = 0.2) +
-  labs(x = "Relationship Duration", y = "Attractiveness of Partner") +
+  labs(x = "Relationship Duration", y = "Partner Attractiveness") +
   scale_x_discrete(labels = c("Single", "0-12 months", "13-28 months", "29-52 months", "> 52 months")) +
   apatheme +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))

@@ -103,7 +103,7 @@ tidy(model, conf.int = T)
 income_attractiveness =
   effect_plot(model, pred = net_income, colors = "CUD", plot.points = FALSE, point.color = "grey",
               jitter = 0.2) +
-  labs(x = "Income", y = "Attractiveness of Partner") +
+  labs(x = "Income", y = "Partner Attractiveness") +
   scale_x_discrete(labels = c("< 500€", "500-1000€", "1000-2000€", "2000-3000€",
                               "> 3000€", "do not want to tell")) +
   apatheme +
