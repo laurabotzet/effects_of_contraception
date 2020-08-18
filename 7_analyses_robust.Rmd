@@ -1,0 +1,751 @@
+---
+title: "Analyses Effects of Contraception"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'hide'
+    self_contained: false
+---
+  
+## Data 
+```{r results='hide',message=F,warning=F}
+source("0_helpers.R")
+
+load("data/cleaned_selected_wrangled.rdata")
+```
+
+## Exclude Participants, who indicated having no penetrative sexual intercourse
+```{r}
+exclude = data %>%
+  filter(contraception_method == "barrier_no_penetrative_sex")
+
+data = data %>%
+  filter(contraception_method != "barrier_no_penetrative_sex")
+```
+
+## Investigate Excluded Participants
+```{r}
+table(is.na(exclude$diary_sex_active_sex_sum))
+```
+
+## Effects of Hormonal Contraceptives {.tabset}
+### Sexual Frequency (Penetrative Intercourse) {.tabset}
+#### Model
+```{r}
+mrobust_hc_sexfreqpen = brm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal,
+                data = data, family = poisson(),
+                file = "mrobust_hc_sexfreqpen")
+```
+
+#### Summary
+```{r}
+kable(tidy(mrobust_hc_sexfreqpen, intervals = T, prob = 0.90))
+summary(mrobust_hc_sexfreqpen, intervals = T, prob = 0.90)
+```
+
+#### Comparison with ROPE
+```{r}
+plot(equivalence_test(mrobust_hc_sexfreqpen, range = c(-0.05, 0.05)), ci = 0.90,
+                      parameters = "contraception")
+equivalence_test(mrobust_hc_sexfreqpen, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception")
+```
+
+#### Plots
+```{r}
+conditional_effects(mrobust_hc_sexfreqpen,
+                    effects = "contraception_hormonal",
+                    conditions = data.frame(number_of_days = 1))
+```
+
+#### Forest Plot for Effect Sizes {.active}
+```{r}
+mrobust_hc_sexfreqpen %>%
+  spread_draws(b_contraception_hormonalyes) %>%
+  pivot_longer(cols = c(b_contraception_hormonalyes),
+               names_to = "condition",
+               values_to = "r_condition") %>%
+  mutate(condition_mean = r_condition,
+         group = ifelse(condition %contains% "b_contraception_hormonalyes",
+                        "Contraception", NA),
+         condition = ifelse(condition %contains% "b_contraception_hormonalyes",
+                        "Hormonal Contraception", NA)) %>%
+  ggplot(aes(y = condition,
+             x = condition_mean,
+             fill = stat(abs(x) < 0.05))) +
+  stat_halfeye() +
+  geom_vline(xintercept = c(-0.05, 0.05), linetype = "dotted") +
+  apatheme +
+  theme(legend.position = "none") +
+  scale_fill_manual(values = c("gray80", "skyblue")) +
+  labs(x = "Effect Size Estimates", y = "Predictors")
+```
+
+### Masturbation Frequency {.tabset}
+#### Model
+```{r}
+mrobust_hc_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
+                     contraception_hormonal,
+                data = data, family = poisson(),
+                file = "mrobust_hc_masfreq")
+```
+
+#### Summary
+```{r}
+kable(tidy(mrobust_hc_masfreq, intervals = T, prob = 0.90))
+summary(mrobust_hc_masfreq, intervals = T, prob = 0.90)
+```
+
+#### Comparison with ROPE
+```{r}
+plot(equivalence_test(mrobust_hc_masfreq, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception"))
+equivalence_test(mrobust_hc_masfreq, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception")
+```
+
+#### Plots
+```{r}
+conditional_effects(mrobust_hc_masfreq,
+                    effects = "contraception_hormonal",
+                    conditions = data.frame(number_of_days = 1))
+```
+
+#### Forest Plot for Effect Sizes {.active}
+```{r}
+mrobust_hc_masfreq %>%
+  spread_draws(b_contraception_hormonalyes) %>%
+  pivot_longer(cols = c(b_contraception_hormonalyes),
+               names_to = "condition",
+               values_to = "r_condition") %>%
+  mutate(condition_mean = r_condition,
+         group = ifelse(condition %contains% "b_contraception_hormonalyes",
+                        "Contraception", NA),
+         condition = ifelse(condition %contains% "b_contraception_hormonalyes",
+                        "Hormonal Contraception", NA)) %>%
+  ggplot(aes(y = condition,
+             x = condition_mean,
+             fill = stat(abs(x) < 0.05))) +
+  stat_halfeye() +
+  geom_vline(xintercept = c(-0.05, 0.05), linetype = "dotted") +
+  apatheme +
+  theme(legend.position = "none") +
+  scale_fill_manual(values = c("gray80", "skyblue")) +
+  labs(x = "Effect Size Estimates", y = "Predictors")
+```
+
+## Controlled Models: Effects of Hormonal Contraceptives {.tabset}
+### Sexual Frequency (Penetrative Intercourse) {.tabset}
+#### Model
+```{r}
+mrobust_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson(),
+                file = "mrobust_hc_sexfreqpen_controlled")
+```
+
+#### Summary
+```{r}
+kable(tidy(mrobust_hc_sexfreqpen_controlled, intervals = T, prob = 0.90))
+summary(mrobust_hc_sexfreqpen_controlled, intervals = T, prob = 0.90)
+```
+
+#### Comparison with ROPE
+```{r}
+plot(equivalence_test(mrobust_hc_sexfreqpen_controlled, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception"))
+equivalence_test(mrobust_hc_sexfreqpen_controlled, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception")
+```
+
+#### Plots
+```{r}
+conditional_effects(mrobust_hc_sexfreqpen_controlled,
+                    effects = "contraception_hormonal",
+                    conditions = data.frame(number_of_days = 1))
+```
+
+#### Forest Plot for Effect Sizes {.active}
+```{r}
+mrobust_hc_sexfreqpen_controlled %>%
+  spread_draws(b_contraception_hormonalyes,
+               b_age,
+               b_net_incomeeuro_500_1000, b_net_incomeeuro_1000_2000, 
+               b_net_incomeeuro_2000_3000, b_net_incomeeuro_gt_3000, b_net_incomedont_tell,
+               b_relationship_duration_factorPartnered_upto28months,
+               b_relationship_duration_factorPartnered_upto52months,
+               b_relationship_duration_factorPartnered_morethan52months,
+               b_education_years,
+               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, 
+               b_religiosity) %>%
+  pivot_longer(cols = c(b_contraception_hormonalyes,
+                        b_age,
+               b_net_incomeeuro_500_1000, b_net_incomeeuro_1000_2000, 
+               b_net_incomeeuro_2000_3000, b_net_incomeeuro_gt_3000, b_net_incomedont_tell,
+               b_relationship_duration_factorPartnered_upto28months,
+               b_relationship_duration_factorPartnered_upto52months,
+               b_relationship_duration_factorPartnered_morethan52months,
+               b_education_years,
+               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, 
+               b_religiosity),
+               names_to = "condition",
+               values_to = "r_condition") %>%
+  mutate(condition_mean = r_condition,
+         group = ifelse(condition %contains% "b_relationship_duration_factor",
+                        "Relationship Duration",
+                        ifelse(condition %contains% "b_net_income",
+                               "Income",
+                               NA)),
+         group = ifelse(condition %contains% "b_contraception_hormonalyes",
+                        "Contraception", group),
+         condition = ifelse(condition %contains% "b_contraception_hormonalyes",
+                        "Hormonal Contraception", condition),
+         condition = ifelse(condition == "b_age", "Age",
+                ifelse(condition == "b_net_incomeeuro_500_1000", "500-1000 Euro",
+                ifelse(condition == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
+                ifelse(condition == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
+                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3000 Euro",
+                ifelse(condition == "b_net_incomedont_tell", "do not tell",
+                ifelse(condition == "b_relationship_duration_factorPartnered_upto28months",
+                       "13-28 months",
+                ifelse(condition == "b_relationship_duration_factorPartnered_upto52months",
+                       "29-52 months",
+                ifelse(condition == "b_relationship_duration_factorPartnered_morethan52months",
+                       ">52 months",
+                ifelse(condition == "b_education_years", "Years of Education",
+                ifelse(condition == "b_bfi_extra", "Extraversion",
+                ifelse(condition == "b_bfi_neuro", "Neuroticism",
+                ifelse(condition == "b_bfi_agree", "Agreeableness",
+                ifelse(condition == "b_bfi_consc", "Conscientiousness",
+                ifelse(condition == "b_bfi_open", "Openness",
+                ifelse(condition == "b_religiosity", "Religiosity",
+                       condition)))))))))))))))),
+         group = ifelse(is.na(group), condition, group),
+         condition = factor(condition, levels = rev(c("Hormonal Contraception", "Age",
+                                        "500-1000 Euro", "1000-2000 Euro",
+                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
+                                        "13-28 months", "29-52 months",
+                                        ">52 months",
+                                        "Years of Education",
+                                        "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness","Religiosity"))),
+         group = factor(group, levels = c("Contraception", "Age", "Income",
+                                          "Relationship Duration","Years of Education",
+                                          "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness","Religiosity"))) %>%
+  ggplot(aes(y = condition,
+             x = condition_mean,
+             fill = stat(abs(x) < 0.05))) +
+  stat_halfeye() +
+  geom_vline(xintercept = c(-0.05, 0.05), linetype = "dotted") +
+  apatheme +
+  theme(legend.position = "none") +
+  scale_fill_manual(values = c("gray80", "skyblue")) +
+  labs(x = "Effect Size Estimates", y = "Predictors")
+```
+
+### Masturabation Frequency {.tabset}
+#### Model
+```{r}
+mrobust_hc_masfreq_controlled = brm(diary_masturbation_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson(),
+                file = "mrobust_hc_masfreq_controlled")
+```
+
+#### Summary
+```{r}
+kable(tidy(mrobust_hc_masfreq_controlled, intervals = T, prob = 0.90))
+summary(mrobust_hc_masfreq_controlled, intervals = T, prob = 0.90)
+```
+
+#### Comparison with ROPE
+```{r}
+plot(equivalence_test(mrobust_hc_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception"))
+equivalence_test(mrobust_hc_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception")
+```
+
+#### Plots
+```{r}
+conditional_effects(mrobust_hc_masfreq_controlled,
+                    effects = "contraception_hormonal",
+                    conditions = data.frame(number_of_days = 1))
+```
+
+#### Forest Plot for Effect Sizes {.active}
+```{r}
+mrobust_hc_masfreq_controlled %>%
+  spread_draws(b_contraception_hormonalyes,
+               b_age,
+               b_net_incomeeuro_500_1000, b_net_incomeeuro_1000_2000, 
+               b_net_incomeeuro_2000_3000, b_net_incomeeuro_gt_3000, b_net_incomedont_tell,
+               b_relationship_duration_factorPartnered_upto28months,
+               b_relationship_duration_factorPartnered_upto52months,
+               b_relationship_duration_factorPartnered_morethan52months,
+               b_education_years,
+               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, 
+               b_religiosity) %>%
+  pivot_longer(cols = c(b_contraception_hormonalyes,
+                        b_age,
+               b_net_incomeeuro_500_1000, b_net_incomeeuro_1000_2000, 
+               b_net_incomeeuro_2000_3000, b_net_incomeeuro_gt_3000, b_net_incomedont_tell,
+               b_relationship_duration_factorPartnered_upto28months,
+               b_relationship_duration_factorPartnered_upto52months,
+               b_relationship_duration_factorPartnered_morethan52months,
+               b_education_years,
+               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, 
+               b_religiosity),
+               names_to = "condition",
+               values_to = "r_condition") %>%
+  mutate(condition_mean = r_condition,
+         group = ifelse(condition %contains% "b_relationship_duration_factor",
+                        "Relationship Duration",
+                        ifelse(condition %contains% "b_net_income",
+                               "Income",
+                               NA)),
+         group = ifelse(condition %contains% "b_contraception_hormonalyes",
+                        "Contraception", group),
+         condition = ifelse(condition %contains% "b_contraception_hormonalyes",
+                        "Hormonal Contraception", condition),
+         condition = ifelse(condition == "b_age", "Age",
+                ifelse(condition == "b_net_incomeeuro_500_1000", "500-1000 Euro",
+                ifelse(condition == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
+                ifelse(condition == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
+                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3000 Euro",
+                ifelse(condition == "b_net_incomedont_tell", "do not tell",
+                ifelse(condition == "b_relationship_duration_factorPartnered_upto28months",
+                       "13-28 months",
+                ifelse(condition == "b_relationship_duration_factorPartnered_upto52months",
+                       "29-52 months",
+                ifelse(condition == "b_relationship_duration_factorPartnered_morethan52months",
+                       ">52 months",
+                ifelse(condition == "b_education_years", "Years of Education",
+                ifelse(condition == "b_bfi_extra", "Extraversion",
+                ifelse(condition == "b_bfi_neuro", "Neuroticism",
+                ifelse(condition == "b_bfi_agree", "Agreeableness",
+                ifelse(condition == "b_bfi_consc", "Conscientiousness",
+                ifelse(condition == "b_bfi_open", "Openness",
+                ifelse(condition == "b_religiosity", "Religiosity",
+                       condition)))))))))))))))),
+         group = ifelse(is.na(group), condition, group),
+         condition = factor(condition, levels = rev(c("Hormonal Contraception", "Age",
+                                        "500-1000 Euro", "1000-2000 Euro",
+                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
+                                        "13-28 months", "29-52 months",
+                                        ">52 months",
+                                        "Years of Education",
+                                        "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness","Religiosity"))),
+         group = factor(group, levels = c("Contraception", "Age", "Income",
+                                          "Relationship Duration","Years of Education",
+                                          "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness","Religiosity"))) %>%
+  ggplot(aes(y = condition,
+             x = condition_mean,
+             fill = stat(abs(x) < 0.05))) +
+  stat_halfeye() +
+  geom_vline(xintercept = c(-0.05, 0.05), linetype = "dotted") +
+  apatheme +
+  theme(legend.position = "none") +
+  scale_fill_manual(values = c("gray80", "skyblue")) +
+  labs(x = "Effect Size Estimates", y = "Predictors")
+```
+
+## Effects of (In)Congruenct HC Use {.tabset}
+
+### Sexual Frequency (Penetrative Intercourse) {.tabset}
+#### Model
+```{r}
+mrobust_congruency_sexfreqpen = brm(diary_sex_active_sex_sum ~ offset(log(number_of_days)) +
+                     contraception_hormonal * congruent_contraception,
+                data = data, family = poisson(),
+                file = "mrobust_congruency_sexfreqpen")
+```
+
+#### Summary
+```{r}
+kable(tidy(mrobust_congruency_sexfreqpen, intervals = T, prob = 0.90))
+summary(mrobust_congruency_sexfreqpen, intervals = T, prob = 0.90)
+```
+
+#### Comparison with ROPE
+```{r}
+plot(equivalence_test(mrobust_congruency_sexfreqpen, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception"))
+equivalence_test(mrobust_congruency_sexfreqpen, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception")
+```
+
+#### Plots
+```{r}
+conditional_effects(mrobust_congruency_sexfreqpen,
+                    effects = "contraception_hormonal:congruent_contraception",
+                    conditions = data.frame(number_of_days = 1))
+```
+
+#### Forest Plot for Effect Sizes {.active}
+```{r}
+mrobust_congruency_sexfreqpen %>%
+  spread_draws(b_contraception_hormonalyes, b_congruent_contraception1,
+               `b_contraception_hormonalyes:congruent_contraception1`) %>%
+  pivot_longer(cols = c(b_contraception_hormonalyes, b_congruent_contraception1,
+               `b_contraception_hormonalyes:congruent_contraception1`),
+               names_to = "condition",
+               values_to = "r_condition") %>%
+  mutate(condition_mean = r_condition,
+         group = ifelse(condition %contains% "ontraception",
+                        "Contraception", NA),
+         condition = ifelse(condition == "b_contraception_hormonalyes",
+                        "Hormonal Contraception",
+                     ifelse(condition == "b_congruent_contraception1",
+                            "Congruent Contraception",
+                     ifelse(condition == "b_contraception_hormonalyes:congruent_contraception1",
+                            "Interaction Hormonal Contracpetion and Congruent Contraception",
+                            condition))),
+         condition = factor(condition, levels = rev(c("Hormonal Contraception",
+                                            "Congruent Contraception",
+                                            "Interaction Hormonal Contracpetion and Congruent Contraception")))) %>%
+  ggplot(aes(y = condition,
+             x = condition_mean,
+             fill = stat(abs(x) < 0.05))) +
+  stat_halfeye() +
+  geom_vline(xintercept = c(-0.05, 0.051), linetype = "dotted") +
+  apatheme +
+  theme(legend.position = "none") +
+  scale_fill_manual(values = c("gray80", "skyblue")) +
+  labs(x = "Effect Size Estimates", y = "Predictors")
+```
+
+### Masturbation Frequency {.tabset}
+#### Model
+```{r}
+mrobust_congruency_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
+                             contraception_hormonal * congruent_contraception,
+                data = data, family = poisson(),
+                file = "mrobust_congruency_masfreq")
+```
+
+#### Summary
+```{r}
+kable(tidy(mrobust_congruency_masfreq, intervals = T, prob = 0.90))
+summary(mrobust_congruency_masfreq, intervals = T, prob = 0.90)
+```
+
+#### Comparison with ROPE
+```{r}
+plot(equivalence_test(mrobust_congruency_masfreq, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception"))
+equivalence_test(mrobust_congruency_masfreq, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception")
+```
+
+#### Plots
+```{r}
+conditional_effects(mrobust_congruency_masfreq,
+                    effects = "contraception_hormonal:congruent_contraception",
+                    conditions = data.frame(number_of_days = 1))
+```
+
+#### Forest Plot for Effect Sizes {.active}
+```{r}
+mrobust_congruency_masfreq %>%
+spread_draws(b_contraception_hormonalyes, b_congruent_contraception1,
+               `b_contraception_hormonalyes:congruent_contraception1`) %>%
+  pivot_longer(cols = c(b_contraception_hormonalyes, b_congruent_contraception1,
+               `b_contraception_hormonalyes:congruent_contraception1`),
+               names_to = "condition",
+               values_to = "r_condition") %>%
+  mutate(condition_mean = r_condition,
+         group = ifelse(condition %contains% "ontraception",
+                        "Contraception", NA),
+         condition = ifelse(condition == "b_contraception_hormonalyes",
+                        "Hormonal Contraception",
+                     ifelse(condition == "b_congruent_contraception1",
+                            "Congruent Contraception",
+                     ifelse(condition == "b_contraception_hormonalyes:congruent_contraception1",
+                            "Interaction Hormonal Contracpetion and Congruent Contraception",
+                            condition))),
+         condition = factor(condition, levels = rev(c("Hormonal Contraception",
+                                            "Congruent Contraception",
+                                            "Interaction Hormonal Contracpetion and Congruent Contraception")))) %>%
+  ggplot(aes(y = condition,
+             x = condition_mean,
+             fill = stat(abs(x) < 0.05))) +
+  stat_halfeye() +
+  geom_vline(xintercept = c(-0.05, 0.05), linetype = "dotted") +
+  apatheme +
+  theme(legend.position = "none") +
+  scale_fill_manual(values = c("gray80", "skyblue")) +
+  labs(x = "Effect Size Estimates", y = "Predictors")
+```
+
+
+
+## Controlled Models: Effects of (In)Congruenct HC Use {.tabset}
+
+### Sexual Frequency (Penetrative Intercourse) {.tabset}
+#### Model
+```{r}
+mrobust_congruency_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal * congruent_contraception +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson(),
+                file = "mrobust_congruency_sexfreqpen_controlled")
+```
+
+#### Summary
+```{r}
+kable(tidy(mrobust_congruency_sexfreqpen_controlled, intervals = T, prob = 0.90))
+summary(mrobust_congruency_sexfreqpen_controlled, intervals = T, prob = 0.90)
+```
+
+#### Comparison with ROPE
+```{r}
+plot(equivalence_test(mrobust_congruency_sexfreqpen_controlled, range = c(-0.05, 0.05),
+                      ci = 0.90,
+                      parameters = "contraception"))
+equivalence_test(mrobust_congruency_sexfreqpen_controlled, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception")
+```
+
+#### Plots
+```{r}
+conditional_effects(mrobust_congruency_sexfreqpen_controlled,
+                    effects = "contraception_hormonal:congruent_contraception",
+                    conditions = data.frame(number_of_days = 1))
+```
+
+#### Forest Plot for Effect Sizes {.active}
+```{r}
+mrobust_congruency_sexfreqpen_controlled %>%
+
+  spread_draws(b_contraception_hormonalyes, b_congruent_contraception1,
+               `b_contraception_hormonalyes:congruent_contraception1`,
+               b_age,
+               b_net_incomeeuro_500_1000, b_net_incomeeuro_1000_2000, 
+               b_net_incomeeuro_2000_3000, b_net_incomeeuro_gt_3000, b_net_incomedont_tell,
+               b_relationship_duration_factorPartnered_upto28months,
+               b_relationship_duration_factorPartnered_upto52months,
+               b_relationship_duration_factorPartnered_morethan52months,
+               b_education_years,
+               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, 
+               b_religiosity) %>%
+  pivot_longer(cols = c(b_contraception_hormonalyes, b_congruent_contraception1,
+               `b_contraception_hormonalyes:congruent_contraception1`,
+                        b_age,
+               b_net_incomeeuro_500_1000, b_net_incomeeuro_1000_2000, 
+               b_net_incomeeuro_2000_3000, b_net_incomeeuro_gt_3000, b_net_incomedont_tell,
+               b_relationship_duration_factorPartnered_upto28months,
+               b_relationship_duration_factorPartnered_upto52months,
+               b_relationship_duration_factorPartnered_morethan52months,
+               b_education_years,
+               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, 
+               b_religiosity),
+               names_to = "condition",
+               values_to = "r_condition") %>%
+  mutate(condition_mean = r_condition,
+         group = ifelse(condition %contains% "b_relationship_duration_factor",
+                        "Relationship Duration",
+                        ifelse(condition %contains% "b_net_income",
+                               "Income",
+                               NA)),
+         group = ifelse(condition %contains% "ontraception",
+                        "Contraception", group),
+         condition = ifelse(condition == "b_contraception_hormonalyes",
+                        "Hormonal Contraception",
+                     ifelse(condition == "b_congruent_contraception1",
+                            "Congruent Contraception",
+                     ifelse(condition == "b_contraception_hormonalyes:congruent_contraception1",
+                            "Interaction Hormonal Contracpetion and Congruent Contraception",
+                            condition))),
+         condition = ifelse(condition == "b_age", "Age",
+                ifelse(condition == "b_net_incomeeuro_500_1000", "500-1000 Euro",
+                ifelse(condition == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
+                ifelse(condition == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
+                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3000 Euro",
+                ifelse(condition == "b_net_incomedont_tell", "do not tell",
+                ifelse(condition == "b_relationship_duration_factorPartnered_upto28months",
+                       "13-28 months",
+                ifelse(condition == "b_relationship_duration_factorPartnered_upto52months",
+                       "29-52 months",
+                ifelse(condition == "b_relationship_duration_factorPartnered_morethan52months",
+                       ">52 months",
+                ifelse(condition == "b_education_years", "Years of Education",
+                ifelse(condition == "b_bfi_extra", "Extraversion",
+                ifelse(condition == "b_bfi_neuro", "Neuroticism",
+                ifelse(condition == "b_bfi_agree", "Agreeableness",
+                ifelse(condition == "b_bfi_consc", "Conscientiousness",
+                ifelse(condition == "b_bfi_open", "Openness",
+                ifelse(condition == "b_religiosity", "Religiosity",
+                       condition)))))))))))))))),
+         group = ifelse(is.na(group), condition, group),
+         condition = factor(condition, levels = rev(c("Hormonal Contraception",
+                                        "Congruent Contraception",
+                                        "Interaction Hormonal Contracpetion and Congruent Contraception",
+                                        "Age",
+                                        "500-1000 Euro", "1000-2000 Euro",
+                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
+                                        "13-28 months", "29-52 months",
+                                        ">52 months",
+                                        "Years of Education",
+                                        "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness","Religiosity"))),
+         group = factor(group, levels = c("Contraception", "Age", "Income",
+                                          "Relationship Duration","Years of Education",
+                                          "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness","Religiosity"))) %>%
+  ggplot(aes(y = condition,
+             x = condition_mean,
+             fill = stat(abs(x) < 0.05))) +
+  stat_halfeye() +
+  geom_vline(xintercept = c(-0.05, 0.05), linetype = "dotted") +
+  apatheme +
+  theme(legend.position = "none") +
+  scale_fill_manual(values = c("gray80", "skyblue")) +
+  labs(x = "Effect Size Estimates", y = "Predictors")
+```
+
+### Masturbation Frequency {.tabset}
+#### Model
+```{r}
+mrobust_congruency_masfreq_controlled = brm(diary_masturbation_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal * congruent_contraception +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson(),
+                file = "mrobust_congruency_masfreq_controlled")
+```
+
+#### Summary
+```{r}
+kable(tidy(mrobust_congruency_masfreq_controlled, intervals = T, prob = 0.90))
+summary(mrobust_congruency_masfreq_controlled, intervals = T, prob = 0.90)
+```
+
+#### Comparison with ROPE
+```{r}
+plot(equivalence_test(mrobust_congruency_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception"))
+equivalence_test(mrobust_congruency_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
+                      parameters = "contraception")
+```
+
+#### Plots
+```{r}
+conditional_effects(mrobust_congruency_masfreq_controlled,
+                    effects = "contraception_hormonal:congruent_contraception",
+                    conditions = data.frame(number_of_days = 1))
+```
+
+#### Forest Plot for Effect Sizes {.active}
+```{r}
+mrobust_congruency_masfreq_controlled %>%
+
+  spread_draws(b_contraception_hormonalyes, b_congruent_contraception1,
+               `b_contraception_hormonalyes:congruent_contraception1`,
+               b_age,
+               b_net_incomeeuro_500_1000, b_net_incomeeuro_1000_2000, 
+               b_net_incomeeuro_2000_3000, b_net_incomeeuro_gt_3000, b_net_incomedont_tell,
+               b_relationship_duration_factorPartnered_upto28months,
+               b_relationship_duration_factorPartnered_upto52months,
+               b_relationship_duration_factorPartnered_morethan52months,
+               b_education_years,
+               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, 
+               b_religiosity) %>%
+  pivot_longer(cols = c(b_contraception_hormonalyes, b_congruent_contraception1,
+               `b_contraception_hormonalyes:congruent_contraception1`,
+                        b_age,
+               b_net_incomeeuro_500_1000, b_net_incomeeuro_1000_2000, 
+               b_net_incomeeuro_2000_3000, b_net_incomeeuro_gt_3000, b_net_incomedont_tell,
+               b_relationship_duration_factorPartnered_upto28months,
+               b_relationship_duration_factorPartnered_upto52months,
+               b_relationship_duration_factorPartnered_morethan52months,
+               b_education_years,
+               b_bfi_extra, b_bfi_neuro, b_bfi_agree, b_bfi_consc, b_bfi_open, 
+               b_religiosity),
+               names_to = "condition",
+               values_to = "r_condition") %>%
+  mutate(condition_mean = r_condition,
+         group = ifelse(condition %contains% "b_relationship_duration_factor",
+                        "Relationship Duration",
+                        ifelse(condition %contains% "b_net_income",
+                               "Income",
+                               NA)),
+         group = ifelse(condition %contains% "ontraception",
+                        "Contraception", group),
+         condition = ifelse(condition == "b_contraception_hormonalyes",
+                        "Hormonal Contraception",
+                     ifelse(condition == "b_congruent_contraception1",
+                            "Congruent Contraception",
+                     ifelse(condition == "b_contraception_hormonalyes:congruent_contraception1",
+                            "Interaction Hormonal Contracpetion and Congruent Contraception",
+                            condition))),
+         condition = ifelse(condition == "b_age", "Age",
+                ifelse(condition == "b_net_incomeeuro_500_1000", "500-1000 Euro",
+                ifelse(condition == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
+                ifelse(condition == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
+                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3000 Euro",
+                ifelse(condition == "b_net_incomedont_tell", "do not tell",
+                ifelse(condition == "b_relationship_duration_factorPartnered_upto28months",
+                       "13-28 months",
+                ifelse(condition == "b_relationship_duration_factorPartnered_upto52months",
+                       "29-52 months",
+                ifelse(condition == "b_relationship_duration_factorPartnered_morethan52months",
+                       ">52 months",
+                ifelse(condition == "b_education_years", "Years of Education",
+                ifelse(condition == "b_bfi_extra", "Extraversion",
+                ifelse(condition == "b_bfi_neuro", "Neuroticism",
+                ifelse(condition == "b_bfi_agree", "Agreeableness",
+                ifelse(condition == "b_bfi_consc", "Conscientiousness",
+                ifelse(condition == "b_bfi_open", "Openness",
+                ifelse(condition == "b_religiosity", "Religiosity",
+                       condition)))))))))))))))),
+         group = ifelse(is.na(group), condition, group),
+         condition = factor(condition, levels = rev(c("Hormonal Contraception",
+                                        "Congruent Contraception",
+                                        "Interaction Hormonal Contracpetion and Congruent Contraception",
+                                        "Age",
+                                        "500-1000 Euro", "1000-2000 Euro",
+                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
+                                        "13-28 months", "29-52 months",
+                                        ">52 months",
+                                        "Years of Education",
+                                        "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness","Religiosity"))),
+         group = factor(group, levels = c("Contraception", "Age", "Income",
+                                          "Relationship Duration","Years of Education",
+                                          "Extraversion", "Neuroticism", "Agreeableness",
+                                         "Conscientiousness","Openness","Religiosity"))) %>%
+  ggplot(aes(y = condition,
+             x = condition_mean,
+             fill = stat(abs(x) < 0.05))) +
+  stat_halfeye() +
+  geom_vline(xintercept = c(-0.05, 0.05), linetype = "dotted") +
+  apatheme +
+  theme(legend.position = "none") +
+  scale_fill_manual(values = c("gray80", "skyblue")) +
+  labs(x = "Effect Size Estimates", y = "Predictors")
+```

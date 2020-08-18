@@ -346,8 +346,7 @@ data = left_join(data, data_diary_means, by = "session")
 ```{r}
 data = data %>%
   select(-duration_relationship_years, -duration_relationship_month,
-         -contraception_at_all, -contraception_method, -contraception_approach, -contraception_method_broad,
-         -reasons_for_exclusion)
+         -contraception_at_all, -contraception_approach, -contraception_method_broad)
 ```
 
  
