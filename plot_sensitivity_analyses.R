@@ -11,12 +11,12 @@ data_plot = data.frame(
   Predictor = rep(c("Use of HC",
               "Use of HC + Observed Confounders"),
             6),
-  Percentage = c(19.8, 7.5,
-               16.9, 8.7,
-               38.8, 24.7,
-               36.1, 26.4,
-               34.9, 19.8,
-               32.0, 21.6
+  Percentage = c(10.2, 4.3,
+               19.2, 10.9,
+               28.5, 19.1,
+               38.3, 29.5,
+               23.7, 13.5,
+               34.3, 24.6
                )
 )
 

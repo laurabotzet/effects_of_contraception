@@ -225,37 +225,37 @@ m_hc_libido %>%
 ### Sexual Frequency (Penetrative Intercourse) {.tabset}
 #### Model
 ```{r}
-m_hc_sexfreqpen = brm(diary_sex_active_sex_sum ~
+mrobust_hc_sexfreqpen = brm(diary_sex_active_sex_sum ~
                         offset(log(number_of_days)) +
                         contraception_hormonal,
                 data = data, family = poisson(),
-                file = "m_hc_sexfreqpen")
+                file = "mrobust_hc_sexfreqpen")
 ```
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_sexfreqpen, intervals = T, prob = 0.90))
-summary(m_hc_sexfreqpen, intervals = T, prob = 0.90)
+kable(tidy(mrobust_hc_sexfreqpen, intervals = T, prob = 0.90))
+summary(mrobust_hc_sexfreqpen, intervals = T, prob = 0.90)
 ```
 
 #### Comparison with ROPE
 ```{r}
-plot(equivalence_test(m_hc_sexfreqpen, range = c(-0.05, 0.05)), ci = 0.90,
+plot(equivalence_test(mrobust_hc_sexfreqpen, range = c(-0.05, 0.05)), ci = 0.90,
                       parameters = "contraception")
-equivalence_test(m_hc_sexfreqpen, range = c(-0.05, 0.05), ci = 0.90,
+equivalence_test(mrobust_hc_sexfreqpen, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception")
 ```
 
 #### Plots
 ```{r}
-conditional_effects(m_hc_sexfreqpen,
+conditional_effects(mrobust_hc_sexfreqpen,
                     effects = "contraception_hormonal",
                     conditions = data.frame(number_of_days = 1))
 ```
 
 #### Forest Plot for Effect Sizes {.active}
 ```{r}
-m_hc_sexfreqpen %>%
+mrobust_hc_sexfreqpen %>%
   spread_draws(b_contraception_hormonalyes) %>%
   pivot_longer(cols = c(b_contraception_hormonalyes),
                names_to = "condition",
@@ -279,36 +279,36 @@ m_hc_sexfreqpen %>%
 ### Masturbation Frequency {.tabset}
 #### Model
 ```{r}
-m_hc_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
+mrobust_hc_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
                      contraception_hormonal,
                 data = data, family = poisson(),
-                file = "m_hc_masfreq")
+                file = "mrobust_hc_masfreq")
 ```
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_masfreq, intervals = T, prob = 0.90))
-summary(m_hc_masfreq, intervals = T, prob = 0.90)
+kable(tidy(mrobust_hc_masfreq, intervals = T, prob = 0.90))
+summary(mrobust_hc_masfreq, intervals = T, prob = 0.90)
 ```
 
 #### Comparison with ROPE
 ```{r}
-plot(equivalence_test(m_hc_masfreq, range = c(-0.05, 0.05), ci = 0.90,
+plot(equivalence_test(mrobust_hc_masfreq, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception"))
-equivalence_test(m_hc_masfreq, range = c(-0.05, 0.05), ci = 0.90,
+equivalence_test(mrobust_hc_masfreq, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception")
 ```
 
 #### Plots
 ```{r}
-conditional_effects(m_hc_masfreq,
+conditional_effects(mrobust_hc_masfreq,
                     effects = "contraception_hormonal",
                     conditions = data.frame(number_of_days = 1))
 ```
 
 #### Forest Plot for Effect Sizes {.active}
 ```{r}
-m_hc_masfreq %>%
+mrobust_hc_masfreq %>%
   spread_draws(b_contraception_hormonalyes) %>%
   pivot_longer(cols = c(b_contraception_hormonalyes),
                names_to = "condition",
@@ -776,7 +776,7 @@ m_hc_libido_controlled %>%
 ### Sexual Frequency (Penetrative Intercourse) {.tabset}
 #### Model
 ```{r}
-m_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
+mrobust_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
                         offset(log(number_of_days)) +
                         contraception_hormonal +
                         age + net_income + relationship_duration_factor +
@@ -784,33 +784,33 @@ m_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                 data = data, family = poisson(),
-                file = "m_hc_sexfreqpen_controlled")
+                file = "mrobust_hc_sexfreqpen_controlled")
 ```
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_sexfreqpen_controlled, intervals = T, prob = 0.90))
-summary(m_hc_sexfreqpen_controlled, intervals = T, prob = 0.90)
+kable(tidy(mrobust_hc_sexfreqpen_controlled, intervals = T, prob = 0.90))
+summary(mrobust_hc_sexfreqpen_controlled, intervals = T, prob = 0.90)
 ```
 
 #### Comparison with ROPE
 ```{r}
-plot(equivalence_test(m_hc_sexfreqpen_controlled, range = c(-0.05, 0.05), ci = 0.90,
+plot(equivalence_test(mrobust_hc_sexfreqpen_controlled, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception"))
-equivalence_test(m_hc_sexfreqpen_controlled, range = c(-0.05, 0.05), ci = 0.90,
+equivalence_test(mrobust_hc_sexfreqpen_controlled, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception")
 ```
 
 #### Plots
 ```{r}
-conditional_effects(m_hc_sexfreqpen_controlled,
+conditional_effects(mrobust_hc_sexfreqpen_controlled,
                     effects = "contraception_hormonal",
                     conditions = data.frame(number_of_days = 1))
 ```
 
 #### Forest Plot for Effect Sizes {.active}
 ```{r}
-m_hc_sexfreqpen_controlled %>%
+mrobust_hc_sexfreqpen_controlled %>%
   spread_draws(b_contraception_hormonalyes,
                b_age,
                b_net_incomeeuro_500_1000, b_net_incomeeuro_1000_2000, 
@@ -890,7 +890,7 @@ m_hc_sexfreqpen_controlled %>%
 ### Masturabation Frequency {.tabset}
 #### Model
 ```{r}
-m_hc_masfreq_controlled = brm(diary_masturbation_sum ~
+mrobust_hc_masfreq_controlled = brm(diary_masturbation_sum ~
                         offset(log(number_of_days)) +
                         contraception_hormonal +
                         age + net_income + relationship_duration_factor +
@@ -898,33 +898,33 @@ m_hc_masfreq_controlled = brm(diary_masturbation_sum ~
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                 data = data, family = poisson(),
-                file = "m_hc_masfreq_controlled")
+                file = "mrobust_hc_masfreq_controlled")
 ```
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_masfreq_controlled, intervals = T, prob = 0.90))
-summary(m_hc_masfreq_controlled, intervals = T, prob = 0.90)
+kable(tidy(mrobust_hc_masfreq_controlled, intervals = T, prob = 0.90))
+summary(mrobust_hc_masfreq_controlled, intervals = T, prob = 0.90)
 ```
 
 #### Comparison with ROPE
 ```{r}
-plot(equivalence_test(m_hc_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
+plot(equivalence_test(mrobust_hc_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception"))
-equivalence_test(m_hc_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
+equivalence_test(mrobust_hc_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception")
 ```
 
 #### Plots
 ```{r}
-conditional_effects(m_hc_masfreq_controlled,
+conditional_effects(mrobust_hc_masfreq_controlled,
                     effects = "contraception_hormonal",
                     conditions = data.frame(number_of_days = 1))
 ```
 
 #### Forest Plot for Effect Sizes {.active}
 ```{r}
-m_hc_masfreq_controlled %>%
+mrobust_hc_masfreq_controlled %>%
   spread_draws(b_contraception_hormonalyes,
                b_age,
                b_net_incomeeuro_500_1000, b_net_incomeeuro_1000_2000, 
@@ -1255,39 +1255,40 @@ m_congruency_libido %>%
   xlim (-0.6, 0.6)
 ```
 
+
 ### Sexual Frequency (Penetrative Intercourse) {.tabset}
 #### Model
 ```{r}
-m_congruency_sexfreqpen = brm(diary_sex_active_sex_sum ~ offset(log(number_of_days)) +
+mrobust_congruency_sexfreqpen = brm(diary_sex_active_sex_sum ~ offset(log(number_of_days)) +
                      contraception_hormonal * congruent_contraception,
                 data = data, family = poisson(),
-                file = "m_congruency_sexfreqpen")
+                file = "mrobust_congruency_sexfreqpen")
 ```
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_sexfreqpen, intervals = T, prob = 0.90))
-summary(m_congruency_sexfreqpen, intervals = T, prob = 0.90)
+kable(tidy(mrobust_congruency_sexfreqpen, intervals = T, prob = 0.90))
+summary(mrobust_congruency_sexfreqpen, intervals = T, prob = 0.90)
 ```
 
 #### Comparison with ROPE
 ```{r}
-plot(equivalence_test(m_congruency_sexfreqpen, range = c(-0.05, 0.05), ci = 0.90,
+plot(equivalence_test(mrobust_congruency_sexfreqpen, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception"))
-equivalence_test(m_congruency_sexfreqpen, range = c(-0.05, 0.05), ci = 0.90,
+equivalence_test(mrobust_congruency_sexfreqpen, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception")
 ```
 
 #### Plots
 ```{r}
-conditional_effects(m_congruency_sexfreqpen,
+conditional_effects(mrobust_congruency_sexfreqpen,
                     effects = "contraception_hormonal:congruent_contraception",
                     conditions = data.frame(number_of_days = 1))
 ```
 
 #### Forest Plot for Effect Sizes {.active}
 ```{r}
-m_congruency_sexfreqpen %>%
+mrobust_congruency_sexfreqpen %>%
   spread_draws(b_contraception_hormonalyes, b_congruent_contraception1,
                `b_contraception_hormonalyes:congruent_contraception1`) %>%
   pivot_longer(cols = c(b_contraception_hormonalyes, b_congruent_contraception1,
@@ -1321,36 +1322,36 @@ m_congruency_sexfreqpen %>%
 ### Masturbation Frequency {.tabset}
 #### Model
 ```{r}
-m_congruency_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
+mrobust_congruency_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
                              contraception_hormonal * congruent_contraception,
                 data = data, family = poisson(),
-                file = "m_congruency_masfreq")
+                file = "mrobust_congruency_masfreq")
 ```
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_masfreq, intervals = T, prob = 0.90))
-summary(m_congruency_masfreq, intervals = T, prob = 0.90)
+kable(tidy(mrobust_congruency_masfreq, intervals = T, prob = 0.90))
+summary(mrobust_congruency_masfreq, intervals = T, prob = 0.90)
 ```
 
 #### Comparison with ROPE
 ```{r}
-plot(equivalence_test(m_congruency_masfreq, range = c(-0.05, 0.05), ci = 0.90,
+plot(equivalence_test(mrobust_congruency_masfreq, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception"))
-equivalence_test(m_congruency_masfreq, range = c(-0.05, 0.05), ci = 0.90,
+equivalence_test(mrobust_congruency_masfreq, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception")
 ```
 
 #### Plots
 ```{r}
-conditional_effects(m_congruency_masfreq,
+conditional_effects(mrobust_congruency_masfreq,
                     effects = "contraception_hormonal:congruent_contraception",
                     conditions = data.frame(number_of_days = 1))
 ```
 
 #### Forest Plot for Effect Sizes {.active}
 ```{r}
-m_congruency_masfreq %>%
+mrobust_congruency_masfreq %>%
 spread_draws(b_contraception_hormonalyes, b_congruent_contraception1,
                `b_contraception_hormonalyes:congruent_contraception1`) %>%
   pivot_longer(cols = c(b_contraception_hormonalyes, b_congruent_contraception1,
@@ -1872,10 +1873,11 @@ m_congruency_libido_controlled %>%
   labs(x = "Effect Size Estimates", y = "Predictors")
 ```
 
+
 ### Sexual Frequency (Penetrative Intercourse) {.tabset}
 #### Model
 ```{r}
-m_congruency_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
+mrobust_congruency_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
                         offset(log(number_of_days)) +
                         contraception_hormonal * congruent_contraception +
                         age + net_income + relationship_duration_factor +
@@ -1883,34 +1885,34 @@ m_congruency_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                 data = data, family = poisson(),
-                file = "m_congruency_sexfreqpen_controlled")
+                file = "mrobust_congruency_sexfreqpen_controlled")
 ```
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_sexfreqpen_controlled, intervals = T, prob = 0.90))
-summary(m_congruency_sexfreqpen_controlled, intervals = T, prob = 0.90)
+kable(tidy(mrobust_congruency_sexfreqpen_controlled, intervals = T, prob = 0.90))
+summary(mrobust_congruency_sexfreqpen_controlled, intervals = T, prob = 0.90)
 ```
 
 #### Comparison with ROPE
 ```{r}
-plot(equivalence_test(m_congruency_sexfreqpen_controlled, range = c(-0.05, 0.05),
+plot(equivalence_test(mrobust_congruency_sexfreqpen_controlled, range = c(-0.05, 0.05),
                       ci = 0.90,
                       parameters = "contraception"))
-equivalence_test(m_congruency_sexfreqpen_controlled, range = c(-0.05, 0.05), ci = 0.90,
+equivalence_test(mrobust_congruency_sexfreqpen_controlled, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception")
 ```
 
 #### Plots
 ```{r}
-conditional_effects(m_congruency_sexfreqpen_controlled,
+conditional_effects(mrobust_congruency_sexfreqpen_controlled,
                     effects = "contraception_hormonal:congruent_contraception",
                     conditions = data.frame(number_of_days = 1))
 ```
 
 #### Forest Plot for Effect Sizes {.active}
 ```{r}
-m_congruency_sexfreqpen_controlled %>%
+mrobust_congruency_sexfreqpen_controlled %>%
 
   spread_draws(b_contraception_hormonalyes, b_congruent_contraception1,
                `b_contraception_hormonalyes:congruent_contraception1`,
@@ -2001,7 +2003,7 @@ m_congruency_sexfreqpen_controlled %>%
 ### Masturbation Frequency {.tabset}
 #### Model
 ```{r}
-m_congruency_masfreq_controlled = brm(diary_masturbation_sum ~
+mrobust_congruency_masfreq_controlled = brm(diary_masturbation_sum ~
                         offset(log(number_of_days)) +
                         contraception_hormonal * congruent_contraception +
                         age + net_income + relationship_duration_factor +
@@ -2009,33 +2011,33 @@ m_congruency_masfreq_controlled = brm(diary_masturbation_sum ~
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                 data = data, family = poisson(),
-                file = "m_congruency_masfreq_controlled")
+                file = "mrobust_congruency_masfreq_controlled")
 ```
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_masfreq_controlled, intervals = T, prob = 0.90))
-summary(m_congruency_masfreq_controlled, intervals = T, prob = 0.90)
+kable(tidy(mrobust_congruency_masfreq_controlled, intervals = T, prob = 0.90))
+summary(mrobust_congruency_masfreq_controlled, intervals = T, prob = 0.90)
 ```
 
 #### Comparison with ROPE
 ```{r}
-plot(equivalence_test(m_congruency_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
+plot(equivalence_test(mrobust_congruency_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception"))
-equivalence_test(m_congruency_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
+equivalence_test(mrobust_congruency_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
                       parameters = "contraception")
 ```
 
 #### Plots
 ```{r}
-conditional_effects(m_congruency_masfreq_controlled,
+conditional_effects(mrobust_congruency_masfreq_controlled,
                     effects = "contraception_hormonal:congruent_contraception",
                     conditions = data.frame(number_of_days = 1))
 ```
 
 #### Forest Plot for Effect Sizes {.active}
 ```{r}
-m_congruency_masfreq_controlled %>%
+mrobust_congruency_masfreq_controlled %>%
 
   spread_draws(b_contraception_hormonalyes, b_congruent_contraception1,
                `b_contraception_hormonalyes:congruent_contraception1`,
@@ -2167,3 +2169,5 @@ Model Comparisons: The difference between models is `r round(compare_models$diff
 ```{r}
 compare_models
 ```
+
+

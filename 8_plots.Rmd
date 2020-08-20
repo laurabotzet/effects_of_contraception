@@ -183,7 +183,7 @@ selection_hc =
                                               plot.margin = margin(1,0,0,0,"cm")),
           m_selection_hc_complex_plot + theme(legend.position = c(0.85,0.5),
                                               plot.margin = margin(1,0,0,0,"cm")),
-          labels = c("Simple Model", "Complex Model"),
+          labels = c("Simple Model (n = 1179)", "Complex Model (n = 1179)"),
           font.label = list(size = 20, color = "black", face = "bold", family = "sans"),
           hjust = -0.1,
           ncol = 1, nrow = 2,
@@ -541,11 +541,11 @@ m_hc_sexfreqpen = brm(diary_sex_active_sex_sum ~
                         offset(log(number_of_days)) +
                         contraception_hormonal,
                 data = data, family = poisson(),
-                file = "m_hc_sexfreqpen")
+                file = "mrobust_hc_sexfreqpen")
 m_hc_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
                      contraception_hormonal,
                 data = data, family = poisson(),
-                file = "m_hc_masfreq")
+                file = "mrobust_hc_masfreq")
 ```
 
 #### Forest Plot for Effect Sizes {.active}
@@ -691,7 +691,7 @@ m_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                 data = data, family = poisson(),
-                file = "m_hc_sexfreqpen_controlled")
+                file = "mrobust_hc_sexfreqpen_controlled")
 
 m_hc_masfreq_controlled = brm(diary_masturbation_sum ~
                         offset(log(number_of_days)) +
@@ -701,7 +701,7 @@ m_hc_masfreq_controlled = brm(diary_masturbation_sum ~
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                 data = data, family = poisson(),
-                file = "m_hc_masfreq_controlled")
+                file = "mrobust_hc_masfreq_controlled")
 ```
 
 #### Forest Plot for Effect Sizes {.active}
@@ -913,7 +913,7 @@ m_congruency_libido_plot
 m_congruency_sexfreqpen = brm(diary_sex_active_sex_sum ~ offset(log(number_of_days)) +
                      contraception_hormonal * congruent_contraception,
                 data = data, family = poisson(),
-                file = "m_congruency_sexfreqpen")
+                file = "mrobust_congruency_sexfreqpen")
 
 
 m_congruency_sexfreqpen_ce = m_congruency_sexfreqpen %>% 
@@ -936,7 +936,7 @@ m_congruency_sexfreqpen_plot
 m_congruency_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
                              contraception_hormonal * congruent_contraception,
                 data = data, family = poisson(),
-                file = "m_congruency_masfreq")
+                file = "mrobust_congruency_masfreq")
 
 m_congruency_masfreq_ce = m_congruency_masfreq %>% 
   conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
@@ -1090,7 +1090,7 @@ m_congruency_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                 data = data, family = poisson(),
-                file = "m_congruency_sexfreqpen_controlled")
+                file = "mrobust_congruency_sexfreqpen_controlled")
 
 m_congruency_sexfreqpen_controlled_ce = m_congruency_sexfreqpen_controlled %>% 
   conditional_effects(., effects = "contraception_hormonal:congruent_contraception",
@@ -1117,7 +1117,7 @@ m_congruency_masfreq_controlled = brm(diary_masturbation_sum ~
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
                 data = data, family = poisson(),
-                file = "m_congruency_masfreq_controlled")
+                file = "mrobust_congruency_masfreq_controlled")
 
 m_congruency_masfreq_controlled_ce = m_congruency_masfreq_controlled %>% 
   conditional_effects(., effects = "contraception_hormonal:congruent_contraception",

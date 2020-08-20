@@ -340,6 +340,36 @@ data_diary_means = data_diary_means %>%
          diary_masturbation_sum = as.integer(diary_masturbation_mean*number_of_days))
 
 data = left_join(data, data_diary_means, by = "session")
+
+```
+
+### Set sex_freq and mas_freq as missing, if participants indicated having no penetrative sexual intercourse and using no other form of contraception
+```{r}
+data = data %>%
+  mutate(diary_sex_active_sex_mean =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_sex_active_sex_mean),
+         diary_sex_active_sex_sum =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_sex_active_sex_sum),
+         diary_sex_active_mean =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_sex_active_mean),
+         diary_sex_active_sum =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_sex_active_sum),
+         diary_masturbation_mean =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_masturbation_mean),
+         diary_masturbation_sum =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_masturbation_sum))
 ```
 
 ## Select Data
