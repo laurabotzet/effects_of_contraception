@@ -367,9 +367,9 @@ tidy(m_hc_sexfreqpen, conf.int = T)
 
 ##### Sensitivity Analyses
 ```{r}
-m_hc_sexfreqpen_sensitivity <- sensemakr(estimate = 0.3827,
+m_hc_sexfreqpen_sensitivity <- sensemakr(estimate = 0.2496,
                                          se = 0.0248,
-                                         dof = 966,
+                                         dof = 895,
                                          treatment = "contraception_hormonal_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -413,9 +413,9 @@ tidy(m_hc_sexfreqpen)
 
 ##### Sensitivity Analyses
 ```{r}
-m_hc_sexfreqpen_sensitivity <- sensemakr(estimate = 0.230,
-                                         se = 0.02626,
-                                         dof = 949,
+m_hc_sexfreqpen_sensitivity <- sensemakr(estimate = 0.165323,
+                                         se = 0.026331,
+                                         dof = 878,
                                          treatment = "contraception_hormonal_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -456,9 +456,9 @@ tidy(m_hc_masfreq, conf.int = T)
 
 ##### Sensitivity Analyses
 ```{r}
-m_hc_masfreq_sensitivity <- sensemakr(estimate = -0.3715,
-                                         se = 0.0267,
-                                         dof = 949,
+m_hc_masfreq_sensitivity <- sensemakr(estimate = -0.3972,
+                                         se = 0.0272,
+                                         dof = 895,
                                          treatment = "contraception_hormonal_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -501,9 +501,9 @@ tidy(m_hc_masfreq, conf.int = T)
 
 ##### Sensitivity Analyses
 ```{r}
-m_hc_masfreq_sensitivity <- sensemakr(estimate = -0.265,
-                                         se = 0.0279,
-                                         dof = 949,
+m_hc_masfreq_sensitivity <- sensemakr(estimate =  -0.29448,
+                                         se = 0.02843,
+                                         dof = 878,
                                          treatment = "contraception_hormonal_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -1260,9 +1260,9 @@ tidy(m_con_sexfreqpen, conf.int = T)
 ##### Sensitivity Analyses {.tabset}
 ###### HC
 ```{r}
-m_con_sexfreqpen_sensitivity_hc <- sensemakr(estimate = 0.2090,
+m_con_sexfreqpen_sensitivity_hc <- sensemakr(estimate =  0.1996,
                                          se = 0.0444,
-                                         dof = 628,
+                                         dof = 618,
                                          treatment = "contraception_hormonal_numeric",
                                          kd = 1:3, #these arguments parameterize how many times
                                           #stronger the confounder is related to the
@@ -1286,9 +1286,9 @@ summary(m_con_sexfreqpen_sensitivity_hc)
 
 ###### Congruency
 ```{r}
-m_con_sexfreqpen_sensitivity_con <- sensemakr(estimate = 0.0548,
-                                         se = 0.0390,
-                                         dof = 628,
+m_con_sexfreqpen_sensitivity_con <- sensemakr(estimate = 0.0880,
+                                         se = 0.0391,
+                                         dof = 618,
                                          treatment = "congruent_contraception_numeric",
                                          kd = 1:3, #these arguments parameterize how many times
                                           #stronger the confounder is related to the
@@ -1311,9 +1311,9 @@ summary(m_con_sexfreqpen_sensitivity_con)
 
 ###### Interaction
 ```{r}
-m_con_sexfreqpen_sensitivity_interaction <- sensemakr(estimate = -0.0533,
-                                         se = 0.0552,
-                                         dof = 628,
+m_con_sexfreqpen_sensitivity_interaction <- sensemakr(estimate =  -0.0865,
+                                         se = 0.0553,
+                                         dof = 618,
                                          treatment = "hc_con_interaction",
                                          kd = 1:3, #these arguments parameterize how many times
                                           #stronger the confounder is related to the
@@ -1353,9 +1353,9 @@ tidy(m_con_sexfreqpen, conf.int = T)
 ##### Sensitivity Analyses {.tabset}
 ###### HC
 ```{r}
-m_con_sexfreqpen_sensitivity_hc <- sensemakr(estimate = 0.15534,
-                                         se = 0.04597,
-                                         dof = 612,
+m_con_sexfreqpen_sensitivity_hc <- sensemakr(estimate = 0.13694,
+                                         se = 0.04605,
+                                         dof = 602,
                                          treatment = "contraception_hormonal_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -1383,9 +1383,9 @@ summary(m_con_sexfreqpen_sensitivity_hc)
 
 ###### Congruency
 ```{r}
-m_con_sexfreqpen_sensitivity_con <- sensemakr(estimate = -0.07651,
-                                         se = 0.04141,
-                                         dof = 612,
+m_con_sexfreqpen_sensitivity_con <- sensemakr(estimate = -0.04884,
+                                         se = 0.04150,
+                                         dof = 602,
                                          treatment = "congruent_contraception_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -1412,7 +1412,7 @@ summary(m_con_sexfreqpen_sensitivity_con)
 
 ###### Interaction
 ```{r}
-m_con_sexfreqpen_sensitivity_interaction <- sensemakr(estimate = 0.07073,
+m_con_sexfreqpen_sensitivity_interaction <- sensemakr(estimate = 0.04281,
                                          se = 0.05733,
                                          dof = 612,
                                          treatment = "hc_con_interaction",
@@ -1455,9 +1455,9 @@ tidy(m_con_masfreq, conf.int = T)
 ##### Sensitivity Analyses {.tabset}
 ###### HC
 ```{r}
-m_con_masfreq_sensitivity_hc <- sensemakr(estimate = -0.3758,
-                                         se = 0.0577,
-                                         dof = 628,
+m_con_masfreq_sensitivity_hc <- sensemakr(estimate = -0.3669,
+                                         se = 0.0579,
+                                         dof = 618,
                                          treatment = "contraception_hormonal_numeric",
                                          kd = 1:3, #these arguments parameterize how many times
                                           #stronger the confounder is related to the
@@ -1481,9 +1481,9 @@ summary(m_con_masfreq_sensitivity_hc)
 
 ###### Congruency
 ```{r}
-m_con_masfreq_sensitivity_con <- sensemakr(estimate = 0.0824,
-                                         se = 0.0709,
-                                         dof = 628,
+m_con_masfreq_sensitivity_con <- sensemakr(estimate = 0.1084,
+                                         se = 0.0433,
+                                         dof = 618,
                                          treatment = "congruent_contraception_numeric",
                                          kd = 1:3, #these arguments parameterize how many times
                                           #stronger the confounder is related to the
@@ -1506,9 +1506,9 @@ summary(m_con_masfreq_sensitivity_con)
 
 ###### Interaction
 ```{r}
-m_con_masfreq_sensitivity_interaction <- sensemakr(estimate = 0.0824,
-                                         se = 0.0428,
-                                         dof = 628,
+m_con_masfreq_sensitivity_interaction <- sensemakr(estimate = 0.0120,
+                                         se = 0.0712,
+                                         dof = 618,
                                          treatment = "hc_con_interaction",
                                          kd = 1:3, #these arguments parameterize how many times
                                           #stronger the confounder is related to the
@@ -1526,7 +1526,7 @@ m_con_masfreq_sensitivity_interaction <- sensemakr(estimate = 0.0824,
 
 
 m_con_masfreq_sensitivity_interaction
-summary(m_con_sexfreq_sensitivity_interaction)
+summary(m_con_masfreq_sensitivity_interaction)
 ```
 
 #### Controlled Model {.tabset}
@@ -1548,9 +1548,9 @@ tidy(m_con_masfreq, conf.int = T)
 ##### Sensitivity Analyses {.tabset}
 ###### HC
 ```{r}
-m_con_masfreq_sensitivity_hc <- sensemakr(estimate = -0.39230,
-                                         se = 0.05928,
-                                         dof = 612,
+m_con_masfreq_sensitivity_hc <- sensemakr(estimate = -0.37828,
+                                         se = 0.05958,
+                                         dof = 602,
                                          treatment = "contraception_hormonal_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -1578,9 +1578,9 @@ summary(m_con_masfreq_sensitivity_hc)
 
 ###### Congruency
 ```{r}
-m_con_masfreq_sensitivity_con <- sensemakr(estimate = 0.01196,
-                                         se = 0.04594,
-                                         dof = 612,
+m_con_masfreq_sensitivity_con <- sensemakr(estimate = 0.03882,
+                                         se = 0.04649,
+                                         dof = 602,
                                          treatment = "congruent_contraception_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -1607,9 +1607,9 @@ summary(m_con_masfreq_sensitivity_con)
 
 ###### Interaction
 ```{r}
-m_con_masfreq_sensitivity_interaction <- sensemakr(estimate = 0.12861,
-                                         se = 0.07310,
-                                         dof = 612,
+m_con_masfreq_sensitivity_interaction <- sensemakr(estimate = 0.09740,
+                                         se = 0.07337 ,
+                                         dof = 602,
                                          treatment = "hc_con_interaction",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -1631,5 +1631,5 @@ m_con_masfreq_sensitivity_interaction <- sensemakr(estimate = 0.12861,
 
 
 m_con_masfreq_sensitivity_interaction
-summary(m_con_sexfreq_sensitivity_interaction)
+summary(m_con_masfreq_sensitivity_interaction)
 ```

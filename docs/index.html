@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -22,15 +22,14 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -40,14 +39,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -57,7 +58,7 @@ pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   { color: #cccccc; background-color: #303030; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ffcfaf; } /* Alert */
 code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
@@ -112,7 +113,7 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -159,9 +160,7 @@ h6 {
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -175,7 +174,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -280,8 +278,6 @@ $(document).ready(function () {
 });
 </script>
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
 
 <style type="text/css">
@@ -326,6 +322,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -338,29 +335,20 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeSourceEmbed("index.Rmd");
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -378,28 +366,30 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Overview</a>
+  <a href="1_exclusion.html">Exclusion</a>
 </li>
 <li>
-  <a href="1_wrangle_data.html">Data wrangling</a>
+  <a href="2_datawrangling.html">Data Wrangling</a>
 </li>
 <li>
-  <a href="2_descriptives.html">Descriptives &amp; Exclusion</a>
+  <a href="3_descriptives.html">Descriptives</a>
 </li>
 <li>
-  <a href="3_analyses.html">Analyses</a>
+  <a href="4_codebook.html">Codebook</a>
 </li>
 <li>
-  <a href="4_robustness_analyses.html">Robustness Analyses</a>
+  <a href="5_analyses_selection.html">Selection Effects</a>
+</li>
+<li>
+  <a href="6_analyses_effects.html">Effects of Contraceptives</a>
+</li>
+<li>
+  <a href="7_analyses_sensitivity.html">Sensitivity Analyses</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/laurabotzet/effects_of_contraception">
-    <span class="fa fa-github"></span>
-     
-    
-  </a>
+  <a href="https://github.com/laurabotzet/effects_of_contraception"></a>
 </li>
       </ul>
     </div><!--/.nav-collapse -->
@@ -426,74 +416,83 @@ $(document).ready(function () {
 
 <div id="effects-of-contraception" class="section level1 tabset tabset-sticky">
 <h1>Effects of Contraception</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># bibliography: packrat_bibliography.bibtex</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">source</span>(<span class="st">&quot;0_helpers.R&quot;</span>)</a></code></pre></div>
-</div>
-<div id="to-the-codebook" class="section level1">
-<h1>To the <a href="2_codebook.html">codebook</a></h1>
-<p>We used these <a href="0_helpers.html">helper functions</a>. These are the <a href=".Rprofile.html">.Rprofile settings</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># bibliography: packrat_bibliography.bibtex</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">source</span>(<span class="st">&quot;0_helpers.R&quot;</span>)</span></code></pre></div>
+<p>We used these <a href="0_helpers.R">helper functions</a>.</p>
 <ol style="list-style-type: decimal">
-<li>First we <a href="0_import_data.html">wrangled the data</a>.</li>
-<li>Then we looked at some <a href="1_descriptives.html">descriptives</a>.</li>
-<li>Then we <a href="2_analyses.html">analysed</a> it.</li>
-<li>And <a href="3_robustness_analyses_new.html">tested robustness</a>.</li>
+<li>First <a href="1_exclusion.html">exclusion criteria were applied</a>.</li>
+<li>Then <a href="2_datawrangling.html">scales were aggregated and contraception groups were formed</a>.</li>
+<li>Some <a href="3_descriptives.html">descriptives</a> and a <a href="4_codebook.html">codebook</a> can be found here.</li>
+<li>All <a href="5_analyses_selection.html">analyses of selection effects</a> are available here.</li>
+<li>Here are the <a href="6_analyses_effects.html">analyses of effects of contraceptive use and congruent contraceptive use</a> including controlled and uncontrolled models.</li>
+<li>In a last step, <a href="7_analyses_sensitivity.html">sensitivity of effects to unobserved confounders</a> was estimated.</li>
+<li>Click <a href="8_plots.html">here</a> for all plots of the manuscript.</li>
 </ol>
-<div id="authors-acknowledgements" class="section level2 tabset tabset-sticky">
-<h2>Authors &amp; Acknowledgements</h2>
-<div id="authors" class="section level3">
-<h3>Authors</h3>
-<p>Laura J. Botzet &amp; Ruben Arslan</p>
-</div>
-<div id="acknowledgements" class="section level3 active">
-<h3>Acknowledgements</h3>
+<p>Here are further information about <a href="99_relationship_duration.html">the factor relationship duration</a>.</p>
 <div id="package-bibliography" class="section level4 tabset tabset-sticky">
 <h4>Package bibliography</h4>
 <div id="session-info" class="section level5">
 <h5>Session info</h5>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Make packrat bibliography</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># packrat_bibliography(overwrite_bib = TRUE, silent = TRUE)</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co"># Turn the .R files into .Rmd files, turn those into .html, remove the .Rmd files</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># spin_R_files_to_site_html()</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">sessionInfo</span>()</a></code></pre></div>
-<pre><code>## R version 3.5.2 (2018-12-20)
-## Platform: x86_64-apple-darwin15.6.0 (64-bit)
-## Running under: macOS Sierra 10.12.6
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Make packrat bibliography</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># packrat_bibliography(overwrite_bib = TRUE, silent = TRUE)</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co"># Turn the .R files into .Rmd files, turn those into .html, remove the .Rmd files</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># spin_R_files_to_site_html()</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
+<pre><code>## R version 4.0.2 (2020-06-22)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 19041)
 ## 
 ## Matrix products: default
-## BLAS: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRblas.0.dylib
-## LAPACK: /Library/Frameworks/R.framework/Versions/3.5/Resources/lib/libRlapack.dylib
 ## 
 ## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## [1] LC_COLLATE=German_Germany.1252  LC_CTYPE=German_Germany.1252    LC_MONETARY=German_Germany.1252
+## [4] LC_NUMERIC=C                    LC_TIME=German_Germany.1252    
 ## 
 ## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## [1] stats     graphics  grDevices datasets  utils     methods   base     
 ## 
 ## other attached packages:
-##  [1] forcats_0.4.0   dplyr_0.7.8     purrr_0.2.5     readr_1.3.1     tidyr_0.8.2     tibble_2.0.1   
-##  [7] tidyverse_1.2.1 codebook_0.8.0  ggthemes_4.1.0  ggplot2_3.1.0   broom_0.5.1     stringr_1.4.0  
-## [13] lubridate_1.7.4 pander_0.6.3    formr_0.8.1     knitr_1.21      rmarkdown_1.11 
+##  [1] dplyr_1.0.0          readr_1.3.1          tidyr_1.1.0          tibble_3.0.1         tidyverse_1.3.0     
+##  [6] UpSetR_1.4.0         jtools_2.1.0         sensemakr_0.1.3      ggpubr_0.4.0         RColorBrewer_1.1-2  
+## [11] rstan_2.19.3         StanHeaders_2.21.0-5 cowplot_1.0.0.9000   tidybayes_2.1.1      modelr_0.1.8        
+## [16] forcats_0.5.0        purrr_0.3.4          magrittr_1.5         bayestestR_0.7.0     loo_2.2.0           
+## [21] brms_2.13.0          Rcpp_1.0.4.6         apaTables_2.0.5      codebook_0.9.2       ggthemes_4.2.0      
+## [26] ggdist_2.2.0         ggplot2_3.3.2        broom_0.5.6          stringr_1.4.0        lubridate_1.7.9     
+## [31] pander_0.6.3         formr_0.8.5          knitr_1.29           rmarkdown_2.3       
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] tidyselect_0.2.5 xfun_0.5         haven_2.1.0.9000 lattice_0.20-38  labelled_2.0.2   colorspace_1.4-0
-##  [7] generics_0.0.2   miniUI_0.1.1.1   htmltools_0.3.6  yaml_2.2.0       base64enc_0.1-3  rlang_0.3.1     
-## [13] pillar_1.3.1     later_0.8.0      glue_1.3.0       withr_2.1.2      readxl_1.3.0     modelr_0.1.4    
-## [19] bindrcpp_0.2.2   bindr_0.1.1      plyr_1.8.4       cellranger_1.1.0 munsell_0.5.0    gtable_0.2.0    
-## [25] rvest_0.3.2      evaluate_0.13    httpuv_1.4.5.1   Rcpp_1.0.0       xtable_1.8-3     scales_1.0.0    
-## [31] backports_1.1.3  promises_1.0.1   jsonlite_1.6     mime_0.6         hms_0.4.2        digest_0.6.18   
-## [37] stringi_1.3.1    shiny_1.2.0      grid_3.5.2       cli_1.0.1        tools_3.5.2      magrittr_1.5    
-## [43] lazyeval_0.2.1   crayon_1.3.4     pkgconfig_2.0.2  xml2_1.2.0       httr_1.4.0       assertthat_0.2.0
-## [49] rstudioapi_0.9.0 R6_2.4.0         nlme_3.1-137     compiler_3.5.2</code></pre>
+##   [1] readxl_1.3.1         backports_1.1.8      plyr_1.8.6           igraph_1.2.5         splines_4.0.2       
+##   [6] svUnit_1.0.3         crosstalk_1.1.0.1    TH.data_1.0-10       rstantools_2.0.0     inline_0.3.15       
+##  [11] digest_0.6.25        htmltools_0.5.0      rsconnect_0.8.16     fansi_0.4.1          checkmate_2.0.0     
+##  [16] openxlsx_4.1.5       RcppParallel_5.0.2   matrixStats_0.56.0   xts_0.12-0           sandwich_2.5-1      
+##  [21] prettyunits_1.1.1    colorspace_1.4-2     rvest_0.3.5          blob_1.2.1           haven_2.3.1         
+##  [26] xfun_0.15            jsonlite_1.7.0       callr_3.4.3          crayon_1.3.4         survival_3.1-12     
+##  [31] zoo_1.8-8            glue_1.4.1           gtable_0.3.0         emmeans_1.4.8        distributional_0.1.0
+##  [36] car_3.0-8            pkgbuild_1.0.8       abind_1.4-5          scales_1.1.1         mvtnorm_1.1-1       
+##  [41] DBI_1.1.0            rstatix_0.6.0        miniUI_0.1.1.1       xtable_1.8-4         foreign_0.8-80      
+##  [46] stats4_4.0.2         DT_0.14              httr_1.4.1           htmlwidgets_1.5.1    threejs_0.3.3       
+##  [51] arrayhelpers_1.1-0   ellipsis_0.3.1       pkgconfig_2.0.3      farver_2.0.3         dbplyr_1.4.4        
+##  [56] tidyselect_1.1.0     rlang_0.4.6          reshape2_1.4.4       later_1.1.0.1        cellranger_1.1.0    
+##  [61] munsell_0.5.0        tools_4.0.2          cli_2.0.2            generics_0.0.2       ggridges_0.5.2      
+##  [66] evaluate_0.14        fastmap_1.0.1        yaml_2.2.1           fs_1.4.1             processx_3.4.2      
+##  [71] zip_2.0.4            nlme_3.1-148         mime_0.9             xml2_1.3.2           compiler_4.0.2      
+##  [76] bayesplot_1.7.2      shinythemes_1.1.2    rstudioapi_0.11      curl_4.3             ggsignif_0.6.0      
+##  [81] reprex_0.3.0         stringi_1.4.6        ps_1.3.3             Brobdingnag_1.2-6    lattice_0.20-41     
+##  [86] Matrix_1.2-18        markdown_1.1         shinyjs_1.1          vctrs_0.3.1          pillar_1.4.4        
+##  [91] lifecycle_0.2.0      bridgesampling_1.0-0 estimability_1.3     data.table_1.12.8    insight_0.8.5       
+##  [96] httpuv_1.5.4         R6_2.4.1             promises_1.1.1       renv_0.11.0          gridExtra_2.3       
+## [101] rio_0.5.16           codetools_0.2-16     colourpicker_1.0     MASS_7.3-51.6        gtools_3.8.2        
+## [106] assertthat_0.2.1     withr_2.2.0          shinystan_2.5.0      multcomp_1.4-13      parallel_4.0.2      
+## [111] hms_0.5.3            grid_4.0.2           labelled_2.5.0       coda_0.19-3          carData_3.0-4       
+## [116] shiny_1.5.0          base64enc_0.1-3      dygraphs_1.1.1.6</code></pre>
 </div>
 <div id="references" class="section level5 active">
 <h5>References</h5>
 </div>
 </div>
 </div>
-</div>
-</div>
 
-<div id="rmd-source-code">LS0tCnBhZ2V0aXRsZTogIkVmZmVjdHMgb2YgQ29udHJhY2VwdGlvbiIKY3NsOiBhcGEtY3VzdG9tLW5vLWlzc3VlLmNzbApub2NpdGU6IHwKICAgIEBSIEBwYWNrcmF0IEBybWFya2Rvd24gQGtuaXRyIEBmb3JtciBAcGFuZGVyIEBsdWJyaWRhdGUgQHN0cmluZ3IgQGJyb29tIEBlZmZlY3RzIEBnZ3Bsb3QyIEB0aWR5ciBAc3ZnbGl0ZSBAZHBseXIgQHJlc2hhcGUyIEBsbWVyVGVzdCBAZGV2dG9vbHMgQGZvcm1hdFIgQGxhenlldmFsIEBzY2FsZXMgQGNhciBAeGxzeCBAbG1lNAotLS0KCiMgRWZmZWN0cyBvZiBDb250cmFjZXB0aW9uIHsudGFic2V0IC50YWJzZXQtc3RpY2t5fQoKYGBge3IgbWVzc2FnZT1GQUxTRSwgd2FybmluZz1GQUxTRX0KIyBiaWJsaW9ncmFwaHk6IHBhY2tyYXRfYmlibGlvZ3JhcGh5LmJpYnRleApzb3VyY2UoIjBfaGVscGVycy5SIikKYGBgCgojIFRvIHRoZSBbY29kZWJvb2tdKDJfY29kZWJvb2suaHRtbCkKCgpXZSB1c2VkIHRoZXNlIFtoZWxwZXIgZnVuY3Rpb25zXSgwX2hlbHBlcnMuaHRtbCkuIFRoZXNlIGFyZSB0aGUgWy5ScHJvZmlsZSBzZXR0aW5nc10oLlJwcm9maWxlLmh0bWwpLgoKMS4gRmlyc3Qgd2UgW3dyYW5nbGVkIHRoZSBkYXRhXSgwX2ltcG9ydF9kYXRhLmh0bWwpLgoyLiBUaGVuIHdlIGxvb2tlZCBhdCBzb21lIFtkZXNjcmlwdGl2ZXNdKDFfZGVzY3JpcHRpdmVzLmh0bWwpLgozLiBUaGVuIHdlIFthbmFseXNlZF0oMl9hbmFseXNlcy5odG1sKSBpdC4KMy4gQW5kIFt0ZXN0ZWQgcm9idXN0bmVzc10oM19yb2J1c3RuZXNzX2FuYWx5c2VzX25ldy5odG1sKS4KCiMjIEF1dGhvcnMgJiBBY2tub3dsZWRnZW1lbnRzIHsudGFic2V0IC50YWJzZXQtc3RpY2t5fQoKIyMjIEF1dGhvcnMKTGF1cmEgSi4gQm90emV0ICYgUnViZW4gQXJzbGFuCgojIyMgQWNrbm93bGVkZ2VtZW50cyB7LmFjdGl2ZX0KCgojIyMjIFBhY2thZ2UgYmlibGlvZ3JhcGh5IHsudGFic2V0IC50YWJzZXQtc3RpY2t5fQoKIyMjIyMgU2Vzc2lvbiBpbmZvCmBgYHtyfQojIE1ha2UgcGFja3JhdCBiaWJsaW9ncmFwaHkKIyBwYWNrcmF0X2JpYmxpb2dyYXBoeShvdmVyd3JpdGVfYmliID0gVFJVRSwgc2lsZW50ID0gVFJVRSkKIyBUdXJuIHRoZSAuUiBmaWxlcyBpbnRvIC5SbWQgZmlsZXMsIHR1cm4gdGhvc2UgaW50byAuaHRtbCwgcmVtb3ZlIHRoZSAuUm1kIGZpbGVzCiMgc3Bpbl9SX2ZpbGVzX3RvX3NpdGVfaHRtbCgpCnNlc3Npb25JbmZvKCkKYGBgCgojIyMjIyBSZWZlcmVuY2VzIHsuYWN0aXZlfQo=</div>
+<div id="rmd-source-code">LS0tCnBhZ2V0aXRsZTogIkVmZmVjdHMgb2YgQ29udHJhY2VwdGlvbiIKY3NsOiBhcGEtY3VzdG9tLW5vLWlzc3VlLmNzbApub2NpdGU6IHwKICAgIEBSIEBwYWNrcmF0IEBybWFya2Rvd24gQGtuaXRyIEBmb3JtciBAcGFuZGVyIEBsdWJyaWRhdGUgQHN0cmluZ3IgQGJyb29tIEBlZmZlY3RzIEBnZ3Bsb3QyIEB0aWR5ciBAc3ZnbGl0ZSBAZHBseXIgQHJlc2hhcGUyIEBsbWVyVGVzdCBAZGV2dG9vbHMgQGZvcm1hdFIgQGxhenlldmFsIEBzY2FsZXMgQGNhciBAeGxzeCBAbG1lNAotLS0KIAojIEVmZmVjdHMgb2YgQ29udHJhY2VwdGlvbiB7LnRhYnNldCAudGFic2V0LXN0aWNreX0KCmBgYHtyIG1lc3NhZ2U9RkFMU0UsIHdhcm5pbmc9RkFMU0V9CiMgYmlibGlvZ3JhcGh5OiBwYWNrcmF0X2JpYmxpb2dyYXBoeS5iaWJ0ZXgKc291cmNlKCIwX2hlbHBlcnMuUiIpCmBgYAoKV2UgdXNlZCB0aGVzZSBbaGVscGVyIGZ1bmN0aW9uc10oMF9oZWxwZXJzLlIpLgoKMS4gRmlyc3QgW2V4Y2x1c2lvbiBjcml0ZXJpYSB3ZXJlIGFwcGxpZWRdKDFfZXhjbHVzaW9uLmh0bWwpLgoyLiBUaGVuIFtzY2FsZXMgd2VyZSBhZ2dyZWdhdGVkIGFuZCBjb250cmFjZXB0aW9uIGdyb3VwcyB3ZXJlIGZvcm1lZF0oMl9kYXRhd3JhbmdsaW5nLmh0bWwpLgozLiBTb21lIFtkZXNjcmlwdGl2ZXNdKDNfZGVzY3JpcHRpdmVzLmh0bWwpIGFuZCBhIFtjb2RlYm9va10oNF9jb2RlYm9vay5odG1sKSBjYW4gYmUgZm91bmQgaGVyZS4KNC4gQWxsIFthbmFseXNlcyBvZiBzZWxlY3Rpb24gZWZmZWN0c10oNV9hbmFseXNlc19zZWxlY3Rpb24uaHRtbCkgYXJlIGF2YWlsYWJsZSBoZXJlLgo1LiBIZXJlIGFyZSB0aGUgW2FuYWx5c2VzIG9mIGVmZmVjdHMgb2YgY29udHJhY2VwdGl2ZSB1c2UgYW5kIGNvbmdydWVudCBjb250cmFjZXB0aXZlIHVzZV0oNl9hbmFseXNlc19lZmZlY3RzLmh0bWwpIGluY2x1ZGluZyBjb250cm9sbGVkIGFuZCB1bmNvbnRyb2xsZWQgbW9kZWxzLgo2LiBJbiBhIGxhc3Qgc3RlcCwgW3NlbnNpdGl2aXR5IG9mIGVmZmVjdHMgdG8gdW5vYnNlcnZlZCBjb25mb3VuZGVyc10oN19hbmFseXNlc19zZW5zaXRpdml0eS5odG1sKSB3YXMgZXN0aW1hdGVkLgo3LiBDbGljayBbaGVyZV0oOF9wbG90cy5odG1sKSBmb3IgYWxsIHBsb3RzIG9mIHRoZSBtYW51c2NyaXB0LgoKSGVyZSBhcmUgZnVydGhlciBpbmZvcm1hdGlvbiBhYm91dCBbdGhlIGZhY3RvciByZWxhdGlvbnNoaXAgZHVyYXRpb25dKDk5X3JlbGF0aW9uc2hpcF9kdXJhdGlvbi5odG1sKS4KCiMjIyMgUGFja2FnZSBiaWJsaW9ncmFwaHkgey50YWJzZXQgLnRhYnNldC1zdGlja3l9CgojIyMjIyBTZXNzaW9uIGluZm8KYGBge3J9CiMgTWFrZSBwYWNrcmF0IGJpYmxpb2dyYXBoeQojIHBhY2tyYXRfYmlibGlvZ3JhcGh5KG92ZXJ3cml0ZV9iaWIgPSBUUlVFLCBzaWxlbnQgPSBUUlVFKQojIFR1cm4gdGhlIC5SIGZpbGVzIGludG8gLlJtZCBmaWxlcywgdHVybiB0aG9zZSBpbnRvIC5odG1sLCByZW1vdmUgdGhlIC5SbWQgZmlsZXMKIyBzcGluX1JfZmlsZXNfdG9fc2l0ZV9odG1sKCkKc2Vzc2lvbkluZm8oKQpgYGAKCiMjIyMjIFJlZmVyZW5jZXMgey5hY3RpdmV9Cg==</div>
 
 
 
@@ -511,6 +510,29 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("index.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

@@ -3,19 +3,22 @@ output_dir: docs
 navbar:
   title: Effects of Contraception
   left:
-  - text: Overview
-    href: index.html
-  - text: Data wrangling
-    href: 1_wrangle_data.html
-  - text: Descriptives & Exclusion
-    href: 2_descriptives.html
-  - text: Analyses
-    href: 3_analyses.html
-  - text: Robustness Analyses
-    href: 4_robustness_analyses.html
+  - text: Exclusion
+    href: 1_exclusion.html
+  - text: Data Wrangling
+    href: 2_datawrangling.html
+  - text: Descriptives
+    href: 3_descriptives.html
+  - text: Codebook
+    href: 4_codebook.html
+  - text: Selection Effects
+    href: 5_analyses_selection.html
+  - text: Effects of Contraceptives
+    href: 6_analyses_effects.html
+  - text: Sensitivity Analyses
+    href: 7_analyses_sensitivity.html
   right:
   - text: ''
-    icon: fa-github
     href: https://github.com/laurabotzet/effects_of_contraception
 output:
   html_document:

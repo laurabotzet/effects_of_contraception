@@ -1,0 +1,9 @@
+body {
+	padding-top: 150px !important;
+}
+body div.main-container {
+  max-width: none;
+}
+pre, code {
+  color: black;
+}
