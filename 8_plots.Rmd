@@ -80,8 +80,12 @@ m_selection_hc_simple_plot = m_selection_hc_simple %>%
   scale_x_continuous(limits = c(-1.2, 1.9),
                      breaks= c(-1.0, -0.5, 0, 0.5, 1.0, 1.5)) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3")) +
-  guides(color = guide_legend(override.aes = list(size = 10)))
-
+  guides(color = guide_legend(override.aes = list(size = 10))) +
+  ggtitle(expression(paste(bold("Simple Model ("),
+                           bolditalic("n"),
+                           bold(" = 1,179)")))) +
+  theme(plot.title = element_text(hjust = -0.32))
+          
 m_selection_hc_simple_plot
 ```
 
@@ -171,7 +175,11 @@ m_selection_hc_complex_plot = m_selection_hc_complex %>%
                      breaks = c(-1.0, -0.5, 0, 0.5, 1.0, 1.5)) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E",
                                 "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9")) +
-  guides(color = guide_legend(override.aes = list(size = 10)))
+  guides(color = guide_legend(override.aes = list(size = 10))) +
+  ggtitle(expression(paste(bold("Complex Model ("),
+                           bolditalic("n"),
+                           bold(" = 1,179)")))) +
+  theme(plot.title = element_text(hjust = -0.32))
                                  
 m_selection_hc_complex_plot
 ```
@@ -183,8 +191,6 @@ selection_hc =
                                               plot.margin = margin(1,0,0,0,"cm")),
           m_selection_hc_complex_plot + theme(legend.position = c(0.85,0.5),
                                               plot.margin = margin(1,0,0,0,"cm")),
-          labels = c("Simple Model (n = 1179)", "Complex Model (n = 1179)"),
-          font.label = list(size = 20, color = "black", face = "bold", family = "sans"),
           hjust = -0.1,
           ncol = 1, nrow = 2,
           align = "v")
@@ -261,7 +267,11 @@ m_selection_congruent_simple_onceHC_plot = m_selection_congruent_simple_onceHC %
   scale_x_continuous(limits = c(-3, 3),
                      breaks= c(-3:3)) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3")) +
-  guides(color = guide_legend(override.aes = list(size = 5)))
+  guides(color = guide_legend(override.aes = list(size = 5)))+
+  ggtitle(expression(paste(bold("Simple Model Once HC User ("),
+                           bolditalic("n"),
+                           bold(" = 390)")))) +
+  theme(plot.title = element_text(hjust = -0.35))
 m_selection_congruent_simple_onceHC_plot
 
 
@@ -316,7 +326,11 @@ m_selection_congruent_simple_oncenonHC_plot = m_selection_congruent_simple_oncen
   scale_x_continuous(limits = c(-3, 3),
                      breaks= c(-3:3)) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3")) +
-  guides(color = guide_legend(override.aes = list(size = 5)))
+  guides(color = guide_legend(override.aes = list(size = 5))) +
+  ggtitle(expression(paste(bold("Simple Model Once Non-HC User ("),
+                           bolditalic("n"),
+                           bold(" = 384)")))) +
+  theme(plot.title = element_text(hjust = -0.35))
 m_selection_congruent_simple_oncenonHC_plot
 ```
 
@@ -413,7 +427,11 @@ m_selection_congruent_complex_onceHC_plot = m_selection_congruent_complex_onceHC
                      breaks = c(-3:3)) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E",
                                 "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9")) +
-  guides(color = guide_legend(override.aes = list(size = 5)))
+  guides(color = guide_legend(override.aes = list(size = 5)))+
+  ggtitle(expression(paste(bold("Complex Model Once HC User ("),
+                           bolditalic("n"),
+                           bold(" = 390)")))) +
+  theme(plot.title = element_text(hjust = -0.35))
 m_selection_congruent_complex_onceHC_plot
 
 m_selection_congruent_complex_oncenonHC_plot = m_selection_congruent_complex_oncenonHC %>%
@@ -489,7 +507,11 @@ m_selection_congruent_complex_oncenonHC_plot = m_selection_congruent_complex_onc
                      breaks = c(-3:3)) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E",
                                 "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9")) +
-  guides(color = guide_legend(override.aes = list(size = 5)))
+  guides(color = guide_legend(override.aes = list(size = 5)))+
+  ggtitle(expression(paste(bold("Complex Model Once Non-HC User ("),
+                           bolditalic("n"),
+                           bold(" = 384)")))) +
+  theme(plot.title = element_text(hjust = -0.35))
 
 m_selection_congruent_complex_oncenonHC_plot
 ```
@@ -502,20 +524,15 @@ selection_congruent =
             m_selection_congruent_simple_oncenonHC_plot +
               theme(legend.position = c(0.85,0.5), plot.margin = margin(1,0,0,0,"cm")),
             m_selection_congruent_complex_onceHC_plot +
-              theme(legend.position = "none", plot.margin = margin(2,0,0,0,"cm")),
+              theme(legend.position = "none", plot.margin = margin(1,0,0,0,"cm")),
             m_selection_congruent_complex_oncenonHC_plot  +
-              theme(legend.position = c(0.85,0.5), plot.margin = margin(2,0,0,0,"cm")),
-          labels = c("Simple Model Once HC-User (n = 390)",
-                     "Simple Model Once Non-HC-User (n = 384)",
-                     "\nComplex Model Once HC-User (n = 390)",
-                     "\nComplex Model Once Non-HC-User (n = 384)"),
-          font.label = list(size = 20, color = "black", face = "bold", family = "sans"),
+              theme(legend.position = c(0.85,0.5), plot.margin = margin(1,0,0,0,"cm")),
           hjust = -0.1, vjust = 1.1,
           ncol = 2, nrow = 2,
           align = "v")
 
 jpeg('Effect size estimates for models with congruency in contraceptive method as an outcome.jpg', 
-     width = 1600, height = 700, quality = 100)
+     width = 1600, height = 720, quality = 100)
 selection_congruent
 dev.off()
 ```

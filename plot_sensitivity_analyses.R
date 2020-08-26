@@ -8,8 +8,8 @@ data_plot = data.frame(
   Outcome = rep(c(rep("Sexual\nFrequency", 2),
                   rep("Masturbation\nFrequency", 2)),
                 3),
-  Predictor = rep(c("Use of HC",
-              "Use of HC + Observed Confounders"),
+  Predictor = rep(c("Use of HCs",
+              "Use of HCs + Observed Confounders"),
             6),
   Percentage = c(10.2, 4.3,
                19.2, 10.9,
@@ -32,7 +32,7 @@ plot =
   scale_fill_manual(values = c("#1B9E77", "#D95F02")) +
   apatheme +
   theme(legend.position = "bottom") +
-  labs(x = "Outcome", fill = "Predictor(s)")
+  labs(x = "Outcome", fill = "Predictors")
 
 jpeg('Plot Sensitivity Analyses.jpg',
      width = 800, height = 600, quality = 100)

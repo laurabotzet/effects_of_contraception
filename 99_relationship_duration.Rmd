@@ -56,7 +56,7 @@ data %>%
 qplot(data$relationship_duration_factor_quartiles)
 
 
-ggplot(data, aes(relationship_duration)) +
+plot = ggplot(data, aes(relationship_duration)) +
   geom_histogram(aes(fill = relationship_duration_factor_quartiles), bins = 300) +
   labs(x = "Relationship Duration (in months)",
        y = "Count") + 
@@ -71,6 +71,11 @@ ggplot(data, aes(relationship_duration)) +
                                  "29‒52 months",
                                  "> 52 months"),
                     values = c("#1B9E77", "#7570B3", "#D95F02", "#E7298A"))
+
+jpeg('Relationship Duration.jpg', 
+     width = 700, height = 500, quality = 100)
+plot
+dev.off()
 
 ```
 

@@ -144,5 +144,6 @@ apatheme=theme_bw()+
         panel.grid.minor=element_blank(),
         panel.border=element_blank(),
         axis.line=element_line(),
-        text = element_text(size=20))
+        text = element_text(size=20),
+        plot.title = element_text(size = 20, face = "bold"))
 
