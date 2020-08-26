@@ -1,14 +1,19 @@
+---
+title: "Relationship Duration"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'hide'
+    self_contained: false
+---
 
 # Datawrangling {.tabset}
 
 ## Data and Functions
 ```{r data and function, results='hide',message=F,warning=F}
 source("0_helpers.R")
-pander::panderOptions("table.split.table", Inf)
-pander::panderOptions('round',2)
-pander::panderOptions('digits',2)
-pander::panderOptions('keep.trailing.zeros',TRUE)
-
 load("data/cleaned_selected_wrangled.rdata")
 ```
 
@@ -16,13 +21,13 @@ load("data/cleaned_selected_wrangled.rdata")
 
 ### Relationship duration {.active .tabset}
 #### Linear relationship duration
-```{r}
+```{r message=F,warning=F}
 qplot(data$relationship_duration)
 ```
 
 #### Factor1 relationship duration
 Divide relationship duration into quartiles
-```{r}
+```{r message=F,warning=F}
 data = data %>%
    mutate(relationship_duration_factor_quartiles = 
             factor(ifelse(relationship_status == "Single",
@@ -81,7 +86,7 @@ dev.off()
 
 #### Factor2 relationship duration
 Divide relationship duration into 8 quantiles
-```{r}
+```{r message=F,warning=F}
 quantiles = quantile(as.numeric(data$relationship_duration),
                      na.rm = T,
                      probs = c(0, 0.125, 0.25, 0.375, 0.5,0.625, 0.75, 0.875, 1))
@@ -157,7 +162,7 @@ Relationship Duration
 * > 16 years
 
 
-```{r}
+```{r message=F,warning=F}
 data = data %>%
   mutate(relationship_duration_factor_schroeder = 
            factor(ifelse(relationship_status == "Single",
@@ -204,177 +209,8 @@ ggplot(data, aes(relationship_duration)) +
 
 ```
 
-## Analyses {.active}
-### Libido
-#### Factor quartiles
-```{r}
-library(brms)
-
-m_simple_factor_quartiles = brm(
-  diary_libido_mean ~ relationship_duration_factor_quartiles,
-  data = data,
-  family = gaussian())
-
-m_complex_factor_quartiles = brm(
-  diary_libido_mean ~ relationship_duration_factor_quartiles +
-    contraception_hormonal +
-    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
-    bfi_agree + bfi_neuro + religiosity,
-  data = data,
-  family = gaussian())
-```
-
-#### Factor finegrained
-```{r}
-m_simple_factor_finegrained = brm(
-  diary_libido_mean ~ relationship_duration_factor_finegrained,
-  data = data,
-  family = gaussian())
-
-m_complex_factor_finegrained = brm(
-  diary_libido_mean ~ relationship_duration_factor_finegrained +
-    contraception_hormonal +
-    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
-    bfi_agree + bfi_neuro + religiosity,
-  data = data,
-  family = gaussian())
-```
-
-#### Factor Schröder
-```{r}
-m_simple_factor_schroeder = brm(
-  diary_libido_mean ~ relationship_duration_factor_schroeder,
-  data = data,
-  family = gaussian())
-
-m_complex_factor_schroeder = brm(
-  diary_libido_mean ~ relationship_duration_factor_schroeder +
-    contraception_hormonal +
-    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
-    bfi_agree + bfi_neuro + religiosity,
-  data = data,
-  family = gaussian())
-```
-
-
-#### Comparisons {.tabset .active}
-##### Simple models
-```{r}
-library(loo)
-comp_simple_quart_fine = loo(m_simple_factor_quartiles,
-                             m_simple_factor_finegrained)
-comp_simple_quart_fine
-
-comp_simple_quart_schroeder = loo(m_simple_factor_quartiles,
-                             m_simple_factor_schroeder)
-comp_simple_quart_schroeder
-
-comp_simple_fine_schroeder = loo(m_simple_factor_finegrained,
-                             m_simple_factor_schroeder)
-comp_simple_fine_schroeder
-
-```
-
-##### Complex models
-```{r}
-comp_complex_quart_fine = loo(m_complex_factor_quartiles,
-                             m_complex_factor_finegrained)
-comp_complex_quart_fine
-
-comp_complex_quart_schroeder = loo(m_complex_factor_quartiles,
-                             m_complex_factor_schroeder)
-comp_complex_quart_schroeder
-
-comp_complex_fine_schroeder = loo(m_complex_factor_finegrained,
-                             m_complex_factor_schroeder)
-comp_complex_fine_schroeder
-```
-
-### Sex Frequency
-#### Factor quartiles
-```{r}
-m_simple_factor_quartiles = brm(
-  diary_sex_active_sex_mean ~ relationship_duration_factor_quartiles,
-  data = data,
-  family = gaussian())
-
-m_complex_factor_quartiles = brm(
-  diary_sex_active_sex_mean ~ relationship_duration_factor_quartiles +
-    contraception_hormonal +
-    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
-    bfi_agree + bfi_neuro + religiosity,
-  data = data,
-  family = gaussian())
-```
-
-#### Factor finegrained
-```{r}
-m_simple_factor_finegrained = brm(
-  diary_sex_active_sex_mean ~ relationship_duration_factor_finegrained,
-  data = data,
-  family = gaussian())
-
-m_complex_factor_finegrained = brm(
-  diary_sex_active_sex_mean ~ relationship_duration_factor_finegrained +
-    contraception_hormonal +
-    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
-    bfi_agree + bfi_neuro + religiosity,
-  data = data,
-  family = gaussian())
-```
-
-#### Factor Schröder
-```{r}
-m_simple_factor_schroeder = brm(
-  diary_sex_active_sex_mean ~ relationship_duration_factor_schroeder,
-  data = data,
-  family = gaussian())
-
-m_complex_factor_schroeder = brm(
-  diary_sex_active_sex_mean ~ relationship_duration_factor_schroeder +
-    contraception_hormonal +
-    age + education_years + net_income + bfi_open + bfi_consc + bfi_extra +
-    bfi_agree + bfi_neuro + religiosity,
-  data = data,
-  family = gaussian())
-```
-
-
-#### Comparisons {.tabset .active}
-##### Simple models
-```{r}
-library(loo)
-comp_simple_quart_fine = loo(m_simple_factor_quartiles,
-                             m_simple_factor_finegrained)
-comp_simple_quart_fine
-
-comp_simple_quart_schroeder = loo(m_simple_factor_quartiles,
-                             m_simple_factor_schroeder)
-comp_simple_quart_schroeder
-
-comp_simple_fine_schroeder = loo(m_simple_factor_finegrained,
-                             m_simple_factor_schroeder)
-comp_simple_fine_schroeder
-
-```
-
-##### Complex models
-```{r}
-comp_complex_quart_fine = loo(m_complex_factor_quartiles,
-                             m_complex_factor_finegrained)
-comp_complex_quart_fine
-
-comp_complex_quart_schroeder = loo(m_complex_factor_quartiles,
-                             m_complex_factor_schroeder)
-comp_complex_quart_schroeder
-
-comp_complex_fine_schroeder = loo(m_complex_factor_finegrained,
-                             m_complex_factor_schroeder)
-comp_complex_fine_schroeder
-```
-
-### Plots
-```{r}
+## Plots
+```{r message=F,warning=F}
 ggplot(data, aes(relationship_duration_factor_finegrained, diary_libido_mean)) +
   geom_jitter() +
   stat_summary(fun.data=mean_cl_normal, geom="pointrange", color="red")
