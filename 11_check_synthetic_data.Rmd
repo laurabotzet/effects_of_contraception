@@ -1,0 +1,122 @@
+---
+title: "Check Synthetic data"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'hide'
+    self_contained: false
+---
+
+## Data and Functions
+```{r data and functions}
+source("0_helpers.R")
+load("data/cleaned_selected_wrangled.rdata")
+load("data/simulated.rdata")
+```
+
+## Distributions {.tabset}
+### Selection Variables
+```{r}
+example_com <- compare(
+  example_sim, # The synthetic dataset
+  data, # The original dataset
+  vars = c("age", "net_income", "relationship_duration_factor"),
+  print.coef = TRUE, # Print tables of estimates for original and synthetic data
+  ncol = 4, # The number of columns in the plot
+  breaks = 16, # Gaps between columns 
+  stat = "counts", # Present the raw counts for each variable
+  cols = c("#62B6CB", "#1B4965") # Setting the colours in the plot
+)
+
+example_com$plots
+```
+
+### Hormonal Contraception
+### Outcomes
+
+### Compare some models
+#### Attractiveness
+```{r}
+m_hc_atrr = lm(attractiveness_partner ~ contraception_hormonal,
+               data = example)
+
+m_hc_atrr_sim = lm.synds(attractiveness_partner ~ contraception_hormonal,
+               data = example_sim)
+
+t_test_com <- compare(
+  m_hc_atrr_sim, # Results from the synthetic linear model
+  example, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot
+```
+
+#### Sexual Frequency
+```{r}
+m_hc_sexfreqpen = glm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                        religiosity,
+                data = example, family = "poisson")
+
+m_hc_sexfreqpen_sim = glm.synds(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                        religiosity,
+                data = example_sim, family = "poisson")
+
+t_test_com <- compare(
+  m_hc_sexfreqpen_sim, # Results from the synthetic linear model
+  example, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot
+```
+
+
+#### Masturbation Frequency
+```{r}
+m_hc_masfreq = glm(diary_masturbation_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = example, family = "poisson")
+
+m_hc_masfreq_sim = glm.synds(diary_masturbation_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                        religiosity,
+                        data = example_sim, family = "poisson")
+
+t_test_com <- compare(
+  m_hc_masfreq_sim, # Results from the synthetic linear model
+  example, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot
+```

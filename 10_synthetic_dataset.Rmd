@@ -1,0 +1,92 @@
+---
+title: "Generate Synthetic data"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'hide'
+    self_contained: false
+---
+
+## Data and Functions
+```{r data and functions}
+source("0_helpers.R")
+load("data/cleaned_selected_wrangled.rdata")
+```
+
+## Create synthetic dataset
+The following procedure is based on https://elifesciences.org/articles/53275 (Quintana, 2020) and https://github.com/dsquintana/synthpop-primer (Quintana, 2020)
+
+### Check wether all required packages are installed
+```{r}
+ipak <- function(pkg) {
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkg))
+    install.packages(new.pkg, dependencies = TRUE)
+  sapply(pkg, require, character.only = TRUE)
+}
+
+packages <- c("synthpop", "tidyverse", "cowplot", "car",
+              "simstudy", "mice", "StatMeasures")
+ipak(packages)
+```
+
+### Function to simulate correlated data  https://debruine.github.io/faux/index.html
+```{r}
+rnorm_pre <- function (x, mu = 0, sd = 1, r = 0, empirical = FALSE) 
+{
+  if (!is.vector(x)) 
+    stop("x must be a vector")
+  if (!is.numeric(x)) 
+    stop("x must be numeric")
+  if (length(x) < 3) 
+    stop("x must have length > 2")
+  n <- length(x)
+  if (!empirical) {
+    sample_params <- sample_from_pop(n, mu, sd, r)
+    mu <- sample_params$mu
+    sd <- sample_params$sd
+    r <- sample_params$r
+  }
+  y <- stats::rnorm(n)
+  z <- r * scale(x)[, 1] + sqrt(1 - r^2) * scale(stats::resid(stats::lm(y ~ 
+                                                                          x)))[, 1]
+  yresult <- mu + sd * z
+  return(yresult)
+}
+```
+
+### Select data used for analyses
+```{r}
+data_selected = data %>%
+  select(age, education_years, net_income,
+         bfi_agree, bfi_consc, bfi_open, bfi_extra, bfi_neuro, religiosity,
+         relationship_duration_factor,
+         contraception_hormonal, congruent_contraception,
+         attractiveness_partner,
+         relationship_satisfaction,
+         satisfaction_sexual_intercourse,
+         diary_libido_mean,
+         diary_sex_active_sex_sum,
+         diary_masturbation_sum,
+         number_of_days)
+```
+
+### Create simulated data
+```{r}
+example = data_selected
+example_sim = syn(example, seed = 1506)
+```
+
+## Save simulated data
+```{r}
+example_sim_label <- sdc(example_sim, example, 
+                          label = "FAKE_DATA") # Adds a "FAKE_DATA" label
+
+example_sim_dat <- example_sim_label$syn
+
+save(example_sim, file = "data/simulated.rdata")
+save(example_sim_dat, file = "data/simulated_onlydata.rdata")
+```
+
