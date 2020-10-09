@@ -49,11 +49,15 @@ library(tidybayes)
 library(cowplot)
 library(rstan)
 library(RColorBrewer)
-library(cowplot)
 library(ggpubr)
 library(sensemakr)
 library(jtools)
 library(Cairo)
+library(synthpop)
+library(car)
+library(mice)
+library(StatMeasures)
+library(simstudy)
 
 #'UpSetR is used to generate exclusion plots
 library(UpSetR)
@@ -136,8 +140,8 @@ pander_handler = function(x, ...) {
   }
 }
 
-
-theme_set(theme_tufte(base_size = 20, base_family='Helvetica Neue'))
+library(extrafont)
+theme_set(theme_tufte(base_size = 20, base_family='Arial'))
 
 apatheme=theme_bw()+
   theme(panel.grid.major=element_blank(),
@@ -145,5 +149,5 @@ apatheme=theme_bw()+
         panel.border=element_blank(),
         axis.line=element_line(),
         text = element_text(size=20),
-        plot.title = element_text(size = 20, face = "bold"))
+        plot.title = element_text(size = 20))
 
