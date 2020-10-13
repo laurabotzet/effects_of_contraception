@@ -76,7 +76,7 @@ data_selected = data %>%
 ### Create simulated data
 ```{r}
 example = data_selected
-example_sim = syn(example, seed = 1506)
+example_sim = syn(example, seed = 2019)
 ```
 
 ## Save simulated data
