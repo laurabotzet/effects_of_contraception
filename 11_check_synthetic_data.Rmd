@@ -24,7 +24,8 @@ example_com <- compare(
   data, # The original dataset
   vars = c("age", "net_income", "relationship_duration_factor"),
   print.coef = TRUE, # Print tables of estimates for original and synthetic data
-  ncol = 4, # The number of columns in the plot
+  ncol = 2,# The number of columns in the plot
+  nrow = 1,
   breaks = 16, # Gaps between columns 
   stat = "counts", # Present the raw counts for each variable
   cols = c("#62B6CB", "#1B4965") # Setting the colours in the plot
@@ -34,89 +35,933 @@ example_com$plots
 ```
 
 ### Hormonal Contraception
-### Outcomes
-
-### Compare some models
-#### Attractiveness
 ```{r}
-m_hc_atrr = lm(attractiveness_partner ~ contraception_hormonal,
-               data = example)
-
-m_hc_atrr_sim = lm.synds(attractiveness_partner ~ contraception_hormonal,
-               data = example_sim)
-
-t_test_com <- compare(
-  m_hc_atrr_sim, # Results from the synthetic linear model
-  example, # The original dataset
-  lwd = 1.5, # The type of line in the plot
-  lty = 1, # The width of line in the plot
-  point.size = 4, # The size of the symbols used in the plot
-  lcol = c("#62B6CB", "#1B4965") # Set the colours
+example_com <- compare(
+  example_sim, # The synthetic dataset
+  data, # The original dataset
+  vars = c("contraception_hormonal", "congruent_contraception"),
+  print.coef = TRUE, # Print tables of estimates for original and synthetic data
+  ncol = 2, # The number of columns in the plot
+  breaks = 16, # Gaps between columns 
+  stat = "counts", # Present the raw counts for each variable
+  cols = c("#62B6CB", "#1B4965") # Setting the colours in the plot
 )
 
-t_test_com$ci.plot
+example_com$plots
 ```
+
+
+### Outcomes
+```{r}
+example_com <- compare(
+  example_sim, # The synthetic dataset
+  data, # The original dataset
+  vars = c("attractiveness_partner",
+         "relationship_satisfaction",
+         "satisfaction_sexual_intercourse",
+         "diary_libido_mean",
+         "diary_sex_active_sex_sum",
+         "diary_masturbation_sum"),
+  print.coef = TRUE, # Print tables of estimates for original and synthetic data
+  ncol = 2, # The number of columns in the plot
+  nrow = 1,
+  breaks = 16, # Gaps between columns 
+  stat = "counts", # Present the raw counts for each variable
+  cols = c("#62B6CB", "#1B4965") # Setting the colours in the plot
+)
+
+example_com$plots
+```
+
+## Correlations {.tabset}
+### Real Data
+```{r}
+cor_real = data %>%
+  mutate(contraception_hormonal_numeric = ifelse(contraception_hormonal == "yes",
+                                                 1,
+                                                 ifelse(contraception_hormonal == "no",
+                                                        0, NA)),
+         congruent_contraception_numeric = ifelse(congruent_contraception == "0",
+                                                  0,
+                                                  ifelse(congruent_contraception == "1",
+                                                         1, NA))) %>%
+  select(age, education_years,
+         bfi_extra, bfi_neuro, bfi_agree, bfi_consc, bfi_open, religiosity,
+         contraception_hormonal_numeric, congruent_contraception_numeric,
+         attractiveness_partner,
+         relationship_satisfaction,
+         satisfaction_sexual_intercourse,
+         diary_libido_mean,
+         diary_sex_active_sex_sum,
+         diary_masturbation_sum) %>%
+  corr.test(., minlength = 35)
+
+cor_real_ci = as.data.frame(cor_real$ci) %>%
+  rownames_to_column(., "variables")
+
+cor_real_ci = cor_real_ci %>%
+  mutate(variables_factor = factor(variables, levels = rev(unique(cor_real_ci$variables))),
+         group = "real_data")
+
+ggplot(cor_real_ci, aes(x = variables_factor, y = r)) + 
+  geom_pointrange(aes(ymin = lower, ymax = upper)) +
+  coord_flip() +
+  apatheme +
+  theme(text = element_text(size=10))
+```
+
+### Simulated Data
+```{r}
+example_sim$syn = example_sim$syn %>%
+  mutate(contraception_hormonal_numeric = ifelse(contraception_hormonal == "yes",
+                                                 1,
+                                                 ifelse(contraception_hormonal == "no",
+                                                        0, NA)),
+         congruent_contraception_numeric = ifelse(congruent_contraception == "0",
+                                                  0,
+                                                  ifelse(congruent_contraception == "1",
+                                                         1, NA)))
+
+cor_sim = example_sim$syn %>%
+  select(age, education_years,
+         bfi_extra, bfi_neuro, bfi_agree, bfi_consc, bfi_open, religiosity,
+         contraception_hormonal_numeric, congruent_contraception_numeric,
+         attractiveness_partner,
+         relationship_satisfaction,
+         satisfaction_sexual_intercourse,
+         diary_libido_mean,
+         diary_sex_active_sex_sum,
+         diary_masturbation_sum) %>%
+  corr.test(., minlength = 35)
+
+cor_sim_ci = as.data.frame(cor_sim$ci) %>%
+  rownames_to_column(., "variables")
+
+cor_sim_ci = cor_sim_ci %>%
+  mutate(variables_factor = factor(variables, levels = rev(unique(cor_sim_ci$variables))),
+         group = "simulated_data")
+
+ggplot(cor_sim_ci, aes(x = variables_factor, y = r)) + 
+  geom_pointrange(aes(ymin = lower, ymax = upper)) +
+  coord_flip() +
+  apatheme +
+  theme(text = element_text(size=10))
+```
+
+### Combined
+```{r}
+cor_combined = rbind(cor_real_ci, cor_sim_ci) %>%
+  arrange(variables)
+
+plot_cor = function(cor_combined) {
+  ggplot(cor_combined, aes(x = variables_factor, y = r, color = group, group = group)) + 
+    geom_pointrange(aes(ymin = lower, ymax = upper, color = group, group = group),
+                    position = position_dodge(width = 0.5)) +
+    coord_flip() +
+    apatheme +
+    theme(text = element_text(size=10))
+}
+```
+
+
+#### Age
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "age"))
+```
+
+#### Years of Education
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "education_years"))
+```
+
+#### Agreeableness
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "bfi_agree"))
+```
+
+#### Conscientiousness
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "bfi_consc"))
+```
+
+#### Openness
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "bfi_open"))
+```
+
+
+#### Extraversion
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "bfi_extra"))
+
+```
+
+#### Neuroticism
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "bfi_neuro"))
+
+```
+
+#### Religiosity
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "religiosity"))
+
+```
+
+#### Hormonal contraception
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "contraception_hormonal_numeric"))
+```
+
+#### Congruent Contraception
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "congruent_contraception_numeric"))
+
+```
+
+
+#### Attractivness Partner
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "attractiveness_partner"))
+
+```
+
+#### Relationship Satisfaction
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "relationship_satisfaction"))
+
+```
+
+#### Sexual Satisfaction
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "satisfaction_sexual_intercourse"))
+
+```
+
+#### Libido
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "diary_libido_mean"))
+
+```
+
 
 #### Sexual Frequency
 ```{r}
-m_hc_sexfreqpen = glm(diary_sex_active_sex_sum ~
-                        offset(log(number_of_days)) +
-                        contraception_hormonal +
-                        age + net_income + relationship_duration_factor +
-                              education_years +
-                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
-                        religiosity,
-                data = example, family = "poisson")
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "diary_sex_active_sex_sum"))
 
-m_hc_sexfreqpen_sim = glm.synds(diary_sex_active_sex_sum ~
-                        offset(log(number_of_days)) +
-                        contraception_hormonal +
-                        age + net_income + relationship_duration_factor +
-                              education_years +
-                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
-                        religiosity,
-                data = example_sim, family = "poisson")
+```
+
+#### Masturbation Frequency
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %contains% "diary_masturbation_sum"))
+
+```
+
+### Problematic? {.active}
+```{r}
+cor_combined_wide = cor_combined %>%
+  select(variables_factor, group, lower, r, upper) %>%
+  pivot_wider(., names_from = group, values_from = c(lower, r, upper)) %>%
+  mutate(dif = ifelse(lower_real_data > r_simulated_data, T,
+                      ifelse(lower_simulated_data > r_real_data, T,
+                             ifelse(upper_real_data < r_simulated_data, T,
+                                    ifelse(upper_simulated_data < r_real_data, T,
+                                           F)))))
+
+x = cor_combined_wide %>% filter(dif == T)
+```
+
+
+```{r}
+plot_cor(cor_combined %>%
+           filter(variables_factor %in% x$variables_factor))
+```
+
+## Main Analyses {.tabset}
+### Selection effects {.tabset}
+#### Hormonal Contraception {.tabset}
+##### Simple Model
+```{r}
+model = lm.synds(as.numeric(contraception_hormonal) ~
+                   age + net_income + relationship_duration_factor,
+                         data = example_sim)
 
 t_test_com <- compare(
-  m_hc_sexfreqpen_sim, # Results from the synthetic linear model
-  example, # The original dataset
+  model, # Results from the synthetic linear model
+  data, # The original dataset
   lwd = 1.5, # The type of line in the plot
   lty = 1, # The width of line in the plot
   point.size = 4, # The size of the symbols used in the plot
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Complex Model
+```{r}
+model = lm.synds(as.numeric(contraception_hormonal) ~
+                   age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                         data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
 ```
 
 
-#### Masturbation Frequency
+#### Congruent Use of Hormonal Contraception {.tabset}
+##### Simple Model
 ```{r}
-m_hc_masfreq = glm(diary_masturbation_sum ~
-                        offset(log(number_of_days)) +
+model = lm.synds(as.numeric(congruent_contraception) ~
+                   age + net_income + relationship_duration_factor,
+                         data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Complex Model
+```{r}
+model = lm.synds(as.numeric(congruent_contraception) ~
+                   age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                         data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+### Effects of Hormonal Contraception {.tabset}
+#### Attractiveness of Partner {.tabset}
+##### Uncontrolled
+```{r}
+model = lm.synds(attractiveness_partner ~ contraception_hormonal,
+                         data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = lm.synds(attractiveness_partner ~ contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                         data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+#### Relationship Satisfaction {.tabset}
+##### Uncontrolled
+```{r}
+model = lm.synds(relationship_satisfaction ~ contraception_hormonal,
+                         data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = lm.synds(relationship_satisfaction ~ contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                         data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+#### Sexual Satisfaction {.tabset}
+##### Uncontrolled
+```{r}
+model = lm.synds(satisfaction_sexual_intercourse ~ contraception_hormonal,
+                         data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = lm.synds(satisfaction_sexual_intercourse ~ contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                         data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+#### Libido {.tabset}
+##### Uncontrolled
+```{r}
+model = lm.synds(diary_libido_mean ~ contraception_hormonal,
+                         data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = lm.synds(diary_libido_mean ~ contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                         data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+#### Sexual Frequency {.tabset}
+##### Uncontrolled
+```{r}
+model = glm.synds(diary_sex_active_sex_sum ~ offset(log(number_of_days)) +
+                        contraception_hormonal,
+                         data = example_sim, family = "poisson")
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = glm.synds(diary_sex_active_sex_sum ~ offset(log(number_of_days)) +
                         contraception_hormonal +
                         age + net_income + relationship_duration_factor +
                               education_years +
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
-                data = example, family = "poisson")
-
-m_hc_masfreq_sim = glm.synds(diary_masturbation_sum ~
-                        offset(log(number_of_days)) +
-                        contraception_hormonal +age + net_income + relationship_duration_factor +
-                              education_years +
-                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
-                        religiosity,
-                        data = example_sim, family = "poisson")
+                         data = example_sim, family = "poisson")
 
 t_test_com <- compare(
-  m_hc_masfreq_sim, # Results from the synthetic linear model
-  example, # The original dataset
+  model, # Results from the synthetic linear model
+  data, # The original dataset
   lwd = 1.5, # The type of line in the plot
   lty = 1, # The width of line in the plot
   point.size = 4, # The size of the symbols used in the plot
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+#### Masturbation Frequency {.tabset}
+##### Uncontrolled
+```{r}
+model = glm.synds(diary_masturbation_sum ~ offset(log(number_of_days)) +
+                        contraception_hormonal,
+                         data = example_sim, family = "poisson")
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = glm.synds(diary_masturbation_sum ~ offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                         data = example_sim, family = "poisson")
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+### HC, Congruent Use of HC and Their Interaction {.tabset}
+#### Attractiveness of Partner {.tabset}
+##### Uncontrolled
+```{r}
+model = lm.synds(attractiveness_partner ~ contraception_hormonal * congruent_contraception,
+                 data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = lm.synds(attractiveness_partner ~ contraception_hormonal * congruent_contraception +
+                   age + net_income + relationship_duration_factor +
+                   education_years +
+                   bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                   religiosity,
+                 data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+#### Relationship Satisfaction {.tabset}
+##### Uncontrolled
+```{r}
+model = lm.synds(relationship_satisfaction ~ contraception_hormonal * congruent_contraception,
+                 data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = lm.synds(relationship_satisfaction ~ contraception_hormonal * congruent_contraception +
+                   age + net_income + relationship_duration_factor +
+                   education_years +
+                   bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                   religiosity,
+                 data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+#### Sexual Satisfaction {.tabset}
+##### Uncontrolled
+```{r}
+model = lm.synds(satisfaction_sexual_intercourse ~ contraception_hormonal * congruent_contraception,
+                 data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = lm.synds(satisfaction_sexual_intercourse ~ contraception_hormonal * congruent_contraception +
+                   age + net_income + relationship_duration_factor +
+                   education_years +
+                   bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                   religiosity,
+                 data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+#### Libido {.tabset}
+##### Uncontrolled
+```{r}
+model = lm.synds(diary_libido_mean ~ contraception_hormonal * congruent_contraception,
+                 data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = lm.synds(diary_libido_mean ~ contraception_hormonal * congruent_contraception +
+                   age + net_income + relationship_duration_factor +
+                   education_years +
+                   bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                   religiosity,
+                 data = example_sim)
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+#### Sexual Frequency {.tabset}
+##### Uncontrolled
+```{r}
+model = glm.synds(diary_sex_active_sex_sum ~ offset(log(number_of_days)) +
+                    contraception_hormonal * congruent_contraception,
+                  data = example_sim, family = "poisson")
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = glm.synds(diary_sex_active_sex_sum ~ offset(log(number_of_days)) +
+                    contraception_hormonal * congruent_contraception +
+                    age + net_income + relationship_duration_factor +
+                    education_years +
+                    bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                    religiosity,
+                  data = example_sim, family = "poisson")
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+#### Masturbation Frequency {.tabset}
+##### Uncontrolled
+```{r}
+model = glm.synds(diary_masturbation_sum ~ offset(log(number_of_days)) +
+                    contraception_hormonal * congruent_contraception,
+                  data = example_sim, family = "poisson")
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
+```
+
+##### Controlled
+```{r}
+model = glm.synds(diary_masturbation_sum ~ offset(log(number_of_days)) +
+                    contraception_hormonal * congruent_contraception +
+                    age + net_income + relationship_duration_factor +
+                    education_years +
+                    bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                    religiosity,
+                  data = example_sim, family = "poisson")
+
+t_test_com <- compare(
+  model, # Results from the synthetic linear model
+  data, # The original dataset
+  lwd = 1.5, # The type of line in the plot
+  lty = 1, # The width of line in the plot
+  point.size = 4, # The size of the symbols used in the plot
+  lcol = c("#62B6CB", "#1B4965") # Set the colours
+)
+
+t_test_com$ci.plot +
+  ggtitle("") +
+  apatheme +
+  theme(text = element_text(size=10)) +
+  background_grid()
 ```
