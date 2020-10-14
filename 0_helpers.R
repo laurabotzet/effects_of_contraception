@@ -1,6 +1,7 @@
 #' # Helper functions used throughout {.tabset .tabset-sticky}
 #' documentation on the functions is interspersed through code comments
 #'
+#'
 #' ## set some options
 #' dont show messages when loading libraries
 library = function(...) suppressMessages(base::library(...))
