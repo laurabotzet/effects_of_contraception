@@ -19,6 +19,7 @@ navbar:
     href: 7_analyses_sensitivity.html
   right:
   - text: ''
+    icon: fa-github
     href: https://github.com/laurabotzet/effects_of_contraception
 output:
   html_document:
@@ -39,6 +40,7 @@ exclude:
 - '*.csl'
 - '*.bibtex'
 - '*.xlsx'
+- '*.rds'
+- '*.docx'
 - data
-- who_fits
-
+- "renv"

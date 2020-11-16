@@ -5,7 +5,7 @@ nocite: |
     @R @packrat @rmarkdown @knitr @formr @pander @lubridate @stringr @broom @effects @ggplot2 @tidyr @svglite @dplyr @reshape2 @lmerTest @devtools @formatR @lazyeval @scales @car @xlsx @lme4
 ---
  
-# Effects of Hormonal Contraception {.tabset .tabset-sticky}
+# Causal Effects of Hormonal Contraception on Relationship Quality and Sexual Functioning Based on Correlative Data? The Role of Observed and Unobserved Selection Effects {.tabset .tabset-sticky}
 
 ```{r message=FALSE, warning=FALSE}
 # bibliography: packrat_bibliography.bibtex

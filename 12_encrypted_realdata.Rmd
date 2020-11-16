@@ -1,0 +1,54 @@
+---
+title: "Encrypt real data"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'hide'
+    self_contained: false
+---
+
+## Data and Functions
+```{r data and functions}
+source("0_helpers.R")
+load("data/cleaned_selected_wrangled.rdata")
+cleaned_selected_wrangled = data
+
+load("data/cleaned_selected.rdata")
+cleaned_selected_all_surveys = all_surveys
+cleaned_selected_diary = diary
+
+load("data/cleaned.rdata")
+cleaned_all_surveys = all_surveys
+cleaned_diary = diary
+```
+
+## Encrypt data
+```{r}
+library(keyring)
+key <- keyring::key_get_raw("encrypt_data_cleaned_selected_wrangled")
+class(key) <- c("aes", "raw")
+
+library(cyphr)
+key <- cyphr::key_openssl(key)
+encrypt(saveRDS(cleaned_selected_wrangled, "data/encrypted_cleaned_selected_wrangled.rds"),key)
+encrypt(write.csv(cleaned_selected_wrangled, "data/encrypted_cleaned_selected_wrangled.csv"), key)
+
+encrypt(saveRDS(cleaned_selected_all_surveys, "data/encrypted_cleaned_selected_all_surveys.rds"),key)
+encrypt(write.csv(cleaned_selected_all_surveys, "data/encrypted_cleaned_selected_all_surveys.csv"), key)
+encrypt(saveRDS(cleaned_selected_diary, "data/encrypted_cleaned_selected_diary.rds"),key)
+encrypt(write.csv(cleaned_selected_diary, "data/encrypted_cleaned_selected_diary.csv"), key)
+
+encrypt(saveRDS(cleaned_all_surveys, "data/encrypted_cleaned_all_surveys.rds"),key)
+encrypt(write.csv(cleaned_all_surveys, "data/encrypted_cleaned_all_surveys.csv"), key)
+encrypt(saveRDS(cleaned_diary, "data/encrypted_cleaned_diary.rds"),key)
+encrypt(write.csv(cleaned_diary, "data/encrypted_cleaned_diary.csv"), key)
+```
+	
+	
+# How key was set
+```{r}
+keyring::key_set("encrypt_data_cleaned_selected_wrangled")
+```
+
