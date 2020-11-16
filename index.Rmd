@@ -22,7 +22,7 @@ We used these [helper functions](0_helpers.R).
 6. In a last step, [sensitivity of effects to unobserved confounders](7_analyses_sensitivity.html) was estimated.
 7. Click [here](8_plots.html) for all plots of the manuscript.
 
-Here are further information about the factor [relationship duration](99_relationship_duration.html).
+Here are further information about the [factor relationship duration](99_relationship_duration.html).
 
 #### Package bibliography {.tabset .tabset-sticky}
 
