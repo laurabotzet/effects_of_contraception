@@ -32,6 +32,7 @@ library(lubridate)
 library(stringr)
 #' extractor functions for models
 library(broom)
+library(broom.mixed)
 #' grammar of graphics plots
 library(ggplot2)
 library(ggdist)
