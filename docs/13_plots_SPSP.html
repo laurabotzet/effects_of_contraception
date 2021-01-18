@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Plots SPSP Preconference</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h2 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h3 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h4 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h5 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.section h6 {
+  padding-top: 69px;
+  margin-top: -69px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Effects of Contraception</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="1_exclusion.html">Exclusion</a>
+</li>
+<li>
+  <a href="2_datawrangling.html">Data Wrangling</a>
+</li>
+<li>
+  <a href="3_descriptives.html">Descriptives</a>
+</li>
+<li>
+  <a href="4_codebook.html">Codebook</a>
+</li>
+<li>
+  <a href="5_analyses_selection.html">Selection Effects</a>
+</li>
+<li>
+  <a href="6_analyses_effects.html">Effects of Contraceptives</a>
+</li>
+<li>
+  <a href="7_analyses_sensitivity.html">Sensitivity Analyses</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/laurabotzet/effects_of_contraception">
+    <span class="fa fa-github"></span>
+     
+    
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Plots SPSP Preconference</h1>
+
+</div>
+
+
+<div id="data" class="section level2">
+<h2>Data</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">source</span>(<span class="st">&quot;0_helpers.R&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">load</span>(<span class="st">&quot;data/cleaned_selected_wrangled.rdata&quot;</span>)</span></code></pre></div>
+</div>
+<div id="effects-of-hcs" class="section level2 tabset">
+<h2>Effects of HCs</h2>
+<div id="models" class="section level4">
+<h4>Models</h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>m_hc_atrr =<span class="st"> </span><span class="kw">brm</span>(attractiveness_partner <span class="op">~</span><span class="st"> </span>contraception_hormonal,</span>
+<span id="cb2-2"><a href="#cb2-2"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb2-3"><a href="#cb2-3"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_atrr&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4"></a>m_hc_relsat =<span class="st"> </span><span class="kw">brm</span>(relationship_satisfaction <span class="op">~</span><span class="st"> </span>contraception_hormonal,</span>
+<span id="cb2-5"><a href="#cb2-5"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb2-6"><a href="#cb2-6"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_relsat&quot;</span>)</span>
+<span id="cb2-7"><a href="#cb2-7"></a>m_hc_sexsat =<span class="st"> </span><span class="kw">brm</span>(satisfaction_sexual_intercourse <span class="op">~</span><span class="st"> </span>contraception_hormonal,</span>
+<span id="cb2-8"><a href="#cb2-8"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb2-9"><a href="#cb2-9"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_sexsat&quot;</span>)</span>
+<span id="cb2-10"><a href="#cb2-10"></a>m_hc_libido =<span class="st"> </span><span class="kw">brm</span>(diary_libido_mean <span class="op">~</span><span class="st"> </span>contraception_hormonal,</span>
+<span id="cb2-11"><a href="#cb2-11"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb2-12"><a href="#cb2-12"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_libido&quot;</span>)</span>
+<span id="cb2-13"><a href="#cb2-13"></a>m_hc_sexfreqpen =<span class="st"> </span><span class="kw">brm</span>(diary_sex_active_sex_sum <span class="op">~</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="st">                        </span><span class="kw">offset</span>(<span class="kw">log</span>(number_of_days)) <span class="op">+</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="st">                        </span>contraception_hormonal,</span>
+<span id="cb2-16"><a href="#cb2-16"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">poisson</span>(),</span>
+<span id="cb2-17"><a href="#cb2-17"></a>                <span class="dt">file =</span> <span class="st">&quot;mrobust_hc_sexfreqpen&quot;</span>)</span>
+<span id="cb2-18"><a href="#cb2-18"></a>m_hc_masfreq =<span class="st"> </span><span class="kw">brm</span>(diary_masturbation_sum <span class="op">~</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(number_of_days)) <span class="op">+</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="st">                     </span>contraception_hormonal,</span>
+<span id="cb2-20"><a href="#cb2-20"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">poisson</span>(),</span>
+<span id="cb2-21"><a href="#cb2-21"></a>                <span class="dt">file =</span> <span class="st">&quot;mrobust_hc_masfreq&quot;</span>)</span>
+<span id="cb2-22"><a href="#cb2-22"></a>m_hc_atrr_controlled =<span class="st"> </span><span class="kw">brm</span>(attractiveness_partner <span class="op">~</span><span class="st"> </span>contraception_hormonal <span class="op">+</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="st">                             </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor <span class="op">+</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="st">                              </span>education_years <span class="op">+</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="st">                              </span>bfi_extra <span class="op">+</span><span class="st"> </span>bfi_neuro <span class="op">+</span><span class="st"> </span>bfi_agree <span class="op">+</span><span class="st"> </span>bfi_consc <span class="op">+</span><span class="st"> </span>bfi_open <span class="op">+</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="st">                              </span>religiosity,</span>
+<span id="cb2-27"><a href="#cb2-27"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb2-28"><a href="#cb2-28"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_atrr_controlled&quot;</span>)</span>
+<span id="cb2-29"><a href="#cb2-29"></a></span>
+<span id="cb2-30"><a href="#cb2-30"></a>m_hc_relsat_controlled =<span class="st"> </span><span class="kw">brm</span>(relationship_satisfaction <span class="op">~</span><span class="st"> </span>contraception_hormonal <span class="op">+</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="st">                             </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor <span class="op">+</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="st">                              </span>education_years <span class="op">+</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a><span class="st">                              </span>bfi_extra <span class="op">+</span><span class="st"> </span>bfi_neuro <span class="op">+</span><span class="st"> </span>bfi_agree <span class="op">+</span><span class="st"> </span>bfi_consc <span class="op">+</span><span class="st"> </span>bfi_open <span class="op">+</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a><span class="st">                              </span>religiosity,</span>
+<span id="cb2-35"><a href="#cb2-35"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb2-36"><a href="#cb2-36"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_relsat_controlled&quot;</span>)</span>
+<span id="cb2-37"><a href="#cb2-37"></a></span>
+<span id="cb2-38"><a href="#cb2-38"></a>m_hc_sexsat_controlled =<span class="st"> </span><span class="kw">brm</span>(satisfaction_sexual_intercourse <span class="op">~</span><span class="st"> </span>contraception_hormonal <span class="op">+</span></span>
+<span id="cb2-39"><a href="#cb2-39"></a><span class="st">                             </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor <span class="op">+</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a><span class="st">                              </span>education_years <span class="op">+</span></span>
+<span id="cb2-41"><a href="#cb2-41"></a><span class="st">                              </span>bfi_extra <span class="op">+</span><span class="st"> </span>bfi_neuro <span class="op">+</span><span class="st"> </span>bfi_agree <span class="op">+</span><span class="st"> </span>bfi_consc <span class="op">+</span><span class="st"> </span>bfi_open <span class="op">+</span></span>
+<span id="cb2-42"><a href="#cb2-42"></a><span class="st">                              </span>religiosity,</span>
+<span id="cb2-43"><a href="#cb2-43"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb2-44"><a href="#cb2-44"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_sexsat_controlled&quot;</span>)</span>
+<span id="cb2-45"><a href="#cb2-45"></a></span>
+<span id="cb2-46"><a href="#cb2-46"></a>m_hc_libido_controlled =<span class="st"> </span><span class="kw">brm</span>(diary_libido_mean <span class="op">~</span><span class="st"> </span>contraception_hormonal <span class="op">+</span></span>
+<span id="cb2-47"><a href="#cb2-47"></a><span class="st">                             </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor <span class="op">+</span></span>
+<span id="cb2-48"><a href="#cb2-48"></a><span class="st">                              </span>education_years <span class="op">+</span></span>
+<span id="cb2-49"><a href="#cb2-49"></a><span class="st">                              </span>bfi_extra <span class="op">+</span><span class="st"> </span>bfi_neuro <span class="op">+</span><span class="st"> </span>bfi_agree <span class="op">+</span><span class="st"> </span>bfi_consc <span class="op">+</span><span class="st"> </span>bfi_open <span class="op">+</span></span>
+<span id="cb2-50"><a href="#cb2-50"></a><span class="st">                              </span>religiosity,</span>
+<span id="cb2-51"><a href="#cb2-51"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">gaussian</span>(),</span>
+<span id="cb2-52"><a href="#cb2-52"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_libido_controlled&quot;</span>)</span>
+<span id="cb2-53"><a href="#cb2-53"></a></span>
+<span id="cb2-54"><a href="#cb2-54"></a>m_hc_sexfreqpen_controlled =<span class="st"> </span><span class="kw">brm</span>(diary_sex_active_sex_sum <span class="op">~</span></span>
+<span id="cb2-55"><a href="#cb2-55"></a><span class="st">                        </span><span class="kw">offset</span>(<span class="kw">log</span>(number_of_days)) <span class="op">+</span></span>
+<span id="cb2-56"><a href="#cb2-56"></a><span class="st">                        </span>contraception_hormonal <span class="op">+</span></span>
+<span id="cb2-57"><a href="#cb2-57"></a><span class="st">                        </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor <span class="op">+</span></span>
+<span id="cb2-58"><a href="#cb2-58"></a><span class="st">                              </span>education_years <span class="op">+</span></span>
+<span id="cb2-59"><a href="#cb2-59"></a><span class="st">                              </span>bfi_extra <span class="op">+</span><span class="st"> </span>bfi_neuro <span class="op">+</span><span class="st"> </span>bfi_agree <span class="op">+</span><span class="st"> </span>bfi_consc <span class="op">+</span><span class="st"> </span>bfi_open <span class="op">+</span></span>
+<span id="cb2-60"><a href="#cb2-60"></a><span class="st">                              </span>religiosity,</span>
+<span id="cb2-61"><a href="#cb2-61"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">poisson</span>(),</span>
+<span id="cb2-62"><a href="#cb2-62"></a>                <span class="dt">file =</span> <span class="st">&quot;mrobust_hc_sexfreqpen_controlled&quot;</span>)</span>
+<span id="cb2-63"><a href="#cb2-63"></a></span>
+<span id="cb2-64"><a href="#cb2-64"></a>m_hc_masfreq_controlled =<span class="st"> </span><span class="kw">brm</span>(diary_masturbation_sum <span class="op">~</span></span>
+<span id="cb2-65"><a href="#cb2-65"></a><span class="st">                        </span><span class="kw">offset</span>(<span class="kw">log</span>(number_of_days)) <span class="op">+</span></span>
+<span id="cb2-66"><a href="#cb2-66"></a><span class="st">                        </span>contraception_hormonal <span class="op">+</span></span>
+<span id="cb2-67"><a href="#cb2-67"></a><span class="st">                        </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor <span class="op">+</span></span>
+<span id="cb2-68"><a href="#cb2-68"></a><span class="st">                              </span>education_years <span class="op">+</span></span>
+<span id="cb2-69"><a href="#cb2-69"></a><span class="st">                              </span>bfi_extra <span class="op">+</span><span class="st"> </span>bfi_neuro <span class="op">+</span><span class="st"> </span>bfi_agree <span class="op">+</span><span class="st"> </span>bfi_consc <span class="op">+</span><span class="st"> </span>bfi_open <span class="op">+</span></span>
+<span id="cb2-70"><a href="#cb2-70"></a><span class="st">                              </span>religiosity,</span>
+<span id="cb2-71"><a href="#cb2-71"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">poisson</span>(),</span>
+<span id="cb2-72"><a href="#cb2-72"></a>                <span class="dt">file =</span> <span class="st">&quot;mrobust_hc_masfreq_controlled&quot;</span>)</span></code></pre></div>
+</div>
+<div id="forest-plot-for-effect-sizes" class="section level4 active">
+<h4>Forest Plot for Effect Sizes</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>models =<span class="st"> </span><span class="kw">rbind</span>(</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  m_hc_atrr <span class="op">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-5"><a href="#cb3-5"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Partner Attractiveness</span><span class="ch">\n</span><span class="st">ROPE = [-0.07, 0.07]&quot;</span>,</span>
+<span id="cb3-8"><a href="#cb3-8"></a>           <span class="dt">ROPE =</span> <span class="fl">0.07</span>,</span>
+<span id="cb3-9"><a href="#cb3-9"></a>           <span class="dt">set =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Uncontrolled Models&quot;</span>),</span>
+<span id="cb3-10"><a href="#cb3-10"></a>  m_hc_relsat <span class="op">%&gt;%</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-13"><a href="#cb3-13"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-14"><a href="#cb3-14"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Relationship Satisfaction</span><span class="ch">\n</span><span class="st">ROPE = [-0.04, 0.04]&quot;</span>,</span>
+<span id="cb3-16"><a href="#cb3-16"></a>           <span class="dt">ROPE =</span> <span class="fl">0.04</span>,</span>
+<span id="cb3-17"><a href="#cb3-17"></a>           <span class="dt">set =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Uncontrolled Models&quot;</span>),</span>
+<span id="cb3-18"><a href="#cb3-18"></a>  m_hc_sexsat <span class="op">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-21"><a href="#cb3-21"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-22"><a href="#cb3-22"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Sexual Satisfaction</span><span class="ch">\n</span><span class="st">ROPE = [-0.11, 0.11]&quot;</span>,</span>
+<span id="cb3-24"><a href="#cb3-24"></a>           <span class="dt">ROPE =</span> <span class="fl">0.11</span>,</span>
+<span id="cb3-25"><a href="#cb3-25"></a>           <span class="dt">set =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Uncontrolled Models&quot;</span>),</span>
+<span id="cb3-26"><a href="#cb3-26"></a>  m_hc_libido <span class="op">%&gt;%</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-29"><a href="#cb3-29"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-30"><a href="#cb3-30"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Libido</span><span class="ch">\n</span><span class="st">ROPE = [-0.06, 0.06]&quot;</span>,</span>
+<span id="cb3-32"><a href="#cb3-32"></a>           <span class="dt">ROPE =</span> <span class="fl">0.06</span>,</span>
+<span id="cb3-33"><a href="#cb3-33"></a>           <span class="dt">set =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Uncontrolled Models&quot;</span>),</span>
+<span id="cb3-34"><a href="#cb3-34"></a>  m_hc_sexfreqpen <span class="op">%&gt;%</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-36"><a href="#cb3-36"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-37"><a href="#cb3-37"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-38"><a href="#cb3-38"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Sexual Frequency</span><span class="ch">\n</span><span class="st">ROPE = [-0.05, 0.05]&quot;</span>,</span>
+<span id="cb3-40"><a href="#cb3-40"></a>           <span class="dt">ROPE =</span> <span class="fl">0.05</span>,</span>
+<span id="cb3-41"><a href="#cb3-41"></a>           <span class="dt">set =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Uncontrolled Models&quot;</span>),</span>
+<span id="cb3-42"><a href="#cb3-42"></a>  m_hc_masfreq <span class="op">%&gt;%</span></span>
+<span id="cb3-43"><a href="#cb3-43"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-44"><a href="#cb3-44"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-45"><a href="#cb3-45"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-46"><a href="#cb3-46"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-47"><a href="#cb3-47"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Masturbation Frequency</span><span class="ch">\n</span><span class="st">ROPE = [-0.05, 0.05]&quot;</span>,</span>
+<span id="cb3-48"><a href="#cb3-48"></a>           <span class="dt">ROPE =</span> <span class="fl">0.05</span>,</span>
+<span id="cb3-49"><a href="#cb3-49"></a>           <span class="dt">set =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Uncontrolled Models&quot;</span>),</span>
+<span id="cb3-50"><a href="#cb3-50"></a>  m_hc_atrr_controlled <span class="op">%&gt;%</span></span>
+<span id="cb3-51"><a href="#cb3-51"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-52"><a href="#cb3-52"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-53"><a href="#cb3-53"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-54"><a href="#cb3-54"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-55"><a href="#cb3-55"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Partner Attractiveness</span><span class="ch">\n</span><span class="st">ROPE = [-0.07, 0.07]&quot;</span>,</span>
+<span id="cb3-56"><a href="#cb3-56"></a>           <span class="dt">ROPE =</span> <span class="fl">0.07</span>,</span>
+<span id="cb3-57"><a href="#cb3-57"></a>           <span class="dt">set =</span> <span class="st">&quot;Controlled Models Including</span><span class="ch">\n</span><span class="st">Observed Selection Effects&quot;</span>),</span>
+<span id="cb3-58"><a href="#cb3-58"></a>  m_hc_relsat_controlled <span class="op">%&gt;%</span></span>
+<span id="cb3-59"><a href="#cb3-59"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-60"><a href="#cb3-60"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-61"><a href="#cb3-61"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-62"><a href="#cb3-62"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-63"><a href="#cb3-63"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Relationship Satisfaction</span><span class="ch">\n</span><span class="st">ROPE = [-0.04, 0.04]&quot;</span>,</span>
+<span id="cb3-64"><a href="#cb3-64"></a>           <span class="dt">ROPE =</span> <span class="fl">0.04</span>,</span>
+<span id="cb3-65"><a href="#cb3-65"></a>           <span class="dt">set =</span> <span class="st">&quot;Controlled Models Including</span><span class="ch">\n</span><span class="st">Observed Selection Effects&quot;</span>),</span>
+<span id="cb3-66"><a href="#cb3-66"></a>  m_hc_sexsat_controlled <span class="op">%&gt;%</span></span>
+<span id="cb3-67"><a href="#cb3-67"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-68"><a href="#cb3-68"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-69"><a href="#cb3-69"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-70"><a href="#cb3-70"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-71"><a href="#cb3-71"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Sexual Satisfaction</span><span class="ch">\n</span><span class="st">ROPE = [-0.11, 0.11]&quot;</span>,</span>
+<span id="cb3-72"><a href="#cb3-72"></a>           <span class="dt">ROPE =</span> <span class="fl">0.11</span>,</span>
+<span id="cb3-73"><a href="#cb3-73"></a>           <span class="dt">set =</span> <span class="st">&quot;Controlled Models Including</span><span class="ch">\n</span><span class="st">Observed Selection Effects&quot;</span>),</span>
+<span id="cb3-74"><a href="#cb3-74"></a>  m_hc_libido_controlled <span class="op">%&gt;%</span></span>
+<span id="cb3-75"><a href="#cb3-75"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-76"><a href="#cb3-76"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-77"><a href="#cb3-77"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-78"><a href="#cb3-78"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-79"><a href="#cb3-79"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Libido</span><span class="ch">\n</span><span class="st">ROPE = [-0.06, 0.06]&quot;</span>,</span>
+<span id="cb3-80"><a href="#cb3-80"></a>           <span class="dt">ROPE =</span> <span class="fl">0.06</span>,</span>
+<span id="cb3-81"><a href="#cb3-81"></a>           <span class="dt">set =</span> <span class="st">&quot;Controlled Models Including</span><span class="ch">\n</span><span class="st">Observed Selection Effects&quot;</span>),</span>
+<span id="cb3-82"><a href="#cb3-82"></a>  m_hc_sexfreqpen_controlled <span class="op">%&gt;%</span></span>
+<span id="cb3-83"><a href="#cb3-83"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-84"><a href="#cb3-84"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-85"><a href="#cb3-85"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-86"><a href="#cb3-86"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-87"><a href="#cb3-87"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Sexual Frequency</span><span class="ch">\n</span><span class="st">ROPE = [-0.05, 0.05]&quot;</span>,</span>
+<span id="cb3-88"><a href="#cb3-88"></a>           <span class="dt">ROPE =</span> <span class="fl">0.05</span>,</span>
+<span id="cb3-89"><a href="#cb3-89"></a>           <span class="dt">set =</span> <span class="st">&quot;Controlled Models Including</span><span class="ch">\n</span><span class="st">Observed Selection Effects&quot;</span>),</span>
+<span id="cb3-90"><a href="#cb3-90"></a>  m_hc_masfreq_controlled <span class="op">%&gt;%</span></span>
+<span id="cb3-91"><a href="#cb3-91"></a><span class="st">    </span><span class="kw">spread_draws</span>(b_contraception_hormonalyes) <span class="op">%&gt;%</span></span>
+<span id="cb3-92"><a href="#cb3-92"></a><span class="st">    </span><span class="kw">pivot_longer</span>(<span class="dt">cols =</span> <span class="kw">c</span>(b_contraception_hormonalyes),</span>
+<span id="cb3-93"><a href="#cb3-93"></a>                 <span class="dt">names_to =</span> <span class="st">&quot;condition&quot;</span>,</span>
+<span id="cb3-94"><a href="#cb3-94"></a>                 <span class="dt">values_to =</span> <span class="st">&quot;r_condition&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-95"><a href="#cb3-95"></a><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="st">&quot;Masturbation Frequency</span><span class="ch">\n</span><span class="st">ROPE = [-0.05, 0.05]&quot;</span>,</span>
+<span id="cb3-96"><a href="#cb3-96"></a>           <span class="dt">ROPE =</span> <span class="fl">0.05</span>,</span>
+<span id="cb3-97"><a href="#cb3-97"></a>           <span class="dt">set =</span> <span class="st">&quot;Controlled Models Including</span><span class="ch">\n</span><span class="st">Observed Selection Effects&quot;</span>))</span>
+<span id="cb3-98"><a href="#cb3-98"></a></span>
+<span id="cb3-99"><a href="#cb3-99"></a>data1 =<span class="st"> </span>models <span class="op">%&gt;%</span></span>
+<span id="cb3-100"><a href="#cb3-100"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">factor</span>(model,</span>
+<span id="cb3-101"><a href="#cb3-101"></a>                   <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Masturbation Frequency</span><span class="ch">\n</span><span class="st">ROPE = [-0.05, 0.05]&quot;</span>,</span>
+<span id="cb3-102"><a href="#cb3-102"></a>                              <span class="st">&quot;Sexual Frequency</span><span class="ch">\n</span><span class="st">ROPE = [-0.05, 0.05]&quot;</span>,</span>
+<span id="cb3-103"><a href="#cb3-103"></a>                              <span class="st">&quot;Libido</span><span class="ch">\n</span><span class="st">ROPE = [-0.06, 0.06]&quot;</span>,</span>
+<span id="cb3-104"><a href="#cb3-104"></a>                              <span class="st">&quot;Sexual Satisfaction</span><span class="ch">\n</span><span class="st">ROPE = [-0.11, 0.11]&quot;</span>,</span>
+<span id="cb3-105"><a href="#cb3-105"></a>                              <span class="st">&quot;Relationship Satisfaction</span><span class="ch">\n</span><span class="st">ROPE = [-0.04, 0.04]&quot;</span>,</span>
+<span id="cb3-106"><a href="#cb3-106"></a>                              <span class="st">&quot;Partner Attractiveness</span><span class="ch">\n</span><span class="st">ROPE = [-0.07, 0.07]&quot;</span>)))</span>
+<span id="cb3-107"><a href="#cb3-107"></a>data2 =<span class="st"> </span>models <span class="op">%&gt;%</span></span>
+<span id="cb3-108"><a href="#cb3-108"></a><span class="st">  </span><span class="kw">group_by</span>(model, set, ROPE) <span class="op">%&gt;%</span></span>
+<span id="cb3-109"><a href="#cb3-109"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">factor</span>(model,</span>
+<span id="cb3-110"><a href="#cb3-110"></a>                        <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;Masturbation Frequency</span><span class="ch">\n</span><span class="st">ROPE = [-0.05, 0.05]&quot;</span>,</span>
+<span id="cb3-111"><a href="#cb3-111"></a>                                   <span class="st">&quot;Sexual Frequency</span><span class="ch">\n</span><span class="st">ROPE = [-0.05, 0.05]&quot;</span>,</span>
+<span id="cb3-112"><a href="#cb3-112"></a>                                   <span class="st">&quot;Libido</span><span class="ch">\n</span><span class="st">ROPE = [-0.06, 0.06]&quot;</span>,</span>
+<span id="cb3-113"><a href="#cb3-113"></a>                                   <span class="st">&quot;Sexual Satisfaction</span><span class="ch">\n</span><span class="st">ROPE = [-0.11, 0.11]&quot;</span>,</span>
+<span id="cb3-114"><a href="#cb3-114"></a>                                   <span class="st">&quot;Relationship Satisfaction</span><span class="ch">\n</span><span class="st">ROPE = [-0.04, 0.04]&quot;</span>,</span>
+<span id="cb3-115"><a href="#cb3-115"></a>                                   <span class="st">&quot;Partner Attractiveness</span><span class="ch">\n</span><span class="st">ROPE = [-0.07, 0.07]&quot;</span>))) <span class="op">%&gt;%</span></span>
+<span id="cb3-116"><a href="#cb3-116"></a><span class="st">  </span><span class="kw">mean_qi</span>(<span class="dt">condition_mean =</span> r_condition,</span>
+<span id="cb3-117"><a href="#cb3-117"></a>          <span class="dt">.width =</span> <span class="kw">c</span>(.<span class="dv">90</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb3-118"><a href="#cb3-118"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">text =</span> <span class="kw">ifelse</span>(.width <span class="op">==</span><span class="st"> </span><span class="fl">.90</span>,</span>
+<span id="cb3-119"><a href="#cb3-119"></a>                       <span class="kw">str_c</span>(<span class="kw">round</span>(condition_mean, <span class="dv">2</span>),</span>
+<span id="cb3-120"><a href="#cb3-120"></a>                             <span class="st">&quot; [&quot;</span>,</span>
+<span id="cb3-121"><a href="#cb3-121"></a>                             <span class="kw">round</span>(.lower, <span class="dv">2</span>),</span>
+<span id="cb3-122"><a href="#cb3-122"></a>                             <span class="st">&quot;; &quot;</span>,</span>
+<span id="cb3-123"><a href="#cb3-123"></a>                             <span class="kw">round</span>(.upper, <span class="dv">2</span>),</span>
+<span id="cb3-124"><a href="#cb3-124"></a>                             <span class="st">&quot;]&quot;</span>), <span class="ot">NA</span>),</span>
+<span id="cb3-125"><a href="#cb3-125"></a>         <span class="dt">sig =</span> <span class="kw">ifelse</span>(.lower <span class="op">&gt;</span><span class="st"> </span>ROPE <span class="op">|</span><span class="st"> </span>.upper <span class="op">&lt;</span><span class="st"> </span><span class="op">-</span>ROPE, T, F))</span>
+<span id="cb3-126"><a href="#cb3-126"></a></span>
+<span id="cb3-127"><a href="#cb3-127"></a></span>
+<span id="cb3-128"><a href="#cb3-128"></a>plot =<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb3-129"><a href="#cb3-129"></a><span class="st">  </span><span class="kw">stat_halfeye</span>(<span class="dt">data =</span> data1,</span>
+<span id="cb3-130"><a href="#cb3-130"></a>               <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> r_condition,</span>
+<span id="cb3-131"><a href="#cb3-131"></a>                   <span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>),</span>
+<span id="cb3-132"><a href="#cb3-132"></a>               <span class="dt">.width =</span> <span class="fl">.90</span>) <span class="op">+</span></span>
+<span id="cb3-133"><a href="#cb3-133"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">+</span></span>
+<span id="cb3-134"><a href="#cb3-134"></a><span class="st">  </span><span class="kw">geom_pointinterval</span>(<span class="dt">data =</span> data2,</span>
+<span id="cb3-135"><a href="#cb3-135"></a>                     <span class="kw">aes</span>(<span class="dt">y =</span> model,</span>
+<span id="cb3-136"><a href="#cb3-136"></a>                         <span class="dt">x =</span> condition_mean,</span>
+<span id="cb3-137"><a href="#cb3-137"></a>                         <span class="dt">xmin =</span> .lower,</span>
+<span id="cb3-138"><a href="#cb3-138"></a>                         <span class="dt">xmax =</span> .upper,</span>
+<span id="cb3-139"><a href="#cb3-139"></a>                         <span class="dt">color =</span> sig)) <span class="op">+</span></span>
+<span id="cb3-140"><a href="#cb3-140"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> ROPE), <span class="dt">shape =</span> <span class="st">&quot;|&quot;</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb3-141"><a href="#cb3-141"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> <span class="op">-</span>ROPE), <span class="dt">shape =</span> <span class="st">&quot;|&quot;</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb3-142"><a href="#cb3-142"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> ROPE), <span class="dt">shape =</span> <span class="dv">58</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb3-143"><a href="#cb3-143"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> <span class="op">-</span>ROPE), <span class="dt">shape =</span> <span class="dv">58</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb3-144"><a href="#cb3-144"></a><span class="st">  </span>apatheme <span class="op">+</span></span>
+<span id="cb3-145"><a href="#cb3-145"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span></span>
+<span id="cb3-146"><a href="#cb3-146"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;skyblue&quot;</span>, <span class="st">&quot;grey&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="op">+</span></span>
+<span id="cb3-147"><a href="#cb3-147"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">-0.25</span>, <span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>),</span>
+<span id="cb3-148"><a href="#cb3-148"></a>                     <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>)) <span class="op">+</span></span>
+<span id="cb3-149"><a href="#cb3-149"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Effect Size Estimates of HCs&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Outcomes&quot;</span>)</span>
+<span id="cb3-150"><a href="#cb3-150"></a>plot</span></code></pre></div>
+<p><img src="13_plots_SPSP_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="uncontrolled-model" class="section level3">
+<h3>Uncontrolled Model</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>plot_uncontrolled =<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span><span class="kw">stat_halfeye</span>(<span class="dt">data =</span> data1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(set <span class="op">==</span><span class="st"> &quot;</span><span class="ch">\n</span><span class="st">Uncontrolled Models&quot;</span>),</span>
+<span id="cb4-3"><a href="#cb4-3"></a>               <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> r_condition,</span>
+<span id="cb4-4"><a href="#cb4-4"></a>                   <span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>),</span>
+<span id="cb4-5"><a href="#cb4-5"></a>               <span class="dt">.width =</span> <span class="fl">.90</span>) <span class="op">+</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">+</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="st">  </span><span class="kw">geom_pointinterval</span>(<span class="dt">data =</span> data2  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(set <span class="op">==</span><span class="st"> &quot;</span><span class="ch">\n</span><span class="st">Uncontrolled Models&quot;</span>),</span>
+<span id="cb4-8"><a href="#cb4-8"></a>                     <span class="kw">aes</span>(<span class="dt">y =</span> model,</span>
+<span id="cb4-9"><a href="#cb4-9"></a>                         <span class="dt">x =</span> condition_mean,</span>
+<span id="cb4-10"><a href="#cb4-10"></a>                         <span class="dt">xmin =</span> .lower,</span>
+<span id="cb4-11"><a href="#cb4-11"></a>                         <span class="dt">xmax =</span> .upper,</span>
+<span id="cb4-12"><a href="#cb4-12"></a>                         <span class="dt">color =</span> sig)) <span class="op">+</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> ROPE), <span class="dt">shape =</span> <span class="st">&quot;|&quot;</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> <span class="op">-</span>ROPE), <span class="dt">shape =</span> <span class="st">&quot;|&quot;</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> ROPE), <span class="dt">shape =</span> <span class="dv">58</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> <span class="op">-</span>ROPE), <span class="dt">shape =</span> <span class="dv">58</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="st">  </span>apatheme <span class="op">+</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;skyblue&quot;</span>, <span class="st">&quot;grey&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="op">+</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">-0.25</span>, <span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>),</span>
+<span id="cb4-21"><a href="#cb4-21"></a>                     <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>)) <span class="op">+</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">Uncontrolled Models&quot;</span>,</span>
+<span id="cb4-23"><a href="#cb4-23"></a>       <span class="dt">x =</span> <span class="st">&quot;Effect Size Estimates of HCs&quot;</span>,</span>
+<span id="cb4-24"><a href="#cb4-24"></a>       <span class="dt">y =</span> <span class="st">&quot;Outcomes&quot;</span>)</span>
+<span id="cb4-25"><a href="#cb4-25"></a>plot_uncontrolled</span></code></pre></div>
+<p><img src="13_plots_SPSP_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">jpeg</span>(<span class="st">&#39;SPSP_uncontrolled.jpg&#39;</span>, </span>
+<span id="cb5-2"><a href="#cb5-2"></a>     <span class="dt">width =</span> <span class="dv">500</span>, <span class="dt">height =</span> <span class="dv">500</span>, <span class="dt">quality =</span> <span class="dv">100</span>)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>plot_uncontrolled</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">dev.off</span>()</span></code></pre></div>
+<pre><code>## png 
+##   2</code></pre>
+</div>
+<div id="controlled-model" class="section level3">
+<h3>Controlled Model</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>plot_controlled =<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw">stat_halfeye</span>(<span class="dt">data =</span> data1 <span class="op">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">                 </span><span class="kw">filter</span>(set <span class="op">==</span><span class="st"> &quot;Controlled Models Including</span><span class="ch">\n</span><span class="st">Observed Selection Effects&quot;</span>),</span>
+<span id="cb7-4"><a href="#cb7-4"></a>               <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> r_condition,</span>
+<span id="cb7-5"><a href="#cb7-5"></a>                   <span class="dt">color =</span> <span class="st">&quot;grey&quot;</span>),</span>
+<span id="cb7-6"><a href="#cb7-6"></a>               <span class="dt">.width =</span> <span class="fl">.90</span>) <span class="op">+</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">+</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="st">  </span><span class="kw">geom_pointinterval</span>(<span class="dt">data =</span> data2 <span class="op">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="st">                 </span><span class="kw">filter</span>(set <span class="op">==</span><span class="st"> &quot;Controlled Models Including</span><span class="ch">\n</span><span class="st">Observed Selection Effects&quot;</span>),</span>
+<span id="cb7-10"><a href="#cb7-10"></a>                     <span class="kw">aes</span>(<span class="dt">y =</span> model,</span>
+<span id="cb7-11"><a href="#cb7-11"></a>                         <span class="dt">x =</span> condition_mean,</span>
+<span id="cb7-12"><a href="#cb7-12"></a>                         <span class="dt">xmin =</span> .lower,</span>
+<span id="cb7-13"><a href="#cb7-13"></a>                         <span class="dt">xmax =</span> .upper,</span>
+<span id="cb7-14"><a href="#cb7-14"></a>                         <span class="dt">color =</span> sig)) <span class="op">+</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> ROPE), <span class="dt">shape =</span> <span class="st">&quot;|&quot;</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> <span class="op">-</span>ROPE), <span class="dt">shape =</span> <span class="st">&quot;|&quot;</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> ROPE), <span class="dt">shape =</span> <span class="dv">58</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> data1, <span class="kw">aes</span>(<span class="dt">y =</span> model, <span class="dt">x =</span> <span class="op">-</span>ROPE), <span class="dt">shape =</span> <span class="dv">58</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="st">  </span>apatheme <span class="op">+</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;skyblue&quot;</span>, <span class="st">&quot;grey&quot;</span>, <span class="st">&quot;red&quot;</span>)) <span class="op">+</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">-0.25</span>, <span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>),</span>
+<span id="cb7-23"><a href="#cb7-23"></a>                     <span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">0.5</span>)) <span class="op">+</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Controlled Models Including</span><span class="ch">\n</span><span class="st">Observed Selection Effects&quot;</span>,</span>
+<span id="cb7-25"><a href="#cb7-25"></a>       <span class="dt">x =</span> <span class="st">&quot;Effect Size Estimates of HCs&quot;</span>,</span>
+<span id="cb7-26"><a href="#cb7-26"></a>       <span class="dt">y =</span> <span class="st">&quot;Outcomes&quot;</span>)</span>
+<span id="cb7-27"><a href="#cb7-27"></a>plot_controlled</span></code></pre></div>
+<p><img src="13_plots_SPSP_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw">jpeg</span>(<span class="st">&#39;SPSP_controlled.jpg&#39;</span>, </span>
+<span id="cb8-2"><a href="#cb8-2"></a>     <span class="dt">width =</span> <span class="dv">500</span>, <span class="dt">height =</span> <span class="dv">500</span>, <span class="dt">quality =</span> <span class="dv">100</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>plot_controlled</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">dev.off</span>()</span></code></pre></div>
+<pre><code>## png 
+##   2</code></pre>
+</div>
+<div id="animated" class="section level3">
+<h3>Animated</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">library</span>(gganimate)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">library</span>(gifski)</span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a>plot_animated &lt;-<span class="st"> </span>plot <span class="op">+</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="st">  </span><span class="kw">transition_states</span>(set,</span>
+<span id="cb10-6"><a href="#cb10-6"></a>                    <span class="dt">transition_length =</span> <span class="dv">2</span>,</span>
+<span id="cb10-7"><a href="#cb10-7"></a>                    <span class="dt">state_length =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;{closest_state}&quot;</span>)</span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="kw">animate</span>(plot_animated,</span>
+<span id="cb10-11"><a href="#cb10-11"></a>        <span class="dt">duration =</span> <span class="dv">20</span>,</span>
+<span id="cb10-12"><a href="#cb10-12"></a>        <span class="dt">fps =</span> <span class="dv">5</span>,</span>
+<span id="cb10-13"><a href="#cb10-13"></a>        <span class="dt">width =</span> <span class="dv">500</span>,</span>
+<span id="cb10-14"><a href="#cb10-14"></a>        <span class="dt">height =</span> <span class="dv">500</span>,</span>
+<span id="cb10-15"><a href="#cb10-15"></a>        <span class="dt">renderer =</span> <span class="kw">gifski_renderer</span>())</span></code></pre></div>
+<p><img src="13_plots_SPSP_files/figure-html/unnamed-chunk-6-1.gif" /><!-- --></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">anim_save</span>(<span class="st">&quot;output.gif&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlBsb3RzIFNQU1AgUHJlY29uZmVyZW5jZSINCm91dHB1dDoNCiAgaHRtbF9kb2N1bWVudDoNCiAgICB0b2M6IHRydWUNCiAgICB0b2NfZGVwdGg6IDQNCiAgICB0b2NfZmxvYXQ6IHRydWUNCiAgICBjb2RlX2ZvbGRpbmc6ICdoaWRlJw0KICAgIHNlbGZfY29udGFpbmVkOiBmYWxzZQ0KLS0tDQogIA0KIyMgRGF0YSANCmBgYHtyIHJlc3VsdHM9J2hpZGUnLG1lc3NhZ2U9Rix3YXJuaW5nPUZ9DQpzb3VyY2UoIjBfaGVscGVycy5SIikNCg0KbG9hZCgiZGF0YS9jbGVhbmVkX3NlbGVjdGVkX3dyYW5nbGVkLnJkYXRhIikNCmBgYA0KDQoNCiMjIEVmZmVjdHMgb2YgSENzIHsudGFic2V0fQ0KIyMjIyBNb2RlbHMNCmBgYHtyfQ0KbV9oY19hdHJyID0gYnJtKGF0dHJhY3RpdmVuZXNzX3BhcnRuZXIgfiBjb250cmFjZXB0aW9uX2hvcm1vbmFsLA0KICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLCBmYW1pbHkgPSBnYXVzc2lhbigpLA0KICAgICAgICAgICAgICAgIGZpbGUgPSAibV9oY19hdHJyIikNCm1faGNfcmVsc2F0ID0gYnJtKHJlbGF0aW9uc2hpcF9zYXRpc2ZhY3Rpb24gfiBjb250cmFjZXB0aW9uX2hvcm1vbmFsLA0KICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLCBmYW1pbHkgPSBnYXVzc2lhbigpLA0KICAgICAgICAgICAgICAgIGZpbGUgPSAibV9oY19yZWxzYXQiKQ0KbV9oY19zZXhzYXQgPSBicm0oc2F0aXNmYWN0aW9uX3NleHVhbF9pbnRlcmNvdXJzZSB+IGNvbnRyYWNlcHRpb25faG9ybW9uYWwsDQogICAgICAgICAgICAgICAgZGF0YSA9IGRhdGEsIGZhbWlseSA9IGdhdXNzaWFuKCksDQogICAgICAgICAgICAgICAgZmlsZSA9ICJtX2hjX3NleHNhdCIpDQptX2hjX2xpYmlkbyA9IGJybShkaWFyeV9saWJpZG9fbWVhbiB+IGNvbnRyYWNlcHRpb25faG9ybW9uYWwsDQogICAgICAgICAgICAgICAgZGF0YSA9IGRhdGEsIGZhbWlseSA9IGdhdXNzaWFuKCksDQogICAgICAgICAgICAgICAgZmlsZSA9ICJtX2hjX2xpYmlkbyIpDQptX2hjX3NleGZyZXFwZW4gPSBicm0oZGlhcnlfc2V4X2FjdGl2ZV9zZXhfc3VtIH4NCiAgICAgICAgICAgICAgICAgICAgICAgIG9mZnNldChsb2cobnVtYmVyX29mX2RheXMpKSArDQogICAgICAgICAgICAgICAgICAgICAgICBjb250cmFjZXB0aW9uX2hvcm1vbmFsLA0KICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLCBmYW1pbHkgPSBwb2lzc29uKCksDQogICAgICAgICAgICAgICAgZmlsZSA9ICJtcm9idXN0X2hjX3NleGZyZXFwZW4iKQ0KbV9oY19tYXNmcmVxID0gYnJtKGRpYXJ5X21hc3R1cmJhdGlvbl9zdW0gfiBvZmZzZXQobG9nKG51bWJlcl9vZl9kYXlzKSkgKw0KICAgICAgICAgICAgICAgICAgICAgY29udHJhY2VwdGlvbl9ob3Jtb25hbCwNCiAgICAgICAgICAgICAgICBkYXRhID0gZGF0YSwgZmFtaWx5ID0gcG9pc3NvbigpLA0KICAgICAgICAgICAgICAgIGZpbGUgPSAibXJvYnVzdF9oY19tYXNmcmVxIikNCm1faGNfYXRycl9jb250cm9sbGVkID0gYnJtKGF0dHJhY3RpdmVuZXNzX3BhcnRuZXIgfiBjb250cmFjZXB0aW9uX2hvcm1vbmFsICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYWdlICsgbmV0X2luY29tZSArIHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IgKw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZWR1Y2F0aW9uX3llYXJzICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJmaV9leHRyYSArIGJmaV9uZXVybyArIGJmaV9hZ3JlZSArIGJmaV9jb25zYyArIGJmaV9vcGVuICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlbGlnaW9zaXR5LA0KICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLCBmYW1pbHkgPSBnYXVzc2lhbigpLA0KICAgICAgICAgICAgICAgIGZpbGUgPSAibV9oY19hdHJyX2NvbnRyb2xsZWQiKQ0KDQptX2hjX3JlbHNhdF9jb250cm9sbGVkID0gYnJtKHJlbGF0aW9uc2hpcF9zYXRpc2ZhY3Rpb24gfiBjb250cmFjZXB0aW9uX2hvcm1vbmFsICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYWdlICsgbmV0X2luY29tZSArIHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IgKw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZWR1Y2F0aW9uX3llYXJzICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJmaV9leHRyYSArIGJmaV9uZXVybyArIGJmaV9hZ3JlZSArIGJmaV9jb25zYyArIGJmaV9vcGVuICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlbGlnaW9zaXR5LA0KICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLCBmYW1pbHkgPSBnYXVzc2lhbigpLA0KICAgICAgICAgICAgICAgIGZpbGUgPSAibV9oY19yZWxzYXRfY29udHJvbGxlZCIpDQoNCm1faGNfc2V4c2F0X2NvbnRyb2xsZWQgPSBicm0oc2F0aXNmYWN0aW9uX3NleHVhbF9pbnRlcmNvdXJzZSB+IGNvbnRyYWNlcHRpb25faG9ybW9uYWwgKw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhZ2UgKyBuZXRfaW5jb21lICsgcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvciArDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICBlZHVjYXRpb25feWVhcnMgKw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmZpX2V4dHJhICsgYmZpX25ldXJvICsgYmZpX2FncmVlICsgYmZpX2NvbnNjICsgYmZpX29wZW4gKw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVsaWdpb3NpdHksDQogICAgICAgICAgICAgICAgZGF0YSA9IGRhdGEsIGZhbWlseSA9IGdhdXNzaWFuKCksDQogICAgICAgICAgICAgICAgZmlsZSA9ICJtX2hjX3NleHNhdF9jb250cm9sbGVkIikNCg0KbV9oY19saWJpZG9fY29udHJvbGxlZCA9IGJybShkaWFyeV9saWJpZG9fbWVhbiB+IGNvbnRyYWNlcHRpb25faG9ybW9uYWwgKw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhZ2UgKyBuZXRfaW5jb21lICsgcmVsYXRpb25zaGlwX2R1cmF0aW9uX2ZhY3RvciArDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICBlZHVjYXRpb25feWVhcnMgKw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYmZpX2V4dHJhICsgYmZpX25ldXJvICsgYmZpX2FncmVlICsgYmZpX2NvbnNjICsgYmZpX29wZW4gKw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVsaWdpb3NpdHksDQogICAgICAgICAgICAgICAgZGF0YSA9IGRhdGEsIGZhbWlseSA9IGdhdXNzaWFuKCksDQogICAgICAgICAgICAgICAgZmlsZSA9ICJtX2hjX2xpYmlkb19jb250cm9sbGVkIikNCg0KbV9oY19zZXhmcmVxcGVuX2NvbnRyb2xsZWQgPSBicm0oZGlhcnlfc2V4X2FjdGl2ZV9zZXhfc3VtIH4NCiAgICAgICAgICAgICAgICAgICAgICAgIG9mZnNldChsb2cobnVtYmVyX29mX2RheXMpKSArDQogICAgICAgICAgICAgICAgICAgICAgICBjb250cmFjZXB0aW9uX2hvcm1vbmFsICsNCiAgICAgICAgICAgICAgICAgICAgICAgIGFnZSArIG5ldF9pbmNvbWUgKyByZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGVkdWNhdGlvbl95ZWFycyArDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICBiZmlfZXh0cmEgKyBiZmlfbmV1cm8gKyBiZmlfYWdyZWUgKyBiZmlfY29uc2MgKyBiZmlfb3BlbiArDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZWxpZ2lvc2l0eSwNCiAgICAgICAgICAgICAgICBkYXRhID0gZGF0YSwgZmFtaWx5ID0gcG9pc3NvbigpLA0KICAgICAgICAgICAgICAgIGZpbGUgPSAibXJvYnVzdF9oY19zZXhmcmVxcGVuX2NvbnRyb2xsZWQiKQ0KDQptX2hjX21hc2ZyZXFfY29udHJvbGxlZCA9IGJybShkaWFyeV9tYXN0dXJiYXRpb25fc3VtIH4NCiAgICAgICAgICAgICAgICAgICAgICAgIG9mZnNldChsb2cobnVtYmVyX29mX2RheXMpKSArDQogICAgICAgICAgICAgICAgICAgICAgICBjb250cmFjZXB0aW9uX2hvcm1vbmFsICsNCiAgICAgICAgICAgICAgICAgICAgICAgIGFnZSArIG5ldF9pbmNvbWUgKyByZWxhdGlvbnNoaXBfZHVyYXRpb25fZmFjdG9yICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGVkdWNhdGlvbl95ZWFycyArDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICBiZmlfZXh0cmEgKyBiZmlfbmV1cm8gKyBiZmlfYWdyZWUgKyBiZmlfY29uc2MgKyBiZmlfb3BlbiArDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZWxpZ2lvc2l0eSwNCiAgICAgICAgICAgICAgICBkYXRhID0gZGF0YSwgZmFtaWx5ID0gcG9pc3NvbigpLA0KICAgICAgICAgICAgICAgIGZpbGUgPSAibXJvYnVzdF9oY19tYXNmcmVxX2NvbnRyb2xsZWQiKQ0KYGBgDQoNCiMjIyMgRm9yZXN0IFBsb3QgZm9yIEVmZmVjdCBTaXplcyB7LmFjdGl2ZX0NCmBgYHtyfQ0KbW9kZWxzID0gcmJpbmQoDQogIG1faGNfYXRyciAlPiUNCiAgICBzcHJlYWRfZHJhd3MoYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSAlPiUNCiAgICBwaXZvdF9sb25nZXIoY29scyA9IGMoYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSwNCiAgICAgICAgICAgICAgICAgbmFtZXNfdG8gPSAiY29uZGl0aW9uIiwNCiAgICAgICAgICAgICAgICAgdmFsdWVzX3RvID0gInJfY29uZGl0aW9uIikgJT4lDQogICAgbXV0YXRlKG1vZGVsID0gIlBhcnRuZXIgQXR0cmFjdGl2ZW5lc3NcblJPUEUgPSBbLTAuMDcsIDAuMDddIiwNCiAgICAgICAgICAgUk9QRSA9IDAuMDcsDQogICAgICAgICAgIHNldCA9ICJcblVuY29udHJvbGxlZCBNb2RlbHMiKSwNCiAgbV9oY19yZWxzYXQgJT4lDQogICAgc3ByZWFkX2RyYXdzKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcykgJT4lDQogICAgcGl2b3RfbG9uZ2VyKGNvbHMgPSBjKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcyksDQogICAgICAgICAgICAgICAgIG5hbWVzX3RvID0gImNvbmRpdGlvbiIsDQogICAgICAgICAgICAgICAgIHZhbHVlc190byA9ICJyX2NvbmRpdGlvbiIpICU+JQ0KICAgIG11dGF0ZShtb2RlbCA9ICJSZWxhdGlvbnNoaXAgU2F0aXNmYWN0aW9uXG5ST1BFID0gWy0wLjA0LCAwLjA0XSIsDQogICAgICAgICAgIFJPUEUgPSAwLjA0LA0KICAgICAgICAgICBzZXQgPSAiXG5VbmNvbnRyb2xsZWQgTW9kZWxzIiksDQogIG1faGNfc2V4c2F0ICU+JQ0KICAgIHNwcmVhZF9kcmF3cyhiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMpICU+JQ0KICAgIHBpdm90X2xvbmdlcihjb2xzID0gYyhiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMpLA0KICAgICAgICAgICAgICAgICBuYW1lc190byA9ICJjb25kaXRpb24iLA0KICAgICAgICAgICAgICAgICB2YWx1ZXNfdG8gPSAicl9jb25kaXRpb24iKSAlPiUNCiAgICBtdXRhdGUobW9kZWwgPSAiU2V4dWFsIFNhdGlzZmFjdGlvblxuUk9QRSA9IFstMC4xMSwgMC4xMV0iLA0KICAgICAgICAgICBST1BFID0gMC4xMSwNCiAgICAgICAgICAgc2V0ID0gIlxuVW5jb250cm9sbGVkIE1vZGVscyIpLA0KICBtX2hjX2xpYmlkbyAlPiUNCiAgICBzcHJlYWRfZHJhd3MoYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSAlPiUNCiAgICBwaXZvdF9sb25nZXIoY29scyA9IGMoYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSwNCiAgICAgICAgICAgICAgICAgbmFtZXNfdG8gPSAiY29uZGl0aW9uIiwNCiAgICAgICAgICAgICAgICAgdmFsdWVzX3RvID0gInJfY29uZGl0aW9uIikgJT4lDQogICAgbXV0YXRlKG1vZGVsID0gIkxpYmlkb1xuUk9QRSA9IFstMC4wNiwgMC4wNl0iLA0KICAgICAgICAgICBST1BFID0gMC4wNiwNCiAgICAgICAgICAgc2V0ID0gIlxuVW5jb250cm9sbGVkIE1vZGVscyIpLA0KICBtX2hjX3NleGZyZXFwZW4gJT4lDQogICAgc3ByZWFkX2RyYXdzKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcykgJT4lDQogICAgcGl2b3RfbG9uZ2VyKGNvbHMgPSBjKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcyksDQogICAgICAgICAgICAgICAgIG5hbWVzX3RvID0gImNvbmRpdGlvbiIsDQogICAgICAgICAgICAgICAgIHZhbHVlc190byA9ICJyX2NvbmRpdGlvbiIpICU+JQ0KICAgIG11dGF0ZShtb2RlbCA9ICJTZXh1YWwgRnJlcXVlbmN5XG5ST1BFID0gWy0wLjA1LCAwLjA1XSIsDQogICAgICAgICAgIFJPUEUgPSAwLjA1LA0KICAgICAgICAgICBzZXQgPSAiXG5VbmNvbnRyb2xsZWQgTW9kZWxzIiksDQogIG1faGNfbWFzZnJlcSAlPiUNCiAgICBzcHJlYWRfZHJhd3MoYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSAlPiUNCiAgICBwaXZvdF9sb25nZXIoY29scyA9IGMoYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSwNCiAgICAgICAgICAgICAgICAgbmFtZXNfdG8gPSAiY29uZGl0aW9uIiwNCiAgICAgICAgICAgICAgICAgdmFsdWVzX3RvID0gInJfY29uZGl0aW9uIikgJT4lDQogICAgbXV0YXRlKG1vZGVsID0gIk1hc3R1cmJhdGlvbiBGcmVxdWVuY3lcblJPUEUgPSBbLTAuMDUsIDAuMDVdIiwNCiAgICAgICAgICAgUk9QRSA9IDAuMDUsDQogICAgICAgICAgIHNldCA9ICJcblVuY29udHJvbGxlZCBNb2RlbHMiKSwNCiAgbV9oY19hdHJyX2NvbnRyb2xsZWQgJT4lDQogICAgc3ByZWFkX2RyYXdzKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcykgJT4lDQogICAgcGl2b3RfbG9uZ2VyKGNvbHMgPSBjKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcyksDQogICAgICAgICAgICAgICAgIG5hbWVzX3RvID0gImNvbmRpdGlvbiIsDQogICAgICAgICAgICAgICAgIHZhbHVlc190byA9ICJyX2NvbmRpdGlvbiIpICU+JQ0KICAgIG11dGF0ZShtb2RlbCA9ICJQYXJ0bmVyIEF0dHJhY3RpdmVuZXNzXG5ST1BFID0gWy0wLjA3LCAwLjA3XSIsDQogICAgICAgICAgIFJPUEUgPSAwLjA3LA0KICAgICAgICAgICBzZXQgPSAiQ29udHJvbGxlZCBNb2RlbHMgSW5jbHVkaW5nXG5PYnNlcnZlZCBTZWxlY3Rpb24gRWZmZWN0cyIpLA0KICBtX2hjX3JlbHNhdF9jb250cm9sbGVkICU+JQ0KICAgIHNwcmVhZF9kcmF3cyhiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMpICU+JQ0KICAgIHBpdm90X2xvbmdlcihjb2xzID0gYyhiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMpLA0KICAgICAgICAgICAgICAgICBuYW1lc190byA9ICJjb25kaXRpb24iLA0KICAgICAgICAgICAgICAgICB2YWx1ZXNfdG8gPSAicl9jb25kaXRpb24iKSAlPiUNCiAgICBtdXRhdGUobW9kZWwgPSAiUmVsYXRpb25zaGlwIFNhdGlzZmFjdGlvblxuUk9QRSA9IFstMC4wNCwgMC4wNF0iLA0KICAgICAgICAgICBST1BFID0gMC4wNCwNCiAgICAgICAgICAgc2V0ID0gIkNvbnRyb2xsZWQgTW9kZWxzIEluY2x1ZGluZ1xuT2JzZXJ2ZWQgU2VsZWN0aW9uIEVmZmVjdHMiKSwNCiAgbV9oY19zZXhzYXRfY29udHJvbGxlZCAlPiUNCiAgICBzcHJlYWRfZHJhd3MoYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSAlPiUNCiAgICBwaXZvdF9sb25nZXIoY29scyA9IGMoYl9jb250cmFjZXB0aW9uX2hvcm1vbmFseWVzKSwNCiAgICAgICAgICAgICAgICAgbmFtZXNfdG8gPSAiY29uZGl0aW9uIiwNCiAgICAgICAgICAgICAgICAgdmFsdWVzX3RvID0gInJfY29uZGl0aW9uIikgJT4lDQogICAgbXV0YXRlKG1vZGVsID0gIlNleHVhbCBTYXRpc2ZhY3Rpb25cblJPUEUgPSBbLTAuMTEsIDAuMTFdIiwNCiAgICAgICAgICAgUk9QRSA9IDAuMTEsDQogICAgICAgICAgIHNldCA9ICJDb250cm9sbGVkIE1vZGVscyBJbmNsdWRpbmdcbk9ic2VydmVkIFNlbGVjdGlvbiBFZmZlY3RzIiksDQogIG1faGNfbGliaWRvX2NvbnRyb2xsZWQgJT4lDQogICAgc3ByZWFkX2RyYXdzKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcykgJT4lDQogICAgcGl2b3RfbG9uZ2VyKGNvbHMgPSBjKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcyksDQogICAgICAgICAgICAgICAgIG5hbWVzX3RvID0gImNvbmRpdGlvbiIsDQogICAgICAgICAgICAgICAgIHZhbHVlc190byA9ICJyX2NvbmRpdGlvbiIpICU+JQ0KICAgIG11dGF0ZShtb2RlbCA9ICJMaWJpZG9cblJPUEUgPSBbLTAuMDYsIDAuMDZdIiwNCiAgICAgICAgICAgUk9QRSA9IDAuMDYsDQogICAgICAgICAgIHNldCA9ICJDb250cm9sbGVkIE1vZGVscyBJbmNsdWRpbmdcbk9ic2VydmVkIFNlbGVjdGlvbiBFZmZlY3RzIiksDQogIG1faGNfc2V4ZnJlcXBlbl9jb250cm9sbGVkICU+JQ0KICAgIHNwcmVhZF9kcmF3cyhiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMpICU+JQ0KICAgIHBpdm90X2xvbmdlcihjb2xzID0gYyhiX2NvbnRyYWNlcHRpb25faG9ybW9uYWx5ZXMpLA0KICAgICAgICAgICAgICAgICBuYW1lc190byA9ICJjb25kaXRpb24iLA0KICAgICAgICAgICAgICAgICB2YWx1ZXNfdG8gPSAicl9jb25kaXRpb24iKSAlPiUNCiAgICBtdXRhdGUobW9kZWwgPSAiU2V4dWFsIEZyZXF1ZW5jeVxuUk9QRSA9IFstMC4wNSwgMC4wNV0iLA0KICAgICAgICAgICBST1BFID0gMC4wNSwNCiAgICAgICAgICAgc2V0ID0gIkNvbnRyb2xsZWQgTW9kZWxzIEluY2x1ZGluZ1xuT2JzZXJ2ZWQgU2VsZWN0aW9uIEVmZmVjdHMiKSwNCiAgbV9oY19tYXNmcmVxX2NvbnRyb2xsZWQgJT4lDQogICAgc3ByZWFkX2RyYXdzKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcykgJT4lDQogICAgcGl2b3RfbG9uZ2VyKGNvbHMgPSBjKGJfY29udHJhY2VwdGlvbl9ob3Jtb25hbHllcyksDQogICAgICAgICAgICAgICAgIG5hbWVzX3RvID0gImNvbmRpdGlvbiIsDQogICAgICAgICAgICAgICAgIHZhbHVlc190byA9ICJyX2NvbmRpdGlvbiIpICU+JQ0KICAgIG11dGF0ZShtb2RlbCA9ICJNYXN0dXJiYXRpb24gRnJlcXVlbmN5XG5ST1BFID0gWy0wLjA1LCAwLjA1XSIsDQogICAgICAgICAgIFJPUEUgPSAwLjA1LA0KICAgICAgICAgICBzZXQgPSAiQ29udHJvbGxlZCBNb2RlbHMgSW5jbHVkaW5nXG5PYnNlcnZlZCBTZWxlY3Rpb24gRWZmZWN0cyIpKQ0KDQpkYXRhMSA9IG1vZGVscyAlPiUNCiAgbXV0YXRlKG1vZGVsID0gZmFjdG9yKG1vZGVsLA0KICAgICAgICAgICAgICAgICAgIGxldmVscyA9IGMoIk1hc3R1cmJhdGlvbiBGcmVxdWVuY3lcblJPUEUgPSBbLTAuMDUsIDAuMDVdIiwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJTZXh1YWwgRnJlcXVlbmN5XG5ST1BFID0gWy0wLjA1LCAwLjA1XSIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiTGliaWRvXG5ST1BFID0gWy0wLjA2LCAwLjA2XSIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiU2V4dWFsIFNhdGlzZmFjdGlvblxuUk9QRSA9IFstMC4xMSwgMC4xMV0iLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIlJlbGF0aW9uc2hpcCBTYXRpc2ZhY3Rpb25cblJPUEUgPSBbLTAuMDQsIDAuMDRdIiwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJQYXJ0bmVyIEF0dHJhY3RpdmVuZXNzXG5ST1BFID0gWy0wLjA3LCAwLjA3XSIpKSkNCmRhdGEyID0gbW9kZWxzICU+JQ0KICBncm91cF9ieShtb2RlbCwgc2V0LCBST1BFKSAlPiUNCiAgbXV0YXRlKG1vZGVsID0gZmFjdG9yKG1vZGVsLA0KICAgICAgICAgICAgICAgICAgICAgICAgbGV2ZWxzID0gYygiTWFzdHVyYmF0aW9uIEZyZXF1ZW5jeVxuUk9QRSA9IFstMC4wNSwgMC4wNV0iLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiU2V4dWFsIEZyZXF1ZW5jeVxuUk9QRSA9IFstMC4wNSwgMC4wNV0iLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiTGliaWRvXG5ST1BFID0gWy0wLjA2LCAwLjA2XSIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJTZXh1YWwgU2F0aXNmYWN0aW9uXG5ST1BFID0gWy0wLjExLCAwLjExXSIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJSZWxhdGlvbnNoaXAgU2F0aXNmYWN0aW9uXG5ST1BFID0gWy0wLjA0LCAwLjA0XSIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJQYXJ0bmVyIEF0dHJhY3RpdmVuZXNzXG5ST1BFID0gWy0wLjA3LCAwLjA3XSIpKSkgJT4lDQogIG1lYW5fcWkoY29uZGl0aW9uX21lYW4gPSByX2NvbmRpdGlvbiwNCiAgICAgICAgICAud2lkdGggPSBjKC45MCkpICU+JQ0KICBtdXRhdGUodGV4dCA9IGlmZWxzZSgud2lkdGggPT0gLjkwLA0KICAgICAgICAgICAgICAgICAgICAgICBzdHJfYyhyb3VuZChjb25kaXRpb25fbWVhbiwgMiksDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICIgWyIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJvdW5kKC5sb3dlciwgMiksDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICI7ICIsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJvdW5kKC51cHBlciwgMiksDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICJdIiksIE5BKSwNCiAgICAgICAgIHNpZyA9IGlmZWxzZSgubG93ZXIgPiBST1BFIHwgLnVwcGVyIDwgLVJPUEUsIFQsIEYpKQ0KDQoNCnBsb3QgPSBnZ3Bsb3QoKSArDQogIHN0YXRfaGFsZmV5ZShkYXRhID0gZGF0YTEsDQogICAgICAgICAgICAgICBhZXMoeSA9IG1vZGVsLCB4ID0gcl9jb25kaXRpb24sDQogICAgICAgICAgICAgICAgICAgY29sb3IgPSAiZ3JleSIpLA0KICAgICAgICAgICAgICAgLndpZHRoID0gLjkwKSArDQogIGdlb21fdmxpbmUoeGludGVyY2VwdCA9IDAsIGxpbmV0eXBlID0gImRvdHRlZCIpICsNCiAgZ2VvbV9wb2ludGludGVydmFsKGRhdGEgPSBkYXRhMiwNCiAgICAgICAgICAgICAgICAgICAgIGFlcyh5ID0gbW9kZWwsDQogICAgICAgICAgICAgICAgICAgICAgICAgeCA9IGNvbmRpdGlvbl9tZWFuLA0KICAgICAgICAgICAgICAgICAgICAgICAgIHhtaW4gPSAubG93ZXIsDQogICAgICAgICAgICAgICAgICAgICAgICAgeG1heCA9IC51cHBlciwNCiAgICAgICAgICAgICAgICAgICAgICAgICBjb2xvciA9IHNpZykpICsNCiAgZ2VvbV9wb2ludChkYXRhID0gZGF0YTEsIGFlcyh5ID0gbW9kZWwsIHggPSBST1BFKSwgc2hhcGUgPSAifCIsIHNpemUgPSAxMCwgY29sb3IgPSAiYmxhY2siKSArDQogIGdlb21fcG9pbnQoZGF0YSA9IGRhdGExLCBhZXMoeSA9IG1vZGVsLCB4ID0gLVJPUEUpLCBzaGFwZSA9ICJ8Iiwgc2l6ZSA9IDEwLCBjb2xvciA9ICJibGFjayIpICsNCiAgZ2VvbV9wb2ludChkYXRhID0gZGF0YTEsIGFlcyh5ID0gbW9kZWwsIHggPSBST1BFKSwgc2hhcGUgPSA1OCwgc2l6ZSA9IDEwLCBjb2xvciA9ICJ3aGl0ZSIpICsNCiAgZ2VvbV9wb2ludChkYXRhID0gZGF0YTEsIGFlcyh5ID0gbW9kZWwsIHggPSAtUk9QRSksIHNoYXBlID0gNTgsIHNpemUgPSAxMCwgY29sb3IgPSAid2hpdGUiKSArDQogIGFwYXRoZW1lICsNCiAgdGhlbWUobGVnZW5kLnBvc2l0aW9uID0gIm5vbmUiKSArDQogIHNjYWxlX2NvbG9yX21hbnVhbCh2YWx1ZXMgPSBjKCJza3libHVlIiwgImdyZXkiLCAicmVkIikpICsNCiAgc2NhbGVfeF9jb250aW51b3VzKGJyZWFrcyA9IGMoLTAuNSwgLTAuMjUsIDAsIDAuMjUsIDAuNSksDQogICAgICAgICAgICAgICAgICAgICBsaW1pdHMgPSBjKC0wLjUsIDAuNSkpICsNCiAgbGFicyh4ID0gIkVmZmVjdCBTaXplIEVzdGltYXRlcyBvZiBIQ3MiLCB5ID0gIk91dGNvbWVzIikNCnBsb3QNCmBgYA0KDQojIyMgVW5jb250cm9sbGVkIE1vZGVsDQpgYGB7cn0NCnBsb3RfdW5jb250cm9sbGVkID0gZ2dwbG90KCkgKw0KICBzdGF0X2hhbGZleWUoZGF0YSA9IGRhdGExICU+JSBmaWx0ZXIoc2V0ID09ICJcblVuY29udHJvbGxlZCBNb2RlbHMiKSwNCiAgICAgICAgICAgICAgIGFlcyh5ID0gbW9kZWwsIHggPSByX2NvbmRpdGlvbiwNCiAgICAgICAgICAgICAgICAgICBjb2xvciA9ICJncmV5IiksDQogICAgICAgICAgICAgICAud2lkdGggPSAuOTApICsNCiAgZ2VvbV92bGluZSh4aW50ZXJjZXB0ID0gMCwgbGluZXR5cGUgPSAiZG90dGVkIikgKw0KICBnZW9tX3BvaW50aW50ZXJ2YWwoZGF0YSA9IGRhdGEyICAlPiUgZmlsdGVyKHNldCA9PSAiXG5VbmNvbnRyb2xsZWQgTW9kZWxzIiksDQogICAgICAgICAgICAgICAgICAgICBhZXMoeSA9IG1vZGVsLA0KICAgICAgICAgICAgICAgICAgICAgICAgIHggPSBjb25kaXRpb25fbWVhbiwNCiAgICAgICAgICAgICAgICAgICAgICAgICB4bWluID0gLmxvd2VyLA0KICAgICAgICAgICAgICAgICAgICAgICAgIHhtYXggPSAudXBwZXIsDQogICAgICAgICAgICAgICAgICAgICAgICAgY29sb3IgPSBzaWcpKSArDQogIGdlb21fcG9pbnQoZGF0YSA9IGRhdGExLCBhZXMoeSA9IG1vZGVsLCB4ID0gUk9QRSksIHNoYXBlID0gInwiLCBzaXplID0gMTAsIGNvbG9yID0gImJsYWNrIikgKw0KICBnZW9tX3BvaW50KGRhdGEgPSBkYXRhMSwgYWVzKHkgPSBtb2RlbCwgeCA9IC1ST1BFKSwgc2hhcGUgPSAifCIsIHNpemUgPSAxMCwgY29sb3IgPSAiYmxhY2siKSArDQogIGdlb21fcG9pbnQoZGF0YSA9IGRhdGExLCBhZXMoeSA9IG1vZGVsLCB4ID0gUk9QRSksIHNoYXBlID0gNTgsIHNpemUgPSAxMCwgY29sb3IgPSAid2hpdGUiKSArDQogIGdlb21fcG9pbnQoZGF0YSA9IGRhdGExLCBhZXMoeSA9IG1vZGVsLCB4ID0gLVJPUEUpLCBzaGFwZSA9IDU4LCBzaXplID0gMTAsIGNvbG9yID0gIndoaXRlIikgKw0KICBhcGF0aGVtZSArDQogIHRoZW1lKGxlZ2VuZC5wb3NpdGlvbiA9ICJub25lIikgKw0KICBzY2FsZV9jb2xvcl9tYW51YWwodmFsdWVzID0gYygic2t5Ymx1ZSIsICJncmV5IiwgInJlZCIpKSArDQogIHNjYWxlX3hfY29udGludW91cyhicmVha3MgPSBjKC0wLjUsIC0wLjI1LCAwLCAwLjI1LCAwLjUpLA0KICAgICAgICAgICAgICAgICAgICAgbGltaXRzID0gYygtMC41LCAwLjUpKSArDQogIGxhYnModGl0bGUgPSAiXG5VbmNvbnRyb2xsZWQgTW9kZWxzIiwNCiAgICAgICB4ID0gIkVmZmVjdCBTaXplIEVzdGltYXRlcyBvZiBIQ3MiLA0KICAgICAgIHkgPSAiT3V0Y29tZXMiKQ0KcGxvdF91bmNvbnRyb2xsZWQNCg0KanBlZygnU1BTUF91bmNvbnRyb2xsZWQuanBnJywgDQogICAgIHdpZHRoID0gNTAwLCBoZWlnaHQgPSA1MDAsIHF1YWxpdHkgPSAxMDApDQpwbG90X3VuY29udHJvbGxlZA0KZGV2Lm9mZigpDQpgYGANCg0KDQojIyMgQ29udHJvbGxlZCBNb2RlbA0KYGBge3J9DQpwbG90X2NvbnRyb2xsZWQgPSBnZ3Bsb3QoKSArDQogIHN0YXRfaGFsZmV5ZShkYXRhID0gZGF0YTEgJT4lDQogICAgICAgICAgICAgICAgIGZpbHRlcihzZXQgPT0gIkNvbnRyb2xsZWQgTW9kZWxzIEluY2x1ZGluZ1xuT2JzZXJ2ZWQgU2VsZWN0aW9uIEVmZmVjdHMiKSwNCiAgICAgICAgICAgICAgIGFlcyh5ID0gbW9kZWwsIHggPSByX2NvbmRpdGlvbiwNCiAgICAgICAgICAgICAgICAgICBjb2xvciA9ICJncmV5IiksDQogICAgICAgICAgICAgICAud2lkdGggPSAuOTApICsNCiAgZ2VvbV92bGluZSh4aW50ZXJjZXB0ID0gMCwgbGluZXR5cGUgPSAiZG90dGVkIikgKw0KICBnZW9tX3BvaW50aW50ZXJ2YWwoZGF0YSA9IGRhdGEyICU+JQ0KICAgICAgICAgICAgICAgICBmaWx0ZXIoc2V0ID09ICJDb250cm9sbGVkIE1vZGVscyBJbmNsdWRpbmdcbk9ic2VydmVkIFNlbGVjdGlvbiBFZmZlY3RzIiksDQogICAgICAgICAgICAgICAgICAgICBhZXMoeSA9IG1vZGVsLA0KICAgICAgICAgICAgICAgICAgICAgICAgIHggPSBjb25kaXRpb25fbWVhbiwNCiAgICAgICAgICAgICAgICAgICAgICAgICB4bWluID0gLmxvd2VyLA0KICAgICAgICAgICAgICAgICAgICAgICAgIHhtYXggPSAudXBwZXIsDQogICAgICAgICAgICAgICAgICAgICAgICAgY29sb3IgPSBzaWcpKSArDQogIGdlb21fcG9pbnQoZGF0YSA9IGRhdGExLCBhZXMoeSA9IG1vZGVsLCB4ID0gUk9QRSksIHNoYXBlID0gInwiLCBzaXplID0gMTAsIGNvbG9yID0gImJsYWNrIikgKw0KICBnZW9tX3BvaW50KGRhdGEgPSBkYXRhMSwgYWVzKHkgPSBtb2RlbCwgeCA9IC1ST1BFKSwgc2hhcGUgPSAifCIsIHNpemUgPSAxMCwgY29sb3IgPSAiYmxhY2siKSArDQogIGdlb21fcG9pbnQoZGF0YSA9IGRhdGExLCBhZXMoeSA9IG1vZGVsLCB4ID0gUk9QRSksIHNoYXBlID0gNTgsIHNpemUgPSAxMCwgY29sb3IgPSAid2hpdGUiKSArDQogIGdlb21fcG9pbnQoZGF0YSA9IGRhdGExLCBhZXMoeSA9IG1vZGVsLCB4ID0gLVJPUEUpLCBzaGFwZSA9IDU4LCBzaXplID0gMTAsIGNvbG9yID0gIndoaXRlIikgKw0KICBhcGF0aGVtZSArDQogIHRoZW1lKGxlZ2VuZC5wb3NpdGlvbiA9ICJub25lIikgKw0KICBzY2FsZV9jb2xvcl9tYW51YWwodmFsdWVzID0gYygic2t5Ymx1ZSIsICJncmV5IiwgInJlZCIpKSArDQogIHNjYWxlX3hfY29udGludW91cyhicmVha3MgPSBjKC0wLjUsIC0wLjI1LCAwLCAwLjI1LCAwLjUpLA0KICAgICAgICAgICAgICAgICAgICAgbGltaXRzID0gYygtMC41LCAwLjUpKSArDQogIGxhYnModGl0bGUgPSAiQ29udHJvbGxlZCBNb2RlbHMgSW5jbHVkaW5nXG5PYnNlcnZlZCBTZWxlY3Rpb24gRWZmZWN0cyIsDQogICAgICAgeCA9ICJFZmZlY3QgU2l6ZSBFc3RpbWF0ZXMgb2YgSENzIiwNCiAgICAgICB5ID0gIk91dGNvbWVzIikNCnBsb3RfY29udHJvbGxlZA0KDQpqcGVnKCdTUFNQX2NvbnRyb2xsZWQuanBnJywgDQogICAgIHdpZHRoID0gNTAwLCBoZWlnaHQgPSA1MDAsIHF1YWxpdHkgPSAxMDApDQpwbG90X2NvbnRyb2xsZWQNCmRldi5vZmYoKQ0KYGBgDQoNCiMjIyBBbmltYXRlZA0KYGBge3J9DQpsaWJyYXJ5KGdnYW5pbWF0ZSkNCmxpYnJhcnkoZ2lmc2tpKQ0KDQpwbG90X2FuaW1hdGVkIDwtIHBsb3QgKw0KICB0cmFuc2l0aW9uX3N0YXRlcyhzZXQsDQogICAgICAgICAgICAgICAgICAgIHRyYW5zaXRpb25fbGVuZ3RoID0gMiwNCiAgICAgICAgICAgICAgICAgICAgc3RhdGVfbGVuZ3RoID0gMSkgKw0KICBsYWJzKHRpdGxlID0gIntjbG9zZXN0X3N0YXRlfSIpDQoNCmFuaW1hdGUocGxvdF9hbmltYXRlZCwNCiAgICAgICAgZHVyYXRpb24gPSAyMCwNCiAgICAgICAgZnBzID0gNSwNCiAgICAgICAgd2lkdGggPSA1MDAsDQogICAgICAgIGhlaWdodCA9IDUwMCwNCiAgICAgICAgcmVuZGVyZXIgPSBnaWZza2lfcmVuZGVyZXIoKSkNCmFuaW1fc2F2ZSgib3V0cHV0LmdpZiIpDQpgYGANCg0K</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("13_plots_SPSP.Rmd");
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

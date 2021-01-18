@@ -1,0 +1,341 @@
+---
+title: "Plots SPSP Preconference"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'hide'
+    self_contained: false
+---
+  
+## Data 
+```{r results='hide',message=F,warning=F}
+source("0_helpers.R")
+
+load("data/cleaned_selected_wrangled.rdata")
+```
+
+
+## Effects of HCs {.tabset}
+#### Models
+```{r}
+m_hc_atrr = brm(attractiveness_partner ~ contraception_hormonal,
+                data = data, family = gaussian(),
+                file = "m_hc_atrr")
+m_hc_relsat = brm(relationship_satisfaction ~ contraception_hormonal,
+                data = data, family = gaussian(),
+                file = "m_hc_relsat")
+m_hc_sexsat = brm(satisfaction_sexual_intercourse ~ contraception_hormonal,
+                data = data, family = gaussian(),
+                file = "m_hc_sexsat")
+m_hc_libido = brm(diary_libido_mean ~ contraception_hormonal,
+                data = data, family = gaussian(),
+                file = "m_hc_libido")
+m_hc_sexfreqpen = brm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal,
+                data = data, family = poisson(),
+                file = "mrobust_hc_sexfreqpen")
+m_hc_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
+                     contraception_hormonal,
+                data = data, family = poisson(),
+                file = "mrobust_hc_masfreq")
+m_hc_atrr_controlled = brm(attractiveness_partner ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_atrr_controlled")
+
+m_hc_relsat_controlled = brm(relationship_satisfaction ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_relsat_controlled")
+
+m_hc_sexsat_controlled = brm(satisfaction_sexual_intercourse ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_sexsat_controlled")
+
+m_hc_libido_controlled = brm(diary_libido_mean ~ contraception_hormonal +
+                             age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = gaussian(),
+                file = "m_hc_libido_controlled")
+
+m_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson(),
+                file = "mrobust_hc_sexfreqpen_controlled")
+
+m_hc_masfreq_controlled = brm(diary_masturbation_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal +
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
+                data = data, family = poisson(),
+                file = "mrobust_hc_masfreq_controlled")
+```
+
+#### Forest Plot for Effect Sizes {.active}
+```{r}
+models = rbind(
+  m_hc_atrr %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Partner Attractiveness\nROPE = [-0.07, 0.07]",
+           ROPE = 0.07,
+           set = "\nUncontrolled Models"),
+  m_hc_relsat %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
+           ROPE = 0.04,
+           set = "\nUncontrolled Models"),
+  m_hc_sexsat %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
+           ROPE = 0.11,
+           set = "\nUncontrolled Models"),
+  m_hc_libido %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Libido\nROPE = [-0.06, 0.06]",
+           ROPE = 0.06,
+           set = "\nUncontrolled Models"),
+  m_hc_sexfreqpen %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
+           ROPE = 0.05,
+           set = "\nUncontrolled Models"),
+  m_hc_masfreq %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Masturbation Frequency\nROPE = [-0.05, 0.05]",
+           ROPE = 0.05,
+           set = "\nUncontrolled Models"),
+  m_hc_atrr_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Partner Attractiveness\nROPE = [-0.07, 0.07]",
+           ROPE = 0.07,
+           set = "Controlled Models Including\nObserved Selection Effects"),
+  m_hc_relsat_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
+           ROPE = 0.04,
+           set = "Controlled Models Including\nObserved Selection Effects"),
+  m_hc_sexsat_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
+           ROPE = 0.11,
+           set = "Controlled Models Including\nObserved Selection Effects"),
+  m_hc_libido_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Libido\nROPE = [-0.06, 0.06]",
+           ROPE = 0.06,
+           set = "Controlled Models Including\nObserved Selection Effects"),
+  m_hc_sexfreqpen_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
+           ROPE = 0.05,
+           set = "Controlled Models Including\nObserved Selection Effects"),
+  m_hc_masfreq_controlled %>%
+    spread_draws(b_contraception_hormonalyes) %>%
+    pivot_longer(cols = c(b_contraception_hormonalyes),
+                 names_to = "condition",
+                 values_to = "r_condition") %>%
+    mutate(model = "Masturbation Frequency\nROPE = [-0.05, 0.05]",
+           ROPE = 0.05,
+           set = "Controlled Models Including\nObserved Selection Effects"))
+
+data1 = models %>%
+  mutate(model = factor(model,
+                   levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
+                              "Sexual Frequency\nROPE = [-0.05, 0.05]",
+                              "Libido\nROPE = [-0.06, 0.06]",
+                              "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
+                              "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
+                              "Partner Attractiveness\nROPE = [-0.07, 0.07]")))
+data2 = models %>%
+  group_by(model, set, ROPE) %>%
+  mutate(model = factor(model,
+                        levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
+                                   "Sexual Frequency\nROPE = [-0.05, 0.05]",
+                                   "Libido\nROPE = [-0.06, 0.06]",
+                                   "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
+                                   "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
+                                   "Partner Attractiveness\nROPE = [-0.07, 0.07]"))) %>%
+  mean_qi(condition_mean = r_condition,
+          .width = c(.90)) %>%
+  mutate(text = ifelse(.width == .90,
+                       str_c(round(condition_mean, 2),
+                             " [",
+                             round(.lower, 2),
+                             "; ",
+                             round(.upper, 2),
+                             "]"), NA),
+         sig = ifelse(.lower > ROPE | .upper < -ROPE, T, F))
+
+
+plot = ggplot() +
+  stat_halfeye(data = data1,
+               aes(y = model, x = r_condition,
+                   color = "grey"),
+               .width = .90) +
+  geom_vline(xintercept = 0, linetype = "dotted") +
+  geom_pointinterval(data = data2,
+                     aes(y = model,
+                         x = condition_mean,
+                         xmin = .lower,
+                         xmax = .upper,
+                         color = sig)) +
+  geom_point(data = data1, aes(y = model, x = ROPE), shape = "|", size = 10, color = "black") +
+  geom_point(data = data1, aes(y = model, x = -ROPE), shape = "|", size = 10, color = "black") +
+  geom_point(data = data1, aes(y = model, x = ROPE), shape = 58, size = 10, color = "white") +
+  geom_point(data = data1, aes(y = model, x = -ROPE), shape = 58, size = 10, color = "white") +
+  apatheme +
+  theme(legend.position = "none") +
+  scale_color_manual(values = c("skyblue", "grey", "red")) +
+  scale_x_continuous(breaks = c(-0.5, -0.25, 0, 0.25, 0.5),
+                     limits = c(-0.5, 0.5)) +
+  labs(x = "Effect Size Estimates of HCs", y = "Outcomes")
+plot
+```
+
+### Uncontrolled Model
+```{r}
+plot_uncontrolled = ggplot() +
+  stat_halfeye(data = data1 %>% filter(set == "\nUncontrolled Models"),
+               aes(y = model, x = r_condition,
+                   color = "grey"),
+               .width = .90) +
+  geom_vline(xintercept = 0, linetype = "dotted") +
+  geom_pointinterval(data = data2  %>% filter(set == "\nUncontrolled Models"),
+                     aes(y = model,
+                         x = condition_mean,
+                         xmin = .lower,
+                         xmax = .upper,
+                         color = sig)) +
+  geom_point(data = data1, aes(y = model, x = ROPE), shape = "|", size = 10, color = "black") +
+  geom_point(data = data1, aes(y = model, x = -ROPE), shape = "|", size = 10, color = "black") +
+  geom_point(data = data1, aes(y = model, x = ROPE), shape = 58, size = 10, color = "white") +
+  geom_point(data = data1, aes(y = model, x = -ROPE), shape = 58, size = 10, color = "white") +
+  apatheme +
+  theme(legend.position = "none") +
+  scale_color_manual(values = c("skyblue", "grey", "red")) +
+  scale_x_continuous(breaks = c(-0.5, -0.25, 0, 0.25, 0.5),
+                     limits = c(-0.5, 0.5)) +
+  labs(title = "\nUncontrolled Models",
+       x = "Effect Size Estimates of HCs",
+       y = "Outcomes")
+plot_uncontrolled
+
+jpeg('SPSP_uncontrolled.jpg', 
+     width = 500, height = 500, quality = 100)
+plot_uncontrolled
+dev.off()
+```
+
+
+### Controlled Model
+```{r}
+plot_controlled = ggplot() +
+  stat_halfeye(data = data1 %>%
+                 filter(set == "Controlled Models Including\nObserved Selection Effects"),
+               aes(y = model, x = r_condition,
+                   color = "grey"),
+               .width = .90) +
+  geom_vline(xintercept = 0, linetype = "dotted") +
+  geom_pointinterval(data = data2 %>%
+                 filter(set == "Controlled Models Including\nObserved Selection Effects"),
+                     aes(y = model,
+                         x = condition_mean,
+                         xmin = .lower,
+                         xmax = .upper,
+                         color = sig)) +
+  geom_point(data = data1, aes(y = model, x = ROPE), shape = "|", size = 10, color = "black") +
+  geom_point(data = data1, aes(y = model, x = -ROPE), shape = "|", size = 10, color = "black") +
+  geom_point(data = data1, aes(y = model, x = ROPE), shape = 58, size = 10, color = "white") +
+  geom_point(data = data1, aes(y = model, x = -ROPE), shape = 58, size = 10, color = "white") +
+  apatheme +
+  theme(legend.position = "none") +
+  scale_color_manual(values = c("skyblue", "grey", "red")) +
+  scale_x_continuous(breaks = c(-0.5, -0.25, 0, 0.25, 0.5),
+                     limits = c(-0.5, 0.5)) +
+  labs(title = "Controlled Models Including\nObserved Selection Effects",
+       x = "Effect Size Estimates of HCs",
+       y = "Outcomes")
+plot_controlled
+
+jpeg('SPSP_controlled.jpg', 
+     width = 500, height = 500, quality = 100)
+plot_controlled
+dev.off()
+```
+
+### Animated
+```{r}
+library(gganimate)
+library(gifski)
+
+plot_animated <- plot +
+  transition_states(set,
+                    transition_length = 2,
+                    state_length = 1) +
+  labs(title = "{closest_state}")
+
+animate(plot_animated,
+        duration = 20,
+        fps = 5,
+        width = 500,
+        height = 500,
+        renderer = gifski_renderer())
+anim_save("output.gif")
+```
+
