@@ -37,11 +37,11 @@ Here are further information about the [factor relationship duration](99_relatio
 </div>
 <div class="clearfix"></div>
 
-#### Abstract {.tabset .tabset-sticky}
+### {.tabset}
+#### Abstract
 Many of the women who take hormonal contraceptives discontinue because of unwanted side effects, including negative psychological effects. Yet scientific evidence of psychological effects is mixed and, partly because causal claims are often based on correlational data. In correlational studies, possible causal effects can be difficult to separate from selection effects, attrition effects, and reverse causality. Contraceptive use and, according to the congruency hypothesis, congruent contraceptive use (whether a woman’s current use/non-use of a hormonal contraceptive is congruent with her use/non-use at the time of meeting her partner) have both been thought to influence relationship quality and sexual functioning. In order to address potential issues of observed and unobserved selection effects in correlational data, we studied a sample of up to 1,179 women to investigate potential effects of contraceptive use and congruent contraceptive use on several measures of relationship quality and sexual functioning: perceived partner attractiveness, relationship satisfaction, sexual satisfaction, and diary measurements including libido, frequency of vaginal intercourse, and frequency of masturbation. No evidence for substantial effects was found except for a positive effect of hormonal contraceptives on frequency of vaginal intercourse and a negative effect of hormonal contraceptives on frequency of masturbation. These effects were robust to the inclusion of observed confounders, and their sensitivity to unobserved confounders was estimated. No support for the congruency hypothesis was found. Our correlational study was able to disentangle, to some extent, causal effects of hormonal contraceptives from selection effects by estimating the sensitivity of reported effects. To reconcile experimental and observational evidence on hormonal contraceptives, future research should scrutinize the role of unobserved selection effects, attrition effects, and reverse causality.
-#### Package bibliography {.tabset .tabset-sticky}
 
-##### Session info
+#### Session info
 ```{r}
 # Make packrat bibliography
 # packrat_bibliography(overwrite_bib = TRUE, silent = TRUE)
@@ -50,4 +50,3 @@ Many of the women who take hormonal contraceptives discontinue because of unwant
 sessionInfo()
 ```
 
-##### References {.active}
