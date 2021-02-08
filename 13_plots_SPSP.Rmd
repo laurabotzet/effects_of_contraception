@@ -134,7 +134,7 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
+    mutate(model = "Frequency of Vaginal Intercourse\nROPE = [-0.05, 0.05]",
            ROPE = 0.05,
            set = "\nUncontrolled Models"),
   m_hc_masfreq %>%
@@ -142,7 +142,7 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Masturbation Frequency\nROPE = [-0.05, 0.05]",
+    mutate(model = "Frequency of Masturbation\nROPE = [-0.05, 0.05]",
            ROPE = 0.05,
            set = "\nUncontrolled Models"),
   m_hc_atrr_controlled %>%
@@ -182,7 +182,7 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
+    mutate(model = "Frequency of Vaginal Intercourse\nROPE = [-0.05, 0.05]",
            ROPE = 0.05,
            set = "Controlled Models Including\nObserved Selection Effects"),
   m_hc_masfreq_controlled %>%
@@ -190,14 +190,14 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Masturbation Frequency\nROPE = [-0.05, 0.05]",
+    mutate(model = "Frequency of Masturbation\nROPE = [-0.05, 0.05]",
            ROPE = 0.05,
            set = "Controlled Models Including\nObserved Selection Effects"))
 
 data1 = models %>%
   mutate(model = factor(model,
-                   levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
-                              "Sexual Frequency\nROPE = [-0.05, 0.05]",
+                   levels = c("Frequency of Masturbation\nROPE = [-0.05, 0.05]",
+                              "Frequency of Vaginal Intercourse\nROPE = [-0.05, 0.05]",
                               "Libido\nROPE = [-0.06, 0.06]",
                               "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                               "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
@@ -205,8 +205,8 @@ data1 = models %>%
 data2 = models %>%
   group_by(model, set, ROPE) %>%
   mutate(model = factor(model,
-                        levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
-                                   "Sexual Frequency\nROPE = [-0.05, 0.05]",
+                        levels = c("Frequency of Masturbation\nROPE = [-0.05, 0.05]",
+                                   "Frequency of Vaginal Intercourse\nROPE = [-0.05, 0.05]",
                                    "Libido\nROPE = [-0.06, 0.06]",
                                    "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                                    "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
@@ -277,7 +277,7 @@ plot_uncontrolled = ggplot() +
 plot_uncontrolled
 
 jpeg('SPSP_uncontrolled.jpg', 
-     width = 500, height = 500, quality = 100)
+     width = 550, height = 500, quality = 100)
 plot_uncontrolled
 dev.off()
 ```
@@ -314,7 +314,7 @@ plot_controlled = ggplot() +
 plot_controlled
 
 jpeg('SPSP_controlled.jpg', 
-     width = 500, height = 500, quality = 100)
+     width = 550, height = 500, quality = 100)
 plot_controlled
 dev.off()
 ```
@@ -333,7 +333,7 @@ plot_animated <- plot +
 animate(plot_animated,
         duration = 20,
         fps = 5,
-        width = 500,
+        width = 550,
         height = 500,
         renderer = gifski_renderer())
 anim_save("output.gif")

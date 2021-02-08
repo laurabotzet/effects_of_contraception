@@ -51,25 +51,25 @@ m_selection_hc_simple_plot = m_selection_hc_simple %>%
                                "Income",
                                NA)),
          condition = ifelse(condition == "b_age", "Age",
-                ifelse(condition == "b_net_incomeeuro_500_1000", "500-1000 Euro",
-                ifelse(condition == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
-                ifelse(condition == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
-                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3000 Euro",
-                ifelse(condition == "b_net_incomedont_tell", "do not tell",
+                ifelse(condition == "b_net_incomeeuro_500_1000", "500 \U2013 1,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_1000_2000", "1,000 \U2013 2,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_2000_3000", "2,000 \U2013 3,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3,000 Euro monthly",
+                ifelse(condition == "b_net_incomedont_tell", "do not disclose",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto12months",
-                       "0-12 months",
+                       "0 \U2013 12 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto28months",
-                       "13-28 months",
+                       "13 \U2013 28 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto52months",
-                       "29-52 months",
+                       "29 \U2013 52 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_morethan52months",
                        ">52 months",
                        condition)))))))))),
          group = ifelse(is.na(group), condition, group),
          condition = factor(condition, levels = rev(c("Age",
-                                        "500-1000 Euro", "1000-2000 Euro",
-                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
-                                        "0-12 months", "13-28 months", "29-52 months",
+                                        "500 \U2013 1,000 Euro monthly", "1,000 \U2013 2,000 Euro monthly",
+                                        "2,000 \U2013 3,000 Euro monthly", ">3,000 Euro monthly", "do not disclose",
+                                        "0 \U2013 12 months", "13 \U2013 28 months", "29 \U2013 52 months",
                                         ">52 months")))) %>%
   ggplot(aes(y = condition, x = condition_mean, color = group)) +
   stat_halfeye(.width = 0.9) +
@@ -130,17 +130,17 @@ m_selection_hc_complex_plot = m_selection_hc_complex %>%
                                "Income",
                                NA)),
          condition = ifelse(condition == "b_age", "Age",
-                ifelse(condition == "b_net_incomeeuro_500_1000", "500-1000 Euro",
-                ifelse(condition == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
-                ifelse(condition == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
-                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3000 Euro",
-                ifelse(condition == "b_net_incomedont_tell", "do not tell",
+                ifelse(condition == "b_net_incomeeuro_500_1000", "500 \U2013 1,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_1000_2000", "1,000 \U2013 2,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_2000_3000", "2,000 \U2013 3,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3,000 Euro monthly",
+                ifelse(condition == "b_net_incomedont_tell", "do not disclose",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto12months",
-                       "0-12 months",
+                       "0 \U2013 12 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto28months",
-                       "13-28 months",
+                       "13 \U2013 28 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto52months",
-                       "29-52 months",
+                       "29 \U2013 52 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_morethan52months",
                        ">52 months",
                 ifelse(condition == "b_education_years", "Years of Education",
@@ -153,9 +153,9 @@ m_selection_hc_complex_plot = m_selection_hc_complex %>%
                        condition))))))))))))))))),
          group = ifelse(is.na(group), condition, group),
          condition = factor(condition, levels = rev(c("Age",
-                                        "500-1000 Euro", "1000-2000 Euro",
-                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
-                                        "0-12 months", "13-28 months", "29-52 months",
+                                        "500 \U2013 1,000 Euro monthly", "1,000 \U2013 2,000 Euro monthly",
+                                        "2,000 \U2013 3,000 Euro monthly", ">3,000 Euro monthly", "do not disclose",
+                                        "0 \U2013 12 months", "13 \U2013 28 months", "29 \U2013 52 months",
                                         ">52 months",
                                         "Years of Education",
                                         "Extraversion", "Neuroticism", "Agreeableness",
@@ -196,7 +196,7 @@ selection_hc =
           align = "v")
 
 jpeg('Effect size estimates for models with current contraceptive use as an outcome.jpg', 
-     width = 800, height = 1000, quality = 100)
+     width = 900, height = 1000, quality = 100)
 selection_hc
 dev.off()
 ```
@@ -238,25 +238,25 @@ m_selection_congruent_simple_onceHC_plot = m_selection_congruent_simple_onceHC %
                                "Income",
                                NA)),
          condition = ifelse(condition == "b_age", "Age",
-                ifelse(condition == "b_net_incomeeuro_500_1000", "500-1000 Euro",
-                ifelse(condition == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
-                ifelse(condition == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
-                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3000 Euro",
-                ifelse(condition == "b_net_incomedont_tell", "do not tell",
+                ifelse(condition == "b_net_incomeeuro_500_1000", "500 \U2013 1,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_1000_2000", "1,000 \U2013 2,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_2000_3000", "2,000 \U2013 3,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3,000 Euro monthly",
+                ifelse(condition == "b_net_incomedont_tell", "do not disclose",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto12months",
-                       "0-12 months",
+                       "0 \U2013 12 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto28months",
-                       "13-28 months",
+                       "13 \U2013 28 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto52months",
-                       "29-52 months",
+                       "29 \U2013 52 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_morethan52months",
                        ">52 months",
                        condition)))))))))),
          group = ifelse(is.na(group), condition, group),
          condition = factor(condition, levels = rev(c("Age",
-                                        "500-1000 Euro", "1000-2000 Euro",
-                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
-                                        "13-28 months", "29-52 months",
+                                        "500 \U2013 1,000 Euro monthly", "1,000 \U2013 2,000 Euro monthly",
+                                        "2,000 \U2013 3,000 Euro monthly", ">3,000 Euro monthly", "do not disclose",
+                                        "13 \U2013 28 months", "29 \U2013 52 months",
                                         ">52 months")))) %>%
   ggplot(aes(y = condition, x = condition_mean, color = group)) +
   stat_halfeye(.width = .90) +
@@ -268,7 +268,7 @@ m_selection_congruent_simple_onceHC_plot = m_selection_congruent_simple_onceHC %
                      breaks= c(-3:3)) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3")) +
   guides(color = guide_legend(override.aes = list(size = 5)))+
-  ggtitle(expression(paste(bold("Simple Model Once HC User ("),
+  ggtitle(expression(paste(bold("Simple Model Initially HC User ("),
                            bolditalic("n"),
                            bold(" = 390)")))) +
   theme(plot.title = element_text(hjust = -0.35))
@@ -297,25 +297,25 @@ m_selection_congruent_simple_oncenonHC_plot = m_selection_congruent_simple_oncen
                                "Income",
                                NA)),
          condition = ifelse(condition == "b_age", "Age",
-                ifelse(condition == "b_net_incomeeuro_500_1000", "500-1000 Euro",
-                ifelse(condition == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
-                ifelse(condition == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
-                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3000 Euro",
-                ifelse(condition == "b_net_incomedont_tell", "do not tell",
+                ifelse(condition == "b_net_incomeeuro_500_1000", "500 \U2013 1,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_1000_2000", "1,000 \U2013 2,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_2000_3000", "2,000 \U2013 3,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3,000 Euro monthly",
+                ifelse(condition == "b_net_incomedont_tell", "do not disclose",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto12months",
-                       "0-12 months",
+                       "0 \U2013 12 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto28months",
-                       "13-28 months",
+                       "13 \U2013 28 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto52months",
-                       "29-52 months",
+                       "29 \U2013 52 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_morethan52months",
                        ">52 months",
                        condition)))))))))),
          group = ifelse(is.na(group), condition, group),
          condition = factor(condition, levels = rev(c("Age",
-                                        "500-1000 Euro", "1000-2000 Euro",
-                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
-                                        "13-28 months", "29-52 months",
+                                        "500 \U2013 1,000 Euro monthly", "1,000 \U2013 2,000 Euro monthly",
+                                        "2,000 \U2013 3,000 Euro monthly", ">3,000 Euro monthly", "do not disclose",
+                                        "13 \U2013 28 months", "29 \U2013 52 months",
                                         ">52 months")))) %>%
   ggplot(aes(y = condition, x = condition_mean, color = group)) +
   stat_halfeye(.width = .90) +
@@ -327,7 +327,7 @@ m_selection_congruent_simple_oncenonHC_plot = m_selection_congruent_simple_oncen
                      breaks= c(-3:3)) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3")) +
   guides(color = guide_legend(override.aes = list(size = 5))) +
-  ggtitle(expression(paste(bold("Simple Model Once Non-HC User ("),
+  ggtitle(expression(paste(bold("Simple Model Initially Non-HC User ("),
                            bolditalic("n"),
                            bold(" = 384)")))) +
   theme(plot.title = element_text(hjust = -0.35))
@@ -382,17 +382,17 @@ m_selection_congruent_complex_onceHC_plot = m_selection_congruent_complex_onceHC
                                "Income",
                                NA)),
          condition = ifelse(condition == "b_age", "Age",
-                ifelse(condition == "b_net_incomeeuro_500_1000", "500-1000 Euro",
-                ifelse(condition == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
-                ifelse(condition == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
-                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3000 Euro",
-                ifelse(condition == "b_net_incomedont_tell", "do not tell",
+                ifelse(condition == "b_net_incomeeuro_500_1000", "500 \U2013 1,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_1000_2000", "1,000 \U2013 2,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_2000_3000", "2,000 \U2013 3,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3,000 Euro monthly",
+                ifelse(condition == "b_net_incomedont_tell", "do not disclose",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto12months",
-                       "0-12 months",
+                       "0 \U2013 12 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto28months",
-                       "13-28 months",
+                       "13 \U2013 28 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto52months",
-                       "29-52 months",
+                       "29 \U2013 52 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_morethan52months",
                        ">52 months",
                 ifelse(condition == "b_education_years", "Years of Education",
@@ -405,9 +405,9 @@ m_selection_congruent_complex_onceHC_plot = m_selection_congruent_complex_onceHC
                        condition))))))))))))))))),
          group = ifelse(is.na(group), condition, group),
          condition = factor(condition, levels = rev(c("Age",
-                                        "500-1000 Euro", "1000-2000 Euro",
-                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
-                                        "13-28 months", "29-52 months",
+                                        "500 \U2013 1,000 Euro monthly", "1,000 \U2013 2,000 Euro monthly",
+                                        "2,000 \U2013 3,000 Euro monthly", ">3,000 Euro monthly", "do not disclose",
+                                        "13 \U2013 28 months", "29 \U2013 52 months",
                                         ">52 months",
                                         "Years of Education",
                                         "Extraversion", "Neuroticism", "Agreeableness",
@@ -428,7 +428,7 @@ m_selection_congruent_complex_onceHC_plot = m_selection_congruent_complex_onceHC
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E",
                                 "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9")) +
   guides(color = guide_legend(override.aes = list(size = 5)))+
-  ggtitle(expression(paste(bold("Complex Model Once HC User ("),
+  ggtitle(expression(paste(bold("Complex Model Initially HC User ("),
                            bolditalic("n"),
                            bold(" = 390)")))) +
   theme(plot.title = element_text(hjust = -0.35))
@@ -462,17 +462,17 @@ m_selection_congruent_complex_oncenonHC_plot = m_selection_congruent_complex_onc
                                "Income",
                                NA)),
          condition = ifelse(condition == "b_age", "Age",
-                ifelse(condition == "b_net_incomeeuro_500_1000", "500-1000 Euro",
-                ifelse(condition == "b_net_incomeeuro_1000_2000", "1000-2000 Euro",
-                ifelse(condition == "b_net_incomeeuro_2000_3000", "2000-3000 Euro",
-                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3000 Euro",
-                ifelse(condition == "b_net_incomedont_tell", "do not tell",
+                ifelse(condition == "b_net_incomeeuro_500_1000", "500 \U2013 1,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_1000_2000", "1,000 \U2013 2,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_2000_3000", "2,000 \U2013 3,000 Euro monthly",
+                ifelse(condition == "b_net_incomeeuro_gt_3000", ">3,000 Euro monthly",
+                ifelse(condition == "b_net_incomedont_tell", "do not disclose",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto12months",
-                       "0-12 months",
+                       "0 \U2013 12 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto28months",
-                       "13-28 months",
+                       "13 \U2013 28 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_upto52months",
-                       "29-52 months",
+                       "29 \U2013 52 months",
                 ifelse(condition == "b_relationship_duration_factorPartnered_morethan52months",
                        ">52 months",
                 ifelse(condition == "b_education_years", "Years of Education",
@@ -485,9 +485,9 @@ m_selection_congruent_complex_oncenonHC_plot = m_selection_congruent_complex_onc
                        condition))))))))))))))))),
          group = ifelse(is.na(group), condition, group),
          condition = factor(condition, levels = rev(c("Age",
-                                        "500-1000 Euro", "1000-2000 Euro",
-                                        "2000-3000 Euro", ">3000 Euro", "do not tell",
-                                        "13-28 months", "29-52 months",
+                                        "500 \U2013 1,000 Euro monthly", "1,000 \U2013 2,000 Euro monthly",
+                                        "2,000 \U2013 3,000 Euro monthly", ">3,000 Euro monthly", "do not disclose",
+                                        "13 \U2013 28 months", "29 \U2013 52 months",
                                         ">52 months",
                                         "Years of Education",
                                         "Extraversion", "Neuroticism", "Agreeableness",
@@ -508,7 +508,7 @@ m_selection_congruent_complex_oncenonHC_plot = m_selection_congruent_complex_onc
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", "#E7298A", "#66A61E",
                                 "#E6AB02", "#A6761D", "#0072B2", "#CC79A7", "#56B4E9")) +
   guides(color = guide_legend(override.aes = list(size = 5)))+
-  ggtitle(expression(paste(bold("Complex Model Once Non-HC User ("),
+  ggtitle(expression(paste(bold("Complex Model Initially Non-HC User ("),
                            bolditalic("n"),
                            bold(" = 384)")))) +
   theme(plot.title = element_text(hjust = -0.35))
@@ -573,7 +573,7 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Partner Attractiveness\nROPE = [-0.07, 0.07]",
+    mutate(model = "Perceived Partner Attractiveness\nROPE = [-0.07, 0.07]",
            ROPE = 0.07),
   m_hc_relsat %>%
     spread_draws(b_contraception_hormonalyes) %>%
@@ -601,33 +601,33 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
+    mutate(model = "Frequency of Vaginal Intercourse\nROPE = [-0.05, 0.05]",
            ROPE = 0.05),
   m_hc_masfreq %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Masturbation Frequency\nROPE = [-0.05, 0.05]",
+    mutate(model = "Frequency of Masturbation\nROPE = [-0.05, 0.05]",
            ROPE = 0.05))
 
 data1 = models %>%
   mutate(model = factor(model,
-                   levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
-                              "Sexual Frequency\nROPE = [-0.05, 0.05]",
+                   levels = c("Frequency of Masturbation\nROPE = [-0.05, 0.05]",
+                              "Frequency of Vaginal Intercourse\nROPE = [-0.05, 0.05]",
                               "Libido\nROPE = [-0.06, 0.06]",
                               "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                               "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
-                              "Partner Attractiveness\nROPE = [-0.07, 0.07]")))
+                              "Perceived Partner Attractiveness\nROPE = [-0.07, 0.07]")))
 data2 = models %>%
   group_by(model, ROPE) %>%
   mutate(model = factor(model,
-                        levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
-                                   "Sexual Frequency\nROPE = [-0.05, 0.05]",
+                        levels = c("Frequency of Masturbation\nROPE = [-0.05, 0.05]",
+                                   "Frequency of Vaginal Intercourse\nROPE = [-0.05, 0.05]",
                                    "Libido\nROPE = [-0.06, 0.06]",
                                    "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                                    "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
-                                   "Partner Attractiveness\nROPE = [-0.07, 0.07]"))) %>%
+                                   "Perceived Partner Attractiveness\nROPE = [-0.07, 0.07]"))) %>%
   mean_qi(condition_mean = r_condition,
           .width = c(.90)) %>%
   mutate(text = ifelse(.width == .90,
@@ -729,7 +729,7 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Partner Attractiveness\nROPE = [-0.07, 0.07]",
+    mutate(model = "Perceived Partner Attractiveness\nROPE = [-0.07, 0.07]",
            ROPE = 0.07),
   m_hc_relsat_controlled %>%
     spread_draws(b_contraception_hormonalyes) %>%
@@ -757,33 +757,33 @@ models = rbind(
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Sexual Frequency\nROPE = [-0.05, 0.05]",
+    mutate(model = "Frequency of Vaginal Intercourse\nROPE = [-0.05, 0.05]",
            ROPE = 0.05),
   m_hc_masfreq_controlled %>%
     spread_draws(b_contraception_hormonalyes) %>%
     pivot_longer(cols = c(b_contraception_hormonalyes),
                  names_to = "condition",
                  values_to = "r_condition") %>%
-    mutate(model = "Masturbation Frequency\nROPE = [-0.05, 0.05]",
+    mutate(model = "Frequency of Masturbation\nROPE = [-0.05, 0.05]",
            ROPE = 0.05))
 
 data1 = models %>%
   mutate(model = factor(model,
-                   levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
-                              "Sexual Frequency\nROPE = [-0.05, 0.05]",
+                   levels = c("Frequency of Masturbation\nROPE = [-0.05, 0.05]",
+                              "Frequency of Vaginal Intercourse\nROPE = [-0.05, 0.05]",
                               "Libido\nROPE = [-0.06, 0.06]",
                               "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                               "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
-                              "Partner Attractiveness\nROPE = [-0.07, 0.07]")))
+                              "Perceived Partner Attractiveness\nROPE = [-0.07, 0.07]")))
 data2 = models %>%
   group_by(model, ROPE) %>%
   mutate(model = factor(model,
-                        levels = c("Masturbation Frequency\nROPE = [-0.05, 0.05]",
-                                   "Sexual Frequency\nROPE = [-0.05, 0.05]",
+                        levels = c("Frequency of Masturbation\nROPE = [-0.05, 0.05]",
+                                   "Frequency of Vaginal Intercourse\nROPE = [-0.05, 0.05]",
                                    "Libido\nROPE = [-0.06, 0.06]",
                                    "Sexual Satisfaction\nROPE = [-0.11, 0.11]",
                                    "Relationship Satisfaction\nROPE = [-0.04, 0.04]",
-                                   "Partner Attractiveness\nROPE = [-0.07, 0.07]"))) %>%
+                                   "Perceived Partner Attractiveness\nROPE = [-0.07, 0.07]"))) %>%
   mean_qi(condition_mean = r_condition,
           .width = c(.90)) %>%
   mutate(text = ifelse(.width == .90,
@@ -854,7 +854,7 @@ m_congruency_atrr_ce = m_congruency_atrr %>%
 m_congruency_atrr_plot = 
   plot(m_congruency_atrr_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Partner Attractiveness") +
+       y = "Perceived Partner Attractiveness") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
@@ -941,7 +941,7 @@ m_congruency_sexfreqpen_ce = m_congruency_sexfreqpen %>%
 m_congruency_sexfreqpen_plot = 
   plot(m_congruency_sexfreqpen_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Sexual Frequency\n(Probablity per Day)") +
+       y = "Frequency of Vaginal Intercourse\n(Probablity per Day)") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
@@ -963,7 +963,7 @@ m_congruency_masfreq_ce = m_congruency_masfreq %>%
 m_congruency_masfreq_plot = 
   plot(m_congruency_masfreq_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Masturbation Frequency\n(Probablity per Day)") +
+       y = "Frequency of Masturbation\n(Probablity per Day)") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
@@ -1015,7 +1015,7 @@ m_congruency_atrr_controlled_ce = m_congruency_atrr_controlled %>%
 m_congruency_atrr_controlled_plot = 
   plot(m_congruency_atrr_controlled_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Partner Attractiveness") +
+       y = "Perceived Partner Attractiveness") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
@@ -1117,7 +1117,7 @@ m_congruency_sexfreqpen_controlled_ce = m_congruency_sexfreqpen_controlled %>%
 m_congruency_sexfreqpen_controlled_plot = 
   plot(m_congruency_sexfreqpen_controlled_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Sexual Frequency\n(Probability per Day)") +
+       y = "Frequency of Vaginal Intercourse\n(Probability per Day)") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +
@@ -1144,7 +1144,7 @@ m_congruency_masfreq_controlled_ce = m_congruency_masfreq_controlled %>%
 m_congruency_masfreq_controlled_plot = 
   plot(m_congruency_masfreq_controlled_ce, plot = FALSE)[[1]] +
   labs(x = "Current Contraceptive Method",
-       y = "Masturbation Frequency\n(Probability per Day") +
+       y = "Frequency of Masturbation\n(Probability per Day)") +
   scale_x_discrete(labels=c("Non-HC", "HC")) +
   scale_color_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                      values=c("#D95F02", "#1B9E77")) +

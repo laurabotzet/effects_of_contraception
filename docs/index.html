@@ -11,7 +11,7 @@
 
 
 
-<title>Effects of Contraception</title>
+<title>Contraception</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -431,8 +431,8 @@ $(document).ready(function () {
 </div>
 
 
-<div id="hormonal-contraception-and-love-life-causal-effects-unobserved-selection-or-reverse-causality" class="section level1 tabset tabset-sticky">
-<h1>Hormonal Contraception and Love Life: Causal Effects, Unobserved Selection, or Reverse Causality?</h1>
+<div id="hormonal-contraception-and-sexuality-causal-effects-unobserved-selection-or-reverse-causality" class="section level1 tabset tabset-sticky">
+<h1>Hormonal Contraception and Sexuality: Causal Effects, Unobserved Selection, or Reverse Causality?</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># bibliography: packrat_bibliography.bibtex</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">source</span>(<span class="st">&quot;0_helpers.R&quot;</span>)</span></code></pre></div>
 <p>We used these <a href="0_helpers.R">helper functions</a>.</p>
@@ -476,40 +476,40 @@ $(document).ready(function () {
 ## [21] StanHeaders_2.21.0-6 cowplot_1.1.0        tidybayes_2.3.1      modelr_0.1.8         forcats_0.5.0       
 ## [26] purrr_0.3.4          magrittr_2.0.1       bayestestR_0.8.0     loo_2.4.0            brms_2.14.4         
 ## [31] Rcpp_1.0.5           apaTables_2.0.5      codebook_0.9.2       ggthemes_4.2.0       ggdist_2.3.0        
-## [36] ggplot2_3.3.2        broom_0.7.2          stringr_1.4.0        lubridate_1.7.9.2    pander_0.6.3        
-## [41] formr_0.8.5          knitr_1.30           rmarkdown_2.5       
+## [36] ggplot2_3.3.2        broom.mixed_0.2.6    broom_0.7.3          stringr_1.4.0        lubridate_1.7.9.2   
+## [41] pander_0.6.3         formr_0.8.5          knitr_1.30           rmarkdown_2.5       
 ## 
 ## loaded via a namespace (and not attached):
 ##   [1] proto_1.0.0          tidyselect_1.1.0     lme4_1.1-26          htmlwidgets_1.5.2    grid_4.0.3          
 ##   [6] ranger_0.12.1        munsell_0.5.0        codetools_0.2-16     statmod_1.4.35       DT_0.16             
 ##  [11] miniUI_0.1.1.1       withr_2.3.0          Brobdingnag_1.2-6    colorspace_2.0-0     rstudioapi_0.13     
 ##  [16] stats4_4.0.3         ggsignif_0.6.0       Rttf2pt1_1.3.8       bayesplot_1.7.2      mnormt_2.0.2        
-##  [21] farver_2.0.3         bridgesampling_1.0-0 coda_0.19-4          vctrs_0.3.5          generics_0.1.0      
+##  [21] farver_2.0.3         bridgesampling_1.0-0 coda_0.19-4          vctrs_0.3.6          generics_0.1.0      
 ##  [26] TH.data_1.0-10       xfun_0.19            randomForest_4.6-14  party_1.3-5          R6_2.5.0            
 ##  [31] markdown_1.1         gamm4_0.2-6          projpred_2.0.2       assertthat_0.2.1     promises_1.1.1      
 ##  [36] scales_1.1.1         multcomp_1.4-15      nnet_7.3-14          gtable_0.3.0         processx_3.4.5      
 ##  [41] sandwich_3.0-0       rlang_0.4.9          splines_4.0.3        extrafontdb_1.0      rstatix_0.6.0       
-##  [46] checkmate_2.0.0      inline_0.3.17        yaml_2.2.1           reshape2_1.4.4       abind_1.4-5         
-##  [51] threejs_0.3.3        crosstalk_1.1.0.1    backports_1.2.0      httpuv_1.5.4         rsconnect_0.8.16    
-##  [56] tools_4.0.3          ellipsis_0.3.1       Rsolnp_1.16          ggridges_0.5.2       plyr_1.8.6          
-##  [61] base64enc_0.1-3      classInt_0.4-3       ps_1.5.0             prettyunits_1.1.1    rpart_4.1-15        
-##  [66] zoo_1.8-8            haven_2.3.1          fs_1.5.0             data.table_1.13.2    openxlsx_4.2.3      
-##  [71] reprex_0.3.0         colourpicker_1.1.0   tmvnsim_1.0-2        truncnorm_1.0-8      mvtnorm_1.1-1       
-##  [76] matrixStats_0.57.0   hms_0.5.3            shinyjs_2.0.0        mime_0.9             evaluate_0.14       
-##  [81] arrayhelpers_1.1-0   xtable_1.8-4         shinystan_2.5.0      rio_0.5.16           readxl_1.3.1        
-##  [86] gridExtra_2.3        rstantools_2.1.1     compiler_4.0.3       KernSmooth_2.23-17   V8_3.4.0            
-##  [91] crayon_1.3.4         minqa_1.2.4          htmltools_0.5.0      mgcv_1.8-33          later_1.1.0.1       
-##  [96] libcoin_1.0-6        RcppParallel_5.0.2   DBI_1.1.0            dbplyr_2.0.0         MASS_7.3-53         
-## [101] boot_1.3-25          Matrix_1.2-18        cli_2.2.0            parallel_4.0.3       insight_0.11.0      
-## [106] igraph_1.2.6         pkgconfig_2.0.3      mipfp_3.2.1          numDeriv_2016.8-1.1  coin_1.3-1          
-## [111] foreign_0.8-80       xml2_1.3.2           svUnit_1.0.3         dygraphs_1.1.1.6     rvest_0.3.6         
-## [116] distributional_0.2.1 callr_3.5.1          digest_0.6.27        strucchange_1.5-2    cmm_0.12            
-## [121] cellranger_1.1.0     curl_4.3             shiny_1.5.0          gtools_3.8.2         modeltools_0.2-23   
-## [126] nloptr_1.2.2.2       lifecycle_0.2.0      nlme_3.1-149         jsonlite_1.7.1       fansi_0.4.1         
-## [131] labelled_2.7.0       pillar_1.4.7         lattice_0.20-41      httr_1.4.2           fastmap_1.0.1       
-## [136] pkgbuild_1.1.0       survival_3.2-7       glue_1.4.2           xts_0.12.1           zip_2.1.1           
-## [141] shinythemes_1.1.2    class_7.3-17         stringi_1.5.3        polspline_1.1.19     renv_0.11.0         
-## [146] e1071_1.7-4</code></pre>
+##  [46] TMB_1.7.18           checkmate_2.0.0      inline_0.3.17        yaml_2.2.1           reshape2_1.4.4      
+##  [51] abind_1.4-5          threejs_0.3.3        crosstalk_1.1.0.1    backports_1.2.0      httpuv_1.5.4        
+##  [56] rsconnect_0.8.16     tools_4.0.3          ellipsis_0.3.1       Rsolnp_1.16          ggridges_0.5.2      
+##  [61] plyr_1.8.6           base64enc_0.1-3      classInt_0.4-3       ps_1.5.0             prettyunits_1.1.1   
+##  [66] rpart_4.1-15         zoo_1.8-8            haven_2.3.1          fs_1.5.0             data.table_1.13.2   
+##  [71] openxlsx_4.2.3       reprex_0.3.0         colourpicker_1.1.0   tmvnsim_1.0-2        truncnorm_1.0-8     
+##  [76] mvtnorm_1.1-1        matrixStats_0.57.0   hms_0.5.3            shinyjs_2.0.0        mime_0.9            
+##  [81] evaluate_0.14        arrayhelpers_1.1-0   xtable_1.8-4         shinystan_2.5.0      rio_0.5.16          
+##  [86] readxl_1.3.1         gridExtra_2.3        rstantools_2.1.1     compiler_4.0.3       KernSmooth_2.23-17  
+##  [91] V8_3.4.0             crayon_1.3.4         minqa_1.2.4          htmltools_0.5.0      mgcv_1.8-33         
+##  [96] later_1.1.0.1        libcoin_1.0-6        RcppParallel_5.0.2   DBI_1.1.0            dbplyr_2.0.0        
+## [101] MASS_7.3-53          boot_1.3-25          Matrix_1.2-18        cli_2.2.0            parallel_4.0.3      
+## [106] insight_0.11.0       igraph_1.2.6         pkgconfig_2.0.3      mipfp_3.2.1          numDeriv_2016.8-1.1 
+## [111] coin_1.3-1           foreign_0.8-80       xml2_1.3.2           svUnit_1.0.3         dygraphs_1.1.1.6    
+## [116] rvest_0.3.6          distributional_0.2.1 callr_3.5.1          digest_0.6.27        strucchange_1.5-2   
+## [121] cmm_0.12             cellranger_1.1.0     curl_4.3             shiny_1.5.0          gtools_3.8.2        
+## [126] modeltools_0.2-23    nloptr_1.2.2.2       lifecycle_0.2.0      nlme_3.1-149         jsonlite_1.7.1      
+## [131] fansi_0.4.1          labelled_2.7.0       pillar_1.4.7         lattice_0.20-41      httr_1.4.2          
+## [136] fastmap_1.0.1        pkgbuild_1.1.0       survival_3.2-7       glue_1.4.2           xts_0.12.1          
+## [141] zip_2.1.1            shinythemes_1.1.2    class_7.3-17         stringi_1.5.3        polspline_1.1.19    
+## [146] renv_0.11.0          e1071_1.7-4</code></pre>
 </div>
 <div id="references" class="section level5 active">
 <h5>References</h5>
@@ -517,7 +517,7 @@ $(document).ready(function () {
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQpwYWdldGl0bGU6ICJFZmZlY3RzIG9mIENvbnRyYWNlcHRpb24iDQpjc2w6IGFwYS1jdXN0b20tbm8taXNzdWUuY3NsDQpub2NpdGU6IHwNCiAgICBAUiBAcGFja3JhdCBAcm1hcmtkb3duIEBrbml0ciBAZm9ybXIgQHBhbmRlciBAbHVicmlkYXRlIEBzdHJpbmdyIEBicm9vbSBAZWZmZWN0cyBAZ2dwbG90MiBAdGlkeXIgQHN2Z2xpdGUgQGRwbHlyIEByZXNoYXBlMiBAbG1lclRlc3QgQGRldnRvb2xzIEBmb3JtYXRSIEBsYXp5ZXZhbCBAc2NhbGVzIEBjYXIgQHhsc3ggQGxtZTQNCi0tLQ0KIA0KIyBIb3Jtb25hbCBDb250cmFjZXB0aW9uIGFuZCBMb3ZlIExpZmU6IENhdXNhbCBFZmZlY3RzLCBVbm9ic2VydmVkIFNlbGVjdGlvbiwgb3IgUmV2ZXJzZSBDYXVzYWxpdHk/IHsudGFic2V0IC50YWJzZXQtc3RpY2t5fQ0KDQpgYGB7ciBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQ0KIyBiaWJsaW9ncmFwaHk6IHBhY2tyYXRfYmlibGlvZ3JhcGh5LmJpYnRleA0Kc291cmNlKCIwX2hlbHBlcnMuUiIpDQpgYGANCg0KV2UgdXNlZCB0aGVzZSBbaGVscGVyIGZ1bmN0aW9uc10oMF9oZWxwZXJzLlIpLg0KDQoxLiBGaXJzdCBbZXhjbHVzaW9uIGNyaXRlcmlhIHdlcmUgYXBwbGllZF0oMV9leGNsdXNpb24uaHRtbCkuDQoyLiBUaGVuIFtzY2FsZXMgd2VyZSBhZ2dyZWdhdGVkIGFuZCBjb250cmFjZXB0aW9uIGdyb3VwcyB3ZXJlIGZvcm1lZF0oMl9kYXRhd3JhbmdsaW5nLmh0bWwpLg0KMy4gU29tZSBbZGVzY3JpcHRpdmVzXSgzX2Rlc2NyaXB0aXZlcy5odG1sKSBhbmQgYSBbY29kZWJvb2tdKDRfY29kZWJvb2suaHRtbCkgY2FuIGJlIGZvdW5kIGhlcmUuDQo0LiBBbGwgW2FuYWx5c2VzIG9mIHNlbGVjdGlvbiBlZmZlY3RzXSg1X2FuYWx5c2VzX3NlbGVjdGlvbi5odG1sKSBhcmUgYXZhaWxhYmxlIGhlcmUuDQo1LiBIZXJlIGFyZSB0aGUgW2FuYWx5c2VzIG9mIGVmZmVjdHMgb2YgY29udHJhY2VwdGl2ZSB1c2UgYW5kIGNvbmdydWVudCBjb250cmFjZXB0aXZlIHVzZV0oNl9hbmFseXNlc19lZmZlY3RzLmh0bWwpIGluY2x1ZGluZyBjb250cm9sbGVkIGFuZCB1bmNvbnRyb2xsZWQgbW9kZWxzLg0KNi4gSW4gYSBsYXN0IHN0ZXAsIFtzZW5zaXRpdml0eSBvZiBlZmZlY3RzIHRvIHVub2JzZXJ2ZWQgY29uZm91bmRlcnNdKDdfYW5hbHlzZXNfc2Vuc2l0aXZpdHkuaHRtbCkgd2FzIGVzdGltYXRlZC4NCjcuIENsaWNrIFtoZXJlXSg4X3Bsb3RzLmh0bWwpIGZvciBhbGwgcGxvdHMgb2YgdGhlIG1hbnVzY3JpcHQuDQoNCkhlcmUgYXJlIGZ1cnRoZXIgaW5mb3JtYXRpb24gYWJvdXQgdGhlIFtmYWN0b3IgcmVsYXRpb25zaGlwIGR1cmF0aW9uXSg5OV9yZWxhdGlvbnNoaXBfZHVyYXRpb24uaHRtbCkuDQoNCiMjIyMgUGFja2FnZSBiaWJsaW9ncmFwaHkgey50YWJzZXQgLnRhYnNldC1zdGlja3l9DQoNCiMjIyMjIFNlc3Npb24gaW5mbw0KYGBge3J9DQojIE1ha2UgcGFja3JhdCBiaWJsaW9ncmFwaHkNCiMgcGFja3JhdF9iaWJsaW9ncmFwaHkob3ZlcndyaXRlX2JpYiA9IFRSVUUsIHNpbGVudCA9IFRSVUUpDQojIFR1cm4gdGhlIC5SIGZpbGVzIGludG8gLlJtZCBmaWxlcywgdHVybiB0aG9zZSBpbnRvIC5odG1sLCByZW1vdmUgdGhlIC5SbWQgZmlsZXMNCiMgc3Bpbl9SX2ZpbGVzX3RvX3NpdGVfaHRtbCgpDQpzZXNzaW9uSW5mbygpDQpgYGANCg0KIyMjIyMgUmVmZXJlbmNlcyB7LmFjdGl2ZX0NCg==</div>
+<div id="rmd-source-code">LS0tDQpwYWdldGl0bGU6ICJDb250cmFjZXB0aW9uIg0KY3NsOiBhcGEtY3VzdG9tLW5vLWlzc3VlLmNzbA0Kbm9jaXRlOiB8DQogICAgQFIgQHBhY2tyYXQgQHJtYXJrZG93biBAa25pdHIgQGZvcm1yIEBwYW5kZXIgQGx1YnJpZGF0ZSBAc3RyaW5nciBAYnJvb20gQGVmZmVjdHMgQGdncGxvdDIgQHRpZHlyIEBzdmdsaXRlIEBkcGx5ciBAcmVzaGFwZTIgQGxtZXJUZXN0IEBkZXZ0b29scyBAZm9ybWF0UiBAbGF6eWV2YWwgQHNjYWxlcyBAY2FyIEB4bHN4IEBsbWU0DQotLS0NCiANCiMgSG9ybW9uYWwgQ29udHJhY2VwdGlvbiBhbmQgU2V4dWFsaXR5OiBDYXVzYWwgRWZmZWN0cywgVW5vYnNlcnZlZCBTZWxlY3Rpb24sIG9yIFJldmVyc2UgQ2F1c2FsaXR5PyB7LnRhYnNldCAudGFic2V0LXN0aWNreX0NCg0KYGBge3IgbWVzc2FnZT1GQUxTRSwgd2FybmluZz1GQUxTRX0NCiMgYmlibGlvZ3JhcGh5OiBwYWNrcmF0X2JpYmxpb2dyYXBoeS5iaWJ0ZXgNCnNvdXJjZSgiMF9oZWxwZXJzLlIiKQ0KYGBgDQoNCldlIHVzZWQgdGhlc2UgW2hlbHBlciBmdW5jdGlvbnNdKDBfaGVscGVycy5SKS4NCg0KMS4gRmlyc3QgW2V4Y2x1c2lvbiBjcml0ZXJpYSB3ZXJlIGFwcGxpZWRdKDFfZXhjbHVzaW9uLmh0bWwpLg0KMi4gVGhlbiBbc2NhbGVzIHdlcmUgYWdncmVnYXRlZCBhbmQgY29udHJhY2VwdGlvbiBncm91cHMgd2VyZSBmb3JtZWRdKDJfZGF0YXdyYW5nbGluZy5odG1sKS4NCjMuIFNvbWUgW2Rlc2NyaXB0aXZlc10oM19kZXNjcmlwdGl2ZXMuaHRtbCkgYW5kIGEgW2NvZGVib29rXSg0X2NvZGVib29rLmh0bWwpIGNhbiBiZSBmb3VuZCBoZXJlLg0KNC4gQWxsIFthbmFseXNlcyBvZiBzZWxlY3Rpb24gZWZmZWN0c10oNV9hbmFseXNlc19zZWxlY3Rpb24uaHRtbCkgYXJlIGF2YWlsYWJsZSBoZXJlLg0KNS4gSGVyZSBhcmUgdGhlIFthbmFseXNlcyBvZiBlZmZlY3RzIG9mIGNvbnRyYWNlcHRpdmUgdXNlIGFuZCBjb25ncnVlbnQgY29udHJhY2VwdGl2ZSB1c2VdKDZfYW5hbHlzZXNfZWZmZWN0cy5odG1sKSBpbmNsdWRpbmcgY29udHJvbGxlZCBhbmQgdW5jb250cm9sbGVkIG1vZGVscy4NCjYuIEluIGEgbGFzdCBzdGVwLCBbc2Vuc2l0aXZpdHkgb2YgZWZmZWN0cyB0byB1bm9ic2VydmVkIGNvbmZvdW5kZXJzXSg3X2FuYWx5c2VzX3NlbnNpdGl2aXR5Lmh0bWwpIHdhcyBlc3RpbWF0ZWQuDQo3LiBDbGljayBbaGVyZV0oOF9wbG90cy5odG1sKSBmb3IgYWxsIHBsb3RzIG9mIHRoZSBtYW51c2NyaXB0Lg0KDQpIZXJlIGFyZSBmdXJ0aGVyIGluZm9ybWF0aW9uIGFib3V0IHRoZSBbZmFjdG9yIHJlbGF0aW9uc2hpcCBkdXJhdGlvbl0oOTlfcmVsYXRpb25zaGlwX2R1cmF0aW9uLmh0bWwpLg0KDQojIyMjIFBhY2thZ2UgYmlibGlvZ3JhcGh5IHsudGFic2V0IC50YWJzZXQtc3RpY2t5fQ0KDQojIyMjIyBTZXNzaW9uIGluZm8NCmBgYHtyfQ0KIyBNYWtlIHBhY2tyYXQgYmlibGlvZ3JhcGh5DQojIHBhY2tyYXRfYmlibGlvZ3JhcGh5KG92ZXJ3cml0ZV9iaWIgPSBUUlVFLCBzaWxlbnQgPSBUUlVFKQ0KIyBUdXJuIHRoZSAuUiBmaWxlcyBpbnRvIC5SbWQgZmlsZXMsIHR1cm4gdGhvc2UgaW50byAuaHRtbCwgcmVtb3ZlIHRoZSAuUm1kIGZpbGVzDQojIHNwaW5fUl9maWxlc190b19zaXRlX2h0bWwoKQ0Kc2Vzc2lvbkluZm8oKQ0KYGBgDQoNCiMjIyMjIFJlZmVyZW5jZXMgey5hY3RpdmV9DQo=</div>
 
 
 

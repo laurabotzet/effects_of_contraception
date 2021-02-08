@@ -1,11 +1,11 @@
 ---
-pagetitle: "Effects of Contraception"
+pagetitle: "Contraception"
 csl: apa-custom-no-issue.csl
 nocite: |
     @R @packrat @rmarkdown @knitr @formr @pander @lubridate @stringr @broom @effects @ggplot2 @tidyr @svglite @dplyr @reshape2 @lmerTest @devtools @formatR @lazyeval @scales @car @xlsx @lme4
 ---
  
-# Hormonal Contraception and Love Life: Causal Effects, Unobserved Selection, or Reverse Causality? {.tabset .tabset-sticky}
+# Hormonal Contraception and Sexuality: Causal Effects, Unobserved Selection, or Reverse Causality? {.tabset .tabset-sticky}
 
 ```{r message=FALSE, warning=FALSE}
 # bibliography: packrat_bibliography.bibtex
