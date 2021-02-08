@@ -12,6 +12,9 @@ nocite: |
 source("0_helpers.R")
 ```
 
+<div class="row">
+
+<div class="col-md-5">
 We used these [helper functions](0_helpers.R).
 
 1. First [exclusion criteria were applied](1_exclusion.html).
@@ -24,6 +27,14 @@ We used these [helper functions](0_helpers.R).
 
 Here are further information about the [factor relationship duration](99_relationship_duration.html).
 
+</div>
+
+<div class="col-md-6 col-md-offset-1">
+![Effects Size Estimates and 90% HDIs of Hormonal Contraceptives on Outcomes Based on Uncontrolled and Controlled Models.<br><i>Note.</i> Thick dotted lines indicate ROPEs for outcomes, thin dotted lines indicate zero. Blue indicates that the 90% HDI overlapped with the ROPE, red indicates that the 90% HDI was outside the ROPE.<br>HDIs = highest density intervals; ROPE = region of practical equivalence.](output.gif)
+</div>
+
+</div>
+<div class="clearfix"></div>
 #### Package bibliography {.tabset .tabset-sticky}
 
 ##### Session info
