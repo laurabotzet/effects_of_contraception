@@ -1,7 +1,7 @@
 name: effects_of_contraception
 output_dir: docs
 navbar:
-  title: Effects of Contraception
+  title: Contraception
   left:
   - text: Exclusion
     href: 1_exclusion.html
@@ -37,10 +37,14 @@ exclude:
 - '*.pdf'
 - '*.dta'
 - '*.csv'
+- geo
+- item_tables
 - '*.csl'
 - '*.bibtex'
 - '*.xlsx'
-- '*.rds'
-- '*.docx'
 - data
+- who_fits
 - "renv"
+- '*_files'
+- 'ras'
+- '*.rds'
