@@ -6,6 +6,8 @@ nocite: |
 ---
 
 # Hormonal Contraception and Sexuality: Causal Effects, Unobserved Selection, or Reverse Causality? {.tabset .tabset-sticky}
+__Supplementary Website__
+
 Laura J. Botzet, Tanja M. Gerlach, Julie C. Driebe, Lars Penke, and Ruben C. Arslan 
 
 ```{r message=FALSE, warning=FALSE}
@@ -19,7 +21,7 @@ source("0_helpers.R")
 We used these [helper functions](0_helpers.R).
 
 1. First [exclusion criteria were applied](1_exclusion.html).
-2. Then [scales were aggregated and contraception groups were formed](2_datawrangling.html).
+2. Then [data was processed](2_datawrangling.html).
 3. Some [descriptives](3_descriptives.html) and a [codebook](4_codebook.html) can be found here.
 4. All [analyses of selection effects](5_analyses_selection.html) are available here.
 5. Here are the [analyses of effects of contraceptive use and congruent contraceptive use](6_analyses_effects.html) including controlled and uncontrolled models.
@@ -30,7 +32,7 @@ Here are further information about the [factor relationship duration](99_relatio
 
 </div>
 
-<div class="col-md-6 col-md-offset-1">
+<div class="col-md-6">
 ![Effects Size Estimates and 90% HDIs of Hormonal Contraceptives on Outcomes Based on Uncontrolled and Controlled Models.<br><i>Note.</i> Thick dotted lines indicate ROPEs for outcomes, thin dotted lines indicate zero. Blue indicates that the 90% HDI overlapped with the ROPE, red indicates that the 90% HDI was outside the ROPE.<br>HDIs = highest density intervals; ROPE = region of practical equivalence.](output.gif)
 </div>
 
