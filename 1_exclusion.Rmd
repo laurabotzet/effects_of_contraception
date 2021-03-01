@@ -11,6 +11,7 @@ output:
 
 # Reasons for Exclusion {.tabset}
 
+
 The following reasons for exclusion apply:
 
 * missing data (not finishing the initial survey)
