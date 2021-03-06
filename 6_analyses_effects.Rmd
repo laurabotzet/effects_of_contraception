@@ -44,7 +44,7 @@ equivalence_test(m_hc_atrr, range = c(-0.07, 0.07), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_atrr, ask = FALSE)
 ```
 
@@ -95,7 +95,7 @@ equivalence_test(m_hc_relsat, range = c(-0.04, 0.04), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_relsat, ask = FALSE)
 ```
 
@@ -147,7 +147,7 @@ equivalence_test(m_hc_sexsat, range = c(-0.11, 0.11), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_sexsat, ask = FALSE)
 ```
 
@@ -199,7 +199,7 @@ equivalence_test(m_hc_libido, range = c(-0.06, 0.06), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_libido, ask = FALSE)
 ```
 
@@ -251,7 +251,7 @@ equivalence_test(m_hc_libido_solitary, range = c(-0.07, 0.07), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_libido_solitary, ask = FALSE)
 ```
 
@@ -303,7 +303,7 @@ equivalence_test(m_hc_libido_dyadic, range = c(-0.06, 0.06), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_libido_dyadic, ask = FALSE)
 ```
 
@@ -356,7 +356,7 @@ equivalence_test(m_hc_sexfreqpen, range = c(-0.05, 0.05), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_sexfreqpen,
                     effects = "contraception_hormonal",
                     conditions = data.frame(number_of_days = 1))
@@ -409,7 +409,7 @@ equivalence_test(m_hc_masfreq, range = c(-0.05, 0.05), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_masfreq,
                     effects = "contraception_hormonal",
                     conditions = data.frame(number_of_days = 1))
@@ -466,7 +466,7 @@ equivalence_test(m_hc_atrr_controlled, range = c(-0.07, 0.07), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_atrr, ask = FALSE)
 ```
 
@@ -577,7 +577,7 @@ equivalence_test(m_hc_relsat_controlled, range = c(-0.04, 0.04), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_relsat_controlled, ask = FALSE)
 ```
 
@@ -688,7 +688,7 @@ equivalence_test(m_hc_sexsat_controlled, range = c(-0.11, 0.11), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_sexsat_controlled, ask = FALSE)
 ```
 
@@ -799,7 +799,7 @@ equivalence_test(m_hc_libido_controlled, range = c(-0.06, 0.06), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_libido_controlled, ask = FALSE)
 ```
 
@@ -911,7 +911,7 @@ equivalence_test(m_hc_sexfreqpen_controlled, range = c(-0.05, 0.05), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_sexfreqpen_controlled,
                     effects = "contraception_hormonal",
                     conditions = data.frame(number_of_days = 1))
@@ -1025,7 +1025,7 @@ equivalence_test(m_hc_masfreq_controlled, range = c(-0.05, 0.05), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_hc_masfreq_controlled,
                     effects = "contraception_hormonal",
                     conditions = data.frame(number_of_days = 1))
@@ -1135,7 +1135,7 @@ equivalence_test(m_congruency_atrr, range = c(-0.07, 0.07), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_atrr, ask = FALSE)
 ```
 
@@ -1200,7 +1200,7 @@ equivalence_test(m_congruency_relsat, range = c(-0.04, 0.04), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_relsat, ask = FALSE)
 ```
 
@@ -1263,7 +1263,7 @@ equivalence_test(m_congruency_sexsat, range = c(-0.11, 0.11), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_sexsat, ask = FALSE)
 ```
 
@@ -1326,7 +1326,7 @@ equivalence_test(m_congruency_libido, range = c(-0.06, 0.06), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_libido, ask = FALSE)
 ```
 
@@ -1389,7 +1389,7 @@ equivalence_test(m_congruency_sexfreqpen, range = c(-0.05, 0.05), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_sexfreqpen,
                     effects = "contraception_hormonal:congruent_contraception",
                     conditions = data.frame(number_of_days = 1))
@@ -1452,7 +1452,7 @@ equivalence_test(m_congruency_masfreq, range = c(-0.05, 0.05), ci = 0.90,
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_masfreq,
                     effects = "contraception_hormonal:congruent_contraception",
                     conditions = data.frame(number_of_days = 1))
@@ -1522,7 +1522,7 @@ equivalence_test(m_congruency_atrr_controlled, range = c(-0.07, 0.07), ci = 0.90
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_atrr_controlled, ask = FALSE)
 ```
 
@@ -1643,7 +1643,7 @@ equivalence_test(m_congruency_relsat_controlled, range = c(-0.04, 0.04), ci = 0.
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_relsat_controlled, ask = FALSE)
 ```
 
@@ -1765,7 +1765,7 @@ equivalence_test(m_congruency_sexsat_controlled, range = c(-0.11, 0.11), ci = 0.
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_sexsat_controlled, ask = FALSE)
 ```
 
@@ -1888,7 +1888,7 @@ equivalence_test(m_congruency_libido_controlled, range = c(-0.06, 0.06), ci = 0.
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_libido_controlled, ask = FALSE)
 ```
 
@@ -2013,7 +2013,7 @@ equivalence_test(m_congruency_sexfreqpen_controlled, range = c(-0.05, 0.05), ci 
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_sexfreqpen_controlled,
                     effects = "contraception_hormonal:congruent_contraception",
                     conditions = data.frame(number_of_days = 1))
@@ -2138,7 +2138,7 @@ equivalence_test(m_congruency_masfreq_controlled, range = c(-0.05, 0.05), ci = 0
 ```
 
 #### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_congruency_masfreq_controlled,
                     effects = "contraception_hormonal:congruent_contraception",
                     conditions = data.frame(number_of_days = 1))

@@ -37,7 +37,7 @@ summary(m_selection_hc_simple, intervals = T, prob = 0.90)
 ```
 
 ##### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_selection_hc_simple, ask = FALSE)
 ```
 
@@ -115,7 +115,7 @@ summary(m_selection_hc_complex, intervals = T, prob = 0.90)
 ```
 
 ##### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_selection_hc_complex, ask = FALSE)
 ```
 
@@ -227,7 +227,7 @@ summary(m_selection_congruent_simple, intervals = T, prob = 0.90)
 ```
 
 ##### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_selection_congruent_simple, ask = FALSE)
 
 ```
@@ -308,7 +308,7 @@ summary(m_selection_congruent_complex, intervals = T, prob = 0.90)
 ```
 
 ##### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_selection_congruent_complex, ask = FALSE)
 ```
 
@@ -401,7 +401,7 @@ Model Comparisons: The difference between models is `r round(compare_models$diff
 compare_models
 ```
 
-### (In)congruent use of hormonal contraceptives inclduing current contraceptive method {.tabset}
+### (In)congruent use of hormonal contraceptives including current contraceptive method {.tabset}
 #### Simple Model {.tabset}
 ##### Model
 ```{r}
@@ -420,7 +420,7 @@ summary(m_selection_congruent_simple_includinghc, intervals = T, prob = 0.90)
 ```
 
 ##### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_selection_congruent_simple_includinghc, ask = FALSE)
 ```
 
@@ -451,7 +451,7 @@ summary(m_selection_congruent_complex_includinghc, intervals = T, prob = 0.90)
 ```
 
 ##### Plots
-```{r}
+```{r warning = FALSE}
 conditional_effects(m_selection_congruent_complex_includinghc, ask = FALSE)
 ```
 

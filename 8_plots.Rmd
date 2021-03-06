@@ -667,12 +667,12 @@ hc_uncontrolled = ggplot() +
   geom_point(data = data1, aes(y = model, x = ROPE), shape = 58, size = 10, color = "white") +
   geom_point(data = data1, aes(y = model, x = -ROPE), shape = 58, size = 10, color = "white") +
   apatheme +
-  theme(legend.position = "none") +
-  scale_color_manual(values = c("skyblue", "grey", "red")) +
+  scale_color_manual(data2, values = c("skyblue", "grey", "red")) +
   scale_x_continuous(breaks = c(-0.5, -0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5),
                      limits = c(-0.5, 0.5)) +
   labs(x = "Effect Size Estimates of Hormonal Contraception", y = "Outcomes") +
-  theme_tufte(base_size = 10)
+  theme_tufte(base_size = 10) +
+  theme(legend.position = "none")
 hc_uncontrolled
 ```
 
@@ -830,7 +830,7 @@ hc_controlled = ggplot() +
   scale_x_continuous(breaks = c(-0.5, -0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5),
                      limits = c(-0.5, 0.5)) +
   labs(x = "Effect Size Estimates of Hormonal Contraception", y = "Outcomes")  +
-  theme_tufte(base_size = 10)
+  theme_tufte(base_size = 10) +   theme(legend.position = "none")
 hc_controlled
 ```
 
