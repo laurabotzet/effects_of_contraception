@@ -88,5 +88,8 @@ example_sim_dat <- example_sim_label$syn
 
 save(example_sim, file = "data/simulated.rdata")
 save(example_sim_dat, file = "data/simulated_onlydata.rdata")
+
+save(example_sim_dat, file = "data/FAKE_effects-of-contraception-data.rdata")
+write.csv2(example_sim_dat, file = "data/FAKE_effects-of-contraception-data.csv")
 ```
 

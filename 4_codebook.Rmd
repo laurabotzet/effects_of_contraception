@@ -127,14 +127,16 @@ selection_variables = codebook_selection_data %>% select(
   -starts_with("bfi_agree_"), -starts_with("bfi_consc_"), -starts_with("bfi_open_"),
   -starts_with("bfi_extra_"), -starts_with("bfi_neuro_"),
   -starts_with("soi_r_attitude_"), -starts_with("soi_r_desire_"), -starts_with("soi_r_behavior_"), 
-  -relationship_status, -net_income, -com, -duration_relationship_month)
+  -relationship_status, -net_income, -relationship_duration_factor, -relationship_duration,
+  -number_of_days,
+  -congruent_contraception)
 
 colnames(selection_variables)
+summary(selection_variables)
 library(psych)
 pairs.panels(selection_variables, cex.cor = 10)
 
-
-cor_pred = cor(selection_variables, use="complete.obs")
+cor_pred = cor(selection_variables, use = "pairwise.complete.obs")
 print(cor_pred)
 ```
 

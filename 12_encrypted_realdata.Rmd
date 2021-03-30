@@ -27,6 +27,7 @@ cleaned_diary = diary
 ## Encrypt data
 ```{r}
 library(keyring)
+key_set("encrypt_data_cleaned_selected_wrangled")
 key <- keyring::key_get_raw("encrypt_data_cleaned_selected_wrangled")
 class(key) <- c("aes", "raw")
 
