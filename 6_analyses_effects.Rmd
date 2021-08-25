@@ -175,7 +175,7 @@ m_hc_sexsat %>%
   xlim (-0.6, 0.6)
 ```
 
-### Libido
+### Libido {.tabset}
 
 #### Model
 ```{r}
@@ -227,109 +227,6 @@ m_hc_libido %>%
   xlim (-0.6, 0.6)
 ```
 
-### Libido Solitary
-
-#### Model
-```{r}
-m_hc_libido_solitary = brm(diary_libido_solitary_mean ~ contraception_hormonal,
-                           data = data, family = gaussian(),
-                           file = "m_hc_libido_solitary")
-```
-
-#### Summary
-```{r}
-kable(tidy(m_hc_libido_solitary, intervals = T, prob = 0.90))
-summary(m_hc_libido_solitary, intervals = T, prob = 0.90)
-```
-
-#### Comparison with ROPE
-```{r}
-plot(equivalence_test(m_hc_libido_solitary, range = c(-0.07, 0.07), ci = 0.90,
-                      parameters = "contraception"))
-equivalence_test(m_hc_libido_solitary, range = c(-0.07, 0.07), ci = 0.90,
-                 parameters = "contraception")
-```
-
-#### Plots
-```{r warning = FALSE}
-conditional_effects(m_hc_libido_solitary, ask = FALSE)
-```
-
-#### Forest Plot for Effect Sizes {.active}
-```{r}
-m_hc_libido_solitary %>%
-  spread_draws(b_contraception_hormonalyes) %>%
-  pivot_longer(cols = c(b_contraception_hormonalyes),
-               names_to = "condition",
-               values_to = "r_condition") %>%
-  mutate(condition_mean = r_condition,
-         group = ifelse(condition %contains% "b_contraception_hormonalyes",
-                        "Contraception", NA),
-         condition = ifelse(condition %contains% "b_contraception_hormonalyes",
-                            "Hormonal Contraception", NA)) %>%
-  ggplot(aes(y = condition,
-             x = condition_mean,
-             fill = stat(abs(x) < 0.07))) +
-  stat_halfeye() +
-  geom_vline(xintercept = c(-0.07, 0.07), linetype = "dotted") +
-  apatheme +
-  theme(legend.position = "none") +
-  scale_fill_manual(values = c("gray80", "skyblue")) +
-  labs(x = "Effect Size Estimates", y = "Predictors") +
-  xlim (-0.8, 0.8)
-```
-
-### Libido Dyadic
-
-#### Model
-```{r}
-m_hc_libido_dyadic = brm(diary_libido_dyadic_mean ~ contraception_hormonal,
-                           data = data, family = gaussian(),
-                           file = "m_hc_libido_dyadic")
-```
-
-#### Summary
-```{r}
-kable(tidy(m_hc_libido_dyadic, intervals = T, prob = 0.90))
-summary(m_hc_libido_dyadic, intervals = T, prob = 0.90)
-```
-
-#### Comparison with ROPE
-```{r}
-plot(equivalence_test(m_hc_libido_dyadic, range = c(-0.06, 0.06), ci = 0.90,
-                      parameters = "contraception"))
-equivalence_test(m_hc_libido_dyadic, range = c(-0.06, 0.06), ci = 0.90,
-                 parameters = "contraception")
-```
-
-#### Plots
-```{r warning = FALSE}
-conditional_effects(m_hc_libido_dyadic, ask = FALSE)
-```
-
-#### Forest Plot for Effect Sizes {.active}
-```{r}
-m_hc_libido_dyadic %>%
-  spread_draws(b_contraception_hormonalyes) %>%
-  pivot_longer(cols = c(b_contraception_hormonalyes),
-               names_to = "condition",
-               values_to = "r_condition") %>%
-  mutate(condition_mean = r_condition,
-         group = ifelse(condition %contains% "b_contraception_hormonalyes",
-                        "Contraception", NA),
-         condition = ifelse(condition %contains% "b_contraception_hormonalyes",
-                            "Hormonal Contraception", NA)) %>%
-  ggplot(aes(y = condition,
-             x = condition_mean,
-             fill = stat(abs(x) < 0.06))) +
-  stat_halfeye() +
-  geom_vline(xintercept = c(-0.06, 0.06), linetype = "dotted") +
-  apatheme +
-  theme(legend.position = "none") +
-  scale_fill_manual(values = c("gray80", "skyblue")) +
-  labs(x = "Effect Size Estimates", y = "Predictors") +
-  xlim (-0.6, 0.6)
-```
 
 ### Sexual Frequency (Penetrative Intercourse) {.tabset}
 #### Model
@@ -771,7 +668,7 @@ m_hc_sexsat_controlled %>%
   labs(x = "Effect Size Estimates", y = "Predictors")
 ```
 
-### Libido
+### Libido {.tabset}
 
 #### Model
 ```{r}
