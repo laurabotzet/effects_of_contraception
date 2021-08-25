@@ -1,7 +1,7 @@
 name: effects_of_contraception
 output_dir: docs
 navbar:
-  title: Contraception
+  title: Effects of Contraception
   left:
   - text: Exclusion
     href: 1_exclusion.html
@@ -15,6 +15,8 @@ navbar:
     href: 5_analyses_selection.html
   - text: Effects of Contraceptives
     href: 6_analyses_effects.html
+  - text: Robustness Analyses
+    href: 14_analyses_robust.html
   - text: Sensitivity Analyses
     href: 7_analyses_sensitivity.html
   right:
