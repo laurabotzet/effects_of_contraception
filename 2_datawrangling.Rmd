@@ -5,7 +5,7 @@ output:
     toc: true
     toc_depth: 4
     toc_float: true
-    code_folding: 'hide'
+    code_folding: 'show'
     self_contained: false
 ---
 
@@ -322,20 +322,6 @@ data = data %>%
 ```
 
 ### Diary information
-Distinguish between solitary libido and dyadic libido in singles (was not measured for partnered women...).
-```{r}
-crosstabs(~ high_libido + sexual_desire_for_whom, data = data_diary)
-# 1 = niemand bestimmtes
-# 2 = mit mir selbst
-# 3 = Bekannter/Freund
-# 4 = Bekannte/Freundin
-# 5 = Fremder
-# 6 = Fremde
-
-data_diary = data_diary %>%
-  mutate(high_libido_dyadic = ifelse(sexual_desire_for_whom >= 3, high_libido, NA),
-         high_libido_solitary = ifelse(sexual_desire_for_whom == 2, high_libido, NA))
-```
 
 
 calculate mean of libido, sex_active_frequency and actual sex frequency based on diary
@@ -343,22 +329,18 @@ calculate mean of libido, sex_active_frequency and actual sex frequency based on
 data_diary_means = data_diary %>%
   group_by(session, number_of_days) %>%
   summarise(diary_libido_mean = mean(high_libido, na.rm = T),
-            diary_libido_solitary_mean = mean(high_libido_solitary, na.rm = T),
-            diary_libido_dyadic_mean = mean(high_libido_dyadic, na.rm = T),
             diary_sex_active_mean = mean(sex_active, na.rm = T),
             diary_sex_active_sex_mean = mean(sex_activity_sex, na.rm = T),
             diary_masturbation_mean = mean(sex_activity_masturbation, na.rm = T))
 
 qplot(data_diary_means$diary_libido_mean)
-qplot(data_diary_means$diary_libido_solitary_mean)
-qplot(data_diary_means$diary_libido_dyadic_mean)
 qplot(data_diary_means$diary_sex_active_mean)
 qplot(data_diary_means$diary_sex_active_sex_mean)
 
 data_diary_means = data_diary_means %>%
-  mutate(diary_sex_active_sex_sum = as.integer(diary_sex_active_sex_mean*number_of_days),
-         diary_sex_active_sum = as.integer(diary_sex_active_mean*number_of_days),
-         diary_masturbation_sum = as.integer(diary_masturbation_mean*number_of_days))
+  mutate(diary_sex_active_sex_sum = as.integer(round(diary_sex_active_sex_mean*number_of_days, 1)),
+         diary_sex_active_sum = as.integer(round(diary_sex_active_mean*number_of_days, 1)),
+         diary_masturbation_sum = as.integer(round(diary_masturbation_mean*number_of_days, 1)))
 
 data = left_join(data, data_diary_means, by = "session")
 

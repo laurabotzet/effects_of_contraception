@@ -14,6 +14,17 @@ output:
 ```{r results='hide',message=F,warning=F}
 source("0_helpers.R")
 
+library(extrafont)
+theme_set(theme_tufte(base_size = 10, base_family='Arial'))
+
+apatheme=theme_bw()+
+  theme(panel.grid.major=element_blank(),
+        panel.grid.minor=element_blank(),
+        panel.border=element_blank(),
+        axis.line=element_line(),
+        text = element_text(size=20),
+        plot.title = element_text(size = 20))
+
 load("data/cleaned_selected_wrangled.rdata")
 ```
 
@@ -85,8 +96,7 @@ m_selection_hc_simple_plot = m_selection_hc_simple %>%
   ggtitle(expression(paste(bold("Simple Model ("),
                            bolditalic("n"),
                            bold(" = 1,179)")))) +
-  theme(plot.title = element_text(hjust = -0.32)) +
-  theme_tufte(base_size = 10)
+  theme(plot.title = element_text(hjust = -0.32))
           
 m_selection_hc_simple_plot
 ```
@@ -181,8 +191,7 @@ m_selection_hc_complex_plot = m_selection_hc_complex %>%
   ggtitle(expression(paste(bold("Complex Model ("),
                            bolditalic("n"),
                            bold(" = 1,179)")))) +
-  theme(plot.title = element_text(hjust = -0.32)) +
-  theme_tufte(base_size = 10)
+  theme(plot.title = element_text(hjust = -0.32))
                                  
 m_selection_hc_complex_plot
 ```
@@ -200,7 +209,7 @@ selection_hc =
 
 selection_hc
 
-jpeg('Effect size estimates for models with current contraceptive use as an outcome.jpg', 
+jpeg('Effect size estimates for models with current contraceptive use as an outcome REVISED.jpg', 
      width = 900, height = 1000, quality = 100)
 selection_hc
 dev.off()
@@ -276,8 +285,7 @@ m_selection_congruent_simple_onceHC_plot = m_selection_congruent_simple_onceHC %
   ggtitle(expression(paste(bold("Simple Model Initially HC User ("),
                            bolditalic("n"),
                            bold(" = 390)")))) +
-  theme(plot.title = element_text(hjust = -0.35)) +
-  theme_tufte(base_size = 10)
+  theme(plot.title = element_text(hjust = -0.35))
 
 m_selection_congruent_simple_onceHC_plot
 
@@ -337,8 +345,7 @@ m_selection_congruent_simple_oncenonHC_plot = m_selection_congruent_simple_oncen
   ggtitle(expression(paste(bold("Simple Model Initially Non-HC User ("),
                            bolditalic("n"),
                            bold(" = 384)")))) +
-  theme(plot.title = element_text(hjust = -0.35)) +
-  theme_tufte(base_size = 10)
+  theme(plot.title = element_text(hjust = -0.35))
 m_selection_congruent_simple_oncenonHC_plot
 ```
 
@@ -519,8 +526,7 @@ m_selection_congruent_complex_oncenonHC_plot = m_selection_congruent_complex_onc
   ggtitle(expression(paste(bold("Complex Model Initially Non-HC User ("),
                            bolditalic("n"),
                            bold(" = 384)")))) +
-  theme(plot.title = element_text(hjust = -0.35)) +
-  theme_tufte(base_size = 10)
+  theme(plot.title = element_text(hjust = -0.35))
 
 m_selection_congruent_complex_oncenonHC_plot
 ```
@@ -541,7 +547,7 @@ selection_congruent =
           align = "v")
 
 selection_congruent
-jpeg('Effect size estimates for models with congruency in contraceptive method as an outcome.jpg', 
+jpeg('Effect size estimates for models with congruency in contraceptive method as an outcome REVISED.jpg', 
      width = 1600, height = 720, quality = 100)
 selection_congruent
 dev.off()
@@ -671,7 +677,6 @@ hc_uncontrolled = ggplot() +
   scale_x_continuous(breaks = c(-0.5, -0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5),
                      limits = c(-0.5, 0.5)) +
   labs(x = "Effect Size Estimates of Hormonal Contraception", y = "Outcomes") +
-  theme_tufte(base_size = 10) +
   theme(legend.position = "none")
 hc_uncontrolled
 ```
@@ -830,7 +835,7 @@ hc_controlled = ggplot() +
   scale_x_continuous(breaks = c(-0.5, -0.4, -0.3, -0.2, -0.1, 0, 0.1, 0.2, 0.3, 0.4, 0.5),
                      limits = c(-0.5, 0.5)) +
   labs(x = "Effect Size Estimates of Hormonal Contraception", y = "Outcomes")  +
-  theme_tufte(base_size = 10) +   theme(legend.position = "none")
+  theme(legend.position = "none")
 hc_controlled
 ```
 
@@ -846,7 +851,7 @@ hc_plots =
           align = "v")
 
 hc_plots
-jpeg('Effect size estimates for hormonal contraceptives on outcomes.jpg', 
+jpeg('Effect size estimates for hormonal contraceptives on outcomes REVISED.jpg', 
      width = 800, height = 1000, quality = 100)
 hc_plots
 dev.off()
@@ -873,8 +878,7 @@ m_congruency_atrr_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme
 
 m_congruency_atrr_plot
 
@@ -896,8 +900,8 @@ m_congruency_relsat_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme
+
 m_congruency_relsat_plot
 
 m_congruency_sexsat = brm(satisfaction_sexual_intercourse ~
@@ -919,8 +923,7 @@ m_congruency_sexsat_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme
 
 m_congruency_sexsat_plot
 
@@ -942,8 +945,8 @@ m_congruency_libido_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme
+
 m_congruency_libido_plot
 
 m_congruency_sexfreqpen = brm(diary_sex_active_sex_sum ~ offset(log(number_of_days)) +
@@ -966,8 +969,8 @@ m_congruency_sexfreqpen_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme 
+
 m_congruency_sexfreqpen_plot
 
 m_congruency_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
@@ -989,8 +992,8 @@ m_congruency_masfreq_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme
+
 m_congruency_masfreq_plot
 ```
 
@@ -1012,7 +1015,7 @@ congruency_uncontrolled =
           align = "v")
 
 congruency_uncontrolled
-jpeg('Differences in current contraceptive method, congruent use of contraceptive method, and their interaction.jpg', 
+jpeg('Differences in current contraceptive method, congruent use of contraceptive method, and their interaction REVISED.jpg', 
      width = 800, height = 1000, quality = 100)
 congruency_uncontrolled
 dev.off()
@@ -1043,8 +1046,8 @@ m_congruency_atrr_controlled_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme
+
 m_congruency_atrr_controlled_plot
 
 m_congruency_relsat_controlled = brm(relationship_satisfaction ~
@@ -1069,8 +1072,8 @@ m_congruency_relsat_controlled_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme 
+
 m_congruency_relsat_controlled_plot
 
 m_congruency_sexsat_controlled = brm(satisfaction_sexual_intercourse ~
@@ -1095,8 +1098,8 @@ m_congruency_sexsat_controlled_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme 
+
 m_congruency_sexsat_controlled_plot
 
 m_congruency_libido_controlled = brm(diary_libido_mean ~
@@ -1121,8 +1124,8 @@ m_congruency_libido_controlled_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme 
+
 m_congruency_libido_controlled_plot
 
 m_congruency_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
@@ -1149,8 +1152,8 @@ m_congruency_sexfreqpen_controlled_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme 
+
 m_congruency_sexfreqpen_controlled_plot
 
 m_congruency_masfreq_controlled = brm(diary_masturbation_sum ~
@@ -1177,8 +1180,8 @@ m_congruency_masfreq_controlled_plot =
                      values=c("#D95F02", "#1B9E77")) +
   scale_fill_manual(name = "Congruent Contraceptive Method", labels = c("No", "Yes"),
                     values=c("#D95F02", "#1B9E77")) +
-  apatheme +
-  theme_tufte(base_size = 10)
+  apatheme 
+
 m_congruency_masfreq_controlled_plot
 ```
 
@@ -1196,7 +1199,7 @@ congruency_controlled =
           align = "v")
 
 congruency_controlled
-jpeg('Differences in current contraceptive method, congruent use of contraceptive method, and their interaction in controlled models.jpg', 
+jpeg('Differences in current contraceptive method, congruent use of contraceptive method, and their interaction in controlled models REVISED.jpg', 
      width = 800, height = 1000, quality = 100)
 congruency_controlled
 dev.off()

@@ -13,12 +13,21 @@
 
 <title>Codebook Effects of Contraception</title>
 
-<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -26,11 +35,9 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
-<script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="site_libs/datatables-binding-0.16/datatables.js"></script>
+<script src="site_libs/datatables-binding-0.18/datatables.js"></script>
 <link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="site_libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
 <script src="site_libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
@@ -47,8 +54,8 @@
 <script src="site_libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
 <link href="site_libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet" />
 <script src="site_libs/selectize-0.12.0/selectize.min.js"></script>
-<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -62,7 +69,14 @@
     </style>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -158,42 +172,14 @@ code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
   }
 })();
 </script>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 
 
 <style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
 #rmd-source-code {
   display: none;
 }
 </style>
+
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -204,10 +190,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -224,40 +206,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 64px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
-.section h2 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
-.section h3 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
-.section h4 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
-.section h5 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
-.section h6 {
-  padding-top: 69px;
-  margin-top: -69px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -285,7 +240,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -297,7 +252,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -308,10 +263,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -323,7 +291,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -452,7 +419,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -471,7 +438,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Contraception</a>
+      <a class="navbar-brand" href="index.html">Effects of Contraception</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -494,6 +461,9 @@ div.tocify {
   <a href="6_analyses_effects.html">Effects of Contraceptives</a>
 </li>
 <li>
+  <a href="14_analyses_robust.html">Robustness Analyses</a>
+</li>
+<li>
   <a href="7_analyses_sensitivity.html">Sensitivity Analyses</a>
 </li>
       </ul>
@@ -510,11 +480,11 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
 <li role="separator" class="divider"></li>
@@ -554,7 +524,7 @@ div.tocify {
 <details>
 <p><summary title="Expand this section to see some additional metadata in a structured format that is useful for search engines">Metadata for search engines</summary></p>
 <ul>
-<li><strong>Date published</strong>: 2021-03-30</li>
+<li><strong>Date published</strong>: 2021-08-25</li>
 </ul>
 <table class="kable_wrapper">
 <tbody>
@@ -795,9 +765,9 @@ Distribution of values for age
 </div>
 <div id="age_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -865,9 +835,9 @@ Distribution of values for education_years
 </div>
 <div id="education_years_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -2299,9 +2269,9 @@ Distribution of values for religiosity
 </div>
 <div id="religiosity_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -2439,9 +2409,9 @@ Distribution of values for relationship_duration
 </div>
 <div id="relationship_duration_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -3287,7 +3257,7 @@ Distribution of values for diary_masturbation_sum
 <script type="application/ld+json">
 {
   "name": "codebook_selection_data",
-  "datePublished": "2021-03-30",
+  "datePublished": "2021-08-25",
   "description": "The dataset has N=1179 rows and 68 columns.\n0 rows have no missing values on any column.\n\n\n## Table of variables\nThis table contains variable names, labels, and number of missing values.\nSee the complete codebook for more.\n\n[truncated]\n\n### Note\nThis dataset was automatically described using the [codebook R package](https://rubenarslan.github.io/codebook/) (version 0.9.2).",
   "keywords": ["age", "education_years", "net_income", "bfi_agree_2", "bfi_agree_3r", "bfi_agree_1r", "bfi_agree_4", "bfi_agree_5", "bfi_agree_6r", "bfi_agree_7", "bfi_agree_8r", "bfi_agree_9", "bfi_agree", "bfi_consc_2r", "bfi_consc_3", "bfi_consc_1", "bfi_consc_9r", "bfi_consc_4r", "bfi_consc_5", "bfi_consc_6", "bfi_consc_7", "bfi_consc_8r", "bfi_consc", "bfi_open_1", "bfi_open_2", "bfi_open_3", "bfi_open_4", "bfi_open_5", "bfi_open_6", "bfi_open_7r", "bfi_open_8", "bfi_open_9r", "bfi_open_10", "bfi_open", "bfi_extra_1", "bfi_extra_3", "bfi_extra_2r", "bfi_extra_4", "bfi_extra_5r", "bfi_extra_6", "bfi_extra_7r", "bfi_extra_8", "bfi_extra", "bfi_neuro_2r", "bfi_neuro_1", "bfi_neuro_3", "bfi_neuro_4", "bfi_neuro_5r", "bfi_neuro_8", "bfi_neuro_6r", "bfi_neuro_7", "bfi_neuro", "religiosity", "relationship_status", "relationship_duration", "relationship_duration_factor", "congruent_contraception", "attractiveness_partner", "number_of_days", "diary_libido_mean", "diary_libido_solitary_mean", "diary_libido_dyadic_mean", "diary_sex_active_mean", "diary_sex_active_sex_mean", "diary_masturbation_mean", "diary_sex_active_sex_sum", "diary_sex_active_sum", "diary_masturbation_sum"],
   "@context": "http://schema.org/",
@@ -3820,7 +3790,7 @@ Distribution of values for diary_masturbation_sum
 <p><summary>JSON-LD metadata</summary> The following JSON-LD can be found by search engines, if you share this codebook publicly on the web.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">{</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;codebook_selection_data&quot;</span><span class="fu">,</span></span>
-<span id="cb22-3"><a href="#cb22-3"></a>  <span class="dt">&quot;datePublished&quot;</span><span class="fu">:</span> <span class="st">&quot;2021-03-30&quot;</span><span class="fu">,</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="dt">&quot;datePublished&quot;</span><span class="fu">:</span> <span class="st">&quot;2021-08-25&quot;</span><span class="fu">,</span></span>
 <span id="cb22-4"><a href="#cb22-4"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;The dataset has N=1179 rows and 68 columns.</span><span class="ch">\n</span><span class="st">0 rows have no missing values on any column.</span><span class="ch">\n\n\n</span><span class="st">## Table of variables</span><span class="ch">\n</span><span class="st">This table contains variable names, labels, and number of missing values.</span><span class="ch">\n</span><span class="st">See the complete codebook for more.</span><span class="ch">\n\n</span><span class="st">[truncated]</span><span class="ch">\n\n</span><span class="st">### Note</span><span class="ch">\n</span><span class="st">This dataset was automatically described using the [codebook R package](https://rubenarslan.github.io/codebook/) (version 0.9.2).&quot;</span><span class="fu">,</span></span>
 <span id="cb22-5"><a href="#cb22-5"></a>  <span class="dt">&quot;keywords&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;age&quot;</span><span class="ot">,</span> <span class="st">&quot;education_years&quot;</span><span class="ot">,</span> <span class="st">&quot;net_income&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_2&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_3r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_1r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_4&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_5&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_6r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_7&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_8r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree_9&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_agree&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_consc_2r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_consc_3&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_consc_1&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_consc_9r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_consc_4r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_consc_5&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_consc_6&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_consc_7&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_consc_8r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_consc&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_open_1&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_open_2&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_open_3&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_open_4&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_open_5&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_open_6&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_open_7r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_open_8&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_open_9r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_open_10&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_open&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_extra_1&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_extra_3&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_extra_2r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_extra_4&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_extra_5r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_extra_6&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_extra_7r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_extra_8&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_extra&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_neuro_2r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_neuro_1&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_neuro_3&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_neuro_4&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_neuro_5r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_neuro_8&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_neuro_6r&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_neuro_7&quot;</span><span class="ot">,</span> <span class="st">&quot;bfi_neuro&quot;</span><span class="ot">,</span> <span class="st">&quot;religiosity&quot;</span><span class="ot">,</span> <span class="st">&quot;relationship_status&quot;</span><span class="ot">,</span> <span class="st">&quot;relationship_duration&quot;</span><span class="ot">,</span> <span class="st">&quot;relationship_duration_factor&quot;</span><span class="ot">,</span> <span class="st">&quot;congruent_contraception&quot;</span><span class="ot">,</span> <span class="st">&quot;attractiveness_partner&quot;</span><span class="ot">,</span> <span class="st">&quot;number_of_days&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_libido_mean&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_libido_solitary_mean&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_libido_dyadic_mean&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_sex_active_mean&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_sex_active_sex_mean&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_masturbation_mean&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_sex_active_sex_sum&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_sex_active_sum&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_masturbation_sum&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
 <span id="cb22-6"><a href="#cb22-6"></a>  <span class="dt">&quot;@context&quot;</span><span class="fu">:</span> <span class="st">&quot;http://schema.org/&quot;</span><span class="fu">,</span></span>
@@ -4362,7 +4332,7 @@ Distribution of values for diary_masturbation_sum
 <details>
 <p><summary title="Expand this section to see some additional metadata in a structured format that is useful for search engines">Metadata for search engines</summary></p>
 <ul>
-<li><strong>Date published</strong>: 2021-03-30</li>
+<li><strong>Date published</strong>: 2021-08-25</li>
 </ul>
 <table class="kable_wrapper">
 <tbody>
@@ -4557,7 +4527,7 @@ Distribution of values for contraception_change_since_meeting_partner
 <script type="application/ld+json">
 {
   "name": "codebook_contraception_data",
-  "datePublished": "2021-03-30",
+  "datePublished": "2021-08-25",
   "description": "The dataset has N=1179 rows and 3 columns.\n774 rows have no missing values on any column.\n\n\n## Table of variables\nThis table contains variable names, labels, and number of missing values.\nSee the complete codebook for more.\n\n|name                                       |label | n_missing|\n|:------------------------------------------|:-----|---------:|\n|contraception_hormonal                     |NA    |         0|\n|contraception_meeting_partner              |NA    |       405|\n|contraception_change_since_meeting_partner |NA    |       405|\n\n### Note\nThis dataset was automatically described using the [codebook R package](https://rubenarslan.github.io/codebook/) (version 0.9.2).",
   "keywords": ["contraception_hormonal", "contraception_meeting_partner", "contraception_change_since_meeting_partner"],
   "@context": "http://schema.org/",
@@ -4584,7 +4554,7 @@ Distribution of values for contraception_change_since_meeting_partner
 <p><summary>JSON-LD metadata</summary> The following JSON-LD can be found by search engines, if you share this codebook publicly on the web.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">{</span></span>
 <span id="cb23-2"><a href="#cb23-2"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;codebook_contraception_data&quot;</span><span class="fu">,</span></span>
-<span id="cb23-3"><a href="#cb23-3"></a>  <span class="dt">&quot;datePublished&quot;</span><span class="fu">:</span> <span class="st">&quot;2021-03-30&quot;</span><span class="fu">,</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="dt">&quot;datePublished&quot;</span><span class="fu">:</span> <span class="st">&quot;2021-08-25&quot;</span><span class="fu">,</span></span>
 <span id="cb23-4"><a href="#cb23-4"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;The dataset has N=1179 rows and 3 columns.</span><span class="ch">\n</span><span class="st">774 rows have no missing values on any column.</span><span class="ch">\n\n\n</span><span class="st">## Table of variables</span><span class="ch">\n</span><span class="st">This table contains variable names, labels, and number of missing values.</span><span class="ch">\n</span><span class="st">See the complete codebook for more.</span><span class="ch">\n\n</span><span class="st">|name                                       |label | n_missing|</span><span class="ch">\n</span><span class="st">|:------------------------------------------|:-----|---------:|</span><span class="ch">\n</span><span class="st">|contraception_hormonal                     |NA    |         0|</span><span class="ch">\n</span><span class="st">|contraception_meeting_partner              |NA    |       405|</span><span class="ch">\n</span><span class="st">|contraception_change_since_meeting_partner |NA    |       405|</span><span class="ch">\n\n</span><span class="st">### Note</span><span class="ch">\n</span><span class="st">This dataset was automatically described using the [codebook R package](https://rubenarslan.github.io/codebook/) (version 0.9.2).&quot;</span><span class="fu">,</span></span>
 <span id="cb23-5"><a href="#cb23-5"></a>  <span class="dt">&quot;keywords&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;contraception_hormonal&quot;</span><span class="ot">,</span> <span class="st">&quot;contraception_meeting_partner&quot;</span><span class="ot">,</span> <span class="st">&quot;contraception_change_since_meeting_partner&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
 <span id="cb23-6"><a href="#cb23-6"></a>  <span class="dt">&quot;@context&quot;</span><span class="fu">:</span> <span class="st">&quot;http://schema.org/&quot;</span><span class="fu">,</span></span>
@@ -4620,7 +4590,7 @@ Distribution of values for contraception_change_since_meeting_partner
 <details>
 <p><summary title="Expand this section to see some additional metadata in a structured format that is useful for search engines">Metadata for search engines</summary></p>
 <ul>
-<li><strong>Date published</strong>: 2021-03-30</li>
+<li><strong>Date published</strong>: 2021-08-25</li>
 </ul>
 <table class="kable_wrapper">
 <tbody>
@@ -4690,9 +4660,9 @@ Distribution of values for partner_attractiveness_face
 </div>
 <div id="partner_attractiveness_face_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -4794,9 +4764,9 @@ Distribution of values for partner_attractiveness_body
 </div>
 <div id="partner_attractiveness_body_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -4898,9 +4868,9 @@ Distribution of values for relationship_satisfaction_overall
 </div>
 <div id="relationship_satisfaction_overall_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -5002,9 +4972,9 @@ Distribution of values for relationship_satisfaction_2
 </div>
 <div id="relationship_satisfaction_2_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -5106,9 +5076,9 @@ Distribution of values for relationship_satisfaction_3
 </div>
 <div id="relationship_satisfaction_3_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -5210,9 +5180,9 @@ Distribution of values for relationship_problems_R
 </div>
 <div id="relationship_problems_R_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -5314,9 +5284,9 @@ Distribution of values for relationship_conflict_R
 </div>
 <div id="relationship_conflict_R_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -5418,9 +5388,9 @@ Distribution of values for satisfaction_sexual_intercourse
 </div>
 <div id="satisfaction_sexual_intercourse_summary" class="section level5">
 <h5>Summary statistics</h5>
-<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class &#39;&quot;haven_labelled&quot;&#39; to a data.frame</code></pre>
+<pre><code>## Error in as.data.frame.default(x[[i]], optional = TRUE): kann Klasse &#39;&quot;haven_labelled&quot;&#39; nicht in data.frame umwandeln</code></pre>
 <pre><code>## Error in names(df) = html_item_name: names() angewendet auf einen Nicht-Vektor</code></pre>
-<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) is not TRUE</code></pre>
+<pre><code>## Error in (skimr::skim_with(haven_labelled = haven_labelled_sfl, haven_labelled_spss = haven_labelled_sfl, : inherits(data, &quot;data.frame&quot;) ist nicht TRUE</code></pre>
 <pre><code>## Error in cb_table$value_labels &lt;- NULL: Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 <pre><code>## Error in exists(&quot;value_labels&quot;, metadata_table): Objekt &#39;cb_table&#39; nicht gefunden</code></pre>
 </div>
@@ -5698,7 +5668,7 @@ Distribution of values for diary_sex_active_sex_mean
 <script type="application/ld+json">
 {
   "name": "codebook_outcome_data",
-  "datePublished": "2021-03-30",
+  "datePublished": "2021-08-25",
   "description": "The dataset has N=1179 rows and 11 columns.\n622 rows have no missing values on any column.\n\n\n## Table of variables\nThis table contains variable names, labels, and number of missing values.\nSee the complete codebook for more.\n\n|name                              |label                                                                                             | n_missing|\n|:---------------------------------|:-------------------------------------------------------------------------------------------------|---------:|\n|partner_attractiveness_face       |Ich finde das Gesicht meines Partners sehr attraktiv.                                             |       405|\n|partner_attractiveness_body       |Ich finde meinen Partner körperlich sehr attraktiv.                                               |       405|\n|relationship_satisfaction_overall |Ich bin im Großen und Ganzen zufrieden mit meiner Beziehung.                                      |       405|\n|relationship_satisfaction_2       |In unserer Beziehung werden meine Bedürfnisse (z.B. nach Intimität, Gemeinsamkeit, etc.) erfüllt. |       405|\n|relationship_satisfaction_3       |Unsere Beziehung macht mich sehr glücklich.                                                       |       405|\n|relationship_problems_R           |Es gibt viele Probleme in meiner Beziehung.                                                       |       405|\n|relationship_conflict_R           |Es gibt oft Streit/Meinungsverschiedenheiten in meiner Partnerschaft.                             |       405|\n|satisfaction_sexual_intercourse   |Der Sex mit meinem Partner ist sehr befriedigend.                                                 |       405|\n|diary_libido_mean                 |NA                                                                                                |       211|\n|diary_sex_active_mean             |NA                                                                                                |       282|\n|diary_sex_active_sex_mean         |NA                                                                                                |       282|\n\n### Note\nThis dataset was automatically described using the [codebook R package](https://rubenarslan.github.io/codebook/) (version 0.9.2).",
   "keywords": ["partner_attractiveness_face", "partner_attractiveness_body", "relationship_satisfaction_overall", "relationship_satisfaction_2", "relationship_satisfaction_3", "relationship_problems_R", "relationship_conflict_R", "satisfaction_sexual_intercourse", "diary_libido_mean", "diary_sex_active_mean", "diary_sex_active_sex_mean"],
   "@context": "http://schema.org/",
@@ -5795,7 +5765,7 @@ Distribution of values for diary_sex_active_sex_mean
 <p><summary>JSON-LD metadata</summary> The following JSON-LD can be found by search engines, if you share this codebook publicly on the web.</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb64-1"><a href="#cb64-1"></a><span class="fu">{</span></span>
 <span id="cb64-2"><a href="#cb64-2"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;codebook_outcome_data&quot;</span><span class="fu">,</span></span>
-<span id="cb64-3"><a href="#cb64-3"></a>  <span class="dt">&quot;datePublished&quot;</span><span class="fu">:</span> <span class="st">&quot;2021-03-30&quot;</span><span class="fu">,</span></span>
+<span id="cb64-3"><a href="#cb64-3"></a>  <span class="dt">&quot;datePublished&quot;</span><span class="fu">:</span> <span class="st">&quot;2021-08-25&quot;</span><span class="fu">,</span></span>
 <span id="cb64-4"><a href="#cb64-4"></a>  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;The dataset has N=1179 rows and 11 columns.</span><span class="ch">\n</span><span class="st">622 rows have no missing values on any column.</span><span class="ch">\n\n\n</span><span class="st">## Table of variables</span><span class="ch">\n</span><span class="st">This table contains variable names, labels, and number of missing values.</span><span class="ch">\n</span><span class="st">See the complete codebook for more.</span><span class="ch">\n\n</span><span class="st">|name                              |label                                                                                             | n_missing|</span><span class="ch">\n</span><span class="st">|:---------------------------------|:-------------------------------------------------------------------------------------------------|---------:|</span><span class="ch">\n</span><span class="st">|partner_attractiveness_face       |Ich finde das Gesicht meines Partners sehr attraktiv.                                             |       405|</span><span class="ch">\n</span><span class="st">|partner_attractiveness_body       |Ich finde meinen Partner körperlich sehr attraktiv.                                               |       405|</span><span class="ch">\n</span><span class="st">|relationship_satisfaction_overall |Ich bin im Großen und Ganzen zufrieden mit meiner Beziehung.                                      |       405|</span><span class="ch">\n</span><span class="st">|relationship_satisfaction_2       |In unserer Beziehung werden meine Bedürfnisse (z.B. nach Intimität, Gemeinsamkeit, etc.) erfüllt. |       405|</span><span class="ch">\n</span><span class="st">|relationship_satisfaction_3       |Unsere Beziehung macht mich sehr glücklich.                                                       |       405|</span><span class="ch">\n</span><span class="st">|relationship_problems_R           |Es gibt viele Probleme in meiner Beziehung.                                                       |       405|</span><span class="ch">\n</span><span class="st">|relationship_conflict_R           |Es gibt oft Streit/Meinungsverschiedenheiten in meiner Partnerschaft.                             |       405|</span><span class="ch">\n</span><span class="st">|satisfaction_sexual_intercourse   |Der Sex mit meinem Partner ist sehr befriedigend.                                                 |       405|</span><span class="ch">\n</span><span class="st">|diary_libido_mean                 |NA                                                                                                |       211|</span><span class="ch">\n</span><span class="st">|diary_sex_active_mean             |NA                                                                                                |       282|</span><span class="ch">\n</span><span class="st">|diary_sex_active_sex_mean         |NA                                                                                                |       282|</span><span class="ch">\n\n</span><span class="st">### Note</span><span class="ch">\n</span><span class="st">This dataset was automatically described using the [codebook R package](https://rubenarslan.github.io/codebook/) (version 0.9.2).&quot;</span><span class="fu">,</span></span>
 <span id="cb64-5"><a href="#cb64-5"></a>  <span class="dt">&quot;keywords&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;partner_attractiveness_face&quot;</span><span class="ot">,</span> <span class="st">&quot;partner_attractiveness_body&quot;</span><span class="ot">,</span> <span class="st">&quot;relationship_satisfaction_overall&quot;</span><span class="ot">,</span> <span class="st">&quot;relationship_satisfaction_2&quot;</span><span class="ot">,</span> <span class="st">&quot;relationship_satisfaction_3&quot;</span><span class="ot">,</span> <span class="st">&quot;relationship_problems_R&quot;</span><span class="ot">,</span> <span class="st">&quot;relationship_conflict_R&quot;</span><span class="ot">,</span> <span class="st">&quot;satisfaction_sexual_intercourse&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_libido_mean&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_sex_active_mean&quot;</span><span class="ot">,</span> <span class="st">&quot;diary_sex_active_sex_mean&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
 <span id="cb64-6"><a href="#cb64-6"></a>  <span class="dt">&quot;@context&quot;</span><span class="fu">:</span> <span class="st">&quot;http://schema.org/&quot;</span><span class="fu">,</span></span>
@@ -6140,7 +6110,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -6155,6 +6125,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

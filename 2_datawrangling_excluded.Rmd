@@ -1,0 +1,379 @@
+---
+title: "data_excludedwrangling for excluded people"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'show'
+    self_contained: false
+---
+
+
+## data_excluded and Functions
+```{r data_excluded and function, results='hide',message=F,warning=F}
+source("0_helpers.R")
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+pander::panderOptions("table.split.table", Inf)
+pander::panderOptions('round',2)
+pander::panderOptions('digits',2)
+pander::panderOptions('keep.trailing.zeros',TRUE)
+
+load("data_excluded/cleaned_selected.rdata_excluded")
+```
+
+
+## Select Variables {.tabset}
+### Initial Survey
+```{r select variables}
+data_excluded = all_surveys %>%
+  select(session,
+         age,
+         education_years,
+         net_income,
+         starts_with("bfi_agree"),
+         starts_with("bfi_consc"),
+         starts_with("bfi_open"),
+         starts_with("bfi_extra"),
+         starts_with("bfi_neuro"),
+         religiosity,
+         duration_relationship_years,
+         duration_relationship_month,
+         contraception_at_all,
+         contraception_method,
+         contraception_approach,
+         contraception_method_broad,
+         contraception_meeting_partner,
+         partner_attractiveness_face,
+         partner_attractiveness_body,
+         relationship_satisfaction_overall,
+         relationship_satisfaction_2,
+         relationship_satisfaction_3,
+         relationship_problems_R,
+         relationship_conflict_R,
+         satisfaction_sexual_intercourse,
+         reasons_for_exclusion)
+```
+
+### Diary
+```{r select variables diary}
+data_excluded_diary = diary %>%
+  select(session,
+         reasons_for_exclusion,
+         high_libido, sexual_desire_for_whom,
+         sex_active, sex_activity_anal_sex, sex_activity_bdsm_dom, sex_activity_bdsm_sub,
+         sex_activity_cuddling, sex_activity_cunnilingus, sex_activity_cybersex,
+         sex_activity_dirty_talk,
+         sex_activity_fellatio, sex_activity_kissing,  sex_activity_masturbated_by_partner,
+         sex_activity_masturbated_partner, sex_activity_masturbation, sex_activity_other,
+         sex_activity_phone_skype_sex, sex_activity_pornography, sex_activity_sex, 
+         sex_activity_touch_other, 
+         sex_activity_toys, sex_activity_unclear,  sex_other, sex_solo, sex_unclear,
+         days_done)
+```
+
+
+## Exclusion {.tabset}
+### Initial Survey
+```{r exclusion initial survey}
+n_excluded = data_excluded %>% filter(reasons_for_exclusion != "") %>% nrow()
+data_excluded = data_excluded %>% filter(reasons_for_exclusion != "" & !(reasons_for_exclusion %contains% "didnt_finish_initial"))
+```
+`r n_excluded` people were excluded.
+
+### Diary  {.tabset}
+
+```{r}
+number_of_days = data_excluded_diary %>%
+  group_by(session) %>%
+  summarise(n = n()) %>%
+  rename(number_of_days = n)
+  
+data_excluded_diary = left_join(data_excluded_diary, number_of_days, by = "session")
+
+data_excluded_diary = data_excluded_diary %>%
+  filter(reasons_for_exclusion != "" & !(reasons_for_exclusion %contains% "didnt_finish_initial"))
+```
+
+
+## Wrangle data_excluded {.tabset}
+
+### Income
+Set factor level correctly
+```{r}
+data_excluded = data_excluded %>%
+  mutate(net_income = factor(net_income,
+                             levels = c("euro_lt_500", "euro_500_1000",
+                                        "euro_1000_2000", "euro_2000_3000",
+                                        "euro_gt_3000", "dont_tell")))
+```
+
+
+### Relationship status (single vs partnered)
+```{r}
+data_excluded = data_excluded %>% mutate(
+  relationship_status = ifelse(is.na(duration_relationship_month), "Single", "Partnered"))
+
+qplot(data_excluded$relationship_status) + coord_flip()
+```
+
+### Relationship duration
+```{r}
+data_excluded = data_excluded %>%
+  mutate(relationship_duration = duration_relationship_years * 12 +
+           duration_relationship_month)
+
+qplot(data_excluded$relationship_duration)
+
+
+data_excluded = data_excluded %>%
+   mutate(relationship_duration_factor = 
+            factor(ifelse(relationship_status == "Single",
+                   "Single",
+                   ifelse(relationship_duration <= 12,
+                          "Partnered_upto12months",
+                          ifelse(relationship_duration <= 28, 
+                                 "Partnered_upto28months",
+                                 ifelse(relationship_duration <= 52,
+                                        "Partnered_upto52months",
+                                        ifelse(relationship_duration > 52,
+                                        "Partnered_morethan52months",
+                                        NA))))),
+                   levels = c("Single", "Partnered_upto12months",
+                              "Partnered_upto28months", "Partnered_upto52months",
+                              "Partnered_morethan52months")))
+
+qplot(data_excluded$relationship_duration_factor)
+
+ggplot(data_excluded, aes(relationship_duration)) +
+  geom_histogram(aes(fill = relationship_duration_factor), bins = 100)
+```
+
+
+
+### Contraception approach
+```{r contraception approach}
+data_excluded = data_excluded %>%
+  mutate(# Participants, who indicated having no penetrative sex:
+         contraception_method = if_else(contraception_at_all == 5,
+                                   "barrier_no_penetrative_sex",
+                                   contraception_method),
+         # Participants, who indicated having no penetrative sex
+         # use no contraceptives
+         contraception_approach = factor(ifelse(
+           contraception_method =="barrier_no_penetrative_sex",
+           "nothing",
+           as.character(contraception_approach))),
+         # Fixed contraception_approach for
+         # "hormonal_pill, barrier_coitus_interruptus"
+         contraception_approach = factor(ifelse(
+           contraception_method == "hormonal_pill, barrier_coitus_interruptus",
+           "hormonal_pill_only",
+           as.character(contraception_approach))),
+         # Fixed contraception_approach for
+         # "hormonal_pill, barrier_no_penetrative_sex"
+         contraception_approach = factor(ifelse(
+           contraception_method == "hormonal_pill, barrier_no_penetrative_sex",
+           "hormonal_pill_only",
+           as.character(contraception_approach))),
+         # Fixed contraception_approach for
+         # "hormonal_other, barrier_condoms"
+         contraception_approach = factor(ifelse(
+           contraception_method == "hormonal_other, barrier_condoms",
+           "hormonal_other+condoms",
+           as.character(contraception_approach))),
+         # Fixed contraception_approach for
+         # "hormonal_other, barrier_condoms, barrier_coitus_interruptus"
+         contraception_approach = factor(ifelse(
+           contraception_method ==
+             "hormonal_other, barrier_condoms, barrier_coitus_interruptus",
+           "hormonal_other+condoms",
+           as.character(contraception_approach))),
+         contraception_approach = factor(ifelse(
+           contraception_approach == "hormonal+barrier",
+           "hormonal_pill+condoms",
+           as.character(contraception_approach))),
+         contraception_approach = factor(ifelse(
+           contraception_method %contains% "awareness" &
+             contraception_method %contains% "condoms" &
+             !(contraception_method %contains% "hormonal"),
+           "awareness+condoms",
+           as.character(contraception_approach))))
+
+
+data_excluded = data_excluded %>%
+  mutate(contraception_approach = factor(contraception_approach,
+                                         levels = c("hormonal_pill_only",
+                                                    "hormonal_other_only",
+                                                    "hormonal_pill+condoms",
+                                                    "hormonal_other+condoms",
+                                                    "barrier_pessar",
+                                                    "awareness",
+                                                    "awareness+condoms",
+                                                    "condoms",
+                                                    "other",
+                                                    "nothing")))
+
+qplot(factor(data_excluded$contraception_approach, levels = rev(levels(data_excluded$contraception_approach)))) +
+  coord_flip()
+table(data_excluded$contraception_approach)
+```
+
+### Current contraceptive status (hormonal vs. non hormonal)
+```{r}
+data_excluded = data_excluded %>% mutate(
+  contraception_hormonal = factor(ifelse(contraception_approach %contains% "hormonal",
+                                         "yes",
+                                         "no")))
+qplot(data_excluded$contraception_hormonal) + coord_flip()
+table(data_excluded$contraception_hormonal)
+```
+
+
+### Changed contraception since meeting their partner
+There will be NAs because we asked about contracetion when meeting partner only if participants were currently in a relationship
+```{r}
+crosstabs(~contraception_hormonal + contraception_meeting_partner, data_excluded = data_excluded)
+data_excluded = data_excluded %>% mutate(
+  contraception_change_since_meeting_partner =
+    ifelse(contraception_hormonal == "yes" & contraception_meeting_partner == 1,
+           "congruent_hormonal",
+           ifelse(contraception_hormonal == "no" & contraception_meeting_partner == 0,
+                  "congruent_nonhormonal",
+                  ifelse(contraception_hormonal == "yes" & contraception_meeting_partner == 0,
+                         "switched_to_hormonal",
+                         ifelse(contraception_hormonal == "no" &
+                                  contraception_meeting_partner == 1, "switched_to_nonhormonal",
+                                NA)))))
+
+qplot(data_excluded$contraception_change_since_meeting_partner) + coord_flip()
+
+data_excluded = data_excluded %>% 
+  mutate(congruent_contraception = 
+           factor(ifelse(contraception_change_since_meeting_partner %contains% "congruent",
+                  1, 0)))
+```
+
+### Contraception meeting partner
+```{r}
+data_excluded = data_excluded %>%
+  mutate(contraception_meeting_partner = factor(if_else(
+    contraception_meeting_partner == 1,
+    "yes", "no")))
+```
+
+### Attractiveness Partner Scale
+```{r}
+data_excluded = data_excluded %>%
+  mutate(attractiveness_partner = as.numeric(
+    (partner_attractiveness_face + partner_attractiveness_body)/2))
+```
+
+### Relationship Satisfaction Scale
+```{r}
+data_excluded = data_excluded %>%
+  mutate(relationship_satisfaction = as.numeric(
+           (relationship_satisfaction_overall +
+              relationship_satisfaction_2 +
+              relationship_satisfaction_3 +
+              (6 - relationship_problems_R) +
+              (6 - relationship_conflict_R))/5))
+```
+
+### Diary information
+Distinguish between solitary libido and dyadic libido in singles (was not measured for partnered women...).
+```{r}
+crosstabs(~ high_libido + sexual_desire_for_whom, data_excluded = data_excluded_diary)
+# 1 = niemand bestimmtes
+# 2 = mit mir selbst
+# 3 = Bekannter/Freund
+# 4 = Bekannte/Freundin
+# 5 = Fremder
+# 6 = Fremde
+
+data_excluded_diary = data_excluded_diary %>%
+  mutate(high_libido_dyadic = ifelse(sexual_desire_for_whom >= 3, high_libido, NA),
+         high_libido_solitary = ifelse(sexual_desire_for_whom == 2, high_libido, NA))
+```
+
+
+calculate mean of libido, sex_active_frequency and actual sex frequency based on diary
+```{r}
+data_excluded_diary_means = data_excluded_diary %>%
+  group_by(session, number_of_days) %>%
+  summarise(diary_libido_mean = mean(high_libido, na.rm = T),
+            diary_libido_solitary_mean = mean(high_libido_solitary, na.rm = T),
+            diary_libido_dyadic_mean = mean(high_libido_dyadic, na.rm = T),
+            diary_sex_active_mean = mean(sex_active, na.rm = T),
+            diary_sex_active_sex_mean = mean(sex_activity_sex, na.rm = T),
+            diary_masturbation_mean = mean(sex_activity_masturbation, na.rm = T))
+
+qplot(data_excluded_diary_means$diary_libido_mean)
+qplot(data_excluded_diary_means$diary_libido_solitary_mean)
+qplot(data_excluded_diary_means$diary_libido_dyadic_mean)
+qplot(data_excluded_diary_means$diary_sex_active_mean)
+qplot(data_excluded_diary_means$diary_sex_active_sex_mean)
+
+data_excluded_diary_means = data_excluded_diary_means %>%
+  mutate(diary_sex_active_sex_sum = as.integer(round(diary_sex_active_sex_mean*number_of_days, 1)),
+         diary_sex_active_sum = as.integer(round(diary_sex_active_mean*number_of_days, 1)),
+         diary_masturbation_sum = as.integer(round(diary_masturbation_mean*number_of_days, 1)))
+
+data_excluded = left_join(data_excluded, data_excluded_diary_means, by = "session")
+
+```
+
+### Set sex_freq and mas_freq as missing, if participants indicated having no penetrative sexual intercourse and using no other form of contraception
+```{r}
+data_excluded = data_excluded %>%
+  mutate(diary_sex_active_sex_mean =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_sex_active_sex_mean),
+         diary_sex_active_sex_sum =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_sex_active_sex_sum),
+         diary_sex_active_mean =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_sex_active_mean),
+         diary_sex_active_sum =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_sex_active_sum),
+         diary_masturbation_mean =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_masturbation_mean),
+         diary_masturbation_sum =
+           ifelse(contraception_method == "barrier_no_penetrative_sex",
+                  NA,
+                  diary_masturbation_sum))
+```
+
+## Select data_excluded
+```{r}
+data_excluded = data_excluded %>%
+  select(-duration_relationship_years, -duration_relationship_month,
+         -contraception_at_all, -contraception_approach, -contraception_method_broad)
+```
+
+## Descriptives for diary
+```{r}
+data_excluded = data_excluded %>% filter(number_of_days >= 14)
+table(is.na(data_excluded$diary_libido_mean))
+
+mean(data_excluded$diary_libido_mean)
+
+mean(data_excluded$diary_sex_active_sex_sum, na.rm = T)
+sd(data_excluded$diary_sex_active_sex_sum, na.rm = T)
+
+mean(data_excluded$diary_masturbation_sum, na.rm = T)
+sd(data_excluded$diary_masturbation_sum, na.rm = T)
+
+t.test(data$diary_sex_active_sex_sum, data_excluded$diary_sex_active_sex_sum)
+cohen.d.ci(0.06,n=1045,n2=148,n1=897,alpha=.05)
+
+```
+

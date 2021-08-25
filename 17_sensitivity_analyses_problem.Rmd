@@ -1,0 +1,276 @@
+---
+title: "Problem for Sensitivity Analysis"
+output:
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: 'hide'
+    self_contained: false
+---
+
+## Data 
+```{r results='hide',message=F,warning=F}
+source("0_helpers.R")
+
+load("data/cleaned_selected_wrangled.rdata")
+```
+
+## Description
+diary_sex_active_sex_sum: Sum of all  sexual active days (piv-sex).
+diary_masturbation_sum: Sum of all masturbation active days.
+diary_sex_active_sex_mean: Proportion of sexual active days (piv_sex)
+diary_masturbation_mean: Proportion of masturbation active days.
+number_of_days: Number of diary days filled out.
+
+
+
+## Preparations
+### Sex freq / number of days
+```{r}
+data = data %>%
+  mutate(diary_sex_active_sex_freq = diary_sex_active_sex_sum/number_of_days,
+         diary_masturbation_freq = diary_masturbation_sum/number_of_days)
+```
+
+### Change factors to numerics, handcode interaction
+```{r}
+data = data %>%
+  mutate(contraception_hormonal_numeric = ifelse(contraception_hormonal == "yes",
+                                                 1,
+                                                 ifelse(contraception_hormonal == "no",
+                                                        0, NA)),
+         congruent_contraception_numeric = ifelse(congruent_contraception == "0",
+                                                  0,
+                                                  ifelse(congruent_contraception == "1",
+                                                         1, NA)),
+         hc_con_interaction = ifelse(is.na(congruent_contraception), NA,
+                                     ifelse(contraception_hormonal == "yes" &
+                                              congruent_contraception == "1", 1, 0)))
+```
+
+
+### Covariates
+```{r}
+covariates = list("age",
+                   "net_incomeeuro_500_1000", "net_incomeeuro_1000_2000",
+                   "net_incomeeuro_2000_3000", "net_incomeeuro_gt_3000",
+                    "net_incomedont_tell",
+                   "relationship_duration_factorPartnered_upto28months",
+                   "relationship_duration_factorPartnered_upto52months",
+                   "relationship_duration_factorPartnered_morethan52months",
+                   "education_years", "bfi_extra", "bfi_neuro", "bfi_agree",
+                   "bfi_consc", "bfi_open", "religiosity")
+names(covariates) = c("age",
+                   "net_incomeeuro_500_1000", "net_incomeeuro_1000_2000",
+                   "net_incomeeuro_2000_3000", "net_incomeeuro_gt_3000",
+                    "net_incomedont_tell",
+                   "relationship_duration_factorPartnered_upto28months",
+                   "relationship_duration_factorPartnered_upto52months",
+                   "relationship_duration_factorPartnered_morethan52months",
+                   "education_years", "bfi_extra", "bfi_neuro", "bfi_agree",
+                   "bfi_consc", "bfi_open", "religiosity")
+```
+
+## Investigate
+```{r}
+qplot(data$diary_sex_active_sex_sum)
+summary(data$diary_sex_active_sex_sum)
+
+qplot(data$diary_masturbation_sum)
+summary(data$diary_masturbation_sum)
+
+qplot(data$diary_sex_active_sex_mean)
+summary(data$diary_sex_active_sex_mean)
+
+qplot(data$diary_masturbation_mean)
+summary(data$diary_masturbation_mean)
+
+cor.test(data$diary_sex_active_sex_sum, data$diary_sex_active_sex_mean)
+cor.test(data$diary_masturbation_sum, data$diary_masturbation_mean)
+
+
+```
+
+### Difference between mean and freq variable
+```{r}
+qplot(data$diary_sex_active_sex_mean, data$diary_sex_active_sex_freq)
+qplot(data$diary_masturbation_mean, data$diary_masturbation_freq)
+
+investigation007 = data %>% select(session, diary_sex_active_sex_sum, diary_sex_active_sex_mean, diary_sex_active_sex_freq,
+                                   diary_masturbation_sum, diary_masturbation_mean, diary_masturbation_freq,
+                                   number_of_days)
+
+investigation007_sex = investigation007 %>% filter(diary_sex_active_sex_mean != diary_sex_active_sex_freq)
+investigation007_mas = investigation007 %>% filter(diary_masturbation_mean != diary_masturbation_freq)
+
+
+data_diary_1 = data_diary %>% filter(session == "1unjd9r8gR6pOFAA5NkKJEc9WtIqnZ2269y-TmVZ6sBQIIHZjx-_EtAJuDB6euO6")
+data_diary_means_1 = data_diary_means %>% filter(session == "1unjd9r8gR6pOFAA5NkKJEc9WtIqnZ2269y-TmVZ6sBQIIHZjx-_EtAJuDB6euO6")
+table(data_diary_1$sex_activity_sex)
+```
+
+## Models {.tabset .active}
+### Poisson
+#### Controlled
+##### Model
+```{r}
+m_hc_sexfreqpen = glm(diary_sex_active_sex_sum ~
+                        offset(log(number_of_days)) +
+                        contraception_hormonal_numeric,
+                data = data, family = poisson())
+qplot(residuals(m_hc_sexfreqpen))
+```
+
+##### Summary
+```{r}
+kable(tidy(m_hc_sexfreqpen, intervals = T, prob = 0.90))
+summary(m_hc_sexfreqpen, intervals = T, prob = 0.90)
+```
+
+##### Sensitivity 
+```{r}
+m_hc_sexfreqpen_sensitivity <- sensemakr(estimate = 0.2496,
+                                         se = 0.0248,
+                                         dof = 895,
+                                         treatment = "contraception_hormonal_numeric",
+                                         kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+m_hc_sexfreqpen_sensitivity
+summary(m_hc_sexfreqpen_sensitivity)
+```
+
+#### Controlled Model
+##### Model
+```{r}
+m_hc_sexfreqpen = glm(formula = diary_sex_active_sex_sum ~ offset(log(number_of_days)) + 
+     contraception_hormonal_numeric + age + net_income + relationship_duration_factor + 
+     education_years + bfi_extra + bfi_neuro + bfi_agree + bfi_consc + 
+     bfi_open + religiosity, family = "poisson", data = data)
+```
+
+##### Summary
+```{r}
+kable(tidy(m_hc_sexfreqpen, intervals = T, prob = 0.90))
+summary(m_hc_sexfreqpen, intervals = T, prob = 0.90)
+```
+
+##### Sensitivity 
+```{r}
+m_hc_sexfreqpen_sensitivity <- sensemakr(estimate = 0.165323,
+                                         se = 0.026331,
+                                         dof = 878,
+                                         treatment = "contraception_hormonal_numeric",
+                                         benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+m_hc_sexfreqpen_sensitivity
+summary(m_hc_sexfreqpen_sensitivity)
+```
+
+
+### Linear
+#### Uncontrolled
+##### Model
+```{r}
+m_hc_sexfreqpen_linear = lm(diary_sex_active_sex_mean ~ contraception_hormonal_numeric,
+               data = data)
+```
+
+##### Summary
+```{r}
+kable(tidy(m_hc_sexfreqpen_linear, intervals = T, prob = 0.90))
+summary(m_hc_sexfreqpen_linear, intervals = T, prob = 0.90)
+```
+
+##### Sensitivity 
+```{r}
+m_hc_sexfreqpen_linear_sensitivity <- sensemakr(model = m_hc_sexfreqpen_linear,
+                                         treatment = "contraception_hormonal_numeric",
+                                        kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_hc_sexfreqpen_linear_sensitivity
+summary(m_hc_sexfreqpen_linear_sensitivity)
+```
+
+#### Controlled
+##### Model
+```{r}
+m_hc_sexfreqpen_linear = lm(diary_sex_active_sex_mean ~ contraception_hormonal_numeric + age + net_income + relationship_duration_factor + 
+     education_years + bfi_extra + bfi_neuro + bfi_agree + bfi_consc + 
+     bfi_open + religiosity,
+               data = data)
+```
+
+##### Summary
+```{r}
+kable(tidy(m_hc_sexfreqpen_linear, intervals = T, prob = 0.90))
+summary(m_hc_sexfreqpen_linear, intervals = T, prob = 0.90)
+```
+
+##### Sensitivity 
+```{r}
+m_hc_sexfreqpen_linear_sensitivity <- sensemakr(model = m_hc_sexfreqpen_linear,
+                                         treatment = "contraception_hormonal_numeric",
+                                          benchmark_covariates = covariates, #covariates that will be
+                                                                   #used to bound the
+                                                                   #plausible strength of the
+                                                                   #unobserved confounders
+                                        kd = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the
+                                          #treatment
+                                ky = 1:3, #these arguments parameterize how many times
+                                          #stronger the confounder is related to the outcome
+                                q = 1, #fraction of the effect estimate that would have to be
+                                       #explained away to be problematic. Setting q = 1,
+                                       #means that a reduction of 100% of the current effect
+                                       #estimate, that is, a true effect of zero, would be
+                                       #deemed problematic.
+                                alpha = 0.05,
+                                reduce = TRUE #confounder reduce absolute effect size
+                                )
+
+
+m_hc_sexfreqpen_linear_sensitivity
+summary(m_hc_sexfreqpen_linear_sensitivity)
+```

@@ -144,13 +144,13 @@ pander_handler = function(x, ...) {
 }
 
 library(extrafont)
-theme_set(theme_tufte(base_size = 20, base_family='Arial'))
+theme_set(theme_tufte(base_size = 10, base_family='Arial'))
 
 apatheme=theme_bw()+
   theme(panel.grid.major=element_blank(),
         panel.grid.minor=element_blank(),
         panel.border=element_blank(),
         axis.line=element_line(),
-        text = element_text(size=20),
-        plot.title = element_text(size = 20))
+        text = element_text(size=10),
+        plot.title = element_text(size = 10))
 
