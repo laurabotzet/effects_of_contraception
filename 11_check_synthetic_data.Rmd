@@ -311,11 +311,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Complex Model
@@ -336,11 +336,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 
@@ -360,11 +360,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Complex Model
@@ -385,11 +385,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ### Effects of Hormonal Contraception {.tabset}
@@ -408,11 +408,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -433,11 +433,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 #### Relationship Satisfaction {.tabset}
@@ -455,11 +455,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -480,11 +480,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 #### Sexual Satisfaction {.tabset}
@@ -502,11 +502,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -527,11 +527,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 #### Libido {.tabset}
@@ -549,11 +549,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -574,11 +574,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 #### Sexual Frequency {.tabset}
@@ -597,11 +597,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -623,11 +623,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 #### Masturbation Frequency {.tabset}
@@ -646,11 +646,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -672,11 +672,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ### HC, Congruent Use of HC and Their Interaction {.tabset}
@@ -695,11 +695,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -720,11 +720,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 #### Relationship Satisfaction {.tabset}
@@ -742,11 +742,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -767,11 +767,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 #### Sexual Satisfaction {.tabset}
@@ -789,11 +789,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -814,11 +814,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 #### Libido {.tabset}
@@ -836,11 +836,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -861,11 +861,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 #### Sexual Frequency {.tabset}
@@ -884,11 +884,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -910,11 +910,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 #### Masturbation Frequency {.tabset}
@@ -933,11 +933,11 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```
 
 ##### Controlled
@@ -959,9 +959,9 @@ t_test_com <- compare(
   lcol = c("#62B6CB", "#1B4965") # Set the colours
 )
 
-t_test_com$ci.plot +
-  ggtitle("") +
-  apatheme +
-  theme(text = element_text(size=10)) +
-  background_grid()
+# t_test_com$ci.plot +
+#   ggtitle("") +
+#   apatheme +
+#   theme(text = element_text(size=10)) +
+#   background_grid()
 ```

@@ -1228,27 +1228,28 @@ m_con_libido_sensitivity_interaction
 summary(m_con_libido_sensitivity_interaction)
 ```
 
-### Sexual Frequency {.tabset}
+
+
+
+
+### Sexual Frequency{.tabset}
 #### Uncontrolled Model {.tabset}
 ##### Model
 ```{r}
-m_con_sexfreqpen = glm(diary_sex_active_sex_sum ~
-                        offset(log(number_of_days)) +
-                        contraception_hormonal_numeric + congruent_contraception_numeric +
+m_hc_sexfreqpen = lm(diary_sex_active_sex_mean ~ contraception_hormonal_numeric + congruent_contraception_numeric +
                          hc_con_interaction,
-                data = data, family = "poisson")
-summary(m_con_sexfreqpen)
-tidy(m_con_sexfreqpen, conf.int = T)
+               data = data)
+qplot(residuals(m_hc_sexfreqpen))
+summary(m_hc_sexfreqpen)
+tidy(m_hc_sexfreqpen, conf.int = T)
 ```
 
-##### Sensitivity Analyses {.tabset}
+##### Sensitivity Analyses
 ###### HC
 ```{r}
-m_con_sexfreqpen_sensitivity_hc <- sensemakr(estimate =  0.1996,
-                                         se = 0.0444,
-                                         dof = 618,
+m_hc_sexfreqpen_sensitivity_hc <- sensemakr(model = m_hc_sexfreqpen,
                                          treatment = "contraception_hormonal_numeric",
-                                         kd = 1:3, #these arguments parameterize how many times
+                                        kd = 1:3, #these arguments parameterize how many times
                                           #stronger the confounder is related to the
                                           #treatment
                                 ky = 1:3, #these arguments parameterize how many times
@@ -1263,18 +1264,15 @@ m_con_sexfreqpen_sensitivity_hc <- sensemakr(estimate =  0.1996,
                                 )
 
 
-m_con_sexfreqpen_sensitivity_hc
-summary(m_con_sexfreqpen_sensitivity_hc)
+m_hc_sexfreqpen_sensitivity_hc
+summary(m_hc_sexfreqpen_sensitivity_hc)
 ```
-
 
 ###### Congruency
 ```{r}
-m_con_sexfreqpen_sensitivity_con <- sensemakr(estimate = 0.0880,
-                                         se = 0.0391,
-                                         dof = 618,
+m_hc_sexfreqpen_sensitivity_con <- sensemakr(model = m_hc_sexfreqpen,
                                          treatment = "congruent_contraception_numeric",
-                                         kd = 1:3, #these arguments parameterize how many times
+                                        kd = 1:3, #these arguments parameterize how many times
                                           #stronger the confounder is related to the
                                           #treatment
                                 ky = 1:3, #these arguments parameterize how many times
@@ -1289,17 +1287,15 @@ m_con_sexfreqpen_sensitivity_con <- sensemakr(estimate = 0.0880,
                                 )
 
 
-m_con_sexfreqpen_sensitivity_con
-summary(m_con_sexfreqpen_sensitivity_con)
+m_hc_sexfreqpen_sensitivity_con
+summary(m_hc_sexfreqpen_sensitivity_con)
 ```
 
 ###### Interaction
 ```{r}
-m_con_sexfreqpen_sensitivity_interaction <- sensemakr(estimate =  -0.0865,
-                                         se = 0.0553,
-                                         dof = 618,
+m_hc_sexfreqpen_sensitivity_interaction <- sensemakr(model = m_hc_sexfreqpen,
                                          treatment = "hc_con_interaction",
-                                         kd = 1:3, #these arguments parameterize how many times
+                                        kd = 1:3, #these arguments parameterize how many times
                                           #stronger the confounder is related to the
                                           #treatment
                                 ky = 1:3, #these arguments parameterize how many times
@@ -1314,32 +1310,29 @@ m_con_sexfreqpen_sensitivity_interaction <- sensemakr(estimate =  -0.0865,
                                 )
 
 
-m_con_sexfreqpen_sensitivity_interaction
-summary(m_con_sexfreqpen_sensitivity_interaction)
+m_hc_sexfreqpen_sensitivity_interaction
+summary(m_hc_sexfreqpen_sensitivity_interaction)
 ```
 
 #### Controlled Model {.tabset}
 ##### Model
 ```{r}
-m_con_sexfreqpen = glm(diary_sex_active_sex_sum ~
-                        offset(log(number_of_days)) +
-                        contraception_hormonal_numeric + congruent_contraception_numeric +
+m_hc_sexfreqpen = lm(diary_sex_active_sex_mean ~ contraception_hormonal_numeric + congruent_contraception_numeric +
                          hc_con_interaction + 
-                        age + net_income + relationship_duration_factor +
+                       age + net_income + relationship_duration_factor +
                               education_years +
                               bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
                               religiosity,
-                data = data, family = "poisson")
-summary(m_con_sexfreqpen)
-tidy(m_con_sexfreqpen, conf.int = T)
+               data = data)
+qplot(residuals(m_hc_sexfreqpen))
+summary(m_hc_sexfreqpen)
+tidy(m_hc_sexfreqpen, conf.int = T)
 ```
 
-##### Sensitivity Analyses {.tabset}
+##### Sensitivity Analyses
 ###### HC
 ```{r}
-m_con_sexfreqpen_sensitivity_hc <- sensemakr(estimate = 0.13694,
-                                         se = 0.04605,
-                                         dof = 602,
+m_hc_sexfreqpen_sensitivity_hc <- sensemakr(model = m_hc_sexfreqpen,
                                          treatment = "contraception_hormonal_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -1360,16 +1353,13 @@ m_con_sexfreqpen_sensitivity_hc <- sensemakr(estimate = 0.13694,
                                 )
 
 
-m_con_sexfreqpen_sensitivity_hc
-summary(m_con_sexfreqpen_sensitivity_hc)
+m_hc_sexfreqpen_sensitivity_hc
+summary(m_hc_sexfreqpen_sensitivity_hc)
 ```
 
-
-###### Congruency
+###### Congreuncy
 ```{r}
-m_con_sexfreqpen_sensitivity_con <- sensemakr(estimate = -0.04884,
-                                         se = 0.04150,
-                                         dof = 602,
+m_hc_sexfreqpen_sensitivity_con <- sensemakr(model = m_hc_sexfreqpen,
                                          treatment = "congruent_contraception_numeric",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -1390,15 +1380,13 @@ m_con_sexfreqpen_sensitivity_con <- sensemakr(estimate = -0.04884,
                                 )
 
 
-m_con_sexfreqpen_sensitivity_con
-summary(m_con_sexfreqpen_sensitivity_con)
+m_hc_sexfreqpen_sensitivity_con
+summary(m_hc_sexfreqpen_sensitivity_con)
 ```
 
 ###### Interaction
 ```{r}
-m_con_sexfreqpen_sensitivity_interaction <- sensemakr(estimate = 0.04281,
-                                         se = 0.05733,
-                                         dof = 612,
+m_hc_sexfreqpen_sensitivity_interaction <- sensemakr(model = m_hc_sexfreqpen,
                                          treatment = "hc_con_interaction",
                                          benchmark_covariates = covariates, #covariates that will be
                                                                    #used to bound the
@@ -1419,201 +1407,185 @@ m_con_sexfreqpen_sensitivity_interaction <- sensemakr(estimate = 0.04281,
                                 )
 
 
-m_con_sexfreqpen_sensitivity_interaction
-summary(m_con_sexfreqpen_sensitivity_interaction)
+m_hc_sexfreqpen_sensitivity_interaction
+summary(m_hc_sexfreqpen_sensitivity_interaction)
 ```
 
-### Masturbation Frequency {.tabset}
+### Masturbation Frequency{.tabset}
 #### Uncontrolled Model {.tabset}
 ##### Model
 ```{r}
-m_con_masfreq = glm(diary_masturbation_sum ~
-                        offset(log(number_of_days)) +
-                        contraception_hormonal_numeric + congruent_contraception_numeric +
-                         hc_con_interaction,
-                data = data, family = "poisson")
-summary(m_con_masfreq)
-tidy(m_con_masfreq, conf.int = T)
+m_hc_masfreq = lm(diary_masturbation_mean ~ contraception_hormonal_numeric + congruent_contraception_numeric +
+                       hc_con_interaction,
+                     data = data)
+qplot(residuals(m_hc_masfreq))
+summary(m_hc_masfreq)
+tidy(m_hc_masfreq, conf.int = T)
 ```
 
-##### Sensitivity Analyses {.tabset}
+##### Sensitivity Analyses
 ###### HC
 ```{r}
-m_con_masfreq_sensitivity_hc <- sensemakr(estimate = -0.3669,
-                                         se = 0.0579,
-                                         dof = 618,
-                                         treatment = "contraception_hormonal_numeric",
-                                         kd = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the
-                                          #treatment
-                                ky = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the outcome
-                                q = 1, #fraction of the effect estimate that would have to be
-                                       #explained away to be problematic. Setting q = 1,
-                                       #means that a reduction of 100% of the current effect
-                                       #estimate, that is, a true effect of zero, would be
-                                       #deemed problematic.
-                                alpha = 0.05,
-                                reduce = TRUE #confounder reduce absolute effect size
-                                )
+m_hc_masfreq_sensitivity_hc <- sensemakr(model = m_hc_masfreq,
+                                            treatment = "contraception_hormonal_numeric",
+                                            kd = 1:3, #these arguments parameterize how many times
+                                            #stronger the confounder is related to the
+                                            #treatment
+                                            ky = 1:3, #these arguments parameterize how many times
+                                            #stronger the confounder is related to the outcome
+                                            q = 1, #fraction of the effect estimate that would have to be
+                                            #explained away to be problematic. Setting q = 1,
+                                            #means that a reduction of 100% of the current effect
+                                            #estimate, that is, a true effect of zero, would be
+                                            #deemed problematic.
+                                            alpha = 0.05,
+                                            reduce = TRUE #confounder reduce absolute effect size
+)
 
 
-m_con_masfreq_sensitivity_hc
-summary(m_con_masfreq_sensitivity_hc)
+m_hc_masfreq_sensitivity_hc
+summary(m_hc_masfreq_sensitivity_hc)
 ```
-
 
 ###### Congruency
 ```{r}
-m_con_masfreq_sensitivity_con <- sensemakr(estimate = 0.1084,
-                                         se = 0.0433,
-                                         dof = 618,
-                                         treatment = "congruent_contraception_numeric",
-                                         kd = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the
-                                          #treatment
-                                ky = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the outcome
-                                q = 1, #fraction of the effect estimate that would have to be
-                                       #explained away to be problematic. Setting q = 1,
-                                       #means that a reduction of 100% of the current effect
-                                       #estimate, that is, a true effect of zero, would be
-                                       #deemed problematic.
-                                alpha = 0.05,
-                                reduce = TRUE #confounder reduce absolute effect size
-                                )
+m_hc_masfreq_sensitivity_con <- sensemakr(model = m_hc_masfreq,
+                                             treatment = "congruent_contraception_numeric",
+                                             kd = 1:3, #these arguments parameterize how many times
+                                             #stronger the confounder is related to the
+                                             #treatment
+                                             ky = 1:3, #these arguments parameterize how many times
+                                             #stronger the confounder is related to the outcome
+                                             q = 1, #fraction of the effect estimate that would have to be
+                                             #explained away to be problematic. Setting q = 1,
+                                             #means that a reduction of 100% of the current effect
+                                             #estimate, that is, a true effect of zero, would be
+                                             #deemed problematic.
+                                             alpha = 0.05,
+                                             reduce = TRUE #confounder reduce absolute effect size
+)
 
 
-m_con_masfreq_sensitivity_con
-summary(m_con_masfreq_sensitivity_con)
+m_hc_masfreq_sensitivity_con
+summary(m_hc_masfreq_sensitivity_con)
 ```
 
 ###### Interaction
 ```{r}
-m_con_masfreq_sensitivity_interaction <- sensemakr(estimate = 0.0120,
-                                         se = 0.0712,
-                                         dof = 618,
-                                         treatment = "hc_con_interaction",
-                                         kd = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the
-                                          #treatment
-                                ky = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the outcome
-                                q = 1, #fraction of the effect estimate that would have to be
-                                       #explained away to be problematic. Setting q = 1,
-                                       #means that a reduction of 100% of the current effect
-                                       #estimate, that is, a true effect of zero, would be
-                                       #deemed problematic.
-                                alpha = 0.05,
-                                reduce = TRUE #confounder reduce absolute effect size
-                                )
+m_hc_masfreq_sensitivity_interaction <- sensemakr(model = m_hc_masfreq,
+                                                     treatment = "hc_con_interaction",
+                                                     kd = 1:3, #these arguments parameterize how many times
+                                                     #stronger the confounder is related to the
+                                                     #treatment
+                                                     ky = 1:3, #these arguments parameterize how many times
+                                                     #stronger the confounder is related to the outcome
+                                                     q = 1, #fraction of the effect estimate that would have to be
+                                                     #explained away to be problematic. Setting q = 1,
+                                                     #means that a reduction of 100% of the current effect
+                                                     #estimate, that is, a true effect of zero, would be
+                                                     #deemed problematic.
+                                                     alpha = 0.05,
+                                                     reduce = TRUE #confounder reduce absolute effect size
+)
 
 
-m_con_masfreq_sensitivity_interaction
-summary(m_con_masfreq_sensitivity_interaction)
+m_hc_masfreq_sensitivity_interaction
+summary(m_hc_masfreq_sensitivity_interaction)
 ```
 
 #### Controlled Model {.tabset}
 ##### Model
 ```{r}
-m_con_masfreq = glm(diary_masturbation_sum ~
-                        offset(log(number_of_days)) +
-                        contraception_hormonal_numeric + congruent_contraception_numeric +
-                         hc_con_interaction + 
-                        age + net_income + relationship_duration_factor +
-                              education_years +
-                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
-                              religiosity,
-                data = data, family = "poisson")
-summary(m_con_masfreq)
-tidy(m_con_masfreq, conf.int = T)
+m_hc_masfreq = lm(diary_masturbation_mean ~ contraception_hormonal_numeric + congruent_contraception_numeric +
+                       hc_con_interaction + 
+                       age + net_income + relationship_duration_factor +
+                       education_years +
+                       bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                       religiosity,
+                     data = data)
+qplot(residuals(m_hc_masfreq))
+summary(m_hc_masfreq)
+tidy(m_hc_masfreq, conf.int = T)
 ```
 
-##### Sensitivity Analyses {.tabset}
+##### Sensitivity Analyses
 ###### HC
 ```{r}
-m_con_masfreq_sensitivity_hc <- sensemakr(estimate = -0.37828,
-                                         se = 0.05958,
-                                         dof = 602,
-                                         treatment = "contraception_hormonal_numeric",
-                                         benchmark_covariates = covariates, #covariates that will be
-                                                                   #used to bound the
-                                                                   #plausible strength of the
-                                                                   #unobserved confounders
-                                kd = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the
-                                          #treatment
-                                ky = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the outcome
-                                q = 1, #fraction of the effect estimate that would have to be
-                                       #explained away to be problematic. Setting q = 1,
-                                       #means that a reduction of 100% of the current effect
-                                       #estimate, that is, a true effect of zero, would be
-                                       #deemed problematic.
-                                alpha = 0.05,
-                                reduce = TRUE #confounder reduce absolute effect size
-                                )
+m_hc_masfreq_sensitivity_hc <- sensemakr(model = m_hc_masfreq,
+                                            treatment = "contraception_hormonal_numeric",
+                                            benchmark_covariates = covariates, #covariates that will be
+                                            #used to bound the
+                                            #plausible strength of the
+                                            #unobserved confounders
+                                            kd = 1:3, #these arguments parameterize how many times
+                                            #stronger the confounder is related to the
+                                            #treatment
+                                            ky = 1:3, #these arguments parameterize how many times
+                                            #stronger the confounder is related to the outcome
+                                            q = 1, #fraction of the effect estimate that would have to be
+                                            #explained away to be problematic. Setting q = 1,
+                                            #means that a reduction of 100% of the current effect
+                                            #estimate, that is, a true effect of zero, would be
+                                            #deemed problematic.
+                                            alpha = 0.05,
+                                            reduce = TRUE #confounder reduce absolute effect size
+)
 
 
-m_con_masfreq_sensitivity_hc
-summary(m_con_masfreq_sensitivity_hc)
+m_hc_masfreq_sensitivity_hc
+summary(m_hc_masfreq_sensitivity_hc)
 ```
 
-
-###### Congruency
+###### Congreuncy
 ```{r}
-m_con_masfreq_sensitivity_con <- sensemakr(estimate = 0.03882,
-                                         se = 0.04649,
-                                         dof = 602,
-                                         treatment = "congruent_contraception_numeric",
-                                         benchmark_covariates = covariates, #covariates that will be
-                                                                   #used to bound the
-                                                                   #plausible strength of the
-                                                                   #unobserved confounders
-                                kd = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the
-                                          #treatment
-                                ky = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the outcome
-                                q = 1, #fraction of the effect estimate that would have to be
-                                       #explained away to be problematic. Setting q = 1,
-                                       #means that a reduction of 100% of the current effect
-                                       #estimate, that is, a true effect of zero, would be
-                                       #deemed problematic.
-                                alpha = 0.05,
-                                reduce = TRUE #confounder reduce absolute effect size
-                                )
+m_hc_masfreq_sensitivity_con <- sensemakr(model = m_hc_masfreq,
+                                             treatment = "congruent_contraception_numeric",
+                                             benchmark_covariates = covariates, #covariates that will be
+                                             #used to bound the
+                                             #plausible strength of the
+                                             #unobserved confounders
+                                             kd = 1:3, #these arguments parameterize how many times
+                                             #stronger the confounder is related to the
+                                             #treatment
+                                             ky = 1:3, #these arguments parameterize how many times
+                                             #stronger the confounder is related to the outcome
+                                             q = 1, #fraction of the effect estimate that would have to be
+                                             #explained away to be problematic. Setting q = 1,
+                                             #means that a reduction of 100% of the current effect
+                                             #estimate, that is, a true effect of zero, would be
+                                             #deemed problematic.
+                                             alpha = 0.05,
+                                             reduce = TRUE #confounder reduce absolute effect size
+)
 
 
-m_con_masfreq_sensitivity_con
-summary(m_con_masfreq_sensitivity_con)
+m_hc_masfreq_sensitivity_con
+summary(m_hc_masfreq_sensitivity_con)
 ```
 
 ###### Interaction
 ```{r}
-m_con_masfreq_sensitivity_interaction <- sensemakr(estimate = 0.09740,
-                                         se = 0.07337 ,
-                                         dof = 602,
-                                         treatment = "hc_con_interaction",
-                                         benchmark_covariates = covariates, #covariates that will be
-                                                                   #used to bound the
-                                                                   #plausible strength of the
-                                                                   #unobserved confounders
-                                kd = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the
-                                          #treatment
-                                ky = 1:3, #these arguments parameterize how many times
-                                          #stronger the confounder is related to the outcome
-                                q = 1, #fraction of the effect estimate that would have to be
-                                       #explained away to be problematic. Setting q = 1,
-                                       #means that a reduction of 100% of the current effect
-                                       #estimate, that is, a true effect of zero, would be
-                                       #deemed problematic.
-                                alpha = 0.05,
-                                reduce = TRUE #confounder reduce absolute effect size
-                                )
+m_hc_masfreq_sensitivity_interaction <- sensemakr(model = m_hc_masfreq,
+                                                     treatment = "hc_con_interaction",
+                                                     benchmark_covariates = covariates, #covariates that will be
+                                                     #used to bound the
+                                                     #plausible strength of the
+                                                     #unobserved confounders
+                                                     kd = 1:3, #these arguments parameterize how many times
+                                                     #stronger the confounder is related to the
+                                                     #treatment
+                                                     ky = 1:3, #these arguments parameterize how many times
+                                                     #stronger the confounder is related to the outcome
+                                                     q = 1, #fraction of the effect estimate that would have to be
+                                                     #explained away to be problematic. Setting q = 1,
+                                                     #means that a reduction of 100% of the current effect
+                                                     #estimate, that is, a true effect of zero, would be
+                                                     #deemed problematic.
+                                                     alpha = 0.05,
+                                                     reduce = TRUE #confounder reduce absolute effect size
+)
 
 
-m_con_masfreq_sensitivity_interaction
-summary(m_con_masfreq_sensitivity_interaction)
+m_hc_masfreq_sensitivity_interaction
+summary(m_hc_masfreq_sensitivity_interaction)
 ```
