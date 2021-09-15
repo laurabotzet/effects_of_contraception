@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Marginal Effects in Controlled Models</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/paper.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+.sourceCode .row {
+  width: 100%;
+}
+.sourceCode {
+  overflow-x: auto;
+}
+.code-folding-btn {
+  margin-right: -30px;
+}
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Effects of Contraception</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="1_exclusion.html">Exclusion</a>
+</li>
+<li>
+  <a href="2_datawrangling.html">Data Wrangling</a>
+</li>
+<li>
+  <a href="3_descriptives.html">Descriptives</a>
+</li>
+<li>
+  <a href="4_codebook.html">Codebook</a>
+</li>
+<li>
+  <a href="5_analyses_selection.html">Selection Effects</a>
+</li>
+<li>
+  <a href="6_analyses_effects.html">Effects of Contraceptives</a>
+</li>
+<li>
+  <a href="14_analyses_robust.html">Robustness Analyses</a>
+</li>
+<li>
+  <a href="18_marginal_effects.html">AME</a>
+</li>
+<li>
+  <a href="7_analyses_sensitivity.html">Sensitivity Analyses</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/laurabotzet/effects_of_contraception">
+    <span class="fa fa-github"></span>
+     
+    
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Marginal Effects in Controlled Models</h1>
+
+</div>
+
+
+<div id="data" class="section level2">
+<h2>Data</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">source</span>(<span class="st">&quot;0_helpers.R&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(modelr)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(tidybayes)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">load</span>(<span class="st">&quot;data/cleaned_selected_wrangled.rdata&quot;</span>)</span></code></pre></div>
+</div>
+<div id="sexual-frequency-penetrative-intercourse" class="section level2 tabset">
+<h2>Sexual Frequency (Penetrative Intercourse)</h2>
+<div id="uncontrolled-model" class="section level3">
+<h3>Uncontrolled Model</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>m_hc_sexfreqpen =<span class="st"> </span><span class="kw">brm</span>(diary_sex_active_sex_sum <span class="op">~</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="st">                        </span><span class="kw">offset</span>(<span class="kw">log</span>(number_of_days)) <span class="op">+</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st">                        </span>contraception_hormonal,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">poisson</span>(),</span>
+<span id="cb2-5"><a href="#cb2-5"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_sexfreqpen&quot;</span>)</span></code></pre></div>
+<div id="data-grid" class="section level4">
+<h4>Data Grid</h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>grid =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw">data_grid</span>(<span class="dt">number_of_days =</span> <span class="dv">1</span>,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>            contraception_hormonal)</span></code></pre></div>
+</div>
+<div id="add-predicted-values" class="section level4">
+<h4>Add Predicted Values</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>data_pred =<span class="st"> </span><span class="kw">add_epred_draws</span>(grid, m_hc_sexfreqpen,</span>
+<span id="cb4-2"><a href="#cb4-2"></a>                   <span class="dt">value =</span> <span class="st">&quot;E[y|A,B]&quot;</span>,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>                   <span class="dt">ndraws =</span> <span class="dv">1000</span>)</span></code></pre></div>
+</div>
+<div id="average-marginal-effect" class="section level4">
+<h4>Average Marginal Effect</h4>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>ame =<span class="st"> </span>data_pred <span class="op">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw">group_by</span>(contraception_hormonal, .draw) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># group by predictors to keep</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">E[y|A]</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean</span>(<span class="st">`</span><span class="dt">E[y|A,B]</span><span class="st">`</span>, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span><span class="kw">compare_levels</span>(<span class="st">`</span><span class="dt">E[y|A]</span><span class="st">`</span>, <span class="dt">by =</span> contraception_hormonal) <span class="op">%&gt;%</span><span class="st">  </span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="st">  </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">mean difference</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">E[y|A]</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="st">  </span><span class="kw">mean_qi</span>(<span class="st">`</span><span class="dt">mean difference</span><span class="st">`</span>, <span class="dt">.width =</span> <span class="fl">.90</span>)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;contraception_hormonal&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>ame</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 7
+##   contraception_hormonal `mean difference` .lower .upper .width .point .interval
+##   &lt;chr&gt;                              &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
+## 1 yes - no                          0.0350 0.0291 0.0410    0.9 mean   qi</code></pre>
+</div>
+<div id="compare-means" class="section level4">
+<h4>Compare Means</h4>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>means =<span class="st"> </span>data_pred <span class="op">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span><span class="kw">group_by</span>(contraception_hormonal) <span class="op">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_fit =</span> <span class="kw">mean</span>(<span class="st">`</span><span class="dt">E[y|A,B]</span><span class="st">`</span>, <span class="dt">na.rm =</span> T))</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">print</span>(<span class="kw">data.frame</span>(means), <span class="dt">digits =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##   contraception_hormonal mean_fit
+## 1                     no   0.1237
+## 2                    yes   0.1587</code></pre>
+</div>
+</div>
+<div id="controlled-model" class="section level3">
+<h3>Controlled Model</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>m_hc_sexfreqpen_controlled =<span class="st"> </span><span class="kw">brm</span>(diary_sex_active_sex_sum <span class="op">~</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="st">                        </span><span class="kw">offset</span>(<span class="kw">log</span>(number_of_days)) <span class="op">+</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="st">                        </span>contraception_hormonal <span class="op">+</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="st">                        </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor <span class="op">+</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="st">                              </span>education_years <span class="op">+</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="st">                              </span>bfi_extra <span class="op">+</span><span class="st"> </span>bfi_neuro <span class="op">+</span><span class="st"> </span>bfi_agree <span class="op">+</span><span class="st"> </span>bfi_consc <span class="op">+</span><span class="st"> </span>bfi_open <span class="op">+</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="st">                              </span>religiosity,</span>
+<span id="cb11-8"><a href="#cb11-8"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">poisson</span>(),</span>
+<span id="cb11-9"><a href="#cb11-9"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_sexfreqpen_controlled&quot;</span>)</span></code></pre></div>
+<div id="data-grid-1" class="section level4">
+<h4>Data Grid</h4>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>grid =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="st">  </span><span class="kw">data_grid</span>(<span class="dt">number_of_days =</span> <span class="dv">1</span>,</span>
+<span id="cb12-3"><a href="#cb12-3"></a>            contraception_hormonal,</span>
+<span id="cb12-4"><a href="#cb12-4"></a>            <span class="dt">age =</span> <span class="kw">seq_range</span>(age, <span class="dt">n =</span> <span class="dv">5</span>), <span class="co"># measured in full years</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>            net_income,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>            relationship_duration_factor,</span>
+<span id="cb12-7"><a href="#cb12-7"></a>            <span class="dt">education_years =</span> <span class="kw">seq_range</span>(education_years, <span class="dt">n =</span> <span class="dv">5</span>), <span class="co"># measured in full years</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a>            <span class="dt">bfi_extra =</span> <span class="kw">mean</span>(data<span class="op">$</span>bfi_extra),</span>
+<span id="cb12-9"><a href="#cb12-9"></a>            <span class="dt">bfi_neuro =</span> <span class="kw">mean</span>(data<span class="op">$</span>bfi_neuro), </span>
+<span id="cb12-10"><a href="#cb12-10"></a>            <span class="dt">bfi_agree =</span> <span class="kw">mean</span>(data<span class="op">$</span>bfi_agree), </span>
+<span id="cb12-11"><a href="#cb12-11"></a>            <span class="dt">bfi_consc =</span> <span class="kw">mean</span>(data<span class="op">$</span>bfi_consc), </span>
+<span id="cb12-12"><a href="#cb12-12"></a>            <span class="dt">bfi_open =</span> <span class="kw">mean</span>(data<span class="op">$</span>bfi_open),</span>
+<span id="cb12-13"><a href="#cb12-13"></a>            <span class="dt">religiosity =</span> <span class="kw">mean</span>(data<span class="op">$</span>religiosity)</span>
+<span id="cb12-14"><a href="#cb12-14"></a>  )</span></code></pre></div>
+</div>
+<div id="add-predicted-values-1" class="section level4">
+<h4>Add Predicted Values</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>data_pred =<span class="st"> </span><span class="kw">add_epred_draws</span>(grid, m_hc_sexfreqpen_controlled,</span>
+<span id="cb13-2"><a href="#cb13-2"></a>                   <span class="dt">value =</span> <span class="st">&quot;E[y|A,B]&quot;</span>,</span>
+<span id="cb13-3"><a href="#cb13-3"></a>                   <span class="dt">ndraws =</span> <span class="dv">1000</span>)</span></code></pre></div>
+</div>
+<div id="average-marginal-effect-1" class="section level4">
+<h4>Average Marginal Effect</h4>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>ame =<span class="st"> </span>data_pred <span class="op">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="st">  </span><span class="kw">group_by</span>(contraception_hormonal, .draw) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># group by predictors to keep</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">E[y|A]</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean</span>(<span class="st">`</span><span class="dt">E[y|A,B]</span><span class="st">`</span>, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="st">  </span><span class="kw">compare_levels</span>(<span class="st">`</span><span class="dt">E[y|A]</span><span class="st">`</span>, <span class="dt">by =</span> contraception_hormonal) <span class="op">%&gt;%</span><span class="st">  </span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="st">  </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">mean difference</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">E[y|A]</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="st">  </span><span class="kw">mean_qi</span>(<span class="st">`</span><span class="dt">mean difference</span><span class="st">`</span>, <span class="dt">.width =</span> <span class="fl">.90</span>)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;contraception_hormonal&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>ame</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 7
+##   contraception_hormonal `mean difference` .lower .upper .width .point .interval
+##   &lt;chr&gt;                              &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
+## 1 yes - no                          0.0272 0.0194 0.0348    0.9 mean   qi</code></pre>
+</div>
+<div id="compare-means-1" class="section level4">
+<h4>Compare Means</h4>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>means =<span class="st"> </span>data_pred <span class="op">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="st">  </span><span class="kw">group_by</span>(contraception_hormonal) <span class="op">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_fit =</span> <span class="kw">mean</span>(<span class="st">`</span><span class="dt">E[y|A,B]</span><span class="st">`</span>, <span class="dt">na.rm =</span> T))</span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">print</span>(<span class="kw">as.data.frame</span>(means), <span class="dt">digits =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##   contraception_hormonal mean_fit
+## 1                     no   0.1525
+## 2                    yes   0.1797</code></pre>
+</div>
+</div>
+</div>
+<div id="masturbation-frequency" class="section level2 tabset">
+<h2>Masturbation Frequency</h2>
+<div id="uncontrolled-model-1" class="section level3">
+<h3>Uncontrolled Model</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>m_hc_masfreq =<span class="st"> </span><span class="kw">brm</span>(diary_masturbation_sum <span class="op">~</span><span class="st"> </span><span class="kw">offset</span>(<span class="kw">log</span>(number_of_days)) <span class="op">+</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="st">                     </span>contraception_hormonal,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">poisson</span>(),</span>
+<span id="cb20-4"><a href="#cb20-4"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_masfreq&quot;</span>)</span></code></pre></div>
+<div id="data-grid-2" class="section level4">
+<h4>Data Grid</h4>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>grid =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="st">  </span><span class="kw">data_grid</span>(<span class="dt">number_of_days =</span> <span class="dv">1</span>,</span>
+<span id="cb21-3"><a href="#cb21-3"></a>            contraception_hormonal)</span></code></pre></div>
+</div>
+<div id="add-predicted-values-2" class="section level4">
+<h4>Add Predicted Values</h4>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>data_pred =<span class="st"> </span><span class="kw">add_epred_draws</span>(grid, m_hc_masfreq,</span>
+<span id="cb22-2"><a href="#cb22-2"></a>                   <span class="dt">value =</span> <span class="st">&quot;E[y|A,B]&quot;</span>,</span>
+<span id="cb22-3"><a href="#cb22-3"></a>                   <span class="dt">ndraws =</span> <span class="dv">1000</span>)</span></code></pre></div>
+</div>
+<div id="average-marginal-effect-2" class="section level4">
+<h4>Average Marginal Effect</h4>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>ame =<span class="st"> </span>data_pred <span class="op">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="st">  </span><span class="kw">group_by</span>(contraception_hormonal, .draw) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># group by predictors to keep</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">E[y|A]</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean</span>(<span class="st">`</span><span class="dt">E[y|A,B]</span><span class="st">`</span>, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="st">  </span><span class="kw">compare_levels</span>(<span class="st">`</span><span class="dt">E[y|A]</span><span class="st">`</span>, <span class="dt">by =</span> contraception_hormonal) <span class="op">%&gt;%</span><span class="st">  </span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="st">  </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">mean difference</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">E[y|A]</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="st">  </span><span class="kw">mean_qi</span>(<span class="st">`</span><span class="dt">mean difference</span><span class="st">`</span>, <span class="dt">.width =</span> <span class="fl">.90</span>)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;contraception_hormonal&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>ame</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 7
+##   contraception_hormonal `mean difference`  .lower  .upper .width .point .interval
+##   &lt;chr&gt;                              &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
+## 1 yes - no                         -0.0502 -0.0556 -0.0450    0.9 mean   qi</code></pre>
+</div>
+<div id="compare-means-2" class="section level4">
+<h4>Compare Means</h4>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>means =<span class="st"> </span>data_pred <span class="op">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="st">  </span><span class="kw">group_by</span>(contraception_hormonal) <span class="op">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_fit =</span> <span class="kw">mean</span>(<span class="st">`</span><span class="dt">E[y|A,B]</span><span class="st">`</span>, <span class="dt">na.rm =</span> T))</span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="kw">print</span>(<span class="kw">as.data.frame</span>(means), <span class="dt">digits =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##   contraception_hormonal mean_fit
+## 1                     no   0.1531
+## 2                    yes   0.1029</code></pre>
+</div>
+</div>
+<div id="controlled-model-1" class="section level3">
+<h3>Controlled Model</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>m_hc_masfreq_controlled =<span class="st"> </span><span class="kw">brm</span>(diary_masturbation_sum <span class="op">~</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="st">                        </span><span class="kw">offset</span>(<span class="kw">log</span>(number_of_days)) <span class="op">+</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="st">                        </span>contraception_hormonal <span class="op">+</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a><span class="st">                        </span>age <span class="op">+</span><span class="st"> </span>net_income <span class="op">+</span><span class="st"> </span>relationship_duration_factor <span class="op">+</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="st">                              </span>education_years <span class="op">+</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a><span class="st">                              </span>bfi_extra <span class="op">+</span><span class="st"> </span>bfi_neuro <span class="op">+</span><span class="st"> </span>bfi_agree <span class="op">+</span><span class="st"> </span>bfi_consc <span class="op">+</span><span class="st"> </span>bfi_open <span class="op">+</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="st">                              </span>religiosity,</span>
+<span id="cb29-8"><a href="#cb29-8"></a>                <span class="dt">data =</span> data, <span class="dt">family =</span> <span class="kw">poisson</span>(),</span>
+<span id="cb29-9"><a href="#cb29-9"></a>                <span class="dt">file =</span> <span class="st">&quot;m_hc_masfreq_controlled&quot;</span>)</span></code></pre></div>
+<div id="data-grid-3" class="section level4">
+<h4>Data Grid</h4>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>grid =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="st">  </span><span class="kw">data_grid</span>(<span class="dt">number_of_days =</span> <span class="dv">1</span>,</span>
+<span id="cb30-3"><a href="#cb30-3"></a>            contraception_hormonal,</span>
+<span id="cb30-4"><a href="#cb30-4"></a>            <span class="dt">age =</span> <span class="kw">seq_range</span>(age, <span class="dt">n =</span> <span class="dv">5</span>), <span class="co"># measured in full years</span></span>
+<span id="cb30-5"><a href="#cb30-5"></a>            net_income,</span>
+<span id="cb30-6"><a href="#cb30-6"></a>            relationship_duration_factor,</span>
+<span id="cb30-7"><a href="#cb30-7"></a>            <span class="dt">education_years =</span> <span class="kw">seq_range</span>(education_years, <span class="dt">n =</span> <span class="dv">5</span>), <span class="co"># measured in full years</span></span>
+<span id="cb30-8"><a href="#cb30-8"></a>            <span class="dt">bfi_extra =</span> <span class="kw">mean</span>(data<span class="op">$</span>bfi_extra),</span>
+<span id="cb30-9"><a href="#cb30-9"></a>            <span class="dt">bfi_neuro =</span> <span class="kw">mean</span>(data<span class="op">$</span>bfi_neuro), </span>
+<span id="cb30-10"><a href="#cb30-10"></a>            <span class="dt">bfi_agree =</span> <span class="kw">mean</span>(data<span class="op">$</span>bfi_agree), </span>
+<span id="cb30-11"><a href="#cb30-11"></a>            <span class="dt">bfi_consc =</span> <span class="kw">mean</span>(data<span class="op">$</span>bfi_consc), </span>
+<span id="cb30-12"><a href="#cb30-12"></a>            <span class="dt">bfi_open =</span> <span class="kw">mean</span>(data<span class="op">$</span>bfi_open),</span>
+<span id="cb30-13"><a href="#cb30-13"></a>            <span class="dt">religiosity =</span> <span class="kw">mean</span>(data<span class="op">$</span>religiosity)</span>
+<span id="cb30-14"><a href="#cb30-14"></a>  )</span></code></pre></div>
+</div>
+<div id="add-predicted-values-3" class="section level4">
+<h4>Add Predicted Values</h4>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>data_pred =<span class="st"> </span><span class="kw">add_epred_draws</span>(grid, m_hc_masfreq_controlled,</span>
+<span id="cb31-2"><a href="#cb31-2"></a>                   <span class="dt">value =</span> <span class="st">&quot;E[y|A,B]&quot;</span>,</span>
+<span id="cb31-3"><a href="#cb31-3"></a>                   <span class="dt">ndraws =</span> <span class="dv">1000</span>)</span></code></pre></div>
+</div>
+<div id="average-marginal-effect-3" class="section level4">
+<h4>Average Marginal Effect</h4>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>ame =<span class="st"> </span>data_pred <span class="op">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="st">  </span><span class="kw">group_by</span>(contraception_hormonal, .draw) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># group by predictors to keep</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">E[y|A]</span><span class="st">`</span> =<span class="st"> </span><span class="kw">mean</span>(<span class="st">`</span><span class="dt">E[y|A,B]</span><span class="st">`</span>, <span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="st">  </span><span class="kw">compare_levels</span>(<span class="st">`</span><span class="dt">E[y|A]</span><span class="st">`</span>, <span class="dt">by =</span> contraception_hormonal) <span class="op">%&gt;%</span><span class="st">  </span></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="st">  </span><span class="kw">rename</span>(<span class="st">`</span><span class="dt">mean difference</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">E[y|A]</span><span class="st">`</span>) <span class="op">%&gt;%</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="st">  </span><span class="kw">mean_qi</span>(<span class="st">`</span><span class="dt">mean difference</span><span class="st">`</span>, <span class="dt">.width =</span> <span class="fl">.90</span>)</span></code></pre></div>
+<pre><code>## `summarise()` has grouped output by &#39;contraception_hormonal&#39;. You can override using the `.groups` argument.</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>ame</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 7
+##   contraception_hormonal `mean difference`  .lower  .upper .width .point .interval
+##   &lt;chr&gt;                              &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;    
+## 1 yes - no                         -0.0311 -0.0358 -0.0266    0.9 mean   qi</code></pre>
+</div>
+<div id="compare-means-3" class="section level4">
+<h4>Compare Means</h4>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>means =<span class="st"> </span>data_pred <span class="op">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="st">  </span><span class="kw">group_by</span>(contraception_hormonal) <span class="op">%&gt;%</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_fit =</span> <span class="kw">mean</span>(<span class="st">`</span><span class="dt">E[y|A,B]</span><span class="st">`</span>, <span class="dt">na.rm =</span> T))</span>
+<span id="cb36-4"><a href="#cb36-4"></a><span class="kw">print</span>(<span class="kw">as.data.frame</span>(means), <span class="dt">digits =</span> <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##   contraception_hormonal mean_fit
+## 1                     no  0.12145
+## 2                    yes  0.09033</code></pre>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIk1hcmdpbmFsIEVmZmVjdHMgaW4gQ29udHJvbGxlZCBNb2RlbHMiDQpvdXRwdXQ6DQogIGh0bWxfZG9jdW1lbnQ6DQogICAgdG9jOiB0cnVlDQogICAgdG9jX2RlcHRoOiA0DQogICAgdG9jX2Zsb2F0OiB0cnVlDQogICAgY29kZV9mb2xkaW5nOiAnc2hvdycNCiAgICBzZWxmX2NvbnRhaW5lZDogZmFsc2UNCmVkaXRvcl9vcHRpb25zOiANCiAgY2h1bmtfb3V0cHV0X3R5cGU6IGNvbnNvbGUNCi0tLQ0KICANCiAgDQojIyBEYXRhIA0KYGBge3IgcmVzdWx0cz0naGlkZScsbWVzc2FnZT1GLHdhcm5pbmc9Rn0NCnNvdXJjZSgiMF9oZWxwZXJzLlIiKQ0KbGlicmFyeShtb2RlbHIpDQpsaWJyYXJ5KHRpZHliYXllcykNCg0KbG9hZCgiZGF0YS9jbGVhbmVkX3NlbGVjdGVkX3dyYW5nbGVkLnJkYXRhIikNCmBgYA0KDQoNCiMjIFNleHVhbCBGcmVxdWVuY3kgKFBlbmV0cmF0aXZlIEludGVyY291cnNlKSB7LnRhYnNldH0NCiMjIyBVbmNvbnRyb2xsZWQgTW9kZWwNCmBgYHtyfQ0KbV9oY19zZXhmcmVxcGVuID0gYnJtKGRpYXJ5X3NleF9hY3RpdmVfc2V4X3N1bSB+DQogICAgICAgICAgICAgICAgICAgICAgICBvZmZzZXQobG9nKG51bWJlcl9vZl9kYXlzKSkgKw0KICAgICAgICAgICAgICAgICAgICAgICAgY29udHJhY2VwdGlvbl9ob3Jtb25hbCwNCiAgICAgICAgICAgICAgICBkYXRhID0gZGF0YSwgZmFtaWx5ID0gcG9pc3NvbigpLA0KICAgICAgICAgICAgICAgIGZpbGUgPSAibV9oY19zZXhmcmVxcGVuIikNCmBgYA0KDQojIyMjIERhdGEgR3JpZA0KYGBge3J9DQpncmlkID0gZGF0YSAlPiUNCiAgZGF0YV9ncmlkKG51bWJlcl9vZl9kYXlzID0gMSwNCiAgICAgICAgICAgIGNvbnRyYWNlcHRpb25faG9ybW9uYWwpDQoNCmBgYA0KDQojIyMjIEFkZCBQcmVkaWN0ZWQgVmFsdWVzDQpgYGB7cn0NCmRhdGFfcHJlZCA9IGFkZF9lcHJlZF9kcmF3cyhncmlkLCBtX2hjX3NleGZyZXFwZW4sDQogICAgICAgICAgICAgICAgICAgdmFsdWUgPSAiRVt5fEEsQl0iLA0KICAgICAgICAgICAgICAgICAgIG5kcmF3cyA9IDEwMDApDQpgYGANCg0KIyMjIyBBdmVyYWdlIE1hcmdpbmFsIEVmZmVjdA0KYGBge3J9DQphbWUgPSBkYXRhX3ByZWQgJT4lDQogIGdyb3VwX2J5KGNvbnRyYWNlcHRpb25faG9ybW9uYWwsIC5kcmF3KSAlPiUgICMgZ3JvdXAgYnkgcHJlZGljdG9ycyB0byBrZWVwDQogIHN1bW1hcmlzZShgRVt5fEFdYCA9IG1lYW4oYEVbeXxBLEJdYCwgbmEucm0gPSBUKSkgJT4lDQogIGNvbXBhcmVfbGV2ZWxzKGBFW3l8QV1gLCBieSA9IGNvbnRyYWNlcHRpb25faG9ybW9uYWwpICU+JSAgDQogIHJlbmFtZShgbWVhbiBkaWZmZXJlbmNlYCA9IGBFW3l8QV1gKSAlPiUNCiAgbWVhbl9xaShgbWVhbiBkaWZmZXJlbmNlYCwgLndpZHRoID0gLjkwKQ0KYW1lDQpgYGANCg0KIyMjIyBDb21wYXJlIE1lYW5zDQpgYGB7cn0NCm1lYW5zID0gZGF0YV9wcmVkICU+JQ0KICBncm91cF9ieShjb250cmFjZXB0aW9uX2hvcm1vbmFsKSAlPiUNCiAgc3VtbWFyaXNlKG1lYW5fZml0ID0gbWVhbihgRVt5fEEsQl1gLCBuYS5ybSA9IFQpKQ0KcHJpbnQoZGF0YS5mcmFtZShtZWFucyksIGRpZ2l0cyA9IDQpDQpgYGANCg0KDQojIyMgQ29udHJvbGxlZCBNb2RlbA0KYGBge3J9DQptX2hjX3NleGZyZXFwZW5fY29udHJvbGxlZCA9IGJybShkaWFyeV9zZXhfYWN0aXZlX3NleF9zdW0gfg0KICAgICAgICAgICAgICAgICAgICAgICAgb2Zmc2V0KGxvZyhudW1iZXJfb2ZfZGF5cykpICsNCiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRyYWNlcHRpb25faG9ybW9uYWwgKw0KICAgICAgICAgICAgICAgICAgICAgICAgYWdlICsgbmV0X2luY29tZSArIHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IgKw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZWR1Y2F0aW9uX3llYXJzICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJmaV9leHRyYSArIGJmaV9uZXVybyArIGJmaV9hZ3JlZSArIGJmaV9jb25zYyArIGJmaV9vcGVuICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlbGlnaW9zaXR5LA0KICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLCBmYW1pbHkgPSBwb2lzc29uKCksDQogICAgICAgICAgICAgICAgZmlsZSA9ICJtX2hjX3NleGZyZXFwZW5fY29udHJvbGxlZCIpDQpgYGANCg0KDQojIyMjIERhdGEgR3JpZA0KYGBge3J9DQpncmlkID0gZGF0YSAlPiUNCiAgZGF0YV9ncmlkKG51bWJlcl9vZl9kYXlzID0gMSwNCiAgICAgICAgICAgIGNvbnRyYWNlcHRpb25faG9ybW9uYWwsDQogICAgICAgICAgICBhZ2UgPSBzZXFfcmFuZ2UoYWdlLCBuID0gNSksICMgbWVhc3VyZWQgaW4gZnVsbCB5ZWFycw0KICAgICAgICAgICAgbmV0X2luY29tZSwNCiAgICAgICAgICAgIHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IsDQogICAgICAgICAgICBlZHVjYXRpb25feWVhcnMgPSBzZXFfcmFuZ2UoZWR1Y2F0aW9uX3llYXJzLCBuID0gNSksICMgbWVhc3VyZWQgaW4gZnVsbCB5ZWFycw0KICAgICAgICAgICAgYmZpX2V4dHJhID0gbWVhbihkYXRhJGJmaV9leHRyYSksDQogICAgICAgICAgICBiZmlfbmV1cm8gPSBtZWFuKGRhdGEkYmZpX25ldXJvKSwgDQogICAgICAgICAgICBiZmlfYWdyZWUgPSBtZWFuKGRhdGEkYmZpX2FncmVlKSwgDQogICAgICAgICAgICBiZmlfY29uc2MgPSBtZWFuKGRhdGEkYmZpX2NvbnNjKSwgDQogICAgICAgICAgICBiZmlfb3BlbiA9IG1lYW4oZGF0YSRiZmlfb3BlbiksDQogICAgICAgICAgICByZWxpZ2lvc2l0eSA9IG1lYW4oZGF0YSRyZWxpZ2lvc2l0eSkNCiAgKQ0KDQpgYGANCg0KIyMjIyBBZGQgUHJlZGljdGVkIFZhbHVlcw0KYGBge3J9DQpkYXRhX3ByZWQgPSBhZGRfZXByZWRfZHJhd3MoZ3JpZCwgbV9oY19zZXhmcmVxcGVuX2NvbnRyb2xsZWQsDQogICAgICAgICAgICAgICAgICAgdmFsdWUgPSAiRVt5fEEsQl0iLA0KICAgICAgICAgICAgICAgICAgIG5kcmF3cyA9IDEwMDApDQpgYGANCg0KIyMjIyBBdmVyYWdlIE1hcmdpbmFsIEVmZmVjdA0KYGBge3J9DQphbWUgPSBkYXRhX3ByZWQgJT4lDQogIGdyb3VwX2J5KGNvbnRyYWNlcHRpb25faG9ybW9uYWwsIC5kcmF3KSAlPiUgICMgZ3JvdXAgYnkgcHJlZGljdG9ycyB0byBrZWVwDQogIHN1bW1hcmlzZShgRVt5fEFdYCA9IG1lYW4oYEVbeXxBLEJdYCwgbmEucm0gPSBUKSkgJT4lDQogIGNvbXBhcmVfbGV2ZWxzKGBFW3l8QV1gLCBieSA9IGNvbnRyYWNlcHRpb25faG9ybW9uYWwpICU+JSAgDQogIHJlbmFtZShgbWVhbiBkaWZmZXJlbmNlYCA9IGBFW3l8QV1gKSAlPiUNCiAgbWVhbl9xaShgbWVhbiBkaWZmZXJlbmNlYCwgLndpZHRoID0gLjkwKQ0KYW1lDQpgYGANCg0KIyMjIyBDb21wYXJlIE1lYW5zDQpgYGB7cn0NCm1lYW5zID0gZGF0YV9wcmVkICU+JQ0KICBncm91cF9ieShjb250cmFjZXB0aW9uX2hvcm1vbmFsKSAlPiUNCiAgc3VtbWFyaXNlKG1lYW5fZml0ID0gbWVhbihgRVt5fEEsQl1gLCBuYS5ybSA9IFQpKQ0KcHJpbnQoYXMuZGF0YS5mcmFtZShtZWFucyksIGRpZ2l0cyA9IDQpDQpgYGANCg0KDQojIyBNYXN0dXJiYXRpb24gRnJlcXVlbmN5IHsudGFic2V0fQ0KIyMjIFVuY29udHJvbGxlZCBNb2RlbA0KYGBge3J9DQptX2hjX21hc2ZyZXEgPSBicm0oZGlhcnlfbWFzdHVyYmF0aW9uX3N1bSB+IG9mZnNldChsb2cobnVtYmVyX29mX2RheXMpKSArDQogICAgICAgICAgICAgICAgICAgICBjb250cmFjZXB0aW9uX2hvcm1vbmFsLA0KICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLCBmYW1pbHkgPSBwb2lzc29uKCksDQogICAgICAgICAgICAgICAgZmlsZSA9ICJtX2hjX21hc2ZyZXEiKQ0KYGBgDQoNCg0KIyMjIyBEYXRhIEdyaWQNCmBgYHtyfQ0KZ3JpZCA9IGRhdGEgJT4lDQogIGRhdGFfZ3JpZChudW1iZXJfb2ZfZGF5cyA9IDEsDQogICAgICAgICAgICBjb250cmFjZXB0aW9uX2hvcm1vbmFsKQ0KDQpgYGANCg0KIyMjIyBBZGQgUHJlZGljdGVkIFZhbHVlcw0KYGBge3J9DQpkYXRhX3ByZWQgPSBhZGRfZXByZWRfZHJhd3MoZ3JpZCwgbV9oY19tYXNmcmVxLA0KICAgICAgICAgICAgICAgICAgIHZhbHVlID0gIkVbeXxBLEJdIiwNCiAgICAgICAgICAgICAgICAgICBuZHJhd3MgPSAxMDAwKQ0KYGBgDQoNCiMjIyMgQXZlcmFnZSBNYXJnaW5hbCBFZmZlY3QNCmBgYHtyfQ0KYW1lID0gZGF0YV9wcmVkICU+JQ0KICBncm91cF9ieShjb250cmFjZXB0aW9uX2hvcm1vbmFsLCAuZHJhdykgJT4lICAjIGdyb3VwIGJ5IHByZWRpY3RvcnMgdG8ga2VlcA0KICBzdW1tYXJpc2UoYEVbeXxBXWAgPSBtZWFuKGBFW3l8QSxCXWAsIG5hLnJtID0gVCkpICU+JQ0KICBjb21wYXJlX2xldmVscyhgRVt5fEFdYCwgYnkgPSBjb250cmFjZXB0aW9uX2hvcm1vbmFsKSAlPiUgIA0KICByZW5hbWUoYG1lYW4gZGlmZmVyZW5jZWAgPSBgRVt5fEFdYCkgJT4lDQogIG1lYW5fcWkoYG1lYW4gZGlmZmVyZW5jZWAsIC53aWR0aCA9IC45MCkNCmFtZQ0KYGBgDQoNCiMjIyMgQ29tcGFyZSBNZWFucw0KYGBge3J9DQptZWFucyA9IGRhdGFfcHJlZCAlPiUNCiAgZ3JvdXBfYnkoY29udHJhY2VwdGlvbl9ob3Jtb25hbCkgJT4lDQogIHN1bW1hcmlzZShtZWFuX2ZpdCA9IG1lYW4oYEVbeXxBLEJdYCwgbmEucm0gPSBUKSkNCnByaW50KGFzLmRhdGEuZnJhbWUobWVhbnMpLCBkaWdpdHMgPSA0KQ0KYGBgDQoNCiMjIyBDb250cm9sbGVkIE1vZGVsDQpgYGB7cn0NCm1faGNfbWFzZnJlcV9jb250cm9sbGVkID0gYnJtKGRpYXJ5X21hc3R1cmJhdGlvbl9zdW0gfg0KICAgICAgICAgICAgICAgICAgICAgICAgb2Zmc2V0KGxvZyhudW1iZXJfb2ZfZGF5cykpICsNCiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRyYWNlcHRpb25faG9ybW9uYWwgKw0KICAgICAgICAgICAgICAgICAgICAgICAgYWdlICsgbmV0X2luY29tZSArIHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IgKw0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZWR1Y2F0aW9uX3llYXJzICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJmaV9leHRyYSArIGJmaV9uZXVybyArIGJmaV9hZ3JlZSArIGJmaV9jb25zYyArIGJmaV9vcGVuICsNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlbGlnaW9zaXR5LA0KICAgICAgICAgICAgICAgIGRhdGEgPSBkYXRhLCBmYW1pbHkgPSBwb2lzc29uKCksDQogICAgICAgICAgICAgICAgZmlsZSA9ICJtX2hjX21hc2ZyZXFfY29udHJvbGxlZCIpDQpgYGANCg0KDQojIyMjIERhdGEgR3JpZA0KYGBge3J9DQpncmlkID0gZGF0YSAlPiUNCiAgZGF0YV9ncmlkKG51bWJlcl9vZl9kYXlzID0gMSwNCiAgICAgICAgICAgIGNvbnRyYWNlcHRpb25faG9ybW9uYWwsDQogICAgICAgICAgICBhZ2UgPSBzZXFfcmFuZ2UoYWdlLCBuID0gNSksICMgbWVhc3VyZWQgaW4gZnVsbCB5ZWFycw0KICAgICAgICAgICAgbmV0X2luY29tZSwNCiAgICAgICAgICAgIHJlbGF0aW9uc2hpcF9kdXJhdGlvbl9mYWN0b3IsDQogICAgICAgICAgICBlZHVjYXRpb25feWVhcnMgPSBzZXFfcmFuZ2UoZWR1Y2F0aW9uX3llYXJzLCBuID0gNSksICMgbWVhc3VyZWQgaW4gZnVsbCB5ZWFycw0KICAgICAgICAgICAgYmZpX2V4dHJhID0gbWVhbihkYXRhJGJmaV9leHRyYSksDQogICAgICAgICAgICBiZmlfbmV1cm8gPSBtZWFuKGRhdGEkYmZpX25ldXJvKSwgDQogICAgICAgICAgICBiZmlfYWdyZWUgPSBtZWFuKGRhdGEkYmZpX2FncmVlKSwgDQogICAgICAgICAgICBiZmlfY29uc2MgPSBtZWFuKGRhdGEkYmZpX2NvbnNjKSwgDQogICAgICAgICAgICBiZmlfb3BlbiA9IG1lYW4oZGF0YSRiZmlfb3BlbiksDQogICAgICAgICAgICByZWxpZ2lvc2l0eSA9IG1lYW4oZGF0YSRyZWxpZ2lvc2l0eSkNCiAgKQ0KDQpgYGANCg0KIyMjIyBBZGQgUHJlZGljdGVkIFZhbHVlcw0KYGBge3J9DQpkYXRhX3ByZWQgPSBhZGRfZXByZWRfZHJhd3MoZ3JpZCwgbV9oY19tYXNmcmVxX2NvbnRyb2xsZWQsDQogICAgICAgICAgICAgICAgICAgdmFsdWUgPSAiRVt5fEEsQl0iLA0KICAgICAgICAgICAgICAgICAgIG5kcmF3cyA9IDEwMDApDQpgYGANCg0KIyMjIyBBdmVyYWdlIE1hcmdpbmFsIEVmZmVjdA0KYGBge3J9DQphbWUgPSBkYXRhX3ByZWQgJT4lDQogIGdyb3VwX2J5KGNvbnRyYWNlcHRpb25faG9ybW9uYWwsIC5kcmF3KSAlPiUgICMgZ3JvdXAgYnkgcHJlZGljdG9ycyB0byBrZWVwDQogIHN1bW1hcmlzZShgRVt5fEFdYCA9IG1lYW4oYEVbeXxBLEJdYCwgbmEucm0gPSBUKSkgJT4lDQogIGNvbXBhcmVfbGV2ZWxzKGBFW3l8QV1gLCBieSA9IGNvbnRyYWNlcHRpb25faG9ybW9uYWwpICU+JSAgDQogIHJlbmFtZShgbWVhbiBkaWZmZXJlbmNlYCA9IGBFW3l8QV1gKSAlPiUNCiAgbWVhbl9xaShgbWVhbiBkaWZmZXJlbmNlYCwgLndpZHRoID0gLjkwKQ0KYW1lDQpgYGANCg0KIyMjIyBDb21wYXJlIE1lYW5zDQpgYGB7cn0NCm1lYW5zID0gZGF0YV9wcmVkICU+JQ0KICBncm91cF9ieShjb250cmFjZXB0aW9uX2hvcm1vbmFsKSAlPiUNCiAgc3VtbWFyaXNlKG1lYW5fZml0ID0gbWVhbihgRVt5fEEsQl1gLCBuYS5ybSA9IFQpKQ0KcHJpbnQoYXMuZGF0YS5mcmFtZShtZWFucyksIGRpZ2l0cyA9IDQpDQpgYGANCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("18_marginal_effects.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

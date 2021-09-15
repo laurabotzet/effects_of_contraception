@@ -5,7 +5,7 @@ output:
     toc: true
     toc_depth: 4
     toc_float: true
-    code_folding: 'hide'
+    code_folding: 'show'
     self_contained: false
 editor_options: 
   chunk_output_type: console
@@ -21,332 +21,157 @@ library(tidybayes)
 load("data/cleaned_selected_wrangled.rdata")
 ```
 
-## Controlled Models: Effects of Hormonal Contraceptives {.tabset}
 
-### Sexual Frequency (Penetrative Intercourse) {.tabset}
-#### Model
+## Sexual Frequency (Penetrative Intercourse) {.tabset}
+### Uncontrolled Model
 ```{r}
-m_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
+m_hc_sexfreqpen = brm(diary_sex_active_sex_sum ~
                         offset(log(number_of_days)) +
-                        contraception_hormonal +
-                        age + net_income + relationship_duration_factor +
-                              education_years +
-                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
-                              religiosity,
+                        contraception_hormonal,
                 data = data, family = poisson(),
-                file = "m_hc_sexfreqpen_controlled")
+                file = "m_hc_sexfreqpen")
 ```
 
-#### Fitted draws
+#### Data Grid
 ```{r}
-data_pred = add_epred_draws(data, m_hc_sexfreqpen_controlled,
-                   value = "E[y|A,B]")
+grid = data %>%
+  data_grid(number_of_days = 1,
+            contraception_hormonal)
+
 ```
 
-#### Compare means
+#### Add Predicted Values
 ```{r}
-means_emp = data %>%
-  group_by(contraception_hormonal) %>%
-  summarise(mean_emp = mean(diary_sex_active_sex_sum, na.rm = T))
-means_emp
-
-means = data_pred %>%
-  group_by(contraception_hormonal) %>%
-  summarise(mean_emp = mean(diary_sex_active_sex_sum, na.rm = T),
-            mean_fit = mean(`E[y|A,B]`, na.rm = T))
-means
+data_pred = add_epred_draws(grid, m_hc_sexfreqpen,
+                   value = "E[y|A,B]",
+                   ndraws = 1000)
 ```
 
-#### Plot
+#### Average Marginal Effect
 ```{r}
-marginal_effects = data_pred %>%
+ame = data_pred %>%
   group_by(contraception_hormonal, .draw) %>%  # group by predictors to keep
-  summarise(`E[y|A]` = mean(`E[y|A,B]`, na.rm = T)) 
-
-mean_diffs = marginal_effects %>%
-  compare_levels(`E[y|A]`, by = contraception_hormonal) %>%  # pairwise differences in `E[y|A]`, by levels of A
-  rename(`mean difference` = `E[y|A]`) 
-
-mean_diffs %>%
-  ggplot(aes(x = `mean difference`, y = contraception_hormonal)) +
-  stat_halfeye() +
-  geom_vline(xintercept = 0, linetype = "dashed")
+  summarise(`E[y|A]` = mean(`E[y|A,B]`, na.rm = T)) %>%
+  compare_levels(`E[y|A]`, by = contraception_hormonal) %>%  
+  rename(`mean difference` = `E[y|A]`) %>%
+  mean_qi(`mean difference`, .width = .90)
+ame
 ```
 
-#### Frequencies?
+#### Compare Means
 ```{r}
-mean_freq = data_pred %>%
-  mutate(emp_freq = diary_sex_active_sex_sum/number_of_days,
-         pred_freq = `E[y|A,B]`/number_of_days) %>%
-  group_by(contraception_hormonal) %>%
-  summarise(mean_emp = mean(emp_freq, na.rm = T),
-            mean_fit = mean(pred_freq, na.rm = T))
-mean_freq
-```
-
-
-### Masturbation Frequency {.tabset}
-#### Model
-```{r}
-m_hc_masfreq_controlled = brm(diary_masturbation_sum ~
-                        offset(log(number_of_days)) +
-                        contraception_hormonal +
-                        age + net_income + relationship_duration_factor +
-                              education_years +
-                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
-                              religiosity,
-                data = data, family = poisson(),
-                file = "m_hc_masfreq_controlled")
-```
-
-#### Fitted draws
-```{r}
-data_pred = add_epred_draws(data, m_hc_masfreq_controlled,
-                   value = "E[y|A,B]")
-```
-
-#### Compare means
-```{r}
-means_emp = data %>%
-  group_by(contraception_hormonal) %>%
-  summarise(mean_emp = mean(diary_masturbation_sum, na.rm = T))
-means_emp
-
-means = data_pred %>%
-  group_by(contraception_hormonal) %>%
-  summarise(mean_emp = mean(diary_masturbation_sum, na.rm = T),
-            mean_fit = mean(`E[y|A,B]`, na.rm = T))
-means
-```
-
-#### Plot
-```{r}
-marginal_effects = data_pred %>%
-  group_by(contraception_hormonal, .draw) %>%  # group by predictors to keep
-  summarise(`E[y|A]` = mean(`E[y|A,B]`, na.rm = T)) 
-
-mean_diffs = marginal_effects %>%
-  compare_levels(`E[y|A]`, by = contraception_hormonal) %>%  # pairwise differences in `E[y|A]`, by levels of A
-  rename(`mean difference` = `E[y|A]`) 
-
-mean_diffs %>%
-  ggplot(aes(x = `mean difference`, y = contraception_hormonal)) +
-  stat_halfeye() +
-  geom_vline(xintercept = 0, linetype = "dashed")
-```
-
-#### Frequencies?
-```{r}
-mean_freq = data_pred %>%
-  mutate(emp_freq = diary_masturbation_sum/number_of_days,
-         pred_freq = `E[y|A,B]`/number_of_days) %>%
-  group_by(contraception_hormonal) %>%
-  summarise(mean_emp = mean(emp_freq, na.rm = T),
-            mean_fit = mean(pred_freq, na.rm = T))
-mean_freq
-```
-
-
-### Very broad continous categories
-
-#### Model
-```{r}
-m_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
-                        offset(log(number_of_days)) +
-                        contraception_hormonal +
-                        age + net_income + relationship_duration_factor +
-                              education_years +
-                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
-                              religiosity,
-                data = data, family = poisson(),
-                file = "m_hc_sexfreqpen_controlled")
-```
-
-
-#### Data grid
-```{r}
-marginal_effects = data %>%
-  data_grid(seq_range(number_of_days, n = 2), #measured in full days
-            contraception_hormonal,
-            seq_range(age, n = 2), # measured in full years
-            net_income,
-            relationship_duration_factor,
-            seq_range(education_years, n = 2), # measured in full years
-            seq_range(bfi_extra, n = 2), 
-            seq_range(bfi_neuro, n = 2), 
-            seq_range(bfi_agree, n = 2), 
-            seq_range(bfi_consc, n = 2), 
-            seq_range(bfi_open, n = 2), 
-            seq_range(religiosity, n = 2) 
-  )
-
-marginal_effects = marginal_effects %>%
-  rename(number_of_days = 'seq_range(number_of_days, n = 2)',
-         age = "seq_range(age, n = 2)",
-         education_years =  "seq_range(education_years, n = 2)",
-         bfi_extra = "seq_range(bfi_extra, n = 2)",
-         bfi_neuro = "seq_range(bfi_neuro, n = 2)",
-         bfi_agree = "seq_range(bfi_agree, n = 2)",
-         bfi_consc = "seq_range(bfi_consc, n = 2)",
-         bfi_open = "seq_range(bfi_open, n = 2)",
-         religiosity = "seq_range(religiosity, n = 2)")
-```
-
-
-#### Add predicted values
-```{r}
-#memory.limit(9999999999999)
-data_pred = add_epred_draws(marginal_effects, m_hc_sexfreqpen_controlled,
-                   value = "E[y|A,B]")
-```
-
-#### Compare means
-```{r}
-means_emp = data %>%
-  group_by(contraception_hormonal) %>%
-  summarise(mean_emp = mean(diary_sex_active_sex_sum, na.rm = T))
-means_emp
-
 means = data_pred %>%
   group_by(contraception_hormonal) %>%
   summarise(mean_fit = mean(`E[y|A,B]`, na.rm = T))
-means
-```
-
-#### Plot
-```{r}
-marginal_effects = data_pred %>%
-  group_by(contraception_hormonal, .draw) %>%  # group by predictors to keep
-  summarise(`E[y|A]` = mean(`E[y|A,B]`, na.rm = T)) 
-
-mean_diffs = marginal_effects %>%
-  compare_levels(`E[y|A]`, by = contraception_hormonal) %>%  # pairwise differences in `E[y|A]`, by levels of A
-  rename(`mean difference` = `E[y|A]`) 
-
-mean_diffs %>%
-  ggplot(aes(x = `mean difference`, y = contraception_hormonal)) +
-  stat_halfeye() +
-  geom_vline(xintercept = 0, linetype = "dashed")
-```
-
-#### Frequencies?
-```{r}
-mean_freq = data_pred %>%
-  mutate(#emp_freq = diary_sex_active_sex_sum/number_of_days,
-         pred_freq = `E[y|A,B]`/number_of_days) %>%
-  group_by(contraception_hormonal) %>%
-  summarise(#mean_emp = mean(emp_freq, na.rm = T),
-            mean_fit = mean(pred_freq, na.rm = T))
-mean_freq
+print(data.frame(means), digits = 4)
 ```
 
 
-------------------------------------------------------------------------------------------
-## Old Stuff from here on ###
-## Categorical Variables
+### Controlled Model
 ```{r}
-data = data %>%
-  mutate(age_cat = factor(age),
-         education_years_cat = factor(education_years),
-         bfi_extra_cat = factor(round(bfi_extra, 0)),
-         bfi_agree_cat = factor(round(bfi_agree, 0)),
-         bfi_neuro_cat = factor(round(bfi_neuro, 0)),
-         bfi_consc_cat = factor(round(bfi_consc, 0)),
-         bfi_open_cat = factor(round(bfi_open, 0)),
-         religiosity_cat = factor(religiosity))
-```
-
-
-## Controlled Models: Effects of Hormonal Contraceptives {.tabset}
-
-### Sexual Frequency (Penetrative Intercourse) {.tabset}
-#### Model
-```{r}
-m_hc_sexfreqpen_controlled_cat = brm(diary_sex_active_sex_sum ~
+m_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
                         offset(log(number_of_days)) +
                         contraception_hormonal +
-                        age_cat + net_income + relationship_duration_factor +
-                        education_years_cat +
-                        bfi_extra_cat + bfi_neuro_cat + bfi_agree_cat +
-                        bfi_consc_cat + bfi_open_cat +
-                              religiosity_cat,
+                        age + net_income + relationship_duration_factor +
+                              education_years +
+                              bfi_extra + bfi_neuro + bfi_agree + bfi_consc + bfi_open +
+                              religiosity,
                 data = data, family = poisson(),
-                file = "m_hc_sexfreqpen_controlled_cat")
-
-kable(tidy(m_hc_sexfreqpen_controlled_cat, intervals = T, prob = 0.90))
+                file = "m_hc_sexfreqpen_controlled")
 ```
 
-#### Average Marginal effects
+
+#### Data Grid
 ```{r}
-
-
-memory.limit(9999999999999) # here i run into problems with the memory limit on my computer... 
-marginal_effects = data %>%
-  filter(!is.na(diary_sex_active_sex_sum),
-         !is.na(number_of_days),
-         !is.na(contraception_hormonal),
-         !is.na(age_cat),
-         !is.na(education_years)) %>%
-  data_grid(seq_range(number_of_days, by = 1), #measured in full days
+grid = data %>%
+  data_grid(number_of_days = 1,
             contraception_hormonal,
-            seq_range(age, by = 1), # measured in full years
+            age = seq_range(age, n = 5), # measured in full years
             net_income,
             relationship_duration_factor,
-            seq_range(education_years, by = 1), # measured in full years
-            seq_range(bfi_extra, n = 16), #32 unique values length(table(data$bfi_extra))
-            #seq_range(bfi_neuro, n = 16), #33 uniqe values length(table(data$bfi_neuro))
-            seq_range(bfi_agree, n = 16), #32 unique values length(table(data$bfi_agree))
-            seq_range(bfi_consc, n = 16), #32 unique values length(table(data$bfi_consc))
-            seq_range(bfi_open, n = 35), #35 unique values length(table(data$bfi_open))
-            seq_range(religiosity, n = 6) # 6 unique values length(table(data$religiosity))
+            education_years = seq_range(education_years, n = 5), # measured in full years
+            bfi_extra = mean(data$bfi_extra),
+            bfi_neuro = mean(data$bfi_neuro), 
+            bfi_agree = mean(data$bfi_agree), 
+            bfi_consc = mean(data$bfi_consc), 
+            bfi_open = mean(data$bfi_open),
+            religiosity = mean(data$religiosity)
   )
 
-
-marginal_effects_cat = data %>%
-  filter(!is.na(diary_sex_active_sex_sum),
-         !is.na(number_of_days),
-         !is.na(contraception_hormonal),
-         !is.na(age_cat),
-         !is.na(education_years)) %>%
-  data_grid(number_of_days,
-            contraception_hormonal,
-            age_cat,
-            net_income,
-            relationship_duration_factor,
-            education_years_cat,
-            bfi_extra_cat,
-            bfi_neuro_cat,
-            bfi_agree_cat,
-            bfi_consc_cat,
-            bfi_open_cat,
-            religiosity_cat)
-# even with categorical vectors my computer says "kann Vektor der Größe 130.2 GB nicht allozieren"
-
-### Code from here is not tested yet and doesnt work
-ames = marginal_effects %>%
-  add_fitted_draws(marginal_effects_cat,
-                   value = "E[y|A,B]") %>%  # get conditional expectations
-  group_by(contraception_hormonal, .draw) %>%                       # group by predictors to keep
-  summarise(`E[y|A]` = mean(`E[y|A,B]`)) 
-
-means = ames %>%
-  ungroup() %>%
-  group_by(contraception_hormonal) %>%
-  summarize(mean = mean(ames$`E[y|A]`))
-
-mean_diffs = ames %>%
-  ungroup() %>%
-  compare_levels(`E[y|A]`, by = contraception_hormonal) %>%         # pairwise differences in `E[y|A]`, by levels of A
-  rename(`mean difference` = `E[y|A]`) 
-
-mean_diffs %>%
-  ggplot(aes(x = `mean difference`, y = contraception_hormonal)) +
-  stat_halfeye() +
-  geom_vline(xintercept = 0, linetype = "dashed")
 ```
 
-### Masturabation Frequency {.tabset}
-#### Model
+#### Add Predicted Values
+```{r}
+data_pred = add_epred_draws(grid, m_hc_sexfreqpen_controlled,
+                   value = "E[y|A,B]",
+                   ndraws = 1000)
+```
+
+#### Average Marginal Effect
+```{r}
+ame = data_pred %>%
+  group_by(contraception_hormonal, .draw) %>%  # group by predictors to keep
+  summarise(`E[y|A]` = mean(`E[y|A,B]`, na.rm = T)) %>%
+  compare_levels(`E[y|A]`, by = contraception_hormonal) %>%  
+  rename(`mean difference` = `E[y|A]`) %>%
+  mean_qi(`mean difference`, .width = .90)
+ame
+```
+
+#### Compare Means
+```{r}
+means = data_pred %>%
+  group_by(contraception_hormonal) %>%
+  summarise(mean_fit = mean(`E[y|A,B]`, na.rm = T))
+print(as.data.frame(means), digits = 4)
+```
+
+
+## Masturbation Frequency {.tabset}
+### Uncontrolled Model
+```{r}
+m_hc_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
+                     contraception_hormonal,
+                data = data, family = poisson(),
+                file = "m_hc_masfreq")
+```
+
+
+#### Data Grid
+```{r}
+grid = data %>%
+  data_grid(number_of_days = 1,
+            contraception_hormonal)
+
+```
+
+#### Add Predicted Values
+```{r}
+data_pred = add_epred_draws(grid, m_hc_masfreq,
+                   value = "E[y|A,B]",
+                   ndraws = 1000)
+```
+
+#### Average Marginal Effect
+```{r}
+ame = data_pred %>%
+  group_by(contraception_hormonal, .draw) %>%  # group by predictors to keep
+  summarise(`E[y|A]` = mean(`E[y|A,B]`, na.rm = T)) %>%
+  compare_levels(`E[y|A]`, by = contraception_hormonal) %>%  
+  rename(`mean difference` = `E[y|A]`) %>%
+  mean_qi(`mean difference`, .width = .90)
+ame
+```
+
+#### Compare Means
+```{r}
+means = data_pred %>%
+  group_by(contraception_hormonal) %>%
+  summarise(mean_fit = mean(`E[y|A,B]`, na.rm = T))
+print(as.data.frame(means), digits = 4)
+```
+
+### Controlled Model
 ```{r}
 m_hc_masfreq_controlled = brm(diary_masturbation_sum ~
                         offset(log(number_of_days)) +
@@ -357,4 +182,50 @@ m_hc_masfreq_controlled = brm(diary_masturbation_sum ~
                               religiosity,
                 data = data, family = poisson(),
                 file = "m_hc_masfreq_controlled")
+```
+
+
+#### Data Grid
+```{r}
+grid = data %>%
+  data_grid(number_of_days = 1,
+            contraception_hormonal,
+            age = seq_range(age, n = 5), # measured in full years
+            net_income,
+            relationship_duration_factor,
+            education_years = seq_range(education_years, n = 5), # measured in full years
+            bfi_extra = mean(data$bfi_extra),
+            bfi_neuro = mean(data$bfi_neuro), 
+            bfi_agree = mean(data$bfi_agree), 
+            bfi_consc = mean(data$bfi_consc), 
+            bfi_open = mean(data$bfi_open),
+            religiosity = mean(data$religiosity)
+  )
+
+```
+
+#### Add Predicted Values
+```{r}
+data_pred = add_epred_draws(grid, m_hc_masfreq_controlled,
+                   value = "E[y|A,B]",
+                   ndraws = 1000)
+```
+
+#### Average Marginal Effect
+```{r}
+ame = data_pred %>%
+  group_by(contraception_hormonal, .draw) %>%  # group by predictors to keep
+  summarise(`E[y|A]` = mean(`E[y|A,B]`, na.rm = T)) %>%
+  compare_levels(`E[y|A]`, by = contraception_hormonal) %>%  
+  rename(`mean difference` = `E[y|A]`) %>%
+  mean_qi(`mean difference`, .width = .90)
+ame
+```
+
+#### Compare Means
+```{r}
+means = data_pred %>%
+  group_by(contraception_hormonal) %>%
+  summarise(mean_fit = mean(`E[y|A,B]`, na.rm = T))
+print(as.data.frame(means), digits = 4)
 ```

@@ -17,6 +17,8 @@ navbar:
     href: 6_analyses_effects.html
   - text: Robustness Analyses
     href: 14_analyses_robust.html
+  - text: AME
+    href: 18_marginal_effects.html
   - text: Sensitivity Analyses
     href: 7_analyses_sensitivity.html
   right:

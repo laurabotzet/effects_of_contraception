@@ -24,7 +24,7 @@ We used these [helper functions](0_helpers.R).
 2. Then [data was processed](2_datawrangling.html).
 3. Some [descriptives](3_descriptives.html) and a [codebook](4_codebook.html) can be found here.
 4. All [analyses of selection effects](5_analyses_selection.html) are available here.
-5. Here are the [analyses of effects of contraceptive use and congruent contraceptive use](6_analyses_effects.html) including controlled and uncontrolled models. In additional [robustness analyses](14_analyses_robust.html) we compared only women using oral hormonal contraceptives with normally cycling women.
+5. Here are the [analyses of effects of contraceptive use and congruent contraceptive use](6_analyses_effects.html) including controlled and uncontrolled models. In additional [robustness analyses](14_analyses_robust.html) we compared only women using oral hormonal contraceptives with normally cycling women. For both outcomes frequency of vaginal intercourse and masturbation frequency we computed [differences in average marginal effects](18_marginal_effects.html).
 6. In a last step, [sensitivity of effects to unobserved confounders](7_analyses_sensitivity.html) was estimated.
 7. Click [here](8_plots.html) for all plots of the manuscript.
 
