@@ -17,13 +17,14 @@ source("0_helpers.R")
 library(extrafont)
 theme_set(theme_tufte(base_size = 10, base_family='Arial'))
 
-apatheme=theme_bw()+
-  theme(panel.grid.major=element_blank(),
-        panel.grid.minor=element_blank(),
-        panel.border=element_blank(),
-        axis.line=element_line(),
-        text = element_text(size=20),
-        plot.title = element_text(size = 20))
+#plot specification for paper:
+# apatheme=theme_bw()+
+#   theme(panel.grid.major=element_blank(),
+#         panel.grid.minor=element_blank(),
+#         panel.border=element_blank(),
+#         axis.line=element_line(),
+#         text = element_text(size=20),
+#         plot.title = element_text(size = 20))
 
 load("data/cleaned_selected_wrangled.rdata")
 ```
@@ -209,7 +210,7 @@ selection_hc =
 
 selection_hc
 
-jpeg('Effect size estimates for models with current contraceptive use as an outcome REVISED.jpg', 
+jpeg('Effect size estimates for models with current contraceptive use as an outcome.jpg', 
      width = 900, height = 1000, quality = 100)
 selection_hc
 dev.off()
@@ -547,7 +548,7 @@ selection_congruent =
           align = "v")
 
 selection_congruent
-jpeg('Effect size estimates for models with congruency in contraceptive method as an outcome REVISED.jpg', 
+jpeg('Effect size estimates for models with congruency in contraceptive method as an outcome.jpg', 
      width = 1600, height = 720, quality = 100)
 selection_congruent
 dev.off()
@@ -851,7 +852,7 @@ hc_plots =
           align = "v")
 
 hc_plots
-jpeg('Effect size estimates for hormonal contraceptives on outcomes REVISED.jpg', 
+jpeg('Effect size estimates for hormonal contraceptives on outcomes.jpg', 
      width = 800, height = 1000, quality = 100)
 hc_plots
 dev.off()
@@ -1015,7 +1016,7 @@ congruency_uncontrolled =
           align = "v")
 
 congruency_uncontrolled
-jpeg('Differences in current contraceptive method, congruent use of contraceptive method, and their interaction REVISED.jpg', 
+jpeg('Differences in current contraceptive method, congruent use of contraceptive method, and their interaction.jpg', 
      width = 800, height = 1000, quality = 100)
 congruency_uncontrolled
 dev.off()
@@ -1199,7 +1200,7 @@ congruency_controlled =
           align = "v")
 
 congruency_controlled
-jpeg('Differences in current contraceptive method, congruent use of contraceptive method, and their interaction in controlled models REVISED.jpg', 
+jpeg('Differences in current contraceptive method, congruent use of contraceptive method, and their interaction in controlled models.jpg', 
      width = 800, height = 1000, quality = 100)
 congruency_controlled
 dev.off()
