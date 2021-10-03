@@ -32,8 +32,7 @@ m_selection_hc_simple = brm(contraception_hormonal ~
 
 ##### Summary
 ```{r}
-kable(tidy(m_selection_hc_simple, intervals = T, prob = 0.90))
-summary(m_selection_hc_simple, intervals = T, prob = 0.90)
+summary(m_selection_hc_simple, conf.int = T, prob = 0.90)
 ```
 
 ##### Plots
@@ -110,8 +109,7 @@ m_selection_hc_complex = brm(contraception_hormonal ~
 
 ##### Summary
 ```{r}
-kable(tidy(m_selection_hc_complex, intervals = T, prob = 0.90))
-summary(m_selection_hc_complex, intervals = T, prob = 0.90)
+summary(m_selection_hc_complex, conf.int = T, prob = 0.90)
 ```
 
 ##### Plots
@@ -222,8 +220,7 @@ m_selection_congruent_simple = brm(congruent_contraception ~
 
 ##### Summary
 ```{r}
-kable(tidy(m_selection_congruent_simple, intervals = T, prob = 0.90))
-summary(m_selection_congruent_simple, intervals = T, prob = 0.90)
+summary(m_selection_congruent_simple, conf.int = T, prob = 0.90)
 ```
 
 ##### Plots
@@ -301,8 +298,7 @@ m_selection_congruent_complex = brm(congruent_contraception ~
 
 ##### Summary
 ```{r}
-kable(tidy(m_selection_congruent_complex, intervals = T, prob = 0.90))
-summary(m_selection_congruent_complex, intervals = T, prob = 0.90)
+summary(m_selection_congruent_complex, conf.int = T, prob = 0.90)
 
 
 ```
@@ -415,8 +411,7 @@ m_selection_congruent_simple_includinghc = brm(congruent_contraception ~
 
 ##### Summary
 ```{r}
-kable(tidy(m_selection_congruent_simple_includinghc, intervals = T, prob = 0.90))
-summary(m_selection_congruent_simple_includinghc, intervals = T, prob = 0.90)
+summary(m_selection_congruent_simple_includinghc, conf.int = T, prob = 0.90)
 ```
 
 ##### Plots
@@ -446,8 +441,7 @@ m_selection_congruent_complex_includinghc = brm(congruent_contraception  ~
 
 ##### Summary
 ```{r}
-kable(tidy(m_selection_congruent_complex_includinghc, intervals = T, prob = 0.90))
-summary(m_selection_congruent_complex_includinghc, intervals = T, prob = 0.90)
+summary(m_selection_congruent_complex_includinghc, conf.int = T, prob = 0.90)
 ```
 
 ##### Plots

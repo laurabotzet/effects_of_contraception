@@ -31,7 +31,6 @@ m_hc_atrr = brm(attractiveness_partner ~ contraception_hormonal,
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_atrr, intervals = T, prob = 0.90))
 summary(m_hc_atrr, intervals = T, prob = 0.90)
 ```
 
@@ -82,7 +81,6 @@ m_hc_relsat = brm(relationship_satisfaction ~ contraception_hormonal,
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_relsat, intervals = T, prob = 0.90))
 summary(m_hc_relsat, intervals = T, prob = 0.90)
 ```
 
@@ -134,7 +132,6 @@ m_hc_sexsat = brm(satisfaction_sexual_intercourse ~ contraception_hormonal,
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_sexsat, intervals = T, prob = 0.90))
 summary(m_hc_sexsat, intervals = T, prob = 0.90)
 ```
 
@@ -186,7 +183,6 @@ m_hc_libido = brm(diary_libido_mean ~ contraception_hormonal,
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_libido, intervals = T, prob = 0.90))
 summary(m_hc_libido, intervals = T, prob = 0.90)
 ```
 
@@ -240,7 +236,6 @@ m_hc_sexfreqpen = brm(diary_sex_active_sex_sum ~
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_sexfreqpen, intervals = T, prob = 0.90))
 summary(m_hc_sexfreqpen, intervals = T, prob = 0.90)
 ```
 
@@ -293,7 +288,6 @@ m_hc_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) +
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_masfreq, intervals = T, prob = 0.90))
 summary(m_hc_masfreq, intervals = T, prob = 0.90)
 ```
 
@@ -350,7 +344,6 @@ m_hc_atrr_controlled = brm(attractiveness_partner ~ contraception_hormonal +
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_atrr_controlled, intervals = T, prob = 0.90))
 summary(m_hc_atrr_controlled, intervals = T, prob = 0.90)
 ```
 
@@ -460,7 +453,6 @@ m_hc_relsat_controlled = brm(relationship_satisfaction ~ contraception_hormonal 
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_relsat_controlled, intervals = T, prob = 0.90))
 summary(m_hc_relsat_controlled, intervals = T, prob = 0.90)
 ```
 
@@ -572,7 +564,6 @@ m_hc_sexsat_controlled = brm(satisfaction_sexual_intercourse ~ contraception_hor
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_sexsat_controlled, intervals = T, prob = 0.90))
 summary(m_hc_sexsat_controlled, intervals = T, prob = 0.90)
 ```
 
@@ -683,7 +674,6 @@ m_hc_libido_controlled = brm(diary_libido_mean ~ contraception_hormonal +
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_libido_controlled, intervals = T, prob = 0.90))
 summary(m_hc_libido_controlled, intervals = T, prob = 0.90)
 ```
 
@@ -795,7 +785,6 @@ m_hc_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_sexfreqpen_controlled, intervals = T, prob = 0.90))
 summary(m_hc_sexfreqpen_controlled, intervals = T, prob = 0.90)
 ```
 
@@ -909,7 +898,6 @@ m_hc_masfreq_controlled = brm(diary_masturbation_sum ~
 
 #### Summary
 ```{r}
-kable(tidy(m_hc_masfreq_controlled, intervals = T, prob = 0.90))
 summary(m_hc_masfreq_controlled, intervals = T, prob = 0.90)
 ```
 
@@ -1019,7 +1007,6 @@ m_congruency_atrr = brm(attractiveness_partner ~
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_atrr, intervals = T, prob = 0.90))
 summary(m_congruency_atrr, intervals = T, prob = 0.90)
 ```
 
@@ -1084,7 +1071,6 @@ m_congruency_relsat = brm(relationship_satisfaction ~
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_relsat, intervals = T, prob = 0.90))
 summary(m_congruency_relsat, intervals = T, prob = 0.90)
 ```
 
@@ -1147,7 +1133,6 @@ m_congruency_sexsat = brm(satisfaction_sexual_intercourse ~
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_sexsat, intervals = T, prob = 0.90))
 summary(m_congruency_sexsat, intervals = T, prob = 0.90)
 ```
 
@@ -1210,7 +1195,6 @@ m_congruency_libido = brm(diary_libido_mean ~
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_libido, intervals = T, prob = 0.90))
 summary(m_congruency_libido, intervals = T, prob = 0.90)
 ```
 
@@ -1273,7 +1257,6 @@ m_congruency_sexfreqpen = brm(diary_sex_active_sex_sum ~ offset(log(number_of_da
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_sexfreqpen, intervals = T, prob = 0.90))
 summary(m_congruency_sexfreqpen, intervals = T, prob = 0.90)
 ```
 
@@ -1336,7 +1319,6 @@ m_congruency_masfreq = brm(diary_masturbation_sum ~ offset(log(number_of_days)) 
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_masfreq, intervals = T, prob = 0.90))
 summary(m_congruency_masfreq, intervals = T, prob = 0.90)
 ```
 
@@ -1406,7 +1388,6 @@ m_congruency_atrr_controlled = brm(attractiveness_partner ~
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_atrr_controlled, intervals = T, prob = 0.90))
 summary(m_congruency_atrr_controlled, intervals = T, prob = 0.90)
 ```
 
@@ -1527,7 +1508,6 @@ m_congruency_relsat_controlled = brm(relationship_satisfaction ~
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_relsat_controlled, intervals = T, prob = 0.90))
 summary(m_congruency_relsat_controlled, intervals = T, prob = 0.90)
 ```
 
@@ -1649,7 +1629,6 @@ m_congruency_sexsat_controlled = brm(satisfaction_sexual_intercourse ~
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_sexsat_controlled, intervals = T, prob = 0.90))
 summary(m_congruency_sexsat_controlled, intervals = T, prob = 0.90)
 ```
 
@@ -1772,7 +1751,6 @@ m_congruency_libido_controlled = brm(diary_libido_mean ~
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_libido_controlled, intervals = T, prob = 0.90))
 summary(m_congruency_libido_controlled, intervals = T, prob = 0.90)
 ```
 
@@ -1896,7 +1874,6 @@ m_congruency_sexfreqpen_controlled = brm(diary_sex_active_sex_sum ~
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_sexfreqpen_controlled, intervals = T, prob = 0.90))
 summary(m_congruency_sexfreqpen_controlled, intervals = T, prob = 0.90)
 ```
 
@@ -2022,7 +1999,6 @@ m_congruency_masfreq_controlled = brm(diary_masturbation_sum ~
 
 #### Summary
 ```{r}
-kable(tidy(m_congruency_masfreq_controlled, intervals = T, prob = 0.90))
 summary(m_congruency_masfreq_controlled, intervals = T, prob = 0.90)
 ```
 
